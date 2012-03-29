@@ -1,4 +1,4 @@
-\documentclass[10pt]{sigplan-proc-varsize-sensys11}
+\documentclass[10pt]{sensys11}
 
 \usepackage{subfigure}
 \usepackage{booktabs}
@@ -31,7 +31,7 @@
 \setlength{\parindent}{5mm}
 
 \begin{document}
-\title{A Collaborative Filtering Approach to Data Imputation in Heterogeneous Wireless Sensor Networks}
+\title{A Collaborative Filtering Approach\\to Estimating Missing Sensor Data}
 \author{
 %{Scribus Primus}\\
 %\affaddr{Primus Address}\\
@@ -41,8 +41,8 @@
 %\email{secondus@elsewhere.com}
 }
 
-\conferenceinfo{SenSys'12,} {November 1--4, 2011, Seattle, WA, USA.}
-\CopyrightYear{2011}
+\conferenceinfo{SenSys'12,} {November 6--9, 2012, Toronto, Canada}
+\CopyrightYear{2012}
 \crdata{XXX-X-XXXXX-XXX-X}
 
 \maketitle
@@ -62,19 +62,23 @@ Our results show...
 \end{abstract}
 
 %\category{C.2.1}{Computer-Communication Networks}{Network Architecture and Design}[Wireless communication]
-%\keywords{Collection, CTP, Sensor Network, Routing}
+\keywords{sensor network,WSN,M2M,missing data,imputation}
 
 \section{Introduction}
 
-\subsection{Relevance (why is WSN dataset analysis an important topic?)}
-The increasing pervasiveness of Wireless Sensor Network (WSN) deployments is reflected by the recent coinage of terms such as ``Internet of Things'' and ``Machine-to-Machine'' to describe this growing revolution~\cite{ashton2009internet,gershenfeld2004internet,nokia2004machine,lawton2004machine}.
-Facilitated by a sharp reduction in hardware costs~\cite{estrin2000special}, this growing trend (beyond providing for the admission of new phrases into the vernacular) has led to an explosion in the amount and variety of sensor network data in need of study.
-For this reason, analysis of WSN data has garnered much attention in recent years~\cite{balazinska2007data}.
+\subsection{Problem (what is the problem to be solved?)}
+We consider a centralized method of filling in missing data in sensor network datasets.
+Given the complete dataset, we estimate the missing observations globally.
+
+%\subsection{Relevance (why is WSN dataset analysis an important topic?)}
+%The increasing pervasiveness of Wireless Sensor Network (WSN) deployments is reflected by the recent coinage of terms such as ``Internet of Things'' and ``Machine-to-Machine'' to describe this growing revolution~\cite{ashton2009internet,gershenfeld2004internet,nokia2004machine,lawton2004machine}.
+%Facilitated by a sharp reduction in hardware costs~\cite{estrin2000special}, this growing trend (beyond providing for the admission of new phrases into the vernacular) has led to an explosion in the amount and variety of sensor network data in need of study.
+%For this reason, analysis of WSN data has garnered much attention in recent years~\cite{balazinska2007data}.
 
 \subsection{Motivation (why is data imputation needed for WSN datasets?)}
 Wireless Sensor Networks are especially susceptible to interference, power failure, and other environmental and communications ailments which lead to data loss.
 One important area of WSN data analysis, however, is the application of machine learning algorithms to discriminate between or predict the occurrence of events within the sensor network deployment environment.
-Many of these approaches require complete dataset are unable to deal with missing values. The filling of these missing data values (in Statistics, known as Data Imputation) is thus a vital tool in the preparation of WSN data for subsequent analysis. 
+Many of these approaches (e.g.\ \textcolor{red}{LIST ALGORITHMS HERE}) require complete dataset are unable to deal with missing values. The filling of these missing data values (in Statistics, known as Data Imputation) is thus a vital tool in the preparation of WSN data for subsequent analysis. 
 
 \subsection{Background (what solutions currently exist?)}
 Data imputation techniques as applied to WSN datasets can be divided into three categories:
@@ -144,7 +148,7 @@ Some more text.
 
 {\footnotesize
 \bibliographystyle{abbrv}
-\bibliography{sensys11-template}
+\bibliography{sensys12}
 }
 
 \end{document}
