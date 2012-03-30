@@ -13,6 +13,8 @@
 \usepackage{cite}
 
 \renewcommand{\arraystretch}{1.2} % Space out rows in tables
+\newcommand{\redtext}[1]{\textcolor{red}{#1}}
+\newcommand{\rednote}[1]{\textcolor{red}{\small #1}}
 
 \setlength\paperheight {11in}
 \setlength\paperwidth {8.5in}
@@ -78,7 +80,7 @@ Given the complete dataset, we estimate the missing observations globally.
 \subsection{Motivation (why is data imputation needed for WSN datasets?)}
 Wireless Sensor Networks are especially susceptible to interference, power failure, and other environmental and communications ailments which lead to data loss.
 One important area of WSN data analysis, however, is the application of machine learning algorithms to discriminate between or predict the occurrence of events within the sensor network deployment environment.
-Many of these approaches (e.g.\ \textcolor{red}{LIST ALGORITHMS HERE}) require complete dataset are unable to deal with missing values. The filling of these missing data values (in Statistics, known as Data Imputation) is thus a vital tool in the preparation of WSN data for subsequent analysis. 
+Many of these approaches (e.g.\ \redtext{LIST ALGORITHMS HERE}) require complete datasets are unable to deal with missing values. The filling of these missing data values (in Statistics, known as Data Imputation) is thus a vital tool in the preparation of WSN data for subsequent analysis. 
 
 \subsection{Background (what solutions currently exist?)}
 Data imputation techniques as applied to WSN datasets can be divided into three categories:
