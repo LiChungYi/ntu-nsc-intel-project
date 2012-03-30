@@ -68,9 +68,9 @@ Our results show...
 
 \section{Introduction}
 
-\subsection{Problem (what is the problem to be solved?)}
+\subsection{Problem Statement (what is the problem to be solved?)}
 We consider a centralized method of filling in missing data in sensor network datasets.
-Given the complete dataset, we estimate the missing observations globally.
+Given a complete sensor network dataset with missing data, we estimate the missing observations globally.
 
 %\subsection{Relevance (why is WSN dataset analysis an important topic?)}
 %The increasing pervasiveness of Wireless Sensor Network (WSN) deployments is reflected by the recent coinage of terms such as ``Internet of Things'' and ``Machine-to-Machine'' to describe this growing revolution~\cite{ashton2009internet,gershenfeld2004internet,nokia2004machine,lawton2004machine}.
@@ -96,20 +96,23 @@ These methods suffer, however, when there are long temporal gaps of data for a g
 As a result, the usefulness of temporal imputation methods drop rapidly as the number of consecutively missing packets becomes large.
 
 \subsubsection{Spatial Methods}
-Spatial data imputation approaches leverage the correlation among of neighboring sensor observations.
-Method to exploit this approach include associations rule mining~\cite{le2005estimating,jiang2007estimating} and weighting functions of nearby sensors~\cite{li2008spatial,li2008data,pan2010k}.
-Generally, methods which rely solely on the spatial imputation approach suffer from the inability to adapt to changes in the sensing environment.
-In other words, with no mechanism to deal with data drift, these methods are susceptible to a breakdown of the stationary distribution assumption.
+Where spatial information is available for deployed sensor nodes, this information may be used to enforce a correlation among of neighboring sensor observations.
+Methods which exploit this approach include associations rule mining~\cite{le2005estimating,jiang2007estimating} and weighting functions of nearby sensors~\cite{li2008spatial,li2008data,pan2010k}.
+Generally, methods which rely solely on the spatial imputation approach suffer from the inability to estimate missing data which occurs across of many sensors simultaneously, which can occur in practice due to communication interference for example.
+Spatial methods also fail to take into account barriers or other sources of sharp environmental gradients which may deter the usage of spatial information as a first-order inter-sensor node correlation approximation.
+For instance, a sensor deployed in close proximity to a furnace and one deployed nearby but beneath an air-conditioning vent may be only weakly correlated by spatial information.
+There is also the corollary possibility of a pair of temperature sensors deployed quite distance from one another, yet having a strong correlation due to well-circulated air flow between the two.
+Certain methods consider not strictly the distance between sensors, but instead establishes a ``neighborhood of influence'' whose size becomes a tuning parameter of this approach.
 
 \subsubsection{Hybrid Methods}
 Hybrid methods of temporal and spatial approaches are less common in the literature.
 For example, the average of the temporal approach of linear interpolation and the spatial approach of multivariate regression has been reported[8].
 Strictly speaking, this approach can be thought of as an ensemble approach between the two methods rather than a fully-integrated approach which considers both temporal and spatial aspects of WSN data.
 
-\subsection{Research Gap Identification (why are current approaches inadequate?)}
-Accurate imputation of missing sensor network observations is crucial to allow for effective subsequent analysis.
-While there are many existing algorithms which estimate missing data (as documented in the following Related Works section), few of these take advantage of the time and space dependencies inherent in the WSN datasets during the data imputation process.
-As a result, the accuracy of such approaches is limited.
+%\subsection{Research Gap Identification (why are current approaches inadequate?)}
+%Accurate imputation of missing sensor network observations is crucial to allow for effective subsequent analysis.
+%While there are many existing algorithms which estimate missing data (as documented in the following Related Works section), few of these take advantage of the time and space dependencies inherent in the WSN datasets during the data imputation process.
+%As a result, the accuracy of such approaches is limited.
 
 \subsection{Method Overview (what is our approach to bridge the research gap?)}
 In our work, we employ a novel collaborative-filtering (CF) approach to WSN data imputation inspired by the field of Recommendation Systems.
@@ -124,6 +127,15 @@ We explore two different environmental datasets, one indoor and one outdoor.
 Both datasets record temperature, humidity, and light within its deployed environment.
 Each dataset has an initial missing rate (which strengthens the claim that missing data in WSNs is a common issue), to which we additionally cover known observations to use for validation and testing purposes.
 Given these experimental conditions, we show that our temporal and spatial-oriented collaborative filtering approach to data imputation for WSNs performs more accurately than existing methods such as linear regression and hybrid-kNN.
+
+\subsection{Contributions (what are the novel aspects of our work?)}
+Our contributions to the body of research related to missing sensor network data estimation include:
+\begin{itemize}
+\item Application of the Collaborative Filtering of Recommendation Systems to the Sensor Network domain
+\item Augment Collaborative Filtering with temporal coherence and multi-sensor signals (our method builds a global model incorporating intra-sensor and inter-sensor information together and directly optimizes the objective function as opposed to the piecewise combination of disparate approaches as is common in the literature.
+\item Empirical study which finds that our method works well without the incorporation spatial information and that our approach can facilitate the generation of better prediction models
+\item A strong argument that directly exploiting spatial information to specify the assumed inter-sensor node correlation may not be as good as directly learning these correlations directly from the sensor observations themselves.
+\end{itemize}
 
 \subsection{Paper Organization (how is the paper organized?)}
 The remainder of our paper is organized as follows.
