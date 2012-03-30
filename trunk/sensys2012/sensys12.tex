@@ -35,12 +35,12 @@
 \begin{document}
 \title{A Collaborative Filtering Approach\\to Estimating Missing Sensor Data}
 \author{
-%{Scribus Primus}\\
-%\affaddr{Primus Address}\\
-%\email{primus@somewhere.com} \and
-%{Scribus Secundus}\\
-%\affaddr{Secundus Address}\\
-%\email{secondus@elsewhere.com}
+{Scribus Primus}\\
+\affaddr{Primus Address}\\
+\email{primus@somewhere.com} \and
+{Scribus Secundus}\\
+\affaddr{Secundus Address}\\
+\email{secondus@elsewhere.com}
 }
 
 \conferenceinfo{SenSys'12,} {November 6--9, 2012, Toronto, Canada}
@@ -48,117 +48,14 @@
 \crdata{XXX-X-XXXXX-XXX-X}
 
 \maketitle
-
-\begin{abstract}
-Data sets gathered from large-scale sensor networks are often prone to suffer from a significant fraction of missing data due to issues such as communication interference, power depletion, or hardware failure. 
-Many standard data analysis tools are ill-equipped to deal will missing values, hence the need to impute missing readings prior to analysis.
-We have developed novel imputation methods which takes a ``Recommendation Systems'' view of the problem: the sensors and their readings at each time step are viewed as users and product ratings with the goal of estimating the missing ratings.
-Sensor readings differ from product ratings in that the former exhibit high correlation in both time and space.
-To incorporate this property, we utilize Matrix and Tensor Factorization common in the Recommendation Systems domain and augment the formulations to support temporal and spatial relationships in the data.
-We evaluate the approaches using two different environmental sensor network datasets, one indoor and one outdoor.
-We show that a temporally-biased MF significantly outperforms standard MF.
-In addition, our experimental results show that our methods also outperform hybrid-kNN and linear interpolation.
-Interestingly, incorporation of a spatial information into the formulation is shown to be ineffective to be ineffective for our datasets as the MF-based approach is already able to discover such correlations among sensors.
-Finally, we extend the approach to include possible correlations between different sensor types (e.g., temperature and humidity) on the same sensor node.
-Our results show...
-\end{abstract}
-
-%\category{C.2.1}{Computer-Communication Networks}{Network Architecture and Design}[Wireless communication]
-\keywords{sensor network,WSN,M2M,missing data,imputation}
-
-\section{Introduction}
-
-\subsection{Problem Statement (what is the problem to be solved?)}
-We consider a centralized method of filling in missing data in sensor network datasets.
-Given a complete sensor network dataset with missing data, we estimate the missing observations globally.
-
-%\subsection{Relevance (why is WSN dataset analysis an important topic?)}
-%The increasing pervasiveness of Wireless Sensor Network (WSN) deployments is reflected by the recent coinage of terms such as ``Internet of Things'' and ``Machine-to-Machine'' to describe this growing revolution~\cite{ashton2009internet,gershenfeld2004internet,nokia2004machine,lawton2004machine}.
-%Facilitated by a sharp reduction in hardware costs~\cite{estrin2000special}, this growing trend (beyond providing for the admission of new phrases into the vernacular) has led to an explosion in the amount and variety of sensor network data in need of study.
-%For this reason, analysis of WSN data has garnered much attention in recent years~\cite{balazinska2007data}.
-
-\subsection{Motivation (why is data imputation needed for WSN datasets?)}
-Wireless Sensor Networks are especially susceptible to interference, power failure, and other environmental and communications ailments which lead to data loss.
-One important area of WSN data analysis, however, is the application of machine learning algorithms to discriminate between or predict the occurrence of events within the sensor network deployment environment.
-Many of these approaches (e.g.\ \redtext{LIST ALGORITHMS HERE}) require complete datasets are unable to deal with missing values. The filling of these missing data values (in Statistics, known as Data Imputation) is thus a vital tool in the preparation of WSN data for subsequent analysis. 
-
-\subsection{Background (what solutions currently exist?)}
-Data imputation techniques as applied to WSN datasets can be divided into three categories:
-temporal methods (i.e.\ estimation using the observations from the target sensor at nearby time-steps),
-spatial methods (i.e.\ estimation using neighboring sensor node observations),
-and hybrid spatial/temporal methods.
-
-\subsubsection{Temporal Methods}
-The feasibility of estimating missing sensor observations based on historical data is grounded by the known temporal correlation in WSN data~\cite{akyildiz2004exploiting}.
-Moreover, where there is a potential for global communication issues to affect the availability for sensor node observations \emph{en masse} during a given duration of time, utilizing spatial correlations as a basis for estimation may be not be possible.
-Temporal imputation methods include observed data mean~\cite{madden2005tinydb,setz2009combining}, last seen[], linear interpolation[].
-These methods suffer, however, when there are long temporal gaps of data for a given sensor (i.e.\ as can happen when intermittent communications starvation occurs in large WSNs).
-As a result, the usefulness of temporal imputation methods drop rapidly as the number of consecutively missing packets becomes large.
-
-\subsubsection{Spatial Methods}
-Where spatial information is available for deployed sensor nodes, this information may be used to enforce a correlation among of neighboring sensor observations.
-Methods which exploit this approach include associations rule mining~\cite{le2005estimating,jiang2007estimating} and weighting functions of nearby sensors~\cite{li2008spatial,li2008data,pan2010k}.
-Generally, methods which rely solely on the spatial imputation approach suffer from the inability to estimate missing data which occurs across of many sensors simultaneously, which can occur in practice due to communication interference for example.
-Spatial methods also fail to take into account barriers or other sources of sharp environmental gradients which may deter the usage of spatial information as a first-order inter-sensor node correlation approximation.
-For instance, a sensor deployed in close proximity to a furnace and one deployed nearby but beneath an air-conditioning vent may be only weakly correlated by spatial information.
-There is also the corollary possibility of a pair of temperature sensors deployed quite distance from one another, yet having a strong correlation due to well-circulated air flow between the two.
-Certain methods consider not strictly the distance between sensors, but instead establishes a ``neighborhood of influence'' whose size becomes a tuning parameter of this approach.
-
-\subsubsection{Hybrid Methods}
-Hybrid methods of temporal and spatial approaches are less common in the literature.
-For example, the average of the temporal approach of linear interpolation and the spatial approach of multivariate regression has been reported[8].
-Strictly speaking, this approach can be thought of as an ensemble approach between the two methods rather than a fully-integrated approach which considers both temporal and spatial aspects of WSN data.
-
-%\subsection{Research Gap Identification (why are current approaches inadequate?)}
-%Accurate imputation of missing sensor network observations is crucial to allow for effective subsequent analysis.
-%While there are many existing algorithms which estimate missing data (as documented in the following Related Works section), few of these take advantage of the time and space dependencies inherent in the WSN datasets during the data imputation process.
-%As a result, the accuracy of such approaches is limited.
-
-\subsection{Method Overview (what is our approach to bridge the research gap?)}
-In our work, we employ a novel collaborative-filtering (CF) approach to WSN data imputation inspired by the field of Recommendation Systems.
-In typical CF approaches, the elements of interest are users and items, whereas WSNs are sensor node and time-steps.
-Applying standard CF techniques, a sensor reading at a given time-step may be estimated much like a user rating for a given item.
-Clearly a sensor reading at a given time will be correlated with itself and its neighbors at times close to that given.
-It is this insight and the potential integration with CF methods which has driven the current work.
-In particular, we focus on Matrix and Tensor Factorization, providing a novel method to augment these well-established techniques to exploit the temporal and spatial relationships among WSN nodes.
-
-\subsection{Results Overview (how does our method compare to the state of the art?)}
-We explore two different environmental datasets, one indoor and one outdoor.
-Both datasets record temperature, humidity, and light within its deployed environment.
-Each dataset has an initial missing rate (which strengthens the claim that missing data in WSNs is a common issue), to which we additionally cover known observations to use for validation and testing purposes.
-Given these experimental conditions, we show that our temporal and spatial-oriented collaborative filtering approach to data imputation for WSNs performs more accurately than existing methods such as linear regression and hybrid-kNN.
-
-\subsection{Contributions (what are the novel aspects of our work?)}
-Our contributions to the body of research related to missing sensor network data estimation include:
-\begin{itemize}
-\item Application of the Collaborative Filtering of Recommendation Systems to the Sensor Network domain
-\item Augment Collaborative Filtering with temporal coherence and multi-sensor signals (our method builds a global model incorporating intra-sensor and inter-sensor information together and directly optimizes the objective function as opposed to the piecewise combination of disparate approaches as is common in the literature.
-\item Empirical study which finds that our method works well without the incorporation spatial information and that our approach can facilitate the generation of better prediction models
-\item A strong argument that directly exploiting spatial information to specify the assumed inter-sensor node correlation may not be as good as directly learning these correlations directly from the sensor observations themselves.
-\end{itemize}
-
-\subsection{Paper Organization (how is the paper organized?)}
-The remainder of our paper is organized as follows.
-Related Work is reviewed in Section \ref{sec:rw}.
-In Sections \ref{sec:mf} and \ref{sec:tf} we describe our Matrix and Tensor Factorization approaches to WSN data imputation, respectively.
-Sections \ref{sec:disc} and \ref{sec:conc} provide discussion of our findings and the conclusion.
-
-\section{Related Work} \label{sec:rw}
-hehehehe
-\section{Matrix Factorization}  \label{sec:mf}
-
-hahahahahhaha
-
-\section{Tensor Factorization}  \label{sec:tf}
-hohohohohohohohohohohoho
-\section{Experiment}  \label{sec:exp}
-huhuhuhuhuhuhuhuhhuhuhuhu
-\section{Discussion}  \label{sec:disc}
-hihihihihihihihihihih
-\section{Conclusion}  \label{sec:conc}
-
-Some more text.
-
+\input{abstract}
+\input{introduction}
+\input{related_work}
+\input{matrix_factorization}
+\input{tensor_factorization}
+\input{experimental_results}
+\input{discussion}
+\input{conclusion}
 
 {\footnotesize
 \bibliographystyle{abbrv}
