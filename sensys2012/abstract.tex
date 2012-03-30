@@ -1,0 +1,13 @@
+\begin{abstract}
+Data sets gathered from large-scale sensor networks are often prone to suffer from a significant fraction of missing data due to issues such as communication interference, power depletion, or hardware failure. 
+Many standard data analysis tools are ill-equipped to deal will missing values, hence the need to impute missing readings prior to analysis.
+We have developed novel imputation methods which takes a ``Recommendation Systems'' view of the problem: the sensors and their readings at each time step are viewed as users and product ratings with the goal of estimating the missing ratings.
+Sensor readings differ from product ratings in that the former exhibit high correlation in both time and space.
+To incorporate this property, we utilize Matrix and Tensor Factorization common in the Recommendation Systems domain and augment the formulations to support temporal and spatial relationships in the data.
+We evaluate the approaches using two different environmental sensor network datasets, one indoor and one outdoor.
+We show that a temporally-biased MF significantly outperforms standard MF.
+In addition, our experimental results show that our methods also outperform hybrid-kNN and linear interpolation.
+Interestingly, incorporation of a spatial information into the formulation is shown to be ineffective to be ineffective for our datasets as the MF-based approach is already able to discover such correlations among sensors.
+Finally, we extend the approach to include possible correlations between different sensor types (e.g., temperature and humidity) on the same sensor node.
+Our results show...
+\end{abstract}
