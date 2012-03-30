@@ -12,13 +12,16 @@ Given a complete sensor network dataset with missing data, we estimate the missi
 \subsection{Motivation (why is data imputation needed for WSN datasets?)}
 Wireless Sensor Networks are especially susceptible to interference, power failure, and other environmental and communications ailments which lead to data loss.
 One important area of WSN data analysis, however, is the application of machine learning algorithms to discriminate between or predict the occurrence of events within the sensor network deployment environment.
-Many of these approaches (e.g.\ \redtext{LIST ALGORITHMS HERE}) require complete datasets are unable to deal with missing values. The filling of these missing data values (in Statistics, known as Data Imputation) is thus a vital tool in the preparation of WSN data for subsequent analysis. 
+Many of these approaches (e.g.\ \redtext{LIST ALGORITHMS HERE}) require complete datasets are unable to deal with missing values.
+The filling of these missing data values (in Statistics, known as Data Imputation) is thus a vital tool in the preparation of WSN data for subsequent analysis. 
+Because subsequent analyses depend on accurate sensor data to draw quality conclusions or predictions, improvement in missing sensor data estimation methodology can directly lead to better solutions to sensor network deployment objectives.
 
 \subsection{Background (what solutions currently exist?)}
-Data imputation techniques as applied to WSN datasets can be divided into three categories:
+Data imputation techniques as applied to WSN datasets can be divided into four categories:
 temporal methods (i.e.\ estimation using the observations from the target sensor at nearby time-steps),
 spatial methods (i.e.\ estimation using neighboring sensor node observations),
-and hybrid spatial/temporal methods.
+heterogeneous sensor methods (i.e.\ like spatial, however now considering sensors of different types),
+and hybrid methods.
 
 \subsubsection{Temporal Methods}
 The feasibility of estimating missing sensor observations based on historical data is grounded by the known temporal correlation in WSN data~\cite{akyildiz2004exploiting}.
@@ -35,6 +38,9 @@ Spatial methods also fail to take into account barriers or other sources of shar
 For instance, a sensor deployed in close proximity to a furnace and one deployed nearby but beneath an air-conditioning vent may be only weakly correlated by spatial information.
 There is also the corollary possibility of a pair of temperature sensors deployed quite distance from one another, yet having a strong correlation due to well-circulated air flow between the two.
 Certain methods consider not strictly the distance between sensors, but instead establishes a ``neighborhood of influence'' whose size becomes a tuning parameter of this approach.
+
+\subsubsection{Heterogeneous Sensor Methods}
+\redtext{more here!}
 
 \subsubsection{Hybrid Methods}
 Hybrid methods of temporal and spatial approaches are less common in the literature.
