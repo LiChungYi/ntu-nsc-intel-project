@@ -1,4 +1,66 @@
 \section{Experimental Results}  \label{sec:exp}
+
+\subsection{Experimental Setup}
+
+\subsubsection{Datasets}
+
+\paragraph*{Berkeley Dataset}
+
+The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature, humidity, and light for 54 sensors (with 1 missing completely missing).
+The dataset was recorded between February 28th and April 5th, 2004 in an indoor lab environment.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.25]{berkeley_lab.png}
+\caption{Intel Berkeley Research Lab Floorplan}
+\end{figure}
+
+Outlier Filtering : Observation removed if temperature $> 100\degc$, temperature $< 5\degc$, or humidity $< 16\%$.
+
+Gridding : Dataset falls on even 30s grid points for the first 10000 time steps (which is all we consider), so no gridding need be performed.
+
+\paragraph*{Traffic Dataset}
+
+The Traffic Dataset records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
+This dataset was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan.
+
+Outlier Filtering : \redtext{this was done by chung-yi.. please fill this in!}
+
+Gridding : The original dataset recorded most readings at around the xx:03 and xx:33 minute marks, so a 6 min window centered at
+these points captured the data for 30min internal readings. Where more than one reading was recorded for a given node
+within within a given window, the closest to the 3 or 33 min mark was chosen.
+
+\subsubsection{Dataset Preparation}
+
+\paragraph*{Common Methodology}
+
+Datasets of various lengths are produced from the single input dataset for our experiments, namely 2500, 5000, and 10000.
+There is an initially missing portion of the observations which can be considered Missing At Random (MAR).
+To this, we impose two different types of Missing Completely At Random (MCAR) sampling techniques to build validation and testing datasets.
+
+\paragraph*{Random Missing Pattern}
+
+This pattern reflects choosing a random time and random sensor to be missing and hence removed from the training set.
+We define three values $a, b, c$ as follows.
+
+\begin{itemize}
+\item $b\%$ of the non-missing data is randomly selected (without replacement) to be the validation set
+\item $c\%$ of the non-missing data is randomly selected (without replacement) to be the testing set
+\item The remaining data is part of the training set (this would be $a\%$ of the total data given no missing; assuming missing rate of $\%m$, the actual data in training set is $100-\%a-\%b-\%m$
+\end{itemize}
+
+\paragraph*{Temporal Missing Pattern}
+
+This pattern reflects testing the effect of all data missing after a certain point in time.
+We define three values $a, b, c$ as follows.
+
+\begin{itemize}
+\item Here, we have the last $c\%$ of time is in test and the prior $b\%$ to test is the validation.
+\item A total of 10 sensors are ``covered up'' in the validation and testing: 2,4,6,8,10,14,17,19,20,99
+\end{itemize}
+
+\subsection{Basic Experimental Results} %from Chung-Yi
+
 %validation setting
 We implemented linear interpolation~(LI), TRMF, Hybrid-kNN, DESM, STI and conducted experiment on the two data sets.
 
@@ -198,18 +260,16 @@ temp 43968 85 10 5	&0.5196	&0.51263\\
 \end{tabular}
 \end{table}
 
+\subsection{Heterogeneous Signal Incorporation}
 
+We compare our TF method with the models without modeling heterogeneous sensor correlations in this section.
+The Tensor Factorization naturally allow us to add additional nominal dimensions to the model, e.g.\ node id or sensor coordinates.
+The three-order TF is used in the experiment, each dimension represent node id, time frame number and heterogeneous signal.  
+Due to the indexes of each dimension are discrete, the heterogeneous sensor data are not able directly used.
+Therefore, the discretization of heterogeneous data is needed.
+Before training, the heterogeneous signal are divide into some bins according to the value.
+Each bin represents the index of the dimension.
 
-\subsubsection{adding heterogeneous signal }
-we compare our TF method with the models without modeling heterogeneous sensor correlations in this section.
-The Tensor Factorization naturally allow us to add additional nominal dimensions to the model, e.g. node id or sensor coordinates. The three-order TF is used in the experiment,
-each dimension represent node id, time frame number and heterogeneous signal.  
-Due to the indexes of each dimension are discrete, the heterogeneous sensor data are not able directly used. Therefore, the discretization of heterogeneous data is needed. Before training, the heterogeneous signal are divide into some bins according to the value. each bin represents the index of the dimension.
-Table ? and ? show the TF result of random split and temporal split on Berkeley dataset while table ? and ? show the TF result of random split and temporal split on traffic dataset.
-
-\subsubsection{prediction performance}
-In this section, we measure the performance of missing value recovery algorithms by regression methods. we demonstrate the experiment on traffic dataset.  the readings of gateway node are to be predicted in offline mode. At the sane time the data from gateway is the label of a instance while the data from the other sensor nodes are the features of a instance. 80 percent of instance are split to be training data, the remaining part is the testing data. Firstly, we filling the features from training and testing data by global mean, linear interpolation, KNN, and TRMF model. The regression model we choose is linear regression(LR) and support vector regression(SVR). The former is a linear model. In contrast, the latter is a nonlinear model. table ? show the result with different data missing rate.
-It is obvious that the more higher quality filling value will help the regression model predicting the objective sensor more precise.
 \begin{table} [htbp]
 \centering
 \caption{predict gateway humidity by LR (RMSE) }
