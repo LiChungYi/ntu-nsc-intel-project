@@ -1,4 +1,111 @@
 \section{Related Work} \label{sec:rw}
 
-Related Work here!
+ \begin{table*}
+\centering
+\caption{Methods for Sensory Data Imputation}
+\begin{tabular}{|l|l|l|} \hline
+Collection&Hot-Deck Imputation&Prediction Models\\ \hline
+\multirow{2}{*} {Temporal} & Last-seen\cite{Granger:lastseen} & Linear Interpolation\\ 
+& Mean&\\ \hline
+\multirow{3}{*}{Spatial}& WARM\cite{Gruenwald:WARM}& DEPM\cite{LI:DESM}\\ 
+&FARM\cite{Gruenwald:FARM}&K-NN\cite{pan:ake}\\ 
+&advWARM\cite{jiang:assoication}&\\\hline
+\multirow{3}{*}{Hybrid Spatio-Temporal}& &DESM\cite{LI:DESM}\\ 
+&STI\cite{Jian-Zhong:STI}&AKE\cite{pan:ake}\\
+&&Ensemble STI\cite{Lim:robust} \\\hline \end{tabular}
+\end{table*}
+Missing data imputation is the process used to fill the missing data items by determine or assign values\cite{Little:hotdeck}. In wireless sensor network, data is often missing as an entire packet due to communication or power exhaustion problem. Moreover, the physical characteristic of WSNs has shown that there are strong spatial and temporal correlation between sensor nodes and its past historical readings\cite{Akyildiz:exploitspatialtemporal}. Besides, sensor mote is consist of different types of sensors, and some sensors, according to their physical phenomenon, have multivariate correlations\cite{lou:multivariate_gap}. In the research above, they build a probabilistic model to estimate the missing values exploiting spatial, temporal, and multivariate correlation conditioned on the observations. 
 
+According to how sensory data imputation method uses the information, it can be partitioned into hot-deck imputation, and prediction models\cite{Garcia:KNNreview}. Hot-deck imputation methods directly replace the value from either neighbourhood information or historical data from itself like the \textit{last-seen} method. The prediction models provide a function to estimate the missing value. 
+\begin{equation}
+y_{it} = f( y_{i(t-1)} , y_{j(t-1})
+\end{equation}
+ Table 1 summarize the sensory data imputation methods. The vertical dimension in table 1 shows whether it exploits the temporal data, spatial data, or hybrid spatio-temporal information. The horizontal dimension classifies the methods by how the missing value is produced, by direct substitution or functional calculation. The environment of sensor networks change rapidly, indicating using only spatial or temporal information for imputation may not performs better than hybrid-spatio-temporal methods. 
+
+\subsection{Temporal predictions}
+\subsubsection{Linear Interpolation-LIN}
+Linear interpolation is a common temporal correlation based technique for missing data prediction. It is a baseline research method due to its simplicity. The estimated value $\hat{y_{it}}$ computed by LIN is:
+\begin{equation}
+\hat{y_{it}} = y_{iu} + \frac{y_{iv}-y{_iu}}{T_v-T_u}(t-T_u)
+\end{equation}
+where $y_{iu}$and $y{iv}$ are the last and the next observation in sensor $i$ at time $t$. The LIN does not consider spatial correlation, and it performs bad if the sampling rates is low or there are consecutive data missing. 
+\subsubsection{Last-seen and moving average}
+Imputation based on the last-seen, moving average, and other statistics methods apply on the target sensors only belongs to the temporal-based method. These methods share the advantage of easy understanding and implementation. But the performance depends on the sensor sampling rates and the network communication condition.   
+\subsection{Spatial predictions}
+
+\subsubsection{DEPM}
+The physical phenomenon of spatial correlation in sensors measurement, can be divided into two categories, the point source and the field source\cite{viran:spatialtemporal}. For point source sensors, the relation between the sensors in a region satisfies physical laws in some event detecting sensors such as light ambient sensors and fire detector. The prediction value is the result of linear superposition by neighbourhood sensors. In other applications, the physical phenomenon is dispersed over the field, for example, the temperature and seismic observation. DEPM\cite{LI:DESM} uses the physical characteristic of light ambient sensors(\ref{DEPM}), where $I_k$ and $I_j$ are two sensors nearby, and P stands for the power radiated from two sources. They build models of the imputation predictor according to the physical phenomenon, and solve the set of linear inhomogeneous equations to provide an accurate estimation for the light ambient sensors. However, it needs the precise knowledge of three-dimensional distance between two sensors, and it is not realistic in large sensors deployment.
+\begin{equation}
+I_K =\frac{P_j}{4\pi d^2(I_j,s_k)}
+\label{DEPM}
+\end{equation} 
+\subsubsection{Association Rule Mining Estimation}
+ Other study predict missing values based on the data mining techniques. WARM\cite{Gruenwald:WARM} and FARM\cite{Gruenwald:FARM} studied the estimations of missing data based on association rules between spatially correlated neighbours. For example, given sensor $i$and $j$, and the state=\{M,L,H\} in the traffic loading sensors. The rule will look like:\{$S_{1} \rightarrow S_{2} \mbox{wrt }  M = 9/13$\}. For past neighbourhood data, the weighting function is:
+ \begin{equation}
+ w(n) = p^{n-1}
+\end{equation}
+where p stands for the dumping factor which is decided by users. The estimation is done by computing the corresponding rules of each neighbour sensors and their weight.
+ It has the advantage of handling categorical sensor data, but the performance is limited in continuous sensor data streams. Moreover, the association rule support and thresholds of confidence need to be predefined by the users. It causes the difficulties for building a satisfying model by users who are not familiar with environmental monitoring. 
+\subsubsection{K-Nearest Neighbours Imputation} 
+ K-nearest neighbours algorithm(KNN) is a naive spatial correlation based imputation method. It has been adopted to estimate the missing value of DNA micro-arrays\cite{Troyanskaya:DNAKNN}, but it does not consider the correlation of  instead it only uses the similarity of values to fill the missing data. Most of the studies that compute the spatial correlation are special cases of KNN, and the difference between them are the selection of the distance metric and the design of the weighting function. The common features among them is to build the relation of pairwise sensors on a linear or nonlinear predictor\cite{Lim:robust}\cite{LI:DESM}\cite{pan:ake}\cite{Jian-Zhong:STI}\cite{zhang:skif}, and they are able to deal with continuously changing sensor data in comparison with associative rule mining. The linear predictor in a local region of nearby sensors computed using autocorrelation or linear regression, and by applying different weighting functions they train the KNN model on these correlation measurements. The two major drawbacks of KNN-based model are that they cannot capture temporal correlation, and most of these methods rely on the knowledge of distance between each sensor.
+\subsection{Hybrid Spatio-temporal Imputation}    
+In past studies, algorithms that only use either spatial data or temporal data will unavoidably face problems. In the environment when the radio transmission quality is bad or the packets collision happens frequently, the large gap missing data will cause the methods that using only temporal information perform very bad, like the linear interpolation. In contrast, for certain point source sensing application like light sensor, the spatial information is often unreliable since it senses more than one light source. The predictor using only spatial data is easily harmed by the bias and drift from neighbourhood sensing data. Therefore, applying both temporal and spatial information on the sensory missing data problem seems promising. However, as far as we know, these methods prefer spatial correlation imputation more than temporal correlation, and most of the methods require the knowledge of mutual distance between sensors.     
+\subsubsection{Spatial temporal imputation-STI}
+An algorithm that uses spatial and temporal imputation(STI) is proposed in \cite{Li:STI}, when a packet is missing, the STI first check if a neighbour node is within the missing sensor's sensing region. The average of the neighbours in the range is then used to impute the missing value. Otherwise, the last seen value of the missing sensor is used for prediction. The method prefers spatial prediction more than temporal. There are problems when the last seen value is far away from the current time slot when most of the nodes in the sensing region has high missing rate. The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range. However, for restricted computing resources application, the algorithm is simple and fast since it does not need extra memory to store information other than their mutual distance. 
+\subsubsection{DESM}
+Another algorithm which prefers spatial more than temporal is DESM\cite{LI:DESM}. The computation in DESM is simple and only little amount of memory is required to store the id of the nearest sensor.  The prediction value of sensor $i$ is:
+\begin{equation}
+\hat{y_{it}} = (1-\alpha)\hat{y_{i(t-1)}} + (\alpha)\hat{z}
+\end{equation}
+where$\alpha$ is the Pearson correlation coefficient between sensor i and j. $\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $i$ at the time $m$(\ref{z-hat}). 
+\begin{equation}
+\hat{z} = X_{j(m)}(1+\frac{X_{i(m+1)}-X_{(im)}}{X_{i(m)}})
+\label{z-hat}
+\end{equation}
+Note that the temporal feature holds a very small portion of contribution to the prediction process since the nearest sensor often have very high correlation value. In most cases the last seen value of sensor j is almost ignored in the cases when the correlation is often higher than 99\% in a dense deployed sensors environment. In realistic sensors environment, the sensors nearby inevitably may have noises and bias which this method cannot capture. .
+ \subsubsection{Appling K-nearest neighbour Estimation-AKE }
+Pan proposed the Applying K-nearest neighbour Estimation algorithm(AKE)\cite{pan:ake} to exploit the spatial correlation in the missing sensory data problem. They argue that the past research on sensor imputation(STI) estimates the missing problem based on more temporal correlation than spatial correlation(STI). In their observation, the sensor data in WSN often changes rapidly and sharply especially in outside environment. The AKE adopts the linear regression model,
+\begin{equation}
+\hat{y}_{it} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}
+\label{ake_j}
+\end{equation}
+ where $it$ stands for time t of sensor i and j is the neighbour nodes of i. The regression coefficients is computed by using more than three complete packets from both sensor $i$ and sensor $j$. They claim that using a linear combination of the estimation from neighbour sensors can lower the random error caused by only using a single sensor. For given node $i$ whose data is missing at time $t$, and the m nearest neighbour sensors who has value at time $t$[$y_{1t}, y_{2t},\dots, y_{mt}$], the missing value is predicted by :   
+ \begin{equation}
+ \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}
+ \label{ake_impute}
+ \end{equation}
+% First they build a matrix 
+%\[ \left( \begin{array}{cccc}
+%
+%\end{array}
+%\right)
+%\]
+In (\ref{ake_impute}), the estimated $\hat{y}_{it}^(j)$ is computed by node $j$ using the coefficients of [$i,j$]. In designing the weighting function, the AKE gives higher correlation pairs a larger weight. It adopts the r-square statistics to rank their correlations where sensors have the higher $R^2$, the better the regression equation fit. Based on the (\ref{ake_j}), the $R^2$ is computed by:
+\begin{equation}
+R_(j)^2 = \sum_{n=1}^{h} \frac{(\hat{y}_{in}^(j)-\bar{y}_i)^2}{(y_{in}-\bar{y}_i)^2}
+\end{equation}
+The AKE is good at estimating large gap missing data. Previous study [2] has showed that for high sampling rates sensing, the temporal correlation is higher than the spatial correlation from nearby sensors. If the consecutive missing frames are within the threshold learned by the algorithm , the linear interpolation is used to predict the value. However, due to the uncertain factors in the natural environment, the AKE gives an approximation on predicting missing value without a mathematical proof why the estimation model adopts linear regression for all cases. The \cite{LI:DESM} has offered an counterexample on the case of light ambient sensor. The preference on spatial over temporal is also being challenged when the sampling rates is very high (i.e. the body sensors).   
+\subsubsection{Imputation Method-ImM}
+ In \cite{Lim:robust}, an imputation method(ImM) consists of two temporal and one spatial predictors was introduced. The algorithm argues that it is not robust to set the preference for its spatial predictor over temporal predictor, or vice versa. There are some cases when the temporal correlation is higher than the spatial correlation, for example, in a data stream with a high sampling rates, or sensors that are close together but separated by a wall. In opposite, the spatial predictor may contributes more than the temporal one when there are a large gap of data missing and its temporal correlation is very low. For given sampling rate and sensor node, the predictor which yields the most accurate results in the training data set is used to predict the missing packets. Given $o$, the training samples of specific sensor $p$, and $O$ who is the training data of sensors other than $p$.  The first temporal predictor(LRS) uses the last transmitted packet as the predicted value(\ref{lrs}).
+\begin{equation}
+\hat{y}_{t} =y_{t-1} \label{lrs}
+\end{equation} 
+ The second temporal predictor uses a linear predictor(LP). The coefficients of the linear predictor is decided by autocorrelation method of autoregressive modelling. The predicted value is(\ref{lp}):
+\begin{equation}
+\hat{y}_{t}^p = a(2)X_o(t-1) - a(3)X_o(t-2)- \dots -a(p+1)X_o(t-p) \label{lp}
+\end{equation} 
+where $p$ is the sensor node ID.  
+The spatial predictor uses the linear predictive model, given the nodes who are successively transmitted to the sink node, $p_1,p_2,\dots,p_L$, the predicted value is(\ref{ImM_Spatial}): 
+\begin{equation}
+\hat{y}_{t}^p = \sum_{l=1}^L a_lp_l
+\label{ImM_Spatial}
+\end{equation}
+ where the weights is determined by weighted coefficients(WC) using least square method$[a_1,a_2,\dots,a_L]^T = (O^TO)^{-1}O^To$.
+  However, the performance of the ImM may degrades if the changes in the continuous data stream are sharp in the high sampling rate data set. For example, the wind sensors in the windy climate area may affect the method selected who will apply on the target sensor. The predictors selection method looks nice but is lack of flexibility in such cases.
+  
+\subsection{Matrix factorization Imputation }
+Matrix factorization has many applications in computer visions, recommendation system, and data imputation. Their goal is to factorize the measurement matrix R and find the two subspace: U and V. 
+\begin{equation}
+M_{d\times n}= U_{d\times k}V^t_{k\times n}
+\end{equation} 
+Structure from motion(SFM)\cite{tomasi1992shape} and motion estimation are among the most important application in computer vision. Different from the recommendation system and the sensor data imputation, the rank of linear subspace in SFM is relatively small. The 3D scene point matrix has rank of three after it is subtracted by its column-wise mean. Notice that the video camera in essential is an univariate sensor device which is different in comparison with heterogeneous nature of sensor networks. The missing rate in SFM could be very high and it could reach 40\% missing\cite{ke2005robust} even to 76.9\%\cite{deguchi2011efficient}.  A number of studies have investigated different approaches to the MF-based structure from motion problem. \cite{buchanan2005damped} performs the L2-norm minimization using the standard Newton algorithm with a damping factor. In \cite{deguchi2011efficient}, they propose a new method incorporates the damping factor into the Wiberg method to solve the L2-norm problem, and they claim their methods reach the global optimum fast from choosing random initial values. By using damping factor, their method is said that it tops the performance of other Newton-family minimization methods for reduce the problem by eliminating either of the two factored matrices . A L1-norm factorization using Wiberg method is proposed in\cite{eriksson2010efficient}. They turn the objective function into a non-linear least square problem and adopt Gauss-Newton method to solve the problem. It turns out that their method converges faster than other L2-norm based methods, and the results show that their method is insensitive to outliers. 
