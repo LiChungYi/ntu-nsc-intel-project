@@ -1,4 +1,41 @@
 \section{Experimental Results}  \label{sec:exp}
 
-Experimental Results here!
+\subsubsection{adding heterogeneous signal }
+we compare our TF method with the models without modeling heterogeneous sensor correlations in this section.
+The Tensor Factorization naturally allow us to add additional nominal dimensions to the model, e.g. node id or sensor coordinates. The three-order TF is used in the experiment,
+each dimension represent node id, time frame number and heterogeneous signal.  
+Due to the indexes of each dimension are discrete, the heterogeneous sensor data are not able directly used. Therefore, the discretization of heterogeneous data is needed. Before training, the heterogeneous signal are divide into some bins according to the value. each bin represents the index of the dimension.
+Table ? and ? show the TF result of random split and temporal split on Berkeley dataset while table ? and ? show the TF result of random split and temporal split on traffic dataset.
 
+\subsubsection{prediction performance}
+In this section, we measure the performance of missing value recovery algorithms by regression methods. we demonstrate the experiment on traffic dataset.  the readings of gateway node are to be predicted in offline mode. At the sane time the data from gateway is the label of a instance while the data from the other sensor nodes are the features of a instance. 80 percent of instance are split to be training data, the remaining part is the testing data. Firstly, we filling the features from training and testing data by global mean, linear interpolation, KNN, and TRMF model. The regression model we choose is linear regression(LR) and support vector regression(SVR). The former is a linear model. In contrast, the latter is a nonlinear model. table ? show the result with different data missing rate.
+It is obvious that the more higher quality filling value will help the regression model predicting the objective sensor more precise.
+\begin{table} [htbp]
+\centering
+\caption{predict gateway humidity by LR (RMSE) }
+\label{table: LR}
+   Filling method
+\begin{tabular}{ r | r r r r r}
+        missing rate&global mean     &LI   &Hybrid-KNN &TRMF\\ \hline
+        10\%    &4.143&3.868&&2.526\\
+        30\%    &5.161&3.955&&2.470\\
+        50\%    &6.234&4.282&&2.756\\
+        70\%   &7.728&5.082&&2.743\\
+  
+\end{tabular}
+\end{table}
+
+\begin{table} [htbp]
+\centering
+\caption{predict gateway humidity by SVR (RMSE) }
+\label{table: SVR}
+   Filling method
+\begin{tabular}{ r | r r r r r}
+        missing rate&global mean     &LI   &Hybrid-KNN &TRMF\\ \hline
+        10\%    &3.933 &4.006&&2.591\\
+        30\%    &5.172&4.083&&2.532\\
+        50\%    &6.234&4.384&&2.813\\
+        70\%   &7.686&5.235&&2.822\\
+  
+\end{tabular}
+\end{table}
