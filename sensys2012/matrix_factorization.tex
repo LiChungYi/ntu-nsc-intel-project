@@ -1,3 +1,131 @@
 \section{Matrix Factorization}  \label{sec:mf}
 
-Matrix Factorization here!
+
+% need update and to be consistent with related work 
+The essence of Matrix Factorization~(MF) is to learn the latent factors from observed entries in the matrix, and use them to predict unobserved entries.  MF is one of the most successful models in domains like Collaborative Filtering~(CF) in recommendation systems. In CF, the rows of the matrix are users and the columns are items, and we want to predict unknown rating scores that reflect users' preference to items. The unknown scores prediction in CF is equivalent to missing data recovery in Wireless Sensor Network~(WSN), except the rows become time frames, the columns become sensor nodes, and the data characteristic is different. 
+
+In the following, we will first introduce the basics of MF. Then we will talk about how we modify the objective function of MF and make it adapted to the WSN data, and finally the complete procedure of our proposed method.
+
+\subsection{Basic Formulation of Matrix Factorization}
+
+The idea of MF is strongly related to Singular Value Decomposition~(SVD). SVD decomposes a completely observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrix~$\mathbf{U}$ and~$\mathbf{V}$ such that
+\begin{equation*} \mathbf{R} = \mathbf{U}\mathbf{D}\mathbf{V}^T. \end{equation*}
+While keeping the largest K singular values, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K$ is the best K-rank approximation of $\mathbf{R}$ under Frobenius Norm. 
+
+Yet, conventional SVD is undefined when the matrix~$\mathbf{R}$ is incomplete. Recent research shows\cite{koren2009matrix} when the matrix~$\mathbf{R}$ is partially observed, a better approach is to factorize $\mathbf{R}$ by considering observed entries only. By some numerical optimization procedures, we can obtain two small matrices~$\mathbf{P}_{MK}$ and $\mathbf{Q}_{NK}$ that approximate observed entries in the matrix~$\mathbf{R}_{MN}$
+\begin{equation*}\mathbf{R} \approx \mathbf{P} \mathbf{Q}^T.\end{equation*}
+If $\mathbf{R}$ is a matrix of temperature readings, then each row of $\mathbf{P}$ represents a latent factor of the time frame and each row of $\mathbf{Q}$ is a latent factor of the sensor node.
+
+Here we adopted the biased MF: row bias $\mu_u$ and column bias $\mu_i$ is added on every row and column. The indices $u$, $i$ come from recommendation literature where the rows are users and columns are items. In a temperature monitoring system, the row bias can be understood as the average temporal at the time, and the column bias reflects the constant bias of the sensor node. Therefore, our prediction $\hat{r}_{u,i} = \mu_u + \mu_i + \mathbf{p}_u^T \mathbf{q}_i$. After adding the regularization term, the whole objective function becomes
+\begin{equation*} \frac{1}{2}\sum_{u,i}{(r_{u,i} - \hat{r}_{u,i})}^2 + \frac{\beta_1}{2}\sum_u{\mu_u^2}, + \frac{\beta_2}{2}\sum_i{\mu_i^2} + \frac{\beta_3}{2}\sum_u{||\mathbf{p}_u||^2} + \frac{\beta_4}{2}\sum_i{||\mathbf{q}_i||^2}.\end{equation*}
+Among which, $\mathbf{p}_u$ and $\mathbf{q}_i$ are feature vectors of row $u$ and column $i$. $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$ are parameters that control the strength of regularization.
+
+\subsection{Temporal Regularized Matrix Factorization}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{TRMF_illustration.png}
+	\caption{illustration of TRMF}
+\end{figure}
+
+%cite temporal reference
+
+Although the goals of both CF and WSN data recovery are missing data prediction, the data characteristics are very different. Firstly, in CF we have millions of users and items. In contrast, there are usually many time frames but few sensors in WSN. The spatial correlation of the sensors may be easily learnt from the data, but the temporal correlation is badly captured. Secondly, users and items are independent in CF, while time frames in WSN have a fixed order: closer time frames have stronger correlation. Having the observation, we come up with Temporal Regularized Matrix Factorization (TRMF) to better fit the characteristic of WSN data. 
+
+TRMF adds a temporal regularization term on conventional MF. The temporal regularization forces the bias terms and features of adjacent rows to be similar, which reflects our intuition that readings in adjacent time frames should be similar. To be specific, we change our objective function into 
+\begin{equation*}\begin{aligned} \frac{1}{2}\sum_{u,i}{(r_{u,i} - \hat{r}_{u,i})}^2 &+ \frac{\beta_1}{2}\sum_u{\mu_u^2}, + \frac{\beta_2}{2}\sum_i{\mu_i^2} + \frac{\beta_3}{2}\sum_u{||\mathbf{p}_u||^2} + \frac{\beta_4}{2}\sum_i{||\mathbf{q}_i||^2}\\ &+ \frac{1}{2}\gamma_1\sum{(\mu_u-\mu_{u+1})^2} + \frac{1}{2}\gamma_2\sum{||\mathbf{p}_u-\mathbf{p}_{u+1}||^2}.\end{aligned}\end{equation*}
+
+
+\subsection{Multivariate TRMF}
+At a location, a sensor node usually sense multiple attributes at the same time. These attributes may be correlated and the correlation may help with missing data recovery. Therefore, we propose Multivariate TRMF. Assume there are two attributes: temperature and humidity. The $\mathbf{R}$ of Multivariate TRMF is the conjunction of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
+\begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
+The objective function remains the same form except that for each time frame there are two bias terms: one for temperature and the other for humidity. Besides, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. For details of data normalization, please refer to \textbf{[Data Normalization]} in \textbf{Section \ref{optimation_procedure}}.
+
+
+\subsection{Optimization Procedure of TRMF}
+\label{optimation_procedure}
+Several approaches have been suggested for solving MF, like Stochastic Gradient Descent (SGD)\cite{koren2009matrix,chih2008large}, Alternating Least Square (ALS)\cite{koren2009matrix,zhou2008large} and Newton's method\cite{buchanan2005damped}. We adopt SGD for its efficiency and simplicity. 
+
+In SGD, we incrementally update our model by considering one observed entry at a time. Focused on one observed reading $r_{u,i}$, the objective function of MF is
+\begin{equation*} \frac{1}{2}(r_{u,i} - \hat{r}_{u,i})^2 + \frac{\beta_1}{2}\mu_u^2 + \frac{\beta_2}{2}\mu_i^2 + \frac{\beta_3}{2}||\mathbf{p}_u||^2 + \frac{\beta_4}{2}||\mathbf{q}_i||^2\end{equation*}
+Thus, the update equation is\\
+$\begin{cases}
+	\mu_u' = \mu_u - \eta_1 ((\hat{r}_{u,i}-r_{u,i}) + \beta_1 \mu_u) \\
+	\mu_i' = \mu_i - \eta_1 ((\hat{r}_{u,i}-r_{u,i}) + \beta_2 \mu_i) \\
+	\mathbf{p}_{u}' = \mathbf{p}_{u} - \eta_2 ((\hat{r}_{u,i}-r_{u,i})\mathbf{q}_{i} + \beta_3 \mathbf{p}_{u})\\
+	\mathbf{q}_{i}' = \mathbf{q}_{i} - \eta_2 ((\hat{r}_{u,i}-r_{u,i})\mathbf{p}_{u} + \beta_4 \mathbf{q}_{i})\\
+\end{cases}$\\
+After we use every rating in the training set once, we update the model according to the temporal regularization
+$\begin{cases}
+	\mu_u' = \mu_u - \eta_1 \gamma_1((\mu_u-\mu_{u-1})+(\mu_u-\mu_{u+1}))\\
+	\mathbf{p}_{u}' = \mathbf{p}_{u} - \eta_2 \gamma_1((\mathbf{p}_{u}-\mathbf{p}_{u-1})+(\mathbf{p}_{u}-\mathbf{p}_{u+1}))\\
+\end{cases}$
+
+We summarize our algorithm in \textbf{Procedure \ref{alg:TRMF}}. Some details are explained in the following:
+
+\aPoint{Data Normalization}
+
+Unlike the rating scores in CF are in a fixed range, readings from WSN are real-valued, and the range varies in different applications. Before training, we normalize the training set by its mean and variance, and in training we update the model by the normalized training set. While predicting validation set and testing set, we restore the prediction to the original mean and variance range and then calculate the error.
+
+There are two benefits of data normalization. Firstly, when the global mean becomes zero, the origin of our model becomes a good initial point. The initial point impacts the performance of MF greatly because the objective function of MF is non-convex and we can only find the local minimum. Secondly, normalization enables us to have similar learning target on different data sets. It simplifies the parameter tuning task for TRMF and it is the foundation of Multivariate TRMF. 
+
+
+\aPoint{Initialization}
+
+There are three ways to initialize the bias terms:
+\begin{enumerate}
+	\setlength {\itemsep}{-5pt}
+	\item Set all of them to zeros.
+	\item Set the row bias as the row mean, and then set the column bias as the column mean of every reading minus its row bias.
+	\item The other way around.
+\end{enumerate}
+For all components of every $\mathbf{p}_{u}$ and $\mathbf{q}_{i}$, we set them as ~$\mbox{random}(-0.05,0.05)/K$, where $K$ is number of features.
+
+\aPoint{Parameters}
+
+We seem to have many parameters: conventional regularization for user bias~$\beta_1$, item bias~$\beta_2$, user feature~$\beta_3$, item feature~$\beta_4$, temporal regularization term for bias~$\gamma_1$ and for feature~$\gamma_2$, learning rate for bias~$\eta_1$ and for feature~$\eta_2$, number of features~$K$, but in many cases we can achieve reasonable performance by setting 
+\begin{equation*}\beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \eta_1 = \eta_2. \end{equation*}
+In the discussion session, we will share our rule of thumb for setting parameters.
+
+\aPoint{Stopping Criterion}
+
+We need to know when to stop updating the model. We should split the available information into a training set and validation set. Our procedure is:
+\begin{enumerate}
+	\item Train on the training set. Stop if validation error is increasing and (current iteration number $-$ best iteration number $>$ threshold).  
+	\item Rerun the training process to train on the training and validation set. Stop at the iteration number we obtained in step 1.
+	\item Output the model and do prediction on a testing set. 
+\end{enumerate}
+The threshold here we choose 500. This will be helpful to get over some local minimums.
+
+\aPoint{Robust Weighting}
+
+Noisy and faulty readings are common in WSN data. Usually the faulty readings deviate greatly from normal readings, so they have huge impact on our models. To cope with faulty readings, we can slightly change the error term
+\begin{equation*}RobustError(r_{u,i}, \hat{r}_{u,i}) = 
+\begin{cases}
+	\frac{1}{2}(r_{u,i}-\hat{r}_{u,i})^2 & \mbox{if $\frac{1}{2}(r_{u,i}-\hat{r}_{u,i})^2 < \epsilon$;}\\
+	\epsilon & \mbox{otherwise},
+\end{cases}
+\end{equation*}
+or change to L1 norm.
+
+However, faulty readings are not our main focus here and we don't want them to mislead our evaluation, so in our experiment we simply remove the outlier readings that are too large or too small.
+
+\begin{algorithm}
+	\caption{Temporal Regularized Matrix Factorization}
+	\label{alg:TRMF}
+	\textbf{Parameter:} $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$, $\gamma_1$, $\gamma_2$, $\eta_1$, $\eta_2$, $K$\\
+	\textbf{Input:} training set, validation set
+	\begin{algorithmic}[1]
+		\State Normalize training set as $\mathcal{D}$
+		\State Initialize the $\mu_u$, $\mu_i$, $\mathbf{p}_u$, $\mathbf{q}_i$ for all $u$, $i$
+		\Repeat
+			\State \textbf{for} each observed reading $r_{u,i}$ in $\mathcal{D}$
+				\State \indent Update $\mu_u$, $\mu_i$, $\mathbf{p}_{u}$, $\mathbf{q}_{i}$
+			\State Update $\mu_u$, $\mathbf{p}_u$ for all $u$ by temporal regularization
+		\Until{stopping criterion is met}
+		\State Rerun the whole algorithm to train on training and validation set 
+		\State Output the model
+	\end{algorithmic}
+\end{algorithm}
+
+
