@@ -1,39 +1,41 @@
-\documentclass[10pt]{sensys11}
+\documentclass[10pt]{sensys-proc}
 
-\usepackage{subfigure}
-\usepackage{booktabs}
-\usepackage{colortbl}
-\usepackage{tabularx}
-\usepackage{color}
-\usepackage{xspace}
-\usepackage{hyperref}    % Creates hyperlinks from ref/cite 
-\hypersetup{pdfstartview=FitH}
 \usepackage{graphicx}    % For importing graphics
-\usepackage{url}         %
+\usepackage{color}
 \usepackage{cite}
+\usepackage{balance}
 
-\renewcommand{\arraystretch}{1.2} % Space out rows in tables
+%\usepackage{subfigure}
+%\usepackage{booktabs}
+%\usepackage{colortbl}
+%\usepackage{tabularx}
+%\usepackage{xspace}
+%\usepackage{hyperref}    % Creates hyperlinks from ref/cite 
+%\hypersetup{pdfstartview=FitH}
+%\usepackage{url}         %
+
+%\renewcommand{\arraystretch}{1.2} % Space out rows in tables
 \newcommand{\redtext}[1]{\textcolor{red}{#1}}
 \newcommand{\rednote}[1]{\textcolor{red}{\small #1}}
 
-\setlength\paperheight {11in}
-\setlength\paperwidth {8.5in}
+%\setlength\paperheight {11in}
+%\setlength\paperwidth {8.5in}
 
 % No space between bibliography items:
-\let\oldthebibliography=\thebibliography
-  \let\endoldthebibliography=\endthebibliography
-  \renewenvironment{thebibliography}[1]{%
-    \begin{oldthebibliography}{#1}%
-      \setlength{\parskip}{0ex}%
-      \setlength{\itemsep}{0ex}%
-  }%
-  {%
-    \end{oldthebibliography}%
-  }
-\setlength{\parindent}{5mm}
+%\let\oldthebibliography=\thebibliography
+%  \let\endoldthebibliography=\endthebibliography
+%  \renewenvironment{thebibliography}[1]{%
+%    \begin{oldthebibliography}{#1}%
+%      \setlength{\parskip}{0ex}%
+%      \setlength{\itemsep}{0ex}%
+%  }%
+%  {%
+%    \end{oldthebibliography}%
+%  }
+%\setlength{\parindent}{5mm}
 
-\begin{document}
-\title{A Collaborative Filtering Approach\\to Estimating Missing Sensor Data}
+\numberofauthors{2}
+
 \author{
 {Scribus Primus}\\
 \affaddr{Primus Address}\\
@@ -43,23 +45,36 @@
 \email{secondus@elsewhere.com}
 }
 
-\conferenceinfo{SenSys'12,} {November 6--9, 2012, Toronto, Canada}
+%\author{
+%{Chung-Yi Li, Wei-Lun Su, Fu-Chun Hsu, Todd G.\ McKenzie, %students
+%Shou-De Lin, Jane Yung-jen Hsu}\\ %professors
+%\affaddr{Department of Computer Science and Information Engineering, National Taiwan University, Taiwan}\\
+%\email{\{r00922051,r00922050,r94082,d97041,sdlin,yjhsu\}@csie.ntu.edu.tw} \and
+%{Phillip B.\ Gibbons}\\
+%\affaddr{Intel Research Pittsburgh, USA}\\
+%\email{phillip.b.gibbons@intel.com}
+%}
+
+\title{A Collaborative Filtering Approach\\to Estimating Missing Sensor Data}
+
+\crdata{978-1-4503-1169-4}
+\conferenceinfo{SenSys'12,} {November 6--9, 2012, Toronto, ON, Canada.}
 \CopyrightYear{2012}
-\crdata{XXX-X-XXXXX-XXX-X}
+
+\begin{document}
 
 \maketitle
 \input{abstract}
-\input{introduction}
-\input{related_work}
-\input{matrix_factorization}
-\input{tensor_factorization}
-\input{experimental_results}
-\input{discussion}
-\input{conclusion}
+%\input{introduction}
+%\input{related_work}
+%\input{matrix_factorization}
+%\input{tensor_factorization}
+%\input{experimental_results}
+%\input{discussion}
+%\input{conclusion}
 
-{\footnotesize
-\bibliographystyle{abbrv}
-\bibliography{sensys12}
-}
+%\balance
+%\bibliographystyle{abbrv}
+%\bibliography{sensys12}  % sigproc.bib is the name of the Bibliography in this case
 
 \end{document}

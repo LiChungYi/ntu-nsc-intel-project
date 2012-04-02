@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{sigplan-proc-varsize-sensys11}
-              [2011/01/21 v1.0
+\ProvidesClass{sensys-proc}
+              [2012/03/04 v1.0
                Document Class]
 
 % This file has a long and troubled history:
@@ -55,6 +55,17 @@
 %   indentedparagraphs  or  noindentedparagraphs
 %
 
+%
+% Hacked 04-Mar-2012 by rasit.eskicioglu@acm.org (RE) to update
+% the copyright notice section and a few other things.
+% To shorten the name, renamed to sensys-proc 
+%
+% RE: Added a new option 'abstract' for demo/poster abstracts
+
+\newif\ifabstract
+\abstractfalse
+\DeclareOption{abstract}{\abstracttrue}
+
 \DeclareOption{a5paper}
     {\ClassError{proc}{Option `a5paper' not supported}{}}
 \DeclareOption{b5paper}
@@ -85,11 +96,11 @@
 \DeclareOption{nocopyrightspace}{\nocopyrightspacetrue}
 \PassOptionsToClass{twocolumn}{article}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
-\ProcessOptions
+\ProcessOptions\relax % RE
 \LoadClass{article}
 
 \def\tableofcontents{\@latexerr{\tableofcontents: Tables of contents are not
-  allowed in the `sigplan-proc-varsize' document style.}\@eha}
+  allowed in the `sensys-proc' document style.}\@eha}
 
 \RequirePackage{pslatex}
 
@@ -240,11 +251,11 @@
 \abovedisplayshortskip \z@ plus2pt%
 \belowdisplayshortskip 3.6pt plus2pt minus 2pt}
 
-\def\footnotesize{\@setsize\footnotesize{10pt}\ixpt\@ixpt
-\abovedisplayskip 6.4pt plus 2pt minus 4pt%
-\belowdisplayskip \abovedisplayskip
-\abovedisplayshortskip \z@ plus 1pt%
-\belowdisplayshortskip 2.7pt plus 1pt minus 2pt}
+% \def\footnotesize{\@setsize\footnotesize{10pt}\ixpt\@ixpt
+% \abovedisplayskip 6.4pt plus 2pt minus 4pt%
+% \belowdisplayskip \abovedisplayskip
+% \abovedisplayshortskip \z@ plus 1pt%
+% \belowdisplayshortskip 2.7pt plus 1pt minus 2pt}
 
 % Section Headers
 % ===============
@@ -298,7 +309,6 @@
        \hbox to\hsize{\hfil\box\@tempboxa\hfil}\par
    \fi}
 
-
 % Title Page
 % ==========
 
@@ -338,7 +348,7 @@
 
 \newcommand{\affaddr}{\normalfont\sffamily\fontsize{10\p@}{10\p@}\selectfont}
 
-\def\addauthorsection{\ifnum\originalaucount>3
+\def\addauthorsection{\ifnum\originalaucount>6
     \section{Additional Authors}\the\addauthors
   \fi}
 
@@ -493,7 +503,7 @@
 \section*{Abstract}\normalsize
 }{}
 
-\newcommand{\keywords}{\section*{Keywords}}
+\newcommand{\keywords}{\paragraph*{Keywords}}
 
 \newcommand{\terms}{\section*{General Terms}}
 
@@ -557,25 +567,31 @@
 \def\crdata#1{\gdef\@crdata{#1}}
 \def\@crdata{}
 \def\permission#1{\gdef\@permission{#1}}
-\def\@permission{ Permission to make digital or hard copies of all or
+
+\ifabstract
+\def\@permission{Copyright is held by the author/owner(s).}
+\else
+\def\@permission{Permission to make digital or hard copies of all or
   part of this work for personal or classroom use is granted without
   fee provided that copies are not made or distributed for profit or
   commercial advantage and that copies bear this notice and the full
-  citation on the first page.  To copy otherwise, to republish, to
+  citation on the first page. To copy otherwise, to republish, to
   post on servers or to redistribute to lists, requires prior specific
   permission and/or a fee.}
+\fi
 \def\crdata#1{\gdef\@crdata{#1}}
 \def\@crdata{}
 
 \def\@copyrightinfo{%
   \ifx\@CopyrightYear\@empty
+  ACM \@crdata
   \else
-  Copyright \@CopyrightYear\ ACM \@crdata\ ...\$5.00
-  \fi}
+  Copyright \copyright\ \@CopyrightYear\ ACM \@crdata\ ...\$10.00
+  \fi
+  }
 
-\toappear{\scriptsize\@permission\par
+\toappear{\scriptsize\@permission\\[-0.5em]\par
 \textsl{\@conferencename} \@conferenceinfo\par\@copyrightinfo}
-
 
 % Theorems
 % ========
@@ -668,16 +684,20 @@
 % ============
 
 % This is identical to the code in article.cls except for the first
-% line and \section instead of \section*.
+% line and \section instead of \section*. 
+
+% The references are now typeset in \small. MRE
 
 \renewenvironment{thebibliography}[1]
      {\ifnum\addauflag=0\addauthorsection\global\addauflag=1\fi
       \section{\refname
         \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}}%
+        \small\vskip 0.25em % MRE to extend the \small spacing after the section header
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
             \leftmargin\labelwidth
             \advance\leftmargin\labelsep
+            \itemsep -0.5em
             \@openbib@code
             \usecounter{enumiv}%
             \let\p@enumiv\@empty
@@ -693,4 +713,4 @@
 
 \endinput
 %%
-%% End of file `sigplan-proc-varsize.cls'.
+%% End of file `sensys-proc.cls'.
