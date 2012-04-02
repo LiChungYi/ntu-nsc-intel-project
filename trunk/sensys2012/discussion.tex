@@ -1,4 +1,5 @@
 \section{Discussion}  \label{sec:disc}
 
-Discussion here!
-
+In temporal split data, it is more easier to be over-fitting state. Therefore, the regularization term should be higher than random split.
+In experiment 4.3, it can be found TF works well on traffic dataset while it does't take advantage from adding heterogeneous signal on Berkeley dataset. Sensors from traffic dataset are deployed outdoor so the variance of heterogeneous data is large. While sensors from Berkeley dataset are deployed indoor, it cause the variance of heterogeneous data is small. The small variance makes TF does't work well because we quantize the heterogeneous signal into nominal bins before training. Most of heterogeneous sensor readings are divided into the same bin such that the additional dimension of TF is redundant.
+We finally make a conclusion that the high variance heterogeneous data are suitable to use TF model but the low variance data are suitable to use Multiverse TRMF model. 
