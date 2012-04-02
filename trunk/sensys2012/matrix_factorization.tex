@@ -85,8 +85,7 @@ For all components of every $\mathbf{p}_{u}$ and $\mathbf{q}_{i}$, we set them a
 
 We seem to have many parameters: conventional regularization for user bias~$\beta_1$, item bias~$\beta_2$, user feature~$\beta_3$, item feature~$\beta_4$, temporal regularization term for bias~$\gamma_1$ and for feature~$\gamma_2$, learning rate for bias~$\eta_1$ and for feature~$\eta_2$, number of features~$K$, but in many cases we can achieve reasonable performance by setting 
 \begin{equation*}\beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \eta_1 = \eta_2. \end{equation*}
-In the discussion session, we will share our rule of thumb for setting parameters.
-
+This is also our setting in the experiment. Moreover, we will share our experience about setting parameters in \textbf{Section \ref{subsec:parameter}}.
 \aPoint{Stopping Criterion}
 
 We need to know when to stop updating the model. We should split the available information into a training set and validation set. Our procedure is:
