@@ -6,13 +6,13 @@
 
 \paragraph*{Berkeley Dataset}
 
-The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature, humidity, and light for 54 sensors (with 1 missing completely missing).
-The dataset was recorded between February 28th and April 5th, 2004 in an indoor lab environment.
+The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature, humidity, light, and voltage for 54 sensors (with 1 missing completely missing) for which locations are given (see Figure \ref{berkeley_lab}).
+The dataset includes 2.3M sensor observations and was recorded between February 28th and April 5th, 2004 in an indoor lab environment.
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.25]{berkeley_lab.png}
-\caption{Intel Berkeley Research Lab Floorplan}
+\caption{Intel Berkeley Research Lab Floorplan} \label{berkeley_lab}
 \end{figure}
 
 Outlier Filtering : Observation removed if temperature $> 100\degc$, temperature $< 5\degc$, or humidity $< 16\%$.
@@ -312,6 +312,11 @@ Due to the indexes of each dimension are discrete, the heterogeneous sensor data
 Therefore, the discretization of heterogeneous data is needed.
 Before training, the heterogeneous signal are divide into some bins according to the value.
 Each bin represents the index of the dimension.
+Table ? and ? show the TF result of random split and temporal split on Berkeley dataset while table ? and ? show the TF result of random split and temporal split on traffic dataset.
+
+\subsection{Prediction Performance}
+In this section, we measure the performance of missing value recovery algorithms by regression methods. we demonstrate the experiment on traffic dataset.  the readings of gateway node are to be predicted in offline mode. At the sane time the data from gateway is the label of a instance while the data from the other sensor nodes are the features of a instance. 80 percent of instance are split to be training data, the remaining part is the testing data. Firstly, we filling the features from training and testing data by global mean, linear interpolation, KNN, and TRMF model. The regression model we choose is linear regression(LR) and support vector regression(SVR). The former is a linear model. In contrast, the latter is a nonlinear model. table ? show the result with different data missing rate.
+It is obvious that the more higher quality filling value will help the regression model predicting the objective sensor more precise.
 
 \begin{table} [htbp]
 \centering
