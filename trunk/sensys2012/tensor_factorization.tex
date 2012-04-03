@@ -73,7 +73,7 @@ As MF, to increase the prediction accuracy, we also add bias term of $F_1, F_2, 
 so our prediction function is :
 \begin{equation*}
 \begin{aligned}
-\mathbf{\hat{T}}_{\alpha\beta\gamma}=\mu_\alpha+\mu_\beta+\mu_\gamma+p_\alpha q_\beta w_\gamma
+\mathbf{\hat{T}}_{\alpha\beta\gamma}=\mu_\alpha+\mu_\beta+\mu_\gamma+p_\alpha \otimes q_\beta\otimes  w_\gamma
 \\=\mu_\alpha+\mu_\beta+\mu_\gamma+\sum\limits_{i=1}^{k}P_{\alpha i} Q_{\beta i} W_{\gamma i}
 \end{aligned}
 \end{equation*}
