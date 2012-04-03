@@ -18,11 +18,11 @@ The filling of these missing data values (in Statistics, known as Data Imputatio
 Because subsequent analyses depend on accurate sensor data to draw quality conclusions or predictions, improvement in missing sensor data estimation methodology can directly lead to better solutions to sensor network deployment objectives.
 
 \subsection{Background (what solutions currently exist?)}
-Data imputation techniques as applied to WSN datasets can be divided into four categories:
-temporal methods (i.e.\ estimation using the observations from the target sensor at nearby time-steps),
-spatial methods (i.e.\ estimation using neighboring sensor node observations),
-heterogeneous sensor methods (i.e.\ like spatial, however now considering sensors of different types),
-and hybrid methods.
+Data imputation techniques as applied to WSN datasets can be divided into two categories:
+temporal methods (i.e.\ estimation using the observations from the target sensor at nearby time-steps) and 
+spatial methods (i.e.\ estimation using neighboring sensor node observations).
+%heterogeneous sensor methods (i.e.\ like spatial, however now considering sensors of different types),
+%and hybrid methods.
 
 \subsubsection{Temporal Methods}
 The feasibility of estimating missing sensor observations based on historical data is grounded by the known temporal correlation in WSN data~\cite{akyildiz2004exploiting}.
@@ -45,13 +45,13 @@ In these cases, the incorporation of spatial information can lead to worse resul
 
 Certain methods consider not strictly the distance between sensors, but instead establishes a ``neighborhood of influence'' whose size becomes a tuning parameter of this approach, which adds to the complexity of this approach.
 
-\subsubsection{Heterogeneous Sensor Methods}
-\redtext{more here!}
+%\subsubsection{Heterogeneous Sensor Methods}
+%\redtext{more here!}
 
-\subsubsection{Hybrid Methods}
-Hybrid methods of temporal and spatial approaches are less common in the literature.
-For example, the average of the temporal approach of linear interpolation and the spatial approach of multivariate regression has been reported[8].
-Strictly speaking, this approach can be thought of as an ensemble approach between the two methods rather than a fully-integrated approach which considers both temporal and spatial aspects of WSN data.
+%\subsubsection{Hybrid Methods}
+%Hybrid methods of temporal and spatial approaches are less common in the literature.
+%For example, the average of the temporal approach of linear interpolation and the spatial approach of multivariate regression has been reported[8].
+%Strictly speaking, this approach can be thought of as an ensemble approach between the two methods rather than a fully-integrated approach which considers both temporal and spatial aspects of WSN data.
 
 %\subsection{Research Gap Identification (why are current approaches inadequate?)}
 %Accurate imputation of missing sensor network observations is crucial to allow for effective subsequent analysis.
