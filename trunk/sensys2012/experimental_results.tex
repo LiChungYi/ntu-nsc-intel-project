@@ -70,7 +70,7 @@ We define three values $a, b, c$ as follows.
 %validation setting
 We implemented linear interpolation~(LI), TRMF, Hybrid-kNN, DESM, STI and conducted experiment on the two data sets.
 
-\subsection{Random Split}
+\subsubsection{Random Split}
 \textbf{Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem}} show the result of random split on Berkeley data set. It is clear that TRMF outperforms others in all cases. Yet, linear interpolation is quite competitive when the size of testing set is small, since the sampling rate of Berkeley data set is fairly high, and the temporal correlation is prominent in this data set.  
 
 \textbf{Table \ref{table:traffic_random_hum} and \ref{table:traffic_random_tem}} show the result of random split on traffic data set. The DESM and STI are not included since they perform badly and the location information of the sensor nodes is not available in this data set. Again, TRMF outperforms other models in all cases. However, the performance of linear interpolation deteriorates a lot and this corresponds to the low sampling rate in traffic data set. 
@@ -89,7 +89,7 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&0.0950	&0.0916	&0.1993	&0.2190	&1.6481\\
 	30\%	&0.0845	&0.0815	&0.1812	&0.1804	&1.6495\\
 	10\%	&0.0750	&0.0758	&0.1267	&0.1599	&1.6039\\
-	 5\%	&0.0742	&0.0750	&0.1208	&0.1480	&1.5493\\
+	 5\%	&0.0742	&0.0750	&0.1208	&0.1480	&1.5493
 \end{tabular}
 \end{table}
 
@@ -105,7 +105,7 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&29.89	&21.58	&41.38	&356.69	&356.31\\
 	30\%	&25.04	&17.21	&33.67	&112.57	&366.87\\
 	10\%	&23.89	&17.85	&27.94	&41.72	&363.34\\
-	 5\%	&20.85	&14.40	&24.34	&44.35	&354.17\\
+	 5\%	&20.85	&14.40	&24.34	&44.35	&354.17
 \end{tabular}
 \end{table}
 
@@ -121,7 +121,7 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&0.0270	&0.0230	&0.0802	&0.0954	&0.6443\\
 	30\%	&0.0206	&0.0182	&0.0529	&0.0665	&0.6375\\
 	10\%	&0.0162	&0.0152	&0.0429	&0.0481	&0.6113\\
-	 5\%	&0.0187	&0.0157	&0.0342	&0.0478	&0.5930\\
+	 5\%	&0.0187	&0.0157	&0.0342	&0.0478	&0.5930
 \end{tabular}
 \end{table}
 
@@ -137,7 +137,7 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	& 4.2328	&1.9503	&3.4578\\
 	30\%	& 3.1837	&1.6748	&2.9011\\
 	10\%	& 2.6897	&1.5707	&2.5107\\
-	 5\%	& 2.5880	&1.5098	&2.4012\\
+	 5\%	& 2.5880	&1.5098	&2.4012
 \end{tabular}
 \end{table}
 
@@ -153,12 +153,13 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&1.4770	&0.6898	&1.1923\\
 	30\%	&1.1011	&0.5865	&1.0046\\
 	10\%	&0.9376	&0.5521	&0.8849\\
-	 5\%	&0.9149	&0.5196	&0.8663\\
+	 5\%	&0.9149	&0.5196	&0.8663
 \end{tabular}
 \end{table}
 
-\subsection{Temporal Split}
-\textbf{Table \ref{table:berkeley_temporal_hum}, \ref{table:berkeley_temporal_light} and \ref{table:berkeley_temporal_tem}} show the result of random split on Berkeley data set and \textbf{Table \ref{table:traffic_temporal_hum} and \ref{table:traffic_temporal_tem}} show the result of random split on traffic data set. In temporal split,  It is clear that linear interpolation performs terribly since its prediction is simply the last reading of the sensor.
+\subsubsection{Temporal Split}
+\textbf{Table \ref{table:berkeley_temporal_hum}, \ref{table:berkeley_temporal_light} and \ref{table:berkeley_temporal_tem}} show the result of random split on Berkeley data set and \textbf{Table \ref{table:traffic_temporal_hum} and \ref{table:traffic_temporal_tem}} show the result of random split on traffic data set.
+In the temporal split, it is clear that linear interpolation performs terribly since its prediction is simply the last reading of the sensor.
 
 \begin{table}[htbp]
 \centering
@@ -172,7 +173,7 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&6.4429	&0.8844	&1.0252	&6.4431	&0.9612\\
 	30\%	&2.2225	&0.9314	&0.9280	&2.2335	&0.8643\\
 	10\%	&1.2076	&0.5392	&0.6358	&1.2165	&0.6878\\
-	 5\%	&2.3060	&0.4285	&0.7768	&2.3077	&0.7960\\
+	 5\%	&2.3060	&0.4285	&0.7768	&2.3077	&0.7960
 \end{tabular}
 \end{table}
 
@@ -188,7 +189,7 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&194.54	&58.39	&68.55	&195.17	&208.28\\
 	30\%	&312.10	&33.83	&77.45	&312.12	&289.20\\
 	10\%	&293.47	&20.60	&84.89	&293.87	&213.90\\
-	 5\%	&277.85	&7.81	&79.05	&280.36	& 92.72\\
+	 5\%	&277.85	&7.81	&79.05	&280.36	& 92.72
 \end{tabular}
 \end{table}
 
@@ -205,7 +206,7 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&3.5948	&0.3029	&0.3037	&3.5952	&0.4859\\
 	30\%	&1.9598	&0.2247	&0.3402	&1.9615	&0.5322\\
 	10\%	&0.8870	&0.2364	&0.2796	&0.8941	&0.3263\\
-	 5\%	&1.0241	&0.0853	&0.3047	&1.0156	&0.3506\\
+	 5\%	&1.0241	&0.0853	&0.3047	&1.0156	&0.3506
 \end{tabular}
 \end{table}
 
@@ -221,7 +222,7 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&25.8277	&5.8469	&5.1926\\
 	30\%	&27.4891	&5.0048	&5.0268\\
 	10\%	&18.9358	&4.6402	&4.1944\\
-	 5\%	&23.5126	&4.0820	&3.6661\\
+	 5\%	&23.5126	&4.0820	&3.6661
 \end{tabular}
 \end{table}
 
@@ -238,11 +239,11 @@ In short, we believe TRMF successfully combines and leverages the temporal corre
 	50\%	&10.5938	&1.7748	&1.5793\\
 	30\%	&14.1343	&1.6737	&1.6874\\
 	10\%	&16.1660	&1.4345	&1.4137\\
-	 5\%	&10.0223	&1.4254	&1.3560\\
+	 5\%	&10.0223	&1.4254	&1.3560
 \end{tabular}
 \end{table}
 
-\subsection{Multivariate TRMF}
+\subsubsection{Multivariate TRMF}
 We see substantial improvement (if look at all to help) 
 
 \begin{table}[htbp]
@@ -277,7 +278,7 @@ humid85-10- 5t	&4.0820	&3.9843	&3.1709\\
  temp40-10-50t	&1.7748	&1.7961	&1.0494\\
  temp60-10-30t	&1.6737	&1.6819	&1.2274\\
  temp80-10-10t	&1.4345	&1.4225	&0.9267\\
- temp85-10- 5t	&1.4254	&1.3374	&0.9259\\
+ temp85-10- 5t	&1.4254	&1.3374	&0.9259
 
 \end{tabular}
 \end{table}
@@ -300,7 +301,7 @@ humid 85 &0.0750	&0.0740	&0.0713\\
  temp 40 &0.0232	&0.0233	&0.0201\\
  temp 60 &0.0181	&0.0183	&0.0166\\
  temp 80 &0.0155	&0.0155	&0.0144\\
- temp 85 &0.0158	&0.0159	&0.0142\\
+ temp 85 &0.0158	&0.0159	&0.0142
 \end{tabular}
 \end{table}
 \subsection{Heterogeneous Signal Incorporation}
@@ -315,7 +316,16 @@ Each bin represents the index of the dimension.
 Table ? and ? show the TF result of random split and temporal split on Berkeley dataset while table ? and ? show the TF result of random split and temporal split on traffic dataset.
 
 \subsection{Prediction Performance}
-In this section, we measure the performance of missing value recovery algorithms by regression methods. we demonstrate the experiment on traffic dataset.  the readings of gateway node are to be predicted in offline mode. At the sane time the data from gateway is the label of a instance while the data from the other sensor nodes are the features of a instance. 80 percent of instance are split to be training data, the remaining part is the testing data. Firstly, we filling the features from training and testing data by global mean, linear interpolation, KNN, and TRMF model. The regression model we choose is linear regression(LR) and support vector regression(SVR). The former is a linear model. In contrast, the latter is a nonlinear model. table ? show the result with different data missing rate.
+In this section, we measure the performance of missing value recovery algorithms by regression methods.
+We demonstrate the experiment on traffic dataset.
+The readings of gateway node are to be predicted in offline mode.
+At the sane time the data from gateway is the label of a instance while the data from the other sensor nodes are the features of a instance.
+80 percent of instance are split to be training data, the remaining part is the testing data.
+Firstly, we filling the features from training and testing data by global mean, linear interpolation, KNN, and TRMF model.
+The regression model we choose is linear regression(LR) and support vector regression(SVR).
+The former is a linear model.
+In contrast, the latter is a nonlinear model.
+Table ? show the result with different data missing rate.
 It is obvious that the more higher quality filling value will help the regression model predicting the objective sensor more precise.
 
 \begin{table} [htbp]
@@ -328,12 +338,11 @@ It is obvious that the more higher quality filling value will help the regressio
         10\%    &4.143&3.868&&2.526\\
         30\%    &5.161&3.955&&2.470\\
         50\%    &6.234&4.282&&2.756\\
-        70\%   &7.728&5.082&&2.743\\
-  
+        70\%   &7.728&5.082&&2.743
 \end{tabular}
 \end{table}
 
-\begin{table} [htbp]
+\begin{table}[htbp]
 \centering
 \caption{predict gateway humidity by SVR (RMSE) }
 \label{table: SVR}
@@ -343,7 +352,6 @@ It is obvious that the more higher quality filling value will help the regressio
         10\%    &3.933 &4.006&&2.591\\
         30\%    &5.172&4.083&&2.532\\
         50\%    &6.234&4.384&&2.813\\
-        70\%   &7.686&5.235&&2.822\\
-  
+        70\%   &7.686&5.235&&2.822
 \end{tabular}
 \end{table}
