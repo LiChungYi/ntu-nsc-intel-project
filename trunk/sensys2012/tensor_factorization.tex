@@ -1,10 +1,10 @@
 %\section{Tensor Factorization}  \label{sec:tf}
 
-\section{Multiverse Factorization Model} \label{sec:tf}
+\section{Multiveriate Factorization Model} \label{sec:tf}
 Factorization models for tensors are studied for many years~\cite{karatzoglou2010multiverse}. The main idea behind the use of  Tensor Factorization (TF) is that we can take advantages of the principle behind Matrix Factorization to deal with multi-Order information. In sensor network, Temporal informations, spatial informations and  heterogeneous sensors informations are strongly correlated. Modeling the correlation between them will be a great benefit to recovery the missing value.
  
 Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition. In the section 4.1 we introduce the methods of Tensor Decomposition. A general model of tensor decomposition is the Tucker decomposition (TD) also known as High-Order Singular Value Decomposition (HOSVD). The special case of Tucker decomposition is called canonical decomposition (CD) also known as the parallel factor analysis (PARAFAC).
-However, the Tensor Decomposition methods require a dense input matrix R and therefore ignore the missing part of  input data. Treating R as a dense tensor with missing entries being assume to be 0. It would make predict missing value failed. We introduce and explain the details of how we have adapted the Tensor Decomposition models with latent features for missing value recovery in section 4.2.  
+However, the Tensor Decomposition methods require a dense input matrix R and therefore ignore the missing part of  input data. Treating R as a dense tensor with missing entries being assume to be 0. It would make predict missing value failed. We introduce and explain the details of how we have adapted the Tensor Decomposition models with latent factors for missing value recovery in section 4.2.  
 
 \subsection{Tensor Decomposition}
 
@@ -12,35 +12,35 @@ However, the Tensor Decomposition methods require a dense input matrix R and the
 \begin{equation*} 
 \mathbf{M}=\mathbf{P}\Sigma \mathbf{Q}^\mathrm{T}=\sum\limits_{k=1}^r\sigma_kp_kq_k^\mathrm{T}=\sum\limits_{k=1}^r\sigma_kp_k\otimes q_k
 \end{equation*}
-Where $\otimes$ denoted the tensor product : $x\otimes y = xy^\mathrm{T}$. $r$ is the rank of M,
-P is an $m\times m$ unitary matrix, Q is a $n\times n$ unitary matrix, $\Sigma$ is an $m\times n$ rectangular diagonal matrix with singular values of M, being adopted the following convention $\sigma_1>\sigma_2 >...\sigma_r>0=\sigma_{r+1}=...=\sigma_{n}$. The SVD may be generalized to High-Order Tensor decomposition. the following are two types of tensor decomposition, for simplicity and in practical, we present the decomposition for tensor of order q=3.
+Where $\otimes$ denoted the tensor product : $x\otimes y = xy^\mathrm{T}$. $r$ is the rank of $\mathbf{M}$,
+$\mathbf{P}$ is an $m\times m$ unitary matrix, $\mathbf{Q}$ is a $n\times n$ unitary matrix, $\Sigma$ is an $m\times n$ rectangular diagonal matrix with singular values of M, being adopted the following convention $\sigma_1>\sigma_2 >...\sigma_r>0=\sigma_{r+1}=...=\sigma_{n}$. The SVD may be generalized to High-Order Tensor decomposition. the following are two types of tensor decomposition, for simplicity and in practical, we present the decomposition for 3-order tensor.
 
 \subsubsection{Tucker Decomposition}
 The Tucker decomposition
-was Þrst introduced by Tucker in 1963 [1], it factorizes a higher-order tensor into a core tensor S and a factor matrix for each dimensions. we decompose a $m\times n \times c $ tensor T :
+was Þrst introduced by Tucker in 1963 [1], it factorizes a higher-order tensor into a core tensor S and a factor matrix for each dimensions. we decompose a $M\times N \times C $ tensor $\mathbf{T}$ :
 
 \begin{equation*}
-\mathbf{T}=\sum\limits_{i=1}^{r_1}\sum\limits_{j=1}^{r_2}\sum\limits_{k=1}^{r_3}\mathbf{S}_{ijk}p_i\otimes q_j\otimes w_k
+\mathbf{T}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}p_i\otimes q_j\otimes w_k
 \end{equation*}
 or for each components,
 \begin{equation*}
-\mathbf{T}_{\alpha\beta\gamma}=\sum\limits_{i=1}^{r_1}\sum\limits_{j=1}^{r_2}\sum\limits_{k=1}^{r_3}\mathbf{S}_{ijk}P_{\alpha i}Q_{\beta j}W_{\gamma k}
+\mathbf{T}_{\alpha\beta\gamma}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{\alpha i}\mathbf{Q}_{\beta j}\mathbf{W}_{\gamma k}
 \end{equation*}
-Where the vector $p_i$, $q_j$, and $w_k$ are the column of matrices P, Q and W respectively, which are the factor matrices (usually orthogonal). They can be thought of as the principal components in each order There are several algorithms for calculating Tucker decompositions. For data compression, the Tucker decomposition usually assume that $r_1\le m$, $r_2 \le n $ and $r_3 \le c$. 
+Where the vector $p_i$, $q_j$, and $w_k$ are the column of matrices P, Q and W respectively, which are the factor matrices (usually orthogonal). They can be thought of as the principal components in each order There are several algorithms for calculating Tucker decompositions. For data compression, the Tucker decomposition usually assume that $I\le M$, $J \le N $ and $K \le C$. 
 \subsubsection{Canonical Decomposition}
 
 The Canonical  decomposition factorizes a tensor into a sum of component rank-one
 tensors. Formally, the Canonical Decomposition(CD) is the special case of the Tucker decomposition
 when S is superdiagonal. The Canonical Decomposition of T is
 \begin{equation*}
-\mathbf{T}=\sum\limits_{i=1}^{k}x_i\otimes y_i\otimes z_i
+\mathbf{T}=\sum\limits_{k=1}^{K}x_k\otimes y_k\otimes z_k
 \end{equation*}
 or
 \begin{equation*}
-\mathbf{T}_{\alpha\beta\gamma}=\sum\limits_{i=1}^{k}X_{\alpha i} Y_{\beta i} Z_{\gamma i}
+\mathbf{T}_{\alpha\beta\gamma}=\sum\limits_{k=1}^{K}\mathbf{X}_{\alpha k} \mathbf{Y}_{\beta k} \mathbf{Z}_{\gamma k}
 \end{equation*}
 
-Here the $x_i$,$y_i$ and $z_i$ are the column of matrices X, Y and Z, which are the factor matrices, k is the factor size. 
+Here the $x_i$,$y_i$ and $z_i$ are the column of matrices X, Y and Z, which are the factor matrices, K is the factor size. 
 
 The Tucker Decomposition and Canonical Decomposition are illustrated in Figure 1.
 
@@ -58,7 +58,7 @@ The Tucker Decomposition and Canonical Decomposition are illustrated in Figure 1
 \subsection{Tensor Factorization for missing recovery}
 \subsubsection{Objective function}
 
-Existing Tensor Decomposition model is requiring the dense tensor, which is unsuitable for missing data recovery when the missing rate increased. Therefore, we propose an N-order Tensor Factorization  for missing data recovery. Just like MF, it take advantage of sparsity of the data while still exploiting the temporal correlation. Moreover, it models the correlation between different informations, e.g. spatial correlation, heterogeneous sensor readings. The followings are the details of the model we proposed.
+Existing Tensor Decomposition model is requiring the dense tensor, which is unsuitable for missing data recovery when the missing rate increased. Therefore, we introduce an N-order Tensor Factorization  for missing data recovery. Just like MF, it take advantage of sparsity of the data while still exploiting the temporal correlation. Moreover, it models the correlation between different informations, e.g. spatial correlation, heterogeneous sensor readings. The followings are the details of the model we proposed.
 
 Assume that there are three features $F_1, F_2 , F_3$, $F_1$ is the time frame number, $F_2$ and $F_3$ are the other features, it could be the sensor node ID, sensor node coordinates, heterogeneous sensor readings or other information. suppose the target sensor readings is $R$ such that tensor T containing  $R$ will be 3-dimensional tensor :
 \begin{equation*}
