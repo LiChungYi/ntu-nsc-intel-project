@@ -63,12 +63,9 @@ Temporal split is like \textbf{Equation \ref{temporalSplit_matrix}}. We can't us
 \end{equation}
 
 To be specific, we share the actual values of the parameter. Firstly, the learning rate $\eta$ is $0.04$ to $0.004$, which is chosen as the largest value that still maintains stable optimization process. Secondly, a strong temporal regularization is always preferred. Temporal regularization times learning rate ($\gamma \times \eta$) is set to $0.2$ in all of our experiment. The conventional regularization is $0.001$ for temporal split and $0$ for random split. Finally, we observe that a large $K$ doesn't lead to overfitting because SGD is a natural regularization that prefers small feature values and it may lead to several non-independent features. The number of features $K$ is $54$ in Berkeley data set and $21$ in traffic data set, although in temporal split the $K$ may be much lowered to speed up the algorithm. 
-
-
-\subsection{Parameter  WeiLun}
 In temporal split data, it is more easier to be over-fitting state. Therefore, the regularization term should be higher than random split.
 In experiment 4.3, it can be found TF works well on traffic dataset while it does't take advantage from adding heterogeneous signal on Berkeley dataset. Sensors from traffic dataset are deployed outdoor so the variance of heterogeneous data is large. While sensors from Berkeley dataset are deployed indoor, it cause the variance of heterogeneous data is small. The small variance makes TF does't work well because we quantize the heterogeneous signal into nominal bins before training. Most of heterogeneous sensor readings are divided into the same bin such that the additional dimension of TF is redundant.
-We finally make a conclusion that the high variance heterogeneous data are suitable to use TF model but the low variance data are suitable to use Multiverse TRMF model. 
+We finally make a conclusion that the high variance heterogeneous data are more suitable to use TF model.
 
 \subsection{Spatial Correlation}
 One might wonder that why we don't apply spatial regulization to enhance the spatial correlation, like we did for temporal side.

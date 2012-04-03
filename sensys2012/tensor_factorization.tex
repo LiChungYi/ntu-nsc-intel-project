@@ -62,7 +62,7 @@ Existing Tensor Decomposition model is requiring the dense tensor, which is unsu
 
 Assume that there are three features $F_1, F_2 , F_3$, $F_1$ is the time frame number, $F_2$ and $F_3$ are the other features, it could be the sensor node ID, sensor node coordinates, heterogeneous sensor readings or other information. suppose the target sensor readings is $R$ such that tensor T containing  $R$ will be 3-dimensional tensor :
 \begin{equation*}
-T := F_1 \times  F_2 \times F_3 \rightarrow R
+\mathbf{T} := \mathbf{F_1} \times  \mathbf{F_2} \times \mathbf{F_3} \rightarrow \mathbf{R}
 \end{equation*}
 
 In contrast to tensor decomposition, the learning model we propose is learning the latent factors P, Q, W. Where P, Q, W are the factors of $F_1, F_2, F_3$. To avoid over-fitting and decrease the complexity of computing prediction, our model is based on Canonical Decomposition. Its complexity of computing prediction is $O(k)$, where k is the factor size of  P, Q and W. On the other hand, the complexity of Tuker Decomposition is $O(k^3)$  by our optimization method,
