@@ -65,8 +65,8 @@ Assume that there are three features $F_1, F_2 , F_3$, $F_1$ is the time frame n
 \mathbf{T} := \mathbf{F_1} \times  \mathbf{F_2} \times \mathbf{F_3} \rightarrow \mathbf{R}
 \end{equation*}
 
-In contrast to tensor decomposition, the learning model we propose is learning the latent factors P, Q, W. Where P, Q, W are the factors of $F_1, F_2, F_3$. To avoid over-fitting and decrease the complexity of computing prediction, our model is based on Canonical Decomposition. Its complexity of computing prediction is $O(k)$, where k is the factor size of  P, Q and W. On the other hand, the complexity of Tuker Decomposition is $O(k^3)$  by our optimization method,
-where $ k=min(k_P,k_Q,k_W) $ , $k_P$, $k_Q$, $ k_W$ are the factor size of P, Q, W respectively.
+In contrast to conventional tensor decomposition, the learning model we propose is learning the latent factors $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$. Where $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ are the factors of $F_1, F_2, F_3$. To avoid over-fitting and decrease the complexity of computing prediction, our model is based on Canonical Decomposition. Its complexity of computing prediction is $\mathbf{O}(K)$, where K is the factor size of  P, Q and W. On the other hand, the complexity of Tuker Decomposition is $\mathbf{O}(K^3)$  by our optimization method,
+where $ K=min(K_P,K_Q,K_W) $ , $K_P$, $K_Q$, $ K_W$ are the factor size of $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ respectively.
 
 
 As MF, to increase the prediction accuracy, we also add bias term of $F_1, F_2, F_3$ into our Tensor Factorization model.
@@ -74,14 +74,14 @@ so our prediction function is :
 \begin{equation*}
 \begin{aligned}
 \mathbf{\hat{T}}_{\alpha\beta\gamma}=\mu_\alpha+\mu_\beta+\mu_\gamma+p_\alpha \otimes q_\beta\otimes  w_\gamma
-\\=\mu_\alpha+\mu_\beta+\mu_\gamma+\sum\limits_{i=1}^{k}P_{\alpha i} Q_{\beta i} W_{\gamma i}
+\\=\mu_\alpha+\mu_\beta+\mu_\gamma+\sum\limits_{k=1}^{K}\mathbf{P}_{\alpha k} \mathbf{Q}_{\beta k} \mathbf{W}_{\gamma k}
 \end{aligned}
 \end{equation*}
 to learn the latent features P, Q and W, we define the loss function :
 \begin{equation*}
-L(\mathbf{\hat{T}},\mathbf{T})=\frac{1}{\|D\|_1} \sum\limits_{t\in D}  l(\hat{t},t)
+L(\mathbf{\hat{T}},\mathbf{T})=\frac{1}{\|\mathbf{D}\|_1} \sum\limits_{t\in \mathbf{D}}  l(\hat{t},t)
 \end{equation*}
-where $D$ is the dataset and $\|D\|$ means the amounts of data point. $l$ is a point-wise loss function penalizing the distance between estimate and observation. we choose $l$ being least squared error because the evaluation function is root mean square error (RMSE), so
+where $\mathbf{D}$ is the dataset and $\|\mathbf{D}\|$ means the amounts of data point. $l$ is a point-wise loss function penalizing the distance between estimate and observation. we choose $l$ being least squared error because the evaluation function is root mean square error (RMSE), so
 \begin{equation*}
 l(\hat{t},t)=\frac{1}{2}(t-\hat{t})^2
 \end{equation*}
@@ -91,7 +91,7 @@ factors. To capture the temporal effect, similar to MF we state previous in sect
 Finally, the objective function of tensor factorization is :\\
 \begin{equation*}
 \begin{aligned}
-&\sum\limits_{\alpha, \beta, \gamma} l( \hat{T}_{\alpha\beta\gamma}, T_{\alpha\beta \gamma} )+\lambda_1\|p_{\alpha}\|^2+\lambda_2\|q_\beta\|^2+\lambda_3\|w_\gamma\|^2+\lambda_4\|
+&\sum\limits_{\alpha, \beta, \gamma} l( \hat{\mathbf{T}}_{\alpha\beta\gamma}, \mathbf{T}_{\alpha\beta \gamma} )+\lambda_1\|p_{\alpha}\|^2+\lambda_2\|q_\beta\|^2+\lambda_3\|w_\gamma\|^2+\lambda_4\|
 \mu_\alpha\|^2\\
 &+\lambda_5\|\mu_\beta\|^2+\lambda_6\|\mu_\gamma\|^2+\frac{1}{2}\lambda_7\sum(\mu_\alpha-\mu_{\alpha+1})^2+(\mu_\alpha-\mu_{\alpha-1})^2
 \\&
