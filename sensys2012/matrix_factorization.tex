@@ -42,13 +42,6 @@ TRMF adds a temporal regularization term on conventional MF. The temporal regula
 &+ \frac{1}{2}\gamma_1\sum{(\mu_m-\mu_{m+1})^2} + \frac{1}{2}\gamma_2\sum{||\mathbf{p}_m-\mathbf{p}_{m+1}||^2}.
 \end{aligned}\end{equation*}
 
-
-\subsection{Multivariate TRMF}
-At a location, a sensor node usually sense multiple attributes at the same time. These attributes may be correlated and the correlation may help with missing data recovery. Therefore, we propose Multivariate TRMF. Assume there are two attributes: temperature and humidity. The $\mathbf{R}$ of Multivariate TRMF is the conjunction of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
-\begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
-The objective function remains the same form except that for each time frame there are two bias terms: one for temperature and the other for humidity. Besides, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. For details of data normalization, please refer to \textbf{[Data Normalization]} in \textbf{Section \ref{optimation_procedure}}.
-
-
 \subsection{Optimization Procedure of TRMF}
 \label{optimation_procedure}
 Several approaches have been suggested for solving MF, like Stochastic Gradient Descent (SGD)\cite{koren2009matrix,chih2008large}, Alternating Least Square (ALS)\cite{koren2009matrix,zhou2008large} and Newton's method\cite{buchanan2005damped}. We adopt SGD for its efficiency and simplicity. 
@@ -74,7 +67,7 @@ We summarize our algorithm in \textbf{Procedure \ref{alg:TRMF}}. Some details ar
 
 Unlike the rating scores in CF are in a fixed range, readings from WSN are real-valued, and the range varies in different applications. Before training, we normalize the training set by its mean and variance, and in training we update the model by the normalized training set. While predicting validation set and testing set, we restore the prediction to the original mean and variance range and then calculate the error.
 
-There are two benefits of data normalization. Firstly, when the global mean becomes zero, the origin of our model becomes a good initial point. The initial point impacts the performance of MF greatly because the objective function of MF is non-convex and we can only find the local minimum. Secondly, normalization makes different data sets look similar. It simplifies the parameter tuning task for TRMF and it is the foundation of Multivariate TRMF. 
+There are two benefits of data normalization. Firstly, when the global mean becomes zero, the origin of our model becomes a good initial point. The initial point impacts the performance of MF greatly because the objective function of MF is non-convex and we can only find the local minimum. Secondly, normalization makes different data sets look similar. It simplifies the parameter tuning task for TRMF and it is the foundation of Multivariate TRMF (Section \ref{subsec:Multivariate_TRMF}). 
 
 
 \paragraph*{Initialization}
