@@ -10,7 +10,7 @@ Strictly speaking, this approach can be thought of as an ensemble approach betwe
 
 We observe that the parameter setting for random split must be different from temporal split, and we provide an explanation for this. 
 
-Let us look at two illustrating examples. Here we ignore bias terms for simplicity. Random split is like \textbf{Equation \ref{randomSplit_matrix}}. We have more confidence in our prediction and we rely more on temporal correlation, so we prefer more features and weak conventional regularization. Also, linear interpolation can be viewed as a solution of TRMF, in which the number of features is large and no conventional regularization is applied. 
+Let us look at two illustrating examples. Here we ignore bias terms for simplicity. Random split is like \textbf{Equation \ref{randomSplit_matrix}}. We have more confidence in our prediction and we rely more on temporal correlation, so we prefer more features and weak conventional regularization. We also see that linear interpolation can be viewed as a solution of TRMF, in which the number of features is large and no conventional regularization is applied. 
 \begin{equation}
 \label{randomSplit_matrix}
 \begin{bmatrix}
@@ -63,7 +63,11 @@ Temporal split is like \textbf{Equation \ref{temporalSplit_matrix}}. We can't us
 \end{equation}
 
 To be specific, we share the actual values of the parameter. Firstly, the learning rate $\eta$ is $0.04$ to $0.004$, which is chosen as the largest value that still maintains stable optimization process. Secondly, a strong temporal regularization is always preferred. Temporal regularization times learning rate ($\gamma \times \eta$) is set to $0.2$ in all of our experiment. The conventional regularization is $0.001$ for temporal split and $0$ for random split. Finally, we observe that a large $K$ doesn't lead to overfitting because SGD is a natural regularization that prefers small feature values and it may lead to several non-independent features. The number of features $K$ is $54$ in Berkeley data set and $21$ in traffic data set, although in temporal split the $K$ may be much lowered to speed up the algorithm. 
-In temporal split data, it is more easier to be over-fitting state. Therefore, the regularization term should be higher than random split.
+
+\redtext{ WeiLun please add your TF parameters here!}
+%In temporal split data, it is more easier to be over-fitting state. Therefore, the regularization term should be higher than random split.
+
+\subsection{User Case of Models}
 In experiment 4.3, it can be found TF works well on traffic dataset while it does't take advantage from adding heterogeneous signal on Berkeley dataset. Sensors from traffic dataset are deployed outdoor so the variance of heterogeneous data is large. While sensors from Berkeley dataset are deployed indoor, it cause the variance of heterogeneous data is small. The small variance makes TF does't work well because we quantize the heterogeneous signal into nominal bins before training. Most of heterogeneous sensor readings are divided into the same bin such that the additional dimension of TF is redundant.
 We finally make a conclusion that the high variance heterogeneous data are more suitable to use TF model.
 
