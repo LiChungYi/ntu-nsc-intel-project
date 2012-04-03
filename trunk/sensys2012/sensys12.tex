@@ -1,6 +1,6 @@
 \documentclass[10pt]{sensys-proc}
 
-\usepackage{graphicx}    % For importing graphics
+\usepackage{graphicx}
 \usepackage{color}
 \usepackage{cite}
 \usepackage{balance}
@@ -10,34 +10,21 @@
 \usepackage{multirow}
 \usepackage{url}
 
-%\usepackage{subfigure}
-%\usepackage{booktabs}
-%\usepackage{colortbl}
-%\usepackage{tabularx}
-%\usepackage{xspace}
-%\usepackage{hyperref}    % Creates hyperlinks from ref/cite 
-%\hypersetup{pdfstartview=FitH}
-
-%\renewcommand{\arraystretch}{1.2} % Space out rows in tables
+%%%%%% FOR DRAFT VERSION - REMOVE FOR FINAL VERSION %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lastpage} % for the number of the last page in the document  %
+\usepackage{fancyhdr}                                                    %
+\pagestyle{fancy}                                                        %
+\fancyhf{}                                                               %
+\lhead{--- DRAFT ---}                                                    %
+\rhead{Section \thesection}                                              %
+\lfoot{\today}                                                           %
+\rfoot{Page \thepage\ of \pageref{LastPage}}                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\redtext}[1]{\textcolor{red}{#1}}
 \newcommand{\rednote}[1]{\textcolor{red}{\small #1}}
 \newcommand{\degc}{\ensuremath{\,^{\circ}\mathrm{C}}}
-
 \newcommand{\aPoint}[1]{\vspace{.5\baselineskip} \noindent\textbf{[#1]}} %Chung-Yi
-
-% No space between bibliography items:
-%\let\oldthebibliography=\thebibliography
-%  \let\endoldthebibliography=\endthebibliography
-%  \renewenvironment{thebibliography}[1]{%
-%    \begin{oldthebibliography}{#1}%
-%      \setlength{\parskip}{0ex}%
-%      \setlength{\itemsep}{0ex}%
-%  }%
-%  {%
-%    \end{oldthebibliography}%
-%  }
-%\setlength{\parindent}{5mm}
 
 \numberofauthors{2}
 
@@ -90,6 +77,6 @@
 
 \balance
 \bibliographystyle{abbrv}
-\bibliography{sensys12}  % sigproc.bib is the name of the Bibliography in this case
+\bibliography{sensys12}
 
 \end{document}
