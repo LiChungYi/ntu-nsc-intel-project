@@ -34,11 +34,16 @@ As a result, the usefulness of temporal imputation methods drop rapidly as the n
 \subsubsection{Spatial Methods}
 Where spatial information is available for deployed sensor nodes, this information may be used to enforce a correlation among of neighboring sensor observations.
 Methods which exploit this approach include associations rule mining~\cite{le2005estimating,jiang2007estimating} and weighting functions of nearby sensors~\cite{li2008spatial,li2008data,pan2010k}.
-Generally, methods which rely solely on the spatial imputation approach suffer from the inability to estimate missing data which occurs across of many sensors simultaneously, which can occur in practice due to communication interference for example.
+Generally, methods which rely solely on the spatial imputation approach suffer from the inability to estimate missing data when global sensor outages occurs such that neighboring sensor values also become unavailable.
+
 Spatial methods also fail to take into account barriers or other sources of sharp environmental gradients which may deter the usage of spatial information as a first-order inter-sensor node correlation approximation.
-For instance, a sensor deployed in close proximity to a furnace and one deployed nearby but beneath an air-conditioning vent may be only weakly correlated by spatial information.
+For instance, a sensor deployed in close proximity to a furnace and one deployed nearby, but beneath an air-conditioning vent, may be only weakly correlated by spatial information.
 There is also the corollary possibility of a pair of temperature sensors deployed quite distance from one another, yet having a strong correlation due to well-circulated air flow between the two.
-Certain methods consider not strictly the distance between sensors, but instead establishes a ``neighborhood of influence'' whose size becomes a tuning parameter of this approach.
+In these cases, the incorporation of spatial information can lead to worse results as non-existent (or at least inconsistent) correlations are imposed between sensors.
+
+
+
+Certain methods consider not strictly the distance between sensors, but instead establishes a ``neighborhood of influence'' whose size becomes a tuning parameter of this approach, which adds to the complexity of this approach.
 
 \subsubsection{Heterogeneous Sensor Methods}
 \redtext{more here!}
