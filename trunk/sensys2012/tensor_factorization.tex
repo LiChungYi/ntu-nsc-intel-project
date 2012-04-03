@@ -1,6 +1,18 @@
 %\section{Tensor Factorization}  \label{sec:tf}
 
-\section{Multiveriate Factorization Model} \label{sec:tf}
+\section{Multivariate Factorization Model} \label{sec:tf}
+At a location, a sensor node usually sense multiple attributes at the same time. These attributes may be correlated and the correlation may help with missing data recovery. We propose two methods, Multivariate TRMF and Tensor Decomposition, that leverage the multivariate correlation.
+
+\subsection{Multivariate TRMF} \label{subsec:Multivariate_TRMF}
+If two matrices are correlated, then some of their latent factors should be similar. This motivates us to design Multivariate TRMF. 
+
+Assume there are two attributes: temperature and humidity. The $\mathbf{R}$ of Multivariate TRMF is the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
+\begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
+
+The objective function is similar to TRMF except that for each row (time frame) there are two bias terms: one for temperature readings and the other for humidity readings. Besides, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. The optimization process remains the same as in Section \ref{optimation_procedure}.
+
+\redtext{weilun please reorganize TF}
+
 Factorization models for tensors are studied for many years~\cite{karatzoglou2010multiverse}. The main idea behind the use of  Tensor Factorization (TF) is that we can take advantages of the principle behind Matrix Factorization to deal with multi-Order information. In sensor network, Temporal informations, spatial informations and  heterogeneous sensors informations are strongly correlated. Modeling the correlation between them will be a great benefit to recovery the missing value.
  
 Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition. In the section 4.1 we introduce the methods of Tensor Decomposition. A general model of tensor decomposition is the Tucker decomposition (TD) also known as High-Order Singular Value Decomposition (HOSVD). The special case of Tucker decomposition is called canonical decomposition (CD) also known as the parallel factor analysis (PARAFAC).
