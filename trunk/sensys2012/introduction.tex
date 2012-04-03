@@ -1,8 +1,9 @@
 \section{Introduction}
 
 \subsection{Problem Statement (what is the problem to be solved?)}
-We consider a centralized method of filling in missing data in sensor network datasets.
-Given a complete sensor network dataset with missing data, we estimate the missing observations globally.
+We develop a centralized method of estimating missing data in sensor network datasets globally, which is crucial for subsequent analysis.
+While there are many existing algorithms which estimate missing data (as documented in Section \ref{related_works}), few of these take advantage of the time and inter-sensor correlations inherent in the WSN datasets during the data imputation process.
+Our approach aims to tackle this issue and provide for a new sensor network data imputation technique high accuracy.
 
 %\subsection{Relevance (why is WSN dataset analysis an important topic?)}
 %The increasing pervasiveness of Wireless Sensor Network (WSN) deployments is reflected by the recent coinage of terms such as ``Internet of Things'' and ``Machine-to-Machine'' to describe this growing revolution~\cite{ashton2009internet,gershenfeld2004internet,nokia2004machine,lawton2004machine}.
@@ -12,7 +13,7 @@ Given a complete sensor network dataset with missing data, we estimate the missi
 \subsection{Motivation (why is data imputation needed for WSN datasets?)}
 Wireless Sensor Networks are especially susceptible to interference, power failure, and other environmental and communications ailments which lead to data loss.
 One important area of WSN data analysis, however, is the application of machine learning algorithms to discriminate between or predict the occurrence of events within the sensor network deployment environment.
-Many of these approaches (e.g.\ \redtext{LIST ALGORITHMS HERE}) require complete datasets are unable to deal with missing values.
+Many of these approaches (e.g.\ Support Vector Machine (SVM)~\cite{vapnik2000nature}, Multiple Regression (MR), etc.) require complete datasets are unable to deal with missing values.
 The filling of these missing data values (in Statistics, known as Data Imputation) is thus a vital tool in the preparation of WSN data for subsequent analysis. 
 Because subsequent analyses depend on accurate sensor data to draw quality conclusions or predictions, improvement in missing sensor data estimation methodology can directly lead to better solutions to sensor network deployment objectives.
 
