@@ -67,8 +67,7 @@ We define two values $x$ and $y$ as follows.
 
 \begin{itemize}
 \item Here, we have the last $y\%$ of time is in test and the prior $10\%$ to test is the validation.
-\item The sensor node numbers ``covered up'' in the validation and testing for the Berkeley and Traffic datasets are ${4,21,45}$ and ${2,4,6,8,10,14,17,19,20,21}$, respectively.
-Note that node $21$ of the Traffic dataset is the gateway node.
+\item The sensor node numbers ``covered up'' in the validation and testing for the Berkeley and Traffic datasets are ${2,4,6,8,10,14,17,19,20,99}$ and ${4,21,45}$, respectively.
 \end{itemize}
 
 \subsection{Basic Experimental Results} %from Chung-Yi
@@ -343,6 +342,7 @@ It is obvious that the more higher quality filling value will help the regressio
    Filling method
 \begin{tabular}{ r | r r r r r}
         missing rate&global mean     &LI   &Hybrid-KNN &TRMF\\ \hline
+        5\%      &&&3.627&\\
         10\%    &4.143&3.868&&2.526\\
         30\%    &5.161&3.955&&2.470\\
         50\%    &6.234&4.282&&2.756\\
@@ -357,6 +357,7 @@ It is obvious that the more higher quality filling value will help the regressio
    Filling method
 \begin{tabular}{ r | r r r r r}
         missing rate&global mean     &LI   &Hybrid-KNN &TRMF\\ \hline
+        5\%\\
         10\%    &3.933 &4.006&&2.591\\
         30\%    &5.172&4.083&&2.532\\
         50\%    &6.234&4.384&&2.813\\
