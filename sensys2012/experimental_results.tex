@@ -249,67 +249,67 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 \subsubsection{Multivariate TRMF}
 
 \begin{table}[htbp]
-\caption{Multivariate TRMF on Traffic Data Set}
+\caption{Multivariate RMSE (Berkeley, random)}
 \label{traffic}
 \begin{tabular}{r | r r r}
-traffic dataset	&TRMF	&MtMF	&MtMF-all \\ \hline
-humid 5-10-85	&4.6898	&4.6690	&3.0966\\
-humid10-10-80	&3.5391	&3.5232	&2.3081\\
-humid20-10-70	&2.5865	&2.5886	&1.8027\\
-humid40-10-50	&1.9503	&1.9435	&1.5207\\
-humid60-10-30	&1.6748	&1.6594	&1.4116\\
-humid80-10-10	&1.5707	&1.5574	&1.3706\\
-humid85-10- 5	&1.5098	&1.4963	&1.3301\\
- temp 5-10-85	&1.6235	&1.6105	&0.9620\\
- temp10-10-80	&1.2159	&1.2186	&0.7305\\
- temp20-10-70	&0.9017	&0.8936	&0.6002\\
- temp40-10-50	&0.6898	&0.6819	&0.5200\\
- temp60-10-30	&0.5865	&0.5818	&0.4770\\
- temp80-10-10	&0.5521	&0.5464	&0.4652\\
- temp85-10- 5	&0.5196	&0.5126	&0.4319\\
-humid 5-10-85t	&5.3882	&5.3994	&5.1394\\
-humid10-10-80t	&5.0636	&5.2424	&4.2964\\
-humid20-10-70t	&5.5701	&5.6727	&4.2332\\
-humid40-10-50t	&5.8469	&6.0046	&4.6036\\
-humid60-10-30t	&5.0048	&4.9566	&3.7443\\
-humid80-10-10t	&4.6402	&4.7294	&3.2574\\
-humid85-10- 5t	&4.0820	&3.9843	&3.1709\\
- temp 5-10-85t	&2.0011	&2.0344	&1.5952\\
- temp10-10-80t	&1.5281	&1.7150	&1.2174\\
- temp20-10-70t	&1.8447	&1.9223	&1.1501\\
- temp40-10-50t	&1.7748	&1.7961	&1.0494\\
- temp60-10-30t	&1.6737	&1.6819	&1.2274\\
- temp80-10-10t	&1.4345	&1.4225	&0.9267\\
- temp85-10- 5t	&1.4254	&1.3374	&0.9259
+	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
+humid10-10-80	&0.1424	&0.1420	&0.1222\\
+humid20-10-70	&0.1135	&0.1135	&0.0973\\
+humid40-10-50	&0.0916	&0.0909	&0.0822\\
+humid60-10-30	&0.0817	&0.0806	&0.0758\\
+humid80-10-10	&0.0757	&0.0748	&0.0709\\
+humid85-10- 5	&0.0751	&0.0739	&0.0712\\
+ temp10-10-80	&0.1137	&0.1148	&0.0729\\
+ temp20-10-70	&0.0462	&0.0481	&0.0369\\
+ temp40-10-50	&0.0316	&0.0328	&0.0263\\
+ temp60-10-30	&0.023	&0.0232	&0.0201\\
+ temp80-10-10	&0.0182	&0.0183	&0.0166\\
+ temp85-10- 5	&0.0153	&0.0154	&0.0143\\
+\end{tabular}
+\end{table}
 
+
+\begin{table}[htbp]
+\caption{Multivariate RMSE (Berkeley, temporal)}
+\label{traffic}
+\begin{tabular}{r | r r r}
+	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
+humid10-10-80t	&0.957&0.996& 	0.991\\
+humid20-10-70t	&0.796&0.852& 	0.846\\
+humid40-10-50t	&0.771&0.835& 	0.807\\
+humid60-10-30t	&0.540&0.887& 	0.880\\
+humid80-10-10t	&0.447&0.483& 	0.480\\
+humid85-10- 5t	&0.323&0.356& 	0.348\\
+ temp10-10-80t	&0.515&0.567& 	0.555\\
+ temp20-10-70t	&0.392&0.491& 	0.485\\
+ temp40-10-50t	&0.310&0.380& 	0.347\\
+ temp60-10-30t	&0.206&0.309& 	0.257\\
+ temp80-10-10t	&0.132&0.429& 	0.432\\
+ temp85-10- 5t	&0.088&0.122& 	0.114\\
 \end{tabular}
 \end{table}
 
 \begin{table}[htbp]
-\caption{Multivariate TRMF on Berkeley Data Set, random}
+\caption{Multivariate RMSE (traffic Data, Random)}
 \label{traffic}
 \begin{tabular}{r | r r r}
-berkeley dataset	&TRMF	&MtMF	&MtMF-all \\ \hline
-humid  5 &0.1936	&0.1941	&0.1594\\
-humid 10 &0.1424	&0.1421	&0.1219\\
-humid 20 &0.1140	&0.1139	&0.0975\\
-humid 40 &0.0918	&0.0910	&0.0824\\
-humid 60 &0.0815	&0.0808	&0.0762\\
-humid 80 &0.0756	&0.0749	&0.0712\\
-humid 85 &0.0750	&0.0740	&0.0713\\
- temp  5 &0.1136	&0.1158	&0.0694\\
- temp 10 &0.0454	&0.0482	&0.0371\\
- temp 20 &0.0316	&0.0329	&0.0264\\
- temp 40 &0.0232	&0.0233	&0.0201\\
- temp 60 &0.0181	&0.0183	&0.0166\\
- temp 80 &0.0155	&0.0155	&0.0144\\
- temp 85 &0.0158	&0.0159	&0.0142
+	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
+humid10-10-80	&3.524 	&3.486 	&2.291\\  
+humid20-10-70	&2.583 	&2.558 	&1.796\\
+humid40-10-50	&1.932 	&1.921 	&1.523\\
+humid60-10-30	&1.664 	&1.649 	&1.408\\
+humid80-10-10	&1.565 	&1.546 	&1.366\\
+humid85-10- 5	&1.503 	&1.489 	&1.326\\
+ temp10-10-80	&1.214 	&1.201 	&0.722\\
+ temp20-10-70	&0.898 	&0.881 	&0.597\\
+ temp40-10-50	&0.689 	&0.676 	&0.519\\
+ temp60-10-30	&0.585 	&0.579 	&0.478\\
+ temp80-10-10	&0.551 	&0.544 	&0.466\\
+ temp85-10- 5	&0.520 	&0.510 	&0.434\\
 \end{tabular}
 \end{table}
 
-
-
-\subsubsection{Tensor Factorization}
+\subsubsection{Tensor Factorization} % need to be combined with multi TRMF 
 We compare our TF method with the models without modeling heterogeneous sensor correlations in this section.
 The Tensor Factorization naturally allow us to add additional nominal dimensions to the model, e.g.\ node id or sensor coordinates.
 The three-order TF is used in the experiment, each dimension represent node id, time frame number and heterogeneous signal.  
