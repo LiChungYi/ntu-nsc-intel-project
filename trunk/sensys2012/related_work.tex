@@ -53,10 +53,10 @@ They set up the prediction model,
 I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}
 \label{DEPM}
 \end{equation} 
-$I_k$ is the intensity of target sensor,$j$ is the neighbour sensors, and P stands for the power radiated from two sources. 
+$I_k$ is the intensity of target sensor, $j$ is the neighbour sensors, and P stands for the power radiated from two sources. 
 They build models of the imputation predictor according to the physical phenomenon, and solve the set of linear inhomogeneous equations to provide an accurate estimation for the light ambient sensors. However, it requires the precise  three-dimensional distance between two sensors, therefore it is not realistic in large sensors deployment.
 \subsubsection{Association Rule Mining Estimation}
- Researchers also propose to predict missing values based on the data mining techniques. Window Association Rule Mining(WARM)\cite{le2005estimating} and Freshness Association Rule Mining(FARM)\cite{Gruenwald:FARM} studied the estimations of missing data based on the association rules between spatially correlated neighbours. For example, given sensor $i$and $j$, where $i$ is the target sensor and $j$ is used to predict the value of $i$, and the state=\{M,L,H\} in the traffic loading sensors. The user-defined \textit{minsupport} is $7/13$. The \textit{actualweightsupport} which is computed from using the rule set and the weighting function (eq\ref{weight_fun}) by sensor $j$ reports on state M is:\{$S_{j} \rightarrow S_{i} \mbox{wrt }  M = 9/13$\}. After  this step, state M will put into the eligible state pool which is later used to do the final prediction. 
+ Researchers also propose to predict missing values based on the data mining techniques. Window Association Rule Mining(WARM)\cite{le2005estimating} and Freshness Association Rule Mining(FARM)\cite{Gruenwald:FARM} studied the estimations of missing data based on the association rules between spatially correlated neighbours. For example, given sensor $i$ and $j$, where $i$ is the target sensor and $j$ is used to predict the value of $i$, and the state=\{M,L,H\} in the traffic loading sensors. The user-defined \textit{minsupport} is $7/13$. The \textit{actualweightsupport} which is computed from using the rule set and the weighting function (eq\ref{weight_fun}) by sensor $j$ reports on state M is:\{$S_{j} \rightarrow S_{i} \mbox{wrt }  M = 9/13$\}. After  this step, state M will put into the eligible state pool which is later used to do the final prediction. 
  \begin{equation}
  w(n) = p^{n-1}
  \label{weight_fun}
@@ -104,7 +104,7 @@ $\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $
 The computation in DESM is simple and only little amount of memory is required to store the id of the nearest sensor. 
 Note that the temporal feature holds a very small portion of contribution to the prediction process and it often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e. blocked by a wall.
  \subsubsection{Applying K-nearest neighbour Estimation}
-Pan\cite{pan2010k} propose the Applying K-nearest neighbour Estimation algorithm(AKE) to exploit the spatial correlation in the missing sensory data problem. They argue that the past research on sensor imputation(STI) estimates the missing problem based on more temporal correlation than spatial correlation(STI). In their observation, the sensor data in WSN often changes rapidly and sharply especially in outside environment. The AKE adopts the linear regression model (eq.\ref{ake_j}),
+Pan\cite{pan2010k} propose the Applying K-nearest neighbour Estimation algorithm(AKE) to exploit the spatial correlation in the missing sensory data problem. They argue that the past research on sensor imputation(STI) estimates the missing problem based on more temporal correlation than spatial correlation(STI). In their observation, the sensor data in WSN often changes rapidly and sharply especially in outside environment. The AKE adopts the linear regression model eq.\ref{ake_j},
 \begin{equation}
 \hat{y}_{it} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}
 \label{ake_j}
@@ -135,11 +135,11 @@ Finally, the preference on spatial over temporal is also being challenged when t
 \subsubsection{Imputation Method-ImM}
  In \cite{Lim:robust}, an imputation method(ImM) consists of two temporal and one spatial predictors was introduced.  The algorithm argues that it is not robust to set the preference for its spatial predictor over temporal predictor, or vice versa.
 They assume that the predictor which yields the most accurate results in the training data set is used to predict the missing packets. 
-The first temporal predictor(LRS) uses the last transmitted packet as the predicted value(eq\ref{lrs}).
+The first temporal predictor(LRS) uses the last transmitted packet as the predicted value eq\ref{lrs}.
 \begin{equation}
 \hat{y}_{t} =y_{t-1} \label{lrs}
 \end{equation} 
- The second temporal predictor uses a linear predictor(LP). Given $o$, the training samples of specific sensor $p$, and $O$ who is the training data of sensors other than $p$. The coefficients of the linear predictor is decided by autocorrelation method of autoregressive modelling. The predicted value is(eq\ref{lp}):
+ The second temporal predictor uses a linear predictor(LP). Given $o$, the training samples of specific sensor $p$, and $O$ who is the training data of sensors other than $p$. The coefficients of the linear predictor is decided by autocorrelation method of autoregressive modelling. The predicted value by eq\ref{lp}:
 \begin{equation}
 \hat{y}_{t}^p = a(2)X_o(t-1) - a(3)X_o(t-2)- \dots -a(p+1)X_o(t-p) \label{lp}
 \end{equation} 
@@ -153,30 +153,30 @@ The spatial predictor uses the linear predictive model, given the nodes who are 
 However, the performance of the ImM may degrades if the changes in the continuous data stream are sharp in the high sampling rate data set. 
 For example, the wind sensors in the windy climate area may affect the method applied on the target sensor.  
 \subsection{Review of Matrix Factorization  }
-Matrix factorization has many applications in computer visions, recommendation system\cite{chen2011linear}, and data imputation. Their goal is to factorize the measurement matrix R and find the two subspace: U and V. We will introduce two applications other than WSNs data imputation in the following sections. First is the EOF-based prediction method in satellite photography and Structure-from-motion(SFM) in computer vision.
+Matrix factorization has many applications in computer visions, recommendation system\cite{chen2011linear}, and data imputation. Their goals are to factorize the measurement matrix R and find the two subspace: U and V. We will introduce two applications other than WSNs data imputation in the following sections. The first application is the EOF-based prediction method in satellite photography and the second one is the Structure-from-motion(SFM) in computer vision.
 \begin{equation}
 M_{d\times n}= U_{d\times k}V^t_{k\times n}
 \end{equation}
 \subsubsection{Prediction based on Empirical Orthogonal Functions }
 Empirical Orthogonal Functions(EOF) has been applied to oceanographic application to solve the problem of missing or unreliable satellite data\cite{beckers2003eof}. 
 They propose the DINEOF (Data Interpolating Empirical Orthogonal Functions) which is an Singular value decomposition(SVD)-based technique for the reconstruction of missing data.
-In their method, a matrix $X_{m*n}$ with its entry $(X)_{ij}$ which contains the observations values at $i$ and moment $j$. 
-To predict the missing value $(X_\gamma)_{ij}$ is in(eq\ref{EOF}), where $X_\gamma$ stands for the matrix where it is zero everywhere except the missing data points. 
-$U_N$ is the first $N$ spatial EOFs, which have the same meaning as $N$-modes in SVD. 
-First all the missing values are filled with zero, and then the prediction of DINEOF is:
+In their method, given a matrix $X_{m*n}$ with its entry $(X)_{ij}$ which contains the observations values at $i$ and moment $j$. 
+in eq\ref{EOF}, $X_\gamma$ is the matrix whose items are zero except the missing data points.
+$U_N$ is the matrix constructed by the first $N$ spatial EOFs, which have the same meaning as $N$-modes in SVD. 
+In their method, all the missing values are filled with zero first, then the prediction of DINEOF becomes eq.\ref{EOF}
 \begin{equation}
 (X_\gamma)_{ij} = (U_ND_NV_N^T)_{ij}
 \label{EOF}
 \end{equation}
 The operations stop when $X_{ij}$ is filled by all the missing item with their prediction in $(X_\gamma)_{ij}$. 
-Researchers of \cite{alvera2009enhancing} point out that when large gap of data missing due to clouds or rains, the remained observations may not be representative of the whole spatial variability of the domain. Therefore they apply a Laplacian filter $F$ on the terms of X before the estimations of EOFs. After filtering, two consecutive images in matrix X with a large time gap between them are less related than two consecutive images. 
+Researchers of \cite{alvera2009enhancing} point out that when large gap of data missing due to clouds or rains, the remained observations may not be representative of the whole spatial variability of the domain. Therefore they apply a Laplacian filter $F$ on the terms of $X$ before the estimations of EOFs. After filtering, two consecutive images in matrix $X$ with a large time gap between them are less related than two consecutive images. 
 \begin{eqnarray}
 &&\tilde{B} = F^TBF \\
 &&B=X^TX
 \label{enhance_eof}
 \end{eqnarray} 
 
-However, there are several drawbacks in the SVD-based methods when apply to impute large-scale sensors network. First, SVD needs to fill all the missing values before factorization which can be very expensive as it significantly increases the amount of data. The inaccurate imputation might also distort the data considerably\cite{koren2009matrix}. In addition, \cite{ke2005robust} points out SVD is sensitive to outliers and missing data. 
+However, there are several drawbacks in the SVD-based methods when apply to impute large-scale sensors network. First, SVD needs to fill all the missing values before factorization which can be very expensive as it significantly increases the amount of data. The inaccurate imputation might also distort the data considerably\cite{koren2009matrix}. In addition,\cite{ke2005robust} point out SVD is sensitive to outliers and missing data. 
   
 \subsubsection{Matrix Factorization on Structure of Motion} 
 Structure from motion(SFM)\cite{tomasi1992shape} and motion estimation are among the most important application in computer vision.   
