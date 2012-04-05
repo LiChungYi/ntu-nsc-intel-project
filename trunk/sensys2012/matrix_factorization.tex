@@ -22,7 +22,7 @@ Utilizing numerical optimization procedures, we generate two small matrices~$\ma
 If $\mathbf{R}$ is a matrix of temperature readings, then each row of $\mathbf{P}$ represents latent factors of the time step and each column of $\mathbf{Q}$ is the latent factors of the sensor node.
 
 We adopt the biased-MF which includes row and column biases $\mu_m$ and $\mu_n$. % is added for predicting $r_{m,n}$.
-In a temperature monitoring system, the row bias can be understood as the average temperature at a given time, and the column bias reflects the systematic bias of the sensor node.
+In a temperature monitoring system, the row bias can be understood as the average temperature at a given time, and the column bias reflects the average temperature at the location and the systematic bias of the sensor node.
 Therefore, we have the prediction $\hat{r}_{m,n} = \mu_m + \mu_n + \mathbf{p}_m \mathbf{q}_n$.
 After adding the regularization term, the whole objective function becomes
 \begin{equation*}\begin{aligned}
