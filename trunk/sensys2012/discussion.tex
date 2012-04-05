@@ -76,10 +76,11 @@ The conventional regularization is $0.001$ for temporal split and $0$ for random
 Finally, we observe that a large $K$ doesn't lead to overfitting because SGD is a natural regularization that prefers small feature values and it may lead to several non-independent features.
 The number of features $K$ is $54$ in Berkeley data set and $21$ in traffic data set, although in temporal split the $K$ may be much lowered to speed up the algorithm. 
 
-\redtext{ WeiLun please add your TF parameters here!}
-%In temporal split data, it is more easier to be over-fitting state. Therefore, the regularization term should be higher than random split.
+Consider the TF model, the learning rate is $0.001 to 0.0001 $. In temporal split data, it is more easier to be over-fitting. Therefore, the conventianal regularization term should be higher than temporal split. we set conventional regularization term to 0.005 for temporal split and 0.001 for random split. Also, the larger $K$ does't lead to overfitting, In the experiment, the $K$ of TF model  is 30 in Berkeley dataset and 10 in traffic dataset.
 
 \subsection{User Case of Models}
+
+
 In experiment 4.3, it can be found TF works well on traffic dataset while it does't take advantage from adding heterogeneous signal on Berkeley dataset.
 Sensors from traffic dataset are deployed outdoor so the variance of heterogeneous data is large.
 While sensors from Berkeley dataset are deployed indoor, it cause the variance of heterogeneous data is small.
