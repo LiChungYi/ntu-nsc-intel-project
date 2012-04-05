@@ -90,11 +90,16 @@ We finally make a conclusion that the high variance heterogeneous data are more 
 
 \subsection{Spatial Regularization}
 %A strong argument that directly exploiting spatial information to specify the assumed inter-sensor node correlation may not be as good as directly learning these correlations directly from the sensor observations themselves.
-We have tried adding spatial regularization on our TR-MF model.
+We have tried adding spatial regularization on our TR-MF model. 
 
-equation!
+%\begin{equation*}\begin{aligned}
+%\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2 &+ \frac{\beta_1}{2}\sum_m{\mu_m^2} + \frac{\beta_2}{2}\sum_n{\mu_n^2}\\
+%&+ \frac{\beta_3}{2}\sum_m{||\mathbf{p}_m||^2} + \frac{\beta_4}{2}\sum_n{||\mathbf{q}_n||^2}\\ 
+%&+ \frac{1}{2}\gamma_1\sum{(\mu_m-\mu_{m+1})^2} + \frac{1}{2}\gamma_2\sum{||\mathbf{p}_m-\mathbf{p}_{m+1}||^2}.
+%\end{aligned}\end{equation*}
 
-Table \ref{table:spatial_random_hum}, \ref{table:spatial_random_light}, \ref{table:spatial_random_tem} show the result of adding spatial regularization. STR-MF mean TR-MF with strong spatial regularization, while sTR-MF is with weak spatial regularization.
+
+Table \ref{table:spatial_random_hum}, \ref{table:spatial_random_light}, \ref{table:spatial_random_tem}, \ref{table:spatial_temporal_hum}, \ref{table:spatial_temporal_light}, \ref{table:spatial_temporal_tem}  show the result of adding spatial regularization. STR-MF mean TR-MF with strong spatial regularization, while sTR-MF is with weak spatial regularization.
 
 \begin{table} [htbp]
 \setlength{\tabcolsep}{2pt}
