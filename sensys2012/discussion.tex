@@ -12,7 +12,7 @@ For both MF and TF model, we observe that the parameter setting in random split 
 
 Let us look at two illustrating examples.
 Here we ignore bias terms for simplicity.
-Random split is like \textbf{Equation \ref{randomSplit_matrix}}.
+Random split is like Equation \ref{randomSplit_matrix}.
 We have more confidence in our prediction and we rely mostly on temporal correlation, so we prefer more features and weak conventional regularization.
 We also see that linear interpolation can be viewed as a solution of TRMF, in which the number of features is large and no conventional regularization is applied. 
 \begin{equation}
@@ -40,7 +40,7 @@ We also see that linear interpolation can be viewed as a solution of TRMF, in wh
 \end{bmatrix} 
 \end{equation}
 
-Temporal split is like \textbf{Equation \ref{temporalSplit_matrix}}.
+Temporal split is like Equation \ref{temporalSplit_matrix}.
 In contrast to temporal split case, we can't use temporal correlation to infer the missing values and we have less confidence in prediction.
 We can only rely on the spatial correlation, so we prefer fewer features and stronger conventioal regularization.
 
@@ -88,7 +88,113 @@ The small variance makes TF does't work well because we quantize the heterogeneo
 Most of heterogeneous sensor readings are divided into the same bin such that the additional dimension of TF is redundant.
 We finally make a conclusion that the high variance heterogeneous data are more suitable to use TF model.
 
-\subsection{Spatial Correlation}
+\subsection{Spatial Regularization}
 %A strong argument that directly exploiting spatial information to specify the assumed inter-sensor node correlation may not be as good as directly learning these correlations directly from the sensor observations themselves.
 We have tried adding spatial regularization on our TR-MF model.
+
+equation!
+
+Table \ref{table:spatial_random_hum}, \ref{table:spatial_random_light}, \ref{table:spatial_random_tem} show the result of adding spatial regularization. STR-MF mean TR-MF with strong spatial regularization, while sTR-MF is with weak spatial regularization.
+
+\begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{RMSE of (berkeley, random, humidity)}
+\label{table:spatial_random_hum}
+\begin{tabular} {r | r r r}
+	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
+	10\% & $ \mathbf{ 0.142 } $ & $ 0.484 $ & $ 0.173 $ \\
+	20\% & $ \mathbf{ 0.114 } $ & $ 0.424 $ & $ 0.135 $ \\
+	40\% & $ \mathbf{ 0.092 } $ & $ 0.352 $ & $ 0.104 $ \\
+	60\% & $ \mathbf{ 0.082 } $ & $ 0.337 $ & $ 0.093 $ \\
+	80\% & $ \mathbf{ 0.076 } $ & $ 0.324 $ & $ 0.084 $ \\
+	85\% & $ \mathbf{ 0.075 } $ & $ 0.326 $ & $ 0.083 $ \\
+\end{tabular}
+\end{table}
+
+
+\begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{RMSE of (berkeley, random, light)}
+\label{table:spatial_random_light}
+\begin{tabular} {r | r r r}
+	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
+	10\% & $ \mathbf{ 35.480 } $ & $ 97.365 $ & $ 38.308 $ \\
+	20\% & $ \mathbf{ 28.200 } $ & $ 90.645 $ & $ 28.869 $ \\
+	40\% & $ \mathbf{ 21.190 } $ & $ 85.758 $ & $ 22.762 $ \\
+	60\% & $ \mathbf{ 17.180 } $ & $ 83.251 $ & $ 18.334 $ \\
+	80\% & $ \mathbf{ 17.740 } $ & $ 84.413 $ & $ 18.095 $ \\
+	85\% & $ \mathbf{ 14.440 } $ & $ 81.972 $ & $ 15.828 $ \\
+\end{tabular}
+\end{table}
+
+
+\begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{RMSE of (berkeley, random, temperature)}
+\label{table:spatial_random_tem}
+\begin{tabular} {r | r r r}
+	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
+	10\% & $ \mathbf{ 0.046 } $ & $ 0.154 $ & $ 0.061 $ \\
+	20\% & $ \mathbf{ 0.032 } $ & $ 0.146 $ & $ 0.047 $ \\
+	40\% & $ \mathbf{ 0.023 } $ & $ 0.145 $ & $ 0.037 $ \\
+	60\% & $ \mathbf{ 0.018 } $ & $ 0.147 $ & $ 0.031 $ \\
+	80\% & $ \mathbf{ 0.015 } $ & $ 0.148 $ & $ 0.027 $ \\
+	85\% & $ \mathbf{ 0.016 } $ & $ 0.138 $ & $ 0.028 $ \\
+\end{tabular}
+\end{table}
+
+
+
+
+\begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{RMSE of (berkeley, temporal, humidity)}
+\label{table:spatial_temporal_hum}
+\begin{tabular} {r | r r r}
+	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
+	10\% & $ 0.957 $ & $ 0.573 $ & $ \mathbf{ 0.547 } $ \\
+	20\% & $ 0.796 $ & $ 0.657 $ & $ \mathbf{ 0.459 } $ \\
+	40\% & $ 0.771 $ & $ 0.520 $ & $ \mathbf{ 0.455 } $ \\
+	60\% & $ 0.540 $ & $ \mathbf{ 0.351 } $ & $ 0.708 $ \\
+	80\% & $ 0.447 $ & $ 0.299 $ & $ \mathbf{ 0.261 } $ \\
+	85\% & $ 0.323 $ & $ \mathbf{ 0.166 } $ & $ 0.256 $ \\
+\end{tabular}
+\end{table}
+
+\begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{RMSE of (berkeley, temporal, light)}
+\label{table:spatial_temporal_light}
+\begin{tabular} {r | r r r}
+	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
+	10\% & $ \mathbf{ 220.070 } $ & $ 281.607 $ & $ 264.763 $ \\
+	20\% & $ \mathbf{ 113.310 } $ & $ 236.865 $ & $ 230.054 $ \\
+	40\% & $ \mathbf{ 58.090 } $ & $ 110.758 $ & $ 64.388 $ \\
+	60\% & $ \mathbf{ 41.730 } $ & $ 150.149 $ & $ 69.235 $ \\
+	80\% & $ \mathbf{ 21.450 } $ & $ 112.694 $ & $ 28.017 $ \\
+	85\% & $ \mathbf{ 8.310 } $ & $ 85.423 $ & $ 12.079 $ \\
+\end{tabular}
+\end{table}
+
+
+\begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{RMSE of (berkeley, temporal, temperature)}
+\label{table:spatial_temporal_tem}
+\begin{tabular} {r | r r r}
+	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
+	10\% & $ 0.515 $ & $ \mathbf{ 0.242 } $ & $ 0.307 $ \\
+	20\% & $ 0.392 $ & $ \mathbf{ 0.179 } $ & $ 0.187 $ \\
+	40\% & $ 0.310 $ & $ 0.196 $ & $ \mathbf{ 0.189 } $ \\
+	60\% & $ 0.206 $ & $ \mathbf{ 0.191 } $ & $ 0.243 $ \\
+	80\% & $ 0.132 $ & $ \mathbf{ 0.108 } $ & $ 0.114 $ \\
+	85\% & $ 0.088 $ & $ \mathbf{ 0.065 } $ & $ 0.082 $ \\
+\end{tabular}
+\end{table}
 
