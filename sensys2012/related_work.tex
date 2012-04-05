@@ -96,7 +96,7 @@ where$\alpha$ is the Pearson correlation coefficient between the sensor $i$ and 
 The above equation assumes that the $X_i$ and $X_j$ have the similar data fluctuation trend which is true if they are very close to each other. 
 $\alpha$ is expected to have more impact on the prediction if $X_i$ is more correlated with $X_j$. 
 $\hat{y_{it}}$ is the last estimated value, which measures the influence of the historical sensing data on the current value at node i. 
-$\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $i$ at the time $m$(eq\ref{z-hat}). It measures the influence of the data sensed by the active node i on the data of the nearest node j. eq\ref{z-hat},  
+$\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $i$ at the time $m$(eq\ref{z-hat}). It measures the influence of the data sensed by the active node i on the data of the nearest node j.  
 \begin{equation}
 \hat{z} = X_{j(m)}(1+\frac{X_{i(m+1)}-X_{(im)}}{X_{i(m)}})
 \label{z-hat}
@@ -122,13 +122,13 @@ For given node $i$ whose data is missing at time $t$, and the m nearest neighbou
 %\end{array}
 %\right)
 %\]
-In (eq\ref{ake_impute}), the estimated $\hat{y}_{it}^{j}$ is computed by node $j$ using the coefficients of [$i,j$]. In designing the weighting function, the AKE gives higher correlation pairs a larger weight. They adopts the r-square statistics to rank their correlations due to when sensors have the higher $R^2$, they have the better regression equation fit. 
+In eq\ref{ake_impute}, the estimated $\hat{y}_{it}^{j}$ is computed by node $j$ using the coefficients of [$i,j$]. In designing the weighting function, the AKE gives higher correlation pairs a larger weight. They adopts the r-square statistics to rank their correlations due to when sensors have the higher $R^2$, they have the better regression equation fit. 
 %Based on the (eq\ref{ake_j}), the $R^2$ is computed by:
 %\begin{equation}
 %R_(j)^2 = \sum_{n=1}^{h} \frac{(\hat{y}_{in}^(j)-\bar{y}_i)^2}{(y_{in}-\bar{y}_i)^2}
 %\end{equation}
 Previous study [2] has showed that for high sampling rates sensing, the temporal correlation is higher than the spatial correlation from nearby sensors. 
-Therefore, If the consecutive missing frames are within the threshold learned by AKE , the linear interpolation is used to predict the value. 
+Therefore, if the consecutive missing frames are within the threshold learned by AKE , the linear interpolation is used to predict the value. 
 However, in some environment, the distance used to decide the m nearest neighbours is not feasible. 
 Moreover, in certain scenarios where two far away sensors have higher correlation, i.e. two sensors place under the same air-conditioning tuyere, the AKE will ignore the far away sensor.
 Finally, the preference on spatial over temporal is also being challenged when the sampling rates is very high, i.e. the body sensors, using temporal linear interpolation has better prediction.   
