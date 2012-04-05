@@ -67,8 +67,7 @@ We define two values $x$ and $y$ as follows.
 
 \begin{itemize}
 \item Here, we have the last $y\%$ of time is in test and the prior $10\%$ to test is the validation.
-\item The sensor node numbers ``covered up'' in the validation and testing for the Berkeley and Traffic datasets are ${4,19,45}$ and ${2,4,6,8,10,14,17,19,20,21}$, respectively.
-Note that node $21$ of the Traffic dataset is the gateway node.
+\item The sensor node numbers ``covered up'' in the validation and testing for the Berkeley and Traffic datasets are ${2,4,6,8,10,14,17,19,20,99}$ and ${4,21,45}$, respectively.
 \end{itemize}
 
 \subsection{Basic Experimental Results} %from Chung-Yi
@@ -84,13 +83,14 @@ Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \re
 \label{table:berkeley_random_hum}
 \begin{tabular}{ r | r r r r r}
 	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
+%	5\% & $ 0.319_{(2)} $ & $ \mathbf{ 0.198_{(1)} } $ & $ 0.354_{(3)} $ & $ 1.957_{(5)} $ & $ 1.220_{(4)} $ \\
 	10\% & $ 0.171_{(2)} $ & $ \mathbf{ 0.142_{(1)} } $ & $ 0.264_{(3)} $ & $ 0.544_{(4)} $ & $ 1.220_{(5)} $ \\
 	20\% & $ 0.127_{(2)} $ & $ \mathbf{ 0.114_{(1)} } $ & $ 0.244_{(3)} $ & $ 0.318_{(4)} $ & $ 1.472_{(5)} $ \\
 	40\% & $ 0.095_{(2)} $ & $ \mathbf{ 0.092_{(1)} } $ & $ 0.199_{(3)} $ & $ 0.219_{(4)} $ & $ 1.648_{(5)} $ \\
 	60\% & $ 0.085_{(2)} $ & $ \mathbf{ 0.082_{(1)} } $ & $ 0.181_{(4)} $ & $ 0.180_{(3)} $ & $ 1.649_{(5)} $ \\
 	80\% & $ \mathbf{ 0.075_{(1)} } $ & $ 0.076_{(2)} $ & $ 0.127_{(3)} $ & $ 0.160_{(4)} $ & $ 1.604_{(5)} $ \\
 	85\% & $ \mathbf{ 0.074_{(1)} } $ & $ 0.075_{(2)} $ & $ 0.121_{(3)} $ & $ 0.148_{(4)} $ & $ 1.549_{(5)} $ \\ \hline
-	rank &1.67 &1.33 &3.17 &3.83 &5.00 \\
+	rank &1.71 &1.29 &3.14 &4.00 &4.86 \\
 \end{tabular}
 \end{table}
 
@@ -100,13 +100,14 @@ Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \re
 \label{table:berkeley_random_light}
 \begin{tabular}{ r |  r r r r r}
 	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
+%	5\% & $ 70.8_{(2)} $ & $ \mathbf{ 51.4_{(1)} } $ & $ 74.8_{(3)} $ & $ 18531.4_{(5)} $ & $ 225.6_{(4)} $ \\
 	10\% & $ 52.9_{(2)} $ & $ \mathbf{ 35.5_{(1)} } $ & $ 61.2_{(3)} $ & $ 6250.4_{(5)} $ & $ 258.2_{(4)} $ \\
 	20\% & $ 38.7_{(2)} $ & $ \mathbf{ 28.2_{(1)} } $ & $ 53.0_{(3)} $ & $ 215.9_{(4)} $ & $ 311.0_{(5)} $ \\
 	40\% & $ 29.9_{(2)} $ & $ \mathbf{ 21.2_{(1)} } $ & $ 41.4_{(3)} $ & $ 356.7_{(5)} $ & $ 356.3_{(4)} $ \\
 	60\% & $ 25.0_{(2)} $ & $ \mathbf{ 17.2_{(1)} } $ & $ 33.7_{(3)} $ & $ 112.6_{(4)} $ & $ 366.9_{(5)} $ \\
 	80\% & $ 23.9_{(2)} $ & $ \mathbf{ 17.7_{(1)} } $ & $ 27.9_{(3)} $ & $ 41.7_{(4)} $ & $ 363.3_{(5)} $ \\
 	85\% & $ 20.9_{(2)} $ & $ \mathbf{ 14.4_{(1)} } $ & $ 24.3_{(3)} $ & $ 44.4_{(4)} $ & $ 354.2_{(5)} $ \\ \hline
-	rank &2.00 &1.00 &3.00 &4.33 &4.67 \\
+	rank &2.00 &1.00 &3.00 &4.43 &4.57 \\
 \end{tabular}
 \end{table}
 
@@ -116,13 +117,14 @@ Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \re
 \label{table:berkeley_random_tem}
 \begin{tabular}{ r | r r r r r}
 	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
-	10\% & $ 0.070_{(2)} $ & $ \mathbf{ 0.046_{(1)} } $ & $ 0.112_{(3)} $ & $ 0.298_{(4)} $ & $ 0.506_{(5)} $ \\
-	20\% & $ 0.042_{(2)} $ & $ \mathbf{ 0.032_{(1)} } $ & $ 0.111_{(3)} $ & $ 0.167_{(4)} $ & $ 0.584_{(5)} $ \\
-	40\% & $ 0.027_{(2)} $ & $ \mathbf{ 0.023_{(1)} } $ & $ 0.080_{(3)} $ & $ 0.095_{(4)} $ & $ 0.644_{(5)} $ \\
-	60\% & $ 0.021_{(2)} $ & $ \mathbf{ 0.018_{(1)} } $ & $ 0.053_{(3)} $ & $ 0.067_{(4)} $ & $ 0.637_{(5)} $ \\
-	80\% & $ 0.016_{(2)} $ & $ \mathbf{ 0.015_{(1)} } $ & $ 0.043_{(3)} $ & $ 0.048_{(4)} $ & $ 0.611_{(5)} $ \\
-	85\% & $ 0.019_{(2)} $ & $ \mathbf{ 0.016_{(1)} } $ & $ 0.034_{(3)} $ & $ 0.048_{(4)} $ & $ 0.593_{(5)} $ \\ \hline
-	rank &2.00 &1.00 &3.00 &4.00 &5.00 \\
+%	5\% & $ 15.725_{(4)} $ & $ 4.690_{(2)} $ & $ \mathbf{ 4.671_{(1)} } $ & $ 21.981_{(5)} $ & $ 14.998_{(3)} $ \\
+	10\% & $ 11.630_{(4)} $ & $ 3.524_{(2)} $ & $ \mathbf{ 3.486_{(1)} } $ & $ 19.817_{(5)} $ & $ 10.625_{(3)} $ \\
+	20\% & $ 7.269_{(4)} $ & $ 2.583_{(2)} $ & $ \mathbf{ 2.558_{(1)} } $ & $ 14.634_{(5)} $ & $ 6.745_{(3)} $ \\
+	40\% & $ 4.233_{(3)} $ & $ 1.932_{(2)} $ & $ \mathbf{ 1.921_{(1)} } $ & $ 8.986_{(5)} $ & $ 5.021_{(4)} $ \\
+	60\% & $ 3.184_{(3)} $ & $ 1.664_{(2)} $ & $ \mathbf{ 1.649_{(1)} } $ & $ 6.396_{(5)} $ & $ 4.710_{(4)} $ \\
+	80\% & $ 2.690_{(3)} $ & $ 1.565_{(2)} $ & $ \mathbf{ 1.546_{(1)} } $ & $ 4.714_{(5)} $ & $ 4.605_{(4)} $ \\
+	85\% & $ 2.588_{(3)} $ & $ 1.503_{(2)} $ & $ \mathbf{ 1.489_{(1)} } $ & $ 4.382_{(4)} $ & $ 4.671_{(5)} $ \\ \hline
+	rank &3.43 &2.00 &1.00 &4.86 &3.71 \\
 \end{tabular}
 \end{table}
 
@@ -134,13 +136,14 @@ Table \ref{table:traffic_random_hum} and \ref{table:traffic_random_tem} show the
 \label{table:traffic_random_hum}
 \begin{tabular}{ r | r r r r r}
 	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
+%	5\% & $ 15.725_{(4)} $ & $ \mathbf{ 4.690_{(1)} } $ & $ 11.894_{(2)} $ & $ 21.981_{(5)} $ & $ 14.998_{(3)} $ \\
 	10\% & $ 11.630_{(4)} $ & $ \mathbf{ 3.524_{(1)} } $ & $ 7.307_{(2)} $ & $ 19.817_{(5)} $ & $ 10.625_{(3)} $ \\
 	20\% & $ 7.269_{(4)} $ & $ \mathbf{ 2.583_{(1)} } $ & $ 4.559_{(2)} $ & $ 14.634_{(5)} $ & $ 6.745_{(3)} $ \\
 	40\% & $ 4.233_{(3)} $ & $ \mathbf{ 1.932_{(1)} } $ & $ 3.458_{(2)} $ & $ 8.986_{(5)} $ & $ 5.021_{(4)} $ \\
 	60\% & $ 3.184_{(3)} $ & $ \mathbf{ 1.664_{(1)} } $ & $ 2.901_{(2)} $ & $ 6.396_{(5)} $ & $ 4.710_{(4)} $ \\
 	80\% & $ 2.690_{(3)} $ & $ \mathbf{ 1.565_{(1)} } $ & $ 2.511_{(2)} $ & $ 4.714_{(5)} $ & $ 4.605_{(4)} $ \\
 	85\% & $ 2.588_{(3)} $ & $ \mathbf{ 1.503_{(1)} } $ & $ 2.401_{(2)} $ & $ 4.382_{(4)} $ & $ 4.671_{(5)} $ \\ \hline
-	rank &3.33 &1.00 &2.00 &4.83 &3.83 \\
+	rank &3.43 &1.00 &2.00 &4.86 &3.71 \\
 \end{tabular}
 \end{table}
 
@@ -150,18 +153,19 @@ Table \ref{table:traffic_random_hum} and \ref{table:traffic_random_tem} show the
 \label{table:traffic_random_tem}
 \begin{tabular}{ r | r r r r r}
 	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
+%	5\% & $ 5.306_{(4)} $ & $ \mathbf{ 1.632_{(1)} } $ & $ 4.014_{(2)} $ & $ 6.855_{(5)} $ & $ 5.149_{(3)} $ \\
 	10\% & $ 4.000_{(4)} $ & $ \mathbf{ 1.214_{(1)} } $ & $ 2.509_{(2)} $ & $ 6.212_{(5)} $ & $ 3.662_{(3)} $ \\
 	20\% & $ 2.508_{(4)} $ & $ \mathbf{ 0.898_{(1)} } $ & $ 1.538_{(2)} $ & $ 4.867_{(5)} $ & $ 2.261_{(3)} $ \\
 	40\% & $ 1.477_{(3)} $ & $ \mathbf{ 0.689_{(1)} } $ & $ 1.192_{(2)} $ & $ 3.149_{(5)} $ & $ 1.732_{(4)} $ \\
 	60\% & $ 1.101_{(3)} $ & $ \mathbf{ 0.585_{(1)} } $ & $ 1.005_{(2)} $ & $ 2.275_{(5)} $ & $ 1.597_{(4)} $ \\
 	80\% & $ 0.938_{(3)} $ & $ \mathbf{ 0.551_{(1)} } $ & $ 0.885_{(2)} $ & $ 1.702_{(5)} $ & $ 1.574_{(4)} $ \\
 	85\% & $ 0.915_{(3)} $ & $ \mathbf{ 0.519_{(1)} } $ & $ 0.866_{(2)} $ & $ 1.494_{(4)} $ & $ 1.585_{(5)} $ \\ \hline
-	rank &3.33 &1.00 &2.00 &4.83 &3.83 \\
+	rank &3.43 &1.00 &2.00 &4.86 &3.71 \\
 \end{tabular}
 \end{table}
 
 \subsubsection{Temporal Split}
-Table \ref{table:berkeley_temporal_hum}, \ref{table:berkeley_temporal_light} and \ref{table:berkeley_temporal_tem} show the result of temporal split on Berkeley data set and Table \ref{table:traffic_temporal_hum} and \ref{table:traffic_temporal_tem} show the result of temporal split on traffic data set.
+\textbf{Table \ref{table:berkeley_temporal_hum}, \ref{table:berkeley_temporal_light} and \ref{table:berkeley_temporal_tem}} show the result of random split on Berkeley data set and \textbf{Table \ref{table:traffic_temporal_hum} and \ref{table:traffic_temporal_tem}} show the result of random split on traffic data set.
 In the temporal split, it is clear that linear interpolation performs terribly since its prediction is simply the last reading of the sensor.
 
 \begin{table}[htbp]
@@ -170,13 +174,13 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 \label{table:berkeley_temporal_hum}
 \begin{tabular}{ r | r r r r r}
 	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
-	10\% & $ 4.183_{(4)} $ & $ 0.957_{(2)} $ & $ 1.669_{(3)} $ & $ 4.185_{(5)} $ & $ \mathbf{ 0.792_{(1)} } $ \\
-	20\% & $ 5.421_{(4)} $ & $ \mathbf{ 0.796_{(1)} } $ & $ 0.969_{(3)} $ & $ 5.422_{(5)} $ & $ 0.865_{(2)} $ \\
-	40\% & $ 6.443_{(4)} $ & $ \mathbf{ 0.771_{(1)} } $ & $ 1.025_{(3)} $ & $ 6.443_{(5)} $ & $ 0.961_{(2)} $ \\
-	60\% & $ 2.223_{(4)} $ & $ \mathbf{ 0.540_{(1)} } $ & $ 0.928_{(3)} $ & $ 2.233_{(5)} $ & $ 0.864_{(2)} $ \\
-	80\% & $ 1.208_{(4)} $ & $ \mathbf{ 0.447_{(1)} } $ & $ 0.636_{(2)} $ & $ 1.216_{(5)} $ & $ 0.688_{(3)} $ \\
-	85\% & $ 2.306_{(4)} $ & $ \mathbf{ 0.323_{(1)} } $ & $ 0.777_{(2)} $ & $ 2.308_{(5)} $ & $ 0.796_{(3)} $ \\ \hline
-	rank &4.00 &1.17 &2.67 &5.00 &2.17 \\
+	85\%	&3.9669	&1.1250	&1.4492	&3.9682	&0.7876\\ 
+	80\%	&4.1829	&1.0069	&1.6694	&4.1853	&0.7918\\
+	70\%	&5.4211	&1.2549	&0.9690	&5.4217	&0.8651\\
+	50\%	&6.4429	&0.8844	&1.0252	&6.4431	&0.9612\\
+	30\%	&2.2225	&0.9314	&0.9280	&2.2335	&0.8643\\
+	10\%	&1.2076	&0.5392	&0.6358	&1.2165	&0.6878\\
+	 5\%	&2.3060	&0.4285	&0.7768	&2.3077	&0.7960
 \end{tabular}
 \end{table}
 
@@ -186,13 +190,13 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 \label{table:berkeley_temporal_light}
 \begin{tabular}{ r | r r r r r}
 	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
-	10\% & $ 320.0_{(5)} $ & $ \mathbf{ 220.1_{(1)} } $ & $ 239.1_{(2)} $ & $ 320.0_{(4)} $ & $ 251.3_{(3)} $ \\
-	20\% & $ 497.8_{(4)} $ & $ \mathbf{ 113.3_{(1)} } $ & $ 257.1_{(3)} $ & $ 499.7_{(5)} $ & $ 206.6_{(2)} $ \\
-	40\% & $ 194.5_{(3)} $ & $ \mathbf{ 58.1_{(1)} } $ & $ 68.5_{(2)} $ & $ 195.2_{(4)} $ & $ 208.3_{(5)} $ \\
-	60\% & $ 312.1_{(4)} $ & $ \mathbf{ 41.7_{(1)} } $ & $ 77.5_{(2)} $ & $ 312.1_{(5)} $ & $ 289.2_{(3)} $ \\
-	80\% & $ 293.5_{(4)} $ & $ \mathbf{ 21.4_{(1)} } $ & $ 84.9_{(2)} $ & $ 293.9_{(5)} $ & $ 213.9_{(3)} $ \\
-	85\% & $ 277.9_{(4)} $ & $ \mathbf{ 8.3_{(1)} } $ & $ 79.0_{(2)} $ & $ 280.4_{(5)} $ & $ 92.7_{(3)} $ \\ \hline
-	rank &4.00 &1.00 &2.17 &4.67 &3.17 \\
+	85\%	&330.55	&176.51	&196.39	&330.85	&251.32\\ 
+	80\%	&320.02	&166.79	&239.09	&320.00	&251.35\\
+	70\%	&497.84	&120.53	&257.11	&499.70	&206.58\\
+	50\%	&194.54	&58.39	&68.55	&195.17	&208.28\\
+	30\%	&312.10	&33.83	&77.45	&312.12	&289.20\\
+	10\%	&293.47	&20.60	&84.89	&293.87	&213.90\\
+	 5\%	&277.85	&7.81	&79.05	&280.36	& 92.72
 \end{tabular}
 \end{table}
 
@@ -203,13 +207,13 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 \label{table:berkeley_temporal_tem}
 \begin{tabular}{ r | r r r r r}
 	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
-	10\% & $ 3.760_{(4)} $ & $ 0.515_{(3)} $ & $ 0.514_{(2)} $ & $ 3.761_{(5)} $ & $ \mathbf{ 0.492_{(1)} } $ \\
-	20\% & $ 2.320_{(4)} $ & $ \mathbf{ 0.392_{(1)} } $ & $ 0.406_{(2)} $ & $ 2.321_{(5)} $ & $ 0.415_{(3)} $ \\
-	40\% & $ 3.595_{(4)} $ & $ 0.310_{(2)} $ & $ \mathbf{ 0.304_{(1)} } $ & $ 3.595_{(5)} $ & $ 0.486_{(3)} $ \\
-	60\% & $ 1.960_{(4)} $ & $ \mathbf{ 0.206_{(1)} } $ & $ 0.340_{(2)} $ & $ 1.962_{(5)} $ & $ 0.532_{(3)} $ \\
-	80\% & $ 0.887_{(4)} $ & $ \mathbf{ 0.132_{(1)} } $ & $ 0.280_{(2)} $ & $ 0.894_{(5)} $ & $ 0.326_{(3)} $ \\
-	85\% & $ 1.024_{(5)} $ & $ \mathbf{ 0.088_{(1)} } $ & $ 0.305_{(2)} $ & $ 1.016_{(4)} $ & $ 0.351_{(3)} $ \\ \hline
-	rank &4.17 &1.50 &1.83 &4.83 &2.67 \\
+	85\%	&3.0873	&0.6098	&0.5312	&3.0876	&0.4786\\ 
+	80\%	&3.7602	&0.6221	&0.5136	&3.7606	&0.4921\\
+	70\%	&2.3195	&0.4429	&0.4058	&2.3214	&0.4152\\
+	50\%	&3.5948	&0.3029	&0.3037	&3.5952	&0.4859\\
+	30\%	&1.9598	&0.2247	&0.3402	&1.9615	&0.5322\\
+	10\%	&0.8870	&0.2364	&0.2796	&0.8941	&0.3263\\
+	 5\%	&1.0241	&0.0853	&0.3047	&1.0156	&0.3506
 \end{tabular}
 \end{table}
 
@@ -218,14 +222,14 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 \caption{RMSE of (traffic, temporal, humidity)}
 \label{table:traffic_temporal_hum}
 \begin{tabular}{ r | r r r r r}
-	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
-	10\% & $ 27.751_{(4)} $ & $ 5.195_{(2)} $ & $ \mathbf{ 5.081_{(1)} } $ & $ 27.794_{(5)} $ & $ 5.752_{(3)} $ \\
-	20\% & $ 21.469_{(4)} $ & $ 5.487_{(2)} $ & $ \mathbf{ 5.020_{(1)} } $ & $ 22.372_{(5)} $ & $ 5.641_{(3)} $ \\
-	40\% & $ 25.828_{(4)} $ & $ 5.782_{(2)} $ & $ \mathbf{ 5.193_{(1)} } $ & $ 25.997_{(5)} $ & $ 5.957_{(3)} $ \\
-	60\% & $ 27.489_{(4)} $ & $ \mathbf{ 4.954_{(1)} } $ & $ 5.027_{(2)} $ & $ 27.517_{(5)} $ & $ 6.372_{(3)} $ \\
-	80\% & $ 18.936_{(4)} $ & $ 4.564_{(2)} $ & $ \mathbf{ 4.194_{(1)} } $ & $ 19.398_{(5)} $ & $ 4.972_{(3)} $ \\
-	85\% & $ 23.513_{(4)} $ & $ 4.248_{(2)} $ & $ \mathbf{ 3.666_{(1)} } $ & $ 23.615_{(5)} $ & $ 4.695_{(3)} $ \\ \hline
-	rank &4.00 &1.83 &1.17 &5.00 &3.00 \\
+	testing	&LI	&TRMF	&Hybrid-kNN \\ \hline
+	85\%	&16.6428	&5.3882	&5.3955\\ 
+	80\%	&27.7509	&5.0636	&5.0810\\
+	70\%	&21.4693	&5.5701	&5.0198\\
+	50\%	&25.8277	&5.8469	&5.1926\\
+	30\%	&27.4891	&5.0048	&5.0268\\
+	10\%	&18.9358	&4.6402	&4.1944\\
+	 5\%	&23.5126	&4.0820	&3.6661
 \end{tabular}
 \end{table}
 
@@ -235,82 +239,80 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 \caption{RMSE of (traffic, temporal, temperture)}
 \label{table:traffic_temporal_tem}
 \begin{tabular}{ r | r r r r r}
-	train	&LI	&TRMF	&AKE	&DESM	&STI\\ \hline
-	10\% & $ 11.435_{(4)} $ & $ 1.700_{(2)} $ & $ \mathbf{ 1.679_{(1)} } $ & $ 11.551_{(5)} $ & $ 2.089_{(3)} $ \\
-	20\% & $ 7.186_{(4)} $ & $ 1.812_{(2)} $ & $ \mathbf{ 1.664_{(1)} } $ & $ 7.259_{(5)} $ & $ 1.956_{(3)} $ \\
-	40\% & $ 10.594_{(4)} $ & $ 1.832_{(2)} $ & $ \mathbf{ 1.579_{(1)} } $ & $ 10.639_{(5)} $ & $ 2.048_{(3)} $ \\
-	60\% & $ 14.134_{(4)} $ & $ \mathbf{ 1.666_{(1)} } $ & $ 1.687_{(2)} $ & $ 14.251_{(5)} $ & $ 2.780_{(3)} $ \\
-	80\% & $ 16.166_{(5)} $ & $ 1.430_{(2)} $ & $ \mathbf{ 1.414_{(1)} } $ & $ 16.139_{(4)} $ & $ 1.710_{(3)} $ \\
-	85\% & $ 10.022_{(5)} $ & $ 1.441_{(2)} $ & $ \mathbf{ 1.356_{(1)} } $ & $ 9.992_{(4)} $ & $ 1.719_{(3)} $ \\ \hline
-	rank &4.33 &1.83 &1.17 &4.67 &3.00 \\
+	testing	&LI	&TRMF	&Hybrid-kNN \\ \hline
+	85\%	& 8.6774	&2.0011	&1.8381\\ 
+	80\%	&11.4353	&1.5281	&1.6787\\
+	70\%	& 7.1857	&1.8447	&1.6644\\
+	50\%	&10.5938	&1.7748	&1.5793\\
+	30\%	&14.1343	&1.6737	&1.6874\\
+	10\%	&16.1660	&1.4345	&1.4137\\
+	 5\%	&10.0223	&1.4254	&1.3560
 \end{tabular}
 \end{table}
 
-\subsection{Multivariate Learning}
 \subsubsection{Multivariate TRMF}
+We see substantial improvement (if look at all to help) 
 
 \begin{table}[htbp]
-\caption{Multivariate RMSE (Berkeley, random)}
+\caption{Multivariate TRMF on Traffic Data Set}
 \label{traffic}
 \begin{tabular}{r | r r r}
-	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
-humid10-10-80	&0.1424	&0.1420	&0.1222\\
-humid20-10-70	&0.1135	&0.1135	&0.0973\\
-humid40-10-50	&0.0916	&0.0909	&0.0822\\
-humid60-10-30	&0.0817	&0.0806	&0.0758\\
-humid80-10-10	&0.0757	&0.0748	&0.0709\\
-humid85-10- 5	&0.0751	&0.0739	&0.0712\\
- temp10-10-80	&0.1137	&0.1148	&0.0729\\
- temp20-10-70	&0.0462	&0.0481	&0.0369\\
- temp40-10-50	&0.0316	&0.0328	&0.0263\\
- temp60-10-30	&0.023	&0.0232	&0.0201\\
- temp80-10-10	&0.0182	&0.0183	&0.0166\\
- temp85-10- 5	&0.0153	&0.0154	&0.0143\\
-\end{tabular}
-\end{table}
+traffic dataset	&TRMF	&MtMF	&MtMF-all \\ \hline
+humid 5-10-85	&4.6898	&4.6690	&3.0966\\
+humid10-10-80	&3.5391	&3.5232	&2.3081\\
+humid20-10-70	&2.5865	&2.5886	&1.8027\\
+humid40-10-50	&1.9503	&1.9435	&1.5207\\
+humid60-10-30	&1.6748	&1.6594	&1.4116\\
+humid80-10-10	&1.5707	&1.5574	&1.3706\\
+humid85-10- 5	&1.5098	&1.4963	&1.3301\\
+ temp 5-10-85	&1.6235	&1.6105	&0.9620\\
+ temp10-10-80	&1.2159	&1.2186	&0.7305\\
+ temp20-10-70	&0.9017	&0.8936	&0.6002\\
+ temp40-10-50	&0.6898	&0.6819	&0.5200\\
+ temp60-10-30	&0.5865	&0.5818	&0.4770\\
+ temp80-10-10	&0.5521	&0.5464	&0.4652\\
+ temp85-10- 5	&0.5196	&0.5126	&0.4319\\
+humid 5-10-85t	&5.3882	&5.3994	&5.1394\\
+humid10-10-80t	&5.0636	&5.2424	&4.2964\\
+humid20-10-70t	&5.5701	&5.6727	&4.2332\\
+humid40-10-50t	&5.8469	&6.0046	&4.6036\\
+humid60-10-30t	&5.0048	&4.9566	&3.7443\\
+humid80-10-10t	&4.6402	&4.7294	&3.2574\\
+humid85-10- 5t	&4.0820	&3.9843	&3.1709\\
+ temp 5-10-85t	&2.0011	&2.0344	&1.5952\\
+ temp10-10-80t	&1.5281	&1.7150	&1.2174\\
+ temp20-10-70t	&1.8447	&1.9223	&1.1501\\
+ temp40-10-50t	&1.7748	&1.7961	&1.0494\\
+ temp60-10-30t	&1.6737	&1.6819	&1.2274\\
+ temp80-10-10t	&1.4345	&1.4225	&0.9267\\
+ temp85-10- 5t	&1.4254	&1.3374	&0.9259
 
-
-\begin{table}[htbp]
-\caption{Multivariate RMSE (Berkeley, temporal)}
-\label{traffic}
-\begin{tabular}{r | r r r}
-	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
-humid10-10-80t	&0.957&0.996& 	0.991\\
-humid20-10-70t	&0.796&0.852& 	0.846\\
-humid40-10-50t	&0.771&0.835& 	0.807\\
-humid60-10-30t	&0.540&0.887& 	0.880\\
-humid80-10-10t	&0.447&0.483& 	0.480\\
-humid85-10- 5t	&0.323&0.356& 	0.348\\
- temp10-10-80t	&0.515&0.567& 	0.555\\
- temp20-10-70t	&0.392&0.491& 	0.485\\
- temp40-10-50t	&0.310&0.380& 	0.347\\
- temp60-10-30t	&0.206&0.309& 	0.257\\
- temp80-10-10t	&0.132&0.429& 	0.432\\
- temp85-10- 5t	&0.088&0.122& 	0.114\\
 \end{tabular}
 \end{table}
 
 \begin{table}[htbp]
-\caption{Multivariate RMSE (traffic Data, Random)}
+\caption{Multivariate TRMF on Berkeley Data Set, random}
 \label{traffic}
 \begin{tabular}{r | r r r}
-	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
-humid10-10-80	&3.524 	&3.486 	&2.291\\  
-humid20-10-70	&2.583 	&2.558 	&1.796\\
-humid40-10-50	&1.932 	&1.921 	&1.523\\
-humid60-10-30	&1.664 	&1.649 	&1.408\\
-humid80-10-10	&1.565 	&1.546 	&1.366\\
-humid85-10- 5	&1.503 	&1.489 	&1.326\\
- temp10-10-80	&1.214 	&1.201 	&0.722\\
- temp20-10-70	&0.898 	&0.881 	&0.597\\
- temp40-10-50	&0.689 	&0.676 	&0.519\\
- temp60-10-30	&0.585 	&0.579 	&0.478\\
- temp80-10-10	&0.551 	&0.544 	&0.466\\
- temp85-10- 5	&0.520 	&0.510 	&0.434\\
+berkeley dataset	&TRMF	&MtMF	&MtMF-all \\ \hline
+humid  5 &0.1936	&0.1941	&0.1594\\
+humid 10 &0.1424	&0.1421	&0.1219\\
+humid 20 &0.1140	&0.1139	&0.0975\\
+humid 40 &0.0918	&0.0910	&0.0824\\
+humid 60 &0.0815	&0.0808	&0.0762\\
+humid 80 &0.0756	&0.0749	&0.0712\\
+humid 85 &0.0750	&0.0740	&0.0713\\
+ temp  5 &0.1136	&0.1158	&0.0694\\
+ temp 10 &0.0454	&0.0482	&0.0371\\
+ temp 20 &0.0316	&0.0329	&0.0264\\
+ temp 40 &0.0232	&0.0233	&0.0201\\
+ temp 60 &0.0181	&0.0183	&0.0166\\
+ temp 80 &0.0155	&0.0155	&0.0144\\
+ temp 85 &0.0158	&0.0159	&0.0142
 \end{tabular}
 \end{table}
+\subsection{Heterogeneous Signal Incorporation}
 
-\subsubsection{Tensor Factorization} % need to be combined with multi TRMF 
 We compare our TF method with the models without modeling heterogeneous sensor correlations in this section.
 The Tensor Factorization naturally allow us to add additional nominal dimensions to the model, e.g.\ node id or sensor coordinates.
 The three-order TF is used in the experiment, each dimension represent node id, time frame number and heterogeneous signal.  
@@ -340,11 +342,12 @@ It is obvious that the more higher quality filling value will help the regressio
    Filling method
 \begin{tabular}{ r | r r r r r}
         missing rate&global mean     &LI   &Hybrid-KNN &TRMF\\ \hline
-        5\%      &&&3.627&\\
-        10\%    &4.143&3.868&&2.526\\
-        30\%    &5.161&3.955&&2.470\\
-        50\%    &6.234&4.282&&2.756\\
-        70\%   &7.728&5.082&&2.743
+        5\%      &&&2.5121&\\
+        10\%    &4.143&3.868& 2.597&2.526\\
+        30\%    &5.161&3.955&2.773&2.470\\
+        50\%    &6.234&4.282&3.158&2.756\\
+        70\%   &7.728&5.082&3.310&2.743\\
+        80\% &&&3.306&\\
 \end{tabular}
 \end{table}
 
@@ -355,7 +358,7 @@ It is obvious that the more higher quality filling value will help the regressio
    Filling method
 \begin{tabular}{ r | r r r r r}
         missing rate&global mean     &LI   &Hybrid-KNN &TRMF\\ \hline
-        5\%\\
+        5\%&&&12.1615&\\
         10\%    &3.933 &4.006&&2.591\\
         30\%    &5.172&4.083&&2.532\\
         50\%    &6.234&4.384&&2.813\\
