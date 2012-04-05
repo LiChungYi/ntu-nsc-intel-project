@@ -6,6 +6,7 @@ We compare linear interpolation~(LI), TRMF, AKE, DESM and STI on the two data se
 Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the result of random split on Berkeley data set. TRMF outperforms others greatly in all cases. On the other hand, linear interpolation is quite competitive, especially when the size of training set is large. This is because the sampling rate of Berkeley data set is fairly high and the temporal correlation is prominent. 
 
 \begin{table}[htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (Berkeley, random, humidity)}
 \label{table:berkeley_random_hum}
@@ -22,6 +23,7 @@ Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \re
 \end{table}
 
 \begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (Berkeley, random, light)}
 \label{table:berkeley_random_light}
@@ -38,6 +40,7 @@ Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \re
 \end{table}
 
 \begin{table}[htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (Berkeley, random, temperature)}
 \label{table:berkeley_random_tem}
@@ -56,6 +59,7 @@ Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \re
 Table \ref{table:traffic_random_hum} and \ref{table:traffic_random_tem} show the result of random split on traffic data set. Again, TRMF outperforms other models significantly. However, the performance of linear interpolation deteriorates a lot. This corresponds to the low sampling rate in traffic data set. 
 
 \begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (traffic, random, humidity)}
 \label{table:traffic_random_hum}
@@ -72,6 +76,7 @@ Table \ref{table:traffic_random_hum} and \ref{table:traffic_random_tem} show the
 \end{table}
 
 \begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (traffic, random, temperature)}
 \label{table:traffic_random_tem}
@@ -92,6 +97,7 @@ Table \ref{table:berkeley_temporal_hum}, \ref{table:berkeley_temporal_light} and
 In the temporal split, it is clear that linear interpolation performs terribly since its prediction is simply the last reading of the sensor.
 
 \begin{table}[htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (Berkeley, temporal, humidity)}
 \label{table:berkeley_temporal_hum}
@@ -108,6 +114,7 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 \end{table}
 
 \begin{table}[htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (Berkeley, temporal, light)}
 \label{table:berkeley_temporal_light}
@@ -125,6 +132,7 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 
 
 \begin{table}[htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (Berkeley, temporal, temperature)}
 \label{table:berkeley_temporal_tem}
@@ -141,6 +149,7 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 \end{table}
 
 \begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (traffic, temporal, humidity)}
 \label{table:traffic_temporal_hum}
@@ -158,6 +167,7 @@ In the temporal split, it is clear that linear interpolation performs terribly s
 
 
 \begin{table} [htbp]
+\setlength{\tabcolsep}{2pt}
 \centering
 \caption{RMSE of (traffic, temporal, temperture)}
 \label{table:traffic_temporal_tem}
