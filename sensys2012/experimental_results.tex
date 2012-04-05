@@ -1,6 +1,7 @@
 
 \subsection{Multivariate Learning}
 \subsubsection{Multivariate TRMF}
+\redtext{The description is to be added, bad berkeley temporal!}
 
 \begin{table}[htbp]
 \setlength{\tabcolsep}{2pt}
@@ -9,18 +10,18 @@
 \label{table:multi_berkeley_random}
 \begin{tabular}{r | r r r}
 train	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
-humid10	&0.1424	&0.1420	&0.1222\\
-humid20	&0.1135	&0.1135	&0.0973\\
-humid40	&0.0916	&0.0909	&0.0822\\
-humid60	&0.0817	&0.0806	&0.0758\\
-humid80	&0.0757	&0.0748	&0.0709\\
-humid85	&0.0751	&0.0739	&0.0712\\
- temp10	&0.1137	&0.1148	&0.0729\\
- temp20	&0.0462	&0.0481	&0.0369\\
- temp40	&0.0316	&0.0328	&0.0263\\
- temp60	&0.023	&0.0232	&0.0201\\
- temp80	&0.0182	&0.0183	&0.0166\\
- temp85	&0.0153	&0.0154	&0.0143\\
+humid10\%	&0.1424	&0.1420	&0.1222\\
+humid20\%	&0.1135	&0.1135	&0.0973\\
+humid40\%	&0.0916	&0.0909	&0.0822\\
+humid60\%	&0.0817	&0.0806	&0.0758\\
+humid80\%	&0.0757	&0.0748	&0.0709\\
+humid85\%	&0.0751	&0.0739	&0.0712\\ \hline
+ temp10\%	&0.1137	&0.1148	&0.0729\\
+ temp20\%	&0.0462	&0.0481	&0.0369\\
+ temp40\%	&0.0316	&0.0328	&0.0263\\
+ temp60\%	&0.023	&0.0232	&0.0201\\
+ temp80\%	&0.0182	&0.0183	&0.0166\\
+ temp85\%	&0.0153	&0.0154	&0.0143\\
 \end{tabular}
 \end{table}
 
@@ -37,7 +38,7 @@ humid20t	&0.796&0.852& 	0.846\\
 humid40t	&0.771&0.835& 	0.807\\
 humid60t	&0.540&0.887& 	0.880\\
 humid80t	&0.447&0.483& 	0.480\\
-humid85t	&0.323&0.356& 	0.348\\
+humid85t	&0.323&0.356& 	0.348\\	\hline
  temp10t	&0.515&0.567& 	0.555\\
  temp20t	&0.392&0.491& 	0.485\\
  temp40t	&0.310&0.380& 	0.347\\
@@ -54,18 +55,40 @@ humid85t	&0.323&0.356& 	0.348\\
 \label{table_multi_traffic_random}
 \begin{tabular}{r | r r r}
 train	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
-humid10	&3.524 	&3.486 	&2.291\\  
-humid20	&2.583 	&2.558 	&1.796\\
-humid40	&1.932 	&1.921 	&1.523\\
-humid60	&1.664 	&1.649 	&1.408\\
-humid80	&1.565 	&1.546 	&1.366\\
-humid85	&1.503 	&1.489 	&1.326\\
- temp10	&1.214 	&1.201 	&0.722\\
- temp20	&0.898 	&0.881 	&0.597\\
- temp40	&0.689 	&0.676 	&0.519\\
- temp60	&0.585 	&0.579 	&0.478\\
- temp80	&0.551 	&0.544 	&0.466\\
- temp85	&0.520 	&0.510 	&0.434\\
+humid10\%	&3.524 	&3.486 	&2.291\\  
+humid20\%	&2.583 	&2.558 	&1.796\\
+humid40\%	&1.932 	&1.921 	&1.523\\
+humid60\%	&1.664 	&1.649 	&1.408\\
+humid80\%	&1.565 	&1.546 	&1.366\\
+humid85\%	&1.503 	&1.489 	&1.326\\ \hline
+ temp10\%	&1.214 	&1.201 	&0.722\\
+ temp20\%	&0.898 	&0.881 	&0.597\\
+ temp40\%	&0.689 	&0.676 	&0.519\\
+ temp60\%	&0.585 	&0.579 	&0.478\\
+ temp80\%	&0.551 	&0.544 	&0.466\\
+ temp85\%	&0.520 	&0.510 	&0.434\\
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{Multivariate RMSE (traffic Data, temporal)}
+\label{table_multi_traffic_temporal}
+\begin{tabular}{r | r r r}
+train	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
+humid10\%	&5.195 	&5.346 	&4.103\\  
+humid20\%	&5.487 	&5.565 	&4.263\\
+humid40\%	&5.782 	&6.009 	&3.968\\
+humid60\%	&4.954 	&4.918 	&3.877\\
+humid80\%	&4.564 	&4.700 	&3.346\\
+humid85\%	&4.248 	&4.248 	&3.254\\ \hline
+ temp10\%	&1.700 	&1.708 	&1.194\\
+ temp20\%	&1.812 	&1.815 	&1.144\\
+ temp40\%	&1.832 	&1.835 	&1.033\\
+ temp60\%	&1.666 	&1.646 	&1.220\\
+ temp80\%	&1.430 	&1.437 	&0.916\\
+ temp85\%	&1.441 	&1.345 	&0.915\\
 \end{tabular}
 \end{table}
 
