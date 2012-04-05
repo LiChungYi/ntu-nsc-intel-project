@@ -30,18 +30,18 @@ This dataset, collected by the Bio-industrial Department at National Taiwan Univ
 
 \paragraph*{Berkeley Dataset Outlier Removal and Gridding}
 
-Outlier Filtering : Observation removed if temperature $> 100\degc$, temperature $< 5\degc$, or humidity $< 16\%$.
+Outlier Filtering : Observation removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
 
 Gridding : Dataset falls on even 30s intervals for the first 5000 time steps (which is all we consider), so no additional gridding need be performed.
 
 \paragraph*{Traffic Dataset Outlier Removal and Gridding}
 
-Outlier Filtering : Observation removed if temperature $< 5\degc$ or $> 60\degc$ or if humidity $< 10\%$ or $> 100\%$.
+Outlier Filtering : Observation removed if temperature \mbox{$<5\degc$} or \mbox{$>60\degc$} or if humidity \mbox{$<10\%$} or \mbox{$>100\%$}.
 
 Gridding : The original dataset recorded most readings at around the $xx:03$ and $xx:33$ minute marks, so a $6$ min window centered at
 these points captured the data for $30$ minute internal readings.
 Where more than one reading was recorded for a given node within a given window, the closest to the $3$ or $33$ minute mark was chosen.
-The full length of the dataset was used, which consists of $~43$K time-steps.
+The full length of the dataset was used, which consists of $\approx 43$K time-steps.
 
 \paragraph*{Common Methodology}
 
