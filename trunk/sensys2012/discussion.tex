@@ -8,12 +8,12 @@ Strictly speaking, this approach can be thought of as an ensemble approach betwe
 
 \subsection{Parameter Setting} \label{subsec:parameter}
 
-We observe that the parameter setting for random split must be different from temporal split, and we provide an explanation for this. 
+For both MF and TF model, we observe that the parameter setting in random split must be different from that in temporal split. Basically, we need stronger regularization in temporal split.  We provide some details and explanation here. 
 
 Let us look at two illustrating examples.
 Here we ignore bias terms for simplicity.
 Random split is like \textbf{Equation \ref{randomSplit_matrix}}.
-We have more confidence in our prediction and we rely more on temporal correlation, so we prefer more features and weak conventional regularization.
+We have more confidence in our prediction and we rely mostly on temporal correlation, so we prefer more features and weak conventional regularization.
 We also see that linear interpolation can be viewed as a solution of TRMF, in which the number of features is large and no conventional regularization is applied. 
 \begin{equation}
 \label{randomSplit_matrix}
@@ -41,8 +41,8 @@ We also see that linear interpolation can be viewed as a solution of TRMF, in wh
 \end{equation}
 
 Temporal split is like \textbf{Equation \ref{temporalSplit_matrix}}.
-We can't use temporal correlation to infer the missing values.
-We are less confident and we hope to apply the spatial correlation, so we prefer fewer features and stronger conventioal regularization.
+In contrast to temporal split case, we can't use temporal correlation to infer the missing values and we have less confidence in prediction.
+We can only rely on the spatial correlation, so we prefer fewer features and stronger conventioal regularization.
 
 \begin{equation}
 \label{temporalSplit_matrix}
@@ -67,8 +67,8 @@ We are less confident and we hope to apply the spatial correlation, so we prefer
 0 & 0 & 1\\
 \end{bmatrix} 
 \end{equation}
-
-To be specific, we share the actual values of the parameter.
+\redtext{(should be merged with TF)}
+To be specific, we share the actual values of the parameters.
 Firstly, the learning rate $\eta$ is $0.04$ to $0.004$, which is chosen as the largest value that still maintains stable optimization process.
 Secondly, a strong temporal regularization is always preferred.
 Temporal regularization times learning rate ($\gamma \times \eta$) is set to $0.2$ in all of our experiment.
@@ -76,7 +76,7 @@ The conventional regularization is $0.001$ for temporal split and $0$ for random
 Finally, we observe that a large $K$ doesn't lead to overfitting because SGD is a natural regularization that prefers small feature values and it may lead to several non-independent features.
 The number of features $K$ is $54$ in Berkeley data set and $21$ in traffic data set, although in temporal split the $K$ may be much lowered to speed up the algorithm. 
 
-Consider the TF model, the learning rate is $0.001$ to $0.0001 $. In temporal split data, it is more easier to be over-fitting. Therefore, the conventianal regularization term should be higher than temporal split. we set conventional regularization term to 0.005 for temporal split and 0.001 for random split. Also, the larger $K$ does't lead to overfitting, In the experiment, the $K$ of TF model  is 30 in Berkeley dataset and 10 in traffic dataset.
+As for the TF model, the learning rate is $0.001$ to $0.0001 $. In temporal split data, it is more easier to be over-fitting. Therefore, the conventianal regularization term should be higher than temporal split. we set conventional regularization term to 0.005 for temporal split and 0.001 for random split. Also, the larger $K$ does't lead to overfitting, In the experiment, the $K$ of TF model  is $30$ in Berkeley dataset and $10$ in traffic dataset.
 
 \subsection{User Case of Models}
 
