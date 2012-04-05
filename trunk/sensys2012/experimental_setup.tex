@@ -36,7 +36,7 @@ Gridding : Dataset falls on even 30s intervals for the first 5000 time steps (wh
 
 \paragraph*{Traffic Dataset Outlier Removal and Gridding}
 
-Outlier Filtering : \redtext{this was done by chung-yi.. please fill this in!}
+Outlier Filtering : Observation removed if temperature $< 5\degc$ or $> 60\degc$ or if humidity $< 10\%$ or $> 100\%$.
 
 Gridding : The original dataset recorded most readings at around the $xx:03$ and $xx:33$ minute marks, so a $6$ min window centered at
 these points captured the data for $30$ minute internal readings.
