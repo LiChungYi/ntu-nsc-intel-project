@@ -16,7 +16,7 @@ SVD decomposes a completely observed matrix~$\mathbf{R}$ into one diagonal matri
 The largest $K$ singular values, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm. 
 
 Conventional SVD is undefined when the matrix~$\mathbf{R}$ is incomplete.
-Recent research shows\cite{koren2009matrix} that when the matrix~$\mathbf{R}$ is partially observed, a better approach is to factorize $\mathbf{R}$ by considering observed entries only.
+In contrast to ealier systems which fill in missing entries and make the matrix dense, recent research shows\cite{koren2009matrix} that a better approach is to factorize $\mathbf{R}$ by considering observed entries only.
 Utilizing numerical optimization procedures, we generate two small matrices~$\mathbf{P}_{MK}$ and $\mathbf{Q}_{KN}$ that approximate the observed entries of $\mathbf{R}_{MN}$
 \begin{equation*}\mathbf{R} \approx \mathbf{P} \mathbf{Q}.\end{equation*}
 If $\mathbf{R}$ is a matrix of temperature readings, then each row of $\mathbf{P}$ represents latent factors of the time step and each column of $\mathbf{Q}$ is the latent factors of the sensor node.
@@ -60,7 +60,7 @@ To achieve this effect, we modify our objective function as follows
 
 \subsection{Optimization Procedure of TR-MF}
 \label{optimation_procedure}
-Several MF solving methodologies have been proposed, such as Stochastic Gradient Descent (SGD)\cite{koren2009matrix,chih2008large}, Alternating Least Square (ALS)\cite{koren2009matrix,zhou2008large} and Newton's method\cite{buchanan2005damped}.
+Several MF solving methodologies have been proposed, such as Stochastic Gradient Descent (SGD)\cite{koren2009matrix,chih2008large}, Alternating Least Square (ALS)\cite{koren2009matrix,zhou2008large}, Newton's method\cite{buchanan2005damped} and Wiberg Algorithm\cite{okatani2007wiberg}.
 In our work, we utilize SGD for its efficiency and simplicity. 
 
 In SGD, we incrementally update our model by considering one observed entry at a time.
