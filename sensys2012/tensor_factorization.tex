@@ -2,7 +2,7 @@
 
 \section{Multivariate Factorization Model} \label{sec:tf}
 A given sensor node may contain multiple sensor types and thus able to sense various aspects of its environment (e.g.\ temperature and humidity) at the same time.
-These attributes may be correlated and this correlation may help in the missing data recovery process.
+These attributes may be correlated and this correlation may help in the missing data estimation process.
 We propose two methods, Multivariate TR-MF (MTR-MF)and Tensor Decomposition, that leverage this multivariate correlation.
 
 \subsection{Multivariate TR-MF} \label{subsec:Multivariate_TRMF}
@@ -14,26 +14,26 @@ The $\mathbf{R}$ of Multivariate TR-MF is the horizontal concatenation of the te
 \begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
 
 The objective function is similar to TR-MF except that for each row (time step) there are two bias terms: one for temperature readings and the other for humidity readings.
-Besides, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances.
+Now $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances.
 The optimization process remains the same as in Section \ref{optimation_procedure}.
 
 \redtext{weilun please reorganize TF}
 
-Factorization models for tensors are studied for many years~\cite{karatzoglou2010multiverse}.
-The main idea behind the use of  Tensor Factorization (TF) is that we can take advantages of the principle behind Matrix Factorization to deal with multi-Order information.
-In sensor network, Temporal informations, spatial informations and  heterogeneous sensors informations are strongly correlated.
-Modeling the correlation between them will be a great benefit to recovery the missing value.
+Factorization models for tensors have been studied for many years~\cite{karatzoglou2010multiverse}.
+The main idea behind the use of Tensor Factorization (TF) is that we can take advantage of the principle behind Matrix Factorization to deal with additional features of the dataset. %multi-Order information.
+In sensor network data, temporal, spatial, and heterogeneous sensor information can be strongly correlated.
+Modeling these correlation can thus be a great benefit when estimating missing values.
  
-Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition.
-In the section 4.1 we introduce the methods of Tensor Decomposition.
+Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition (SVD).
+In the section \ref{sec:sensordecomp} we introduce the methods of Tensor Decomposition.
 A general model of tensor decomposition is the Tucker decomposition (TD) also known as High-Order Singular Value Decomposition (HOSVD).
-The special case of Tucker decomposition is called canonical decomposition (CD) also known as the parallel factor analysis (PARAFAC).
-However, the Tensor Decomposition methods require a dense input matrix R and therefore ignore the missing part of  input data.
-Treating R as a dense tensor with missing entries being assume to be 0.
-It would make predict missing value failed.
-We introduce and explain the details of how we have adapted the Tensor Decomposition models with latent factors for missing value recovery in section 4.2.
+The special case of Tucker decomposition is called canonical decomposition (CD) also known as parallel factor analysis (PARAFAC).
+Tensor Decomposition methods require a dense input matrix $\mathbf{R}$ with missing parts of input data ignored during optimization.
+%Treating $\mathbf{R}$ as a dense tensor with missing entries being assume to be 0.
+%It would make predict missing value failed.
+We introduce and explain the details of how we have adapted the Tensor Decomposition models with latent factors for missing value estimation in Section \ref{sec:tfmissing}.
  
-\subsection{Tensor Decomposition}
+\subsection{Tensor Decomposition} \label{sec:tensordecomp}
 
  If we want to decompose a $m\times n$ Matrix M, recall the Singular Value Decomposition(SVD) as being
 \begin{equation*} 
@@ -46,28 +46,26 @@ The SVD may be generalized to High-Order Tensor decomposition.
 the following are two types of tensor decomposition, for simplicity and in practical, we present the decomposition for 3-order tensor.
 
 \subsubsection{Tucker Decomposition}
-The Tucker decomposition
-was Þrst introduced by Tucker in 1963 [1], it factorizes a higher-order tensor into a core tensor S and a factor matrix for each dimensions.
-we decompose a $M\times N \times C $ tensor $\mathbf{T}$ :
+The Tucker decomposition was first introduced by Tucker in 1963 [1], it factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and a factor matrix for each dimensions.
+We decompose a $M\times N \times C $ tensor $\mathbf{T}$ :
 
 \begin{equation*}
 \mathbf{T}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}p_i\otimes q_j\otimes w_k
 \end{equation*}
-or for each components,
+or for each component,
 \begin{equation*}
 \mathbf{T}_{\alpha\beta\gamma}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{\alpha i}\mathbf{Q}_{\beta j}\mathbf{W}_{\gamma k}
 \end{equation*}
-Where the vector $p_i$, $q_j$, and $w_k$ are the column of matrices P, Q and W respectively, which are the factor matrices (usually orthogonal).
-They can be thought of as the principal components in each order There are several algorithms for calculating Tucker decompositions.
-For data compression, the Tucker decomposition usually assume that $I\le M$, $J \le N $ and $K \le C$.
+where the vectors $p_i$, $q_j$, and $w_k$ are the column of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
+They can be thought of as the principal components in each order.
+There are several algorithms for calculating Tucker decompositions.
+For data compression, the Tucker decomposition usually assumes that $I\le M$, $J \le N $ and $K \le C$.
 
 \subsubsection{Canonical Decomposition}
 
-The Canonical  decomposition factorizes a tensor into a sum of component rank-one
-tensors.
-Formally, the Canonical Decomposition(CD) is the special case of the Tucker decomposition
-when S is superdiagonal.
-The Canonical Decomposition of T is
+The Canonical decomposition factorizes a tensor into a sum of component rank-one tensors.
+Formally, the Canonical Decomposition(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is superdiagonal.
+The Canonical Decomposition of $\mathbf{T}$ is
 \begin{equation*}
 \mathbf{T}=\sum\limits_{k=1}^{K}x_k\otimes y_k\otimes z_k
 \end{equation*}
@@ -75,29 +73,24 @@ or
 \begin{equation*}
 \mathbf{T}_{\alpha\beta\gamma}=\sum\limits_{k=1}^{K}\mathbf{X}_{\alpha k} \mathbf{Y}_{\beta k} \mathbf{Z}_{\gamma k}
 \end{equation*}
+where $x_i$,$y_i$ and $z_i$ are the column of matrices $\mathbf{X$}, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, $K$ is the factor size. 
 
-Here the $x_i$,$y_i$ and $z_i$ are the column of matrices X, Y and Z, which are the factor matrices, K is the factor size. 
-
-The Tucker Decomposition and Canonical Decomposition are illustrated in Figure 1.
-
+The Tucker Decomposition and Canonical Decomposition are illustrated in Figure \ref{fig:tf:tuckcanon}.
 
 \begin{figure}[h] 
 \includegraphics[width=9cm]{tf.jpg} 
-\caption{ (a) the Tucker Decomposition model  (b) the Canonical Decomposition model is a special case of TD model.
-In sensor network, the three dimension can be nominal features such as node id, time step number.
-}
-
-
+\caption{ (a) the Tucker Decomposition (TD) model (b) the Canonical Decomposition model, a special case of the TD model.\\
+In sensor networks, the three dimension can be nominal features such as node id, time step index.} \label{fig:tf:tuckcanon}
 \end{figure}
 
-\subsection{Tensor Factorization for missing recovery}
+\subsection{Tensor Factorization for Missing Data Estimation} \label{sec:tfmissing}
 \subsubsection{Objective function}
 
-Existing Tensor Decomposition model is requiring the dense tensor, which is unsuitable for missing data recovery when the missing rate increased.
-Therefore, we introduce an N-order Tensor Factorization  for missing data recovery.
-Just like MF, it take advantage of sparsity of the data while still exploiting the temporal correlation.
-Moreover, it models the correlation between different informations, e.g.\ spatial correlation, heterogeneous sensor readings.
-The followings are the details of the model we proposed.
+Existing Tensor Decomposition models require a dense tensor, which is unsuitable for missing data estimation with a high missing rate.
+Therefore, we introduce an $N$-order Tensor Factorization for missing data estimation.
+Just like MF, it takes advantage of data sparsity while still exploiting the temporal correlation.
+Moreover, it models the correlation between different information, e.g.\ spatial correlation and heterogeneous sensor readings.
+The followings are the details of the model we propose.
 
 Assume that there are three features $F_1, F_2 , F_3$, $F_1$ is the time step number, $F_2$ and $F_3$ are the other features, it could be the sensor node ID, sensor node coordinates, heterogeneous sensor readings or other information.
 suppose the target sensor readings is $R$ such that tensor T containing  $R$ will be 3-dimensional tensor :
