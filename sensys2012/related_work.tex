@@ -5,14 +5,14 @@
 Collection&Hot-Deck Imputation&Prediction Models\\ \hline
 \multirow{2}{*} {Temporal} & Last-seen\cite{Granger:lastseen} & Linear Interpolation\\ 
 & Mean&\\ \hline
-\multirow{3}{*}{Spatial}& WARM\cite{Gruenwald:WARM}& DEPM\cite{LI:DESM}\\ 
-&FARM\cite{Gruenwald:FARM}&K-NN\cite{pan:ake}\\ 
+\multirow{3}{*}{Spatial}& WARM\cite{le2005estimating}& DEPM\cite{li2008data}\\ 
+&FARM\cite{Gruenwald:FARM}&K-NN\cite{pan2010k}\\ 
 &advWARM\cite{jiang:assoication}&\\\hline
-\multirow{3}{*}{Hybrid Spatio-Temporal}& &DESM\cite{LI:DESM}\\ 
-&STI\cite{Jian-Zhong:STI}&AKE\cite{pan:ake}\\
+\multirow{3}{*}{Hybrid Spatio-Temporal}& &DESM\cite{li2008data}\\ 
+&STI\cite{Jian-Zhong:STI}&AKE\cite{pan2010k}\\
 &&Ensemble STI\cite{Lim:robust} \\\hline \end{tabular}
 \end{table*}
-Missing data imputation is the process used to fill the missing data items by determine or assign values\cite{Little:hotdeck}. In wireless sensor network, data is often missing as an entire packet due to communication or power exhaustion problem. Moreover, the physical characteristic of WSNs has shown that there are strong spatial and temporal correlation between sensor nodes and its past historical readings\cite{Akyildiz:exploitspatialtemporal}. Besides, sensor mote is consist of different types of sensors, and some sensors, according to their physical phenomenon, have multivariate correlations\cite{lou:multivariate_gap}. In the research above, they build a probabilistic model to estimate the missing values exploiting spatial, temporal, and multivariate correlation conditioned on the observations. 
+Missing data imputation is the process used to fill the missing data items by determine or assign values\cite{Little:hotdeck}. In wireless sensor network, data is often missing as an entire packet due to communication or power exhaustion problem. Moreover, the physical characteristic of WSNs has shown that there are strong spatial and temporal correlation between sensor nodes and its past historical readings\cite{akyildiz2004exploiting}. Besides, sensor mote is consist of different types of sensors, and some sensors, according to their physical phenomenon, have multivariate correlations\cite{lou:multivariate_gap}. In the research above, they build a probabilistic model to estimate the missing values exploiting spatial, temporal, and multivariate correlation conditioned on the observations. 
 
 According to the strategy deployed to fill in the missing values,  sensory data imputation method can be partitioned into hot-deck imputation, and prediction models\cite{Garcia:KNNreview}. 
 Hot-deck imputation methods directly replace the value from either neighbourhood values or historical record from itself such as the \textit{last-seen} method. 
@@ -46,7 +46,7 @@ However,their performance depends on the sensor data missing pattern as well as 
 The physical phenomenon of spatial correlation in sensors measurement can be divided into two categories, the point source and the field source\cite{viran:spatialtemporal}. For point source sensors, the relation between the sensors in a region satisfies physical laws in some event detecting sensors such as light ambient sensors and fire detector. 
 Their prediction values are the result of linear superposition by neighbourhood sensors. 
 In field source sensor applications, the physical phenomenon is dispersed over the field, for example, the temperature and seismic observation. 
-Data Estimation using Physical Model(DEPM)\cite{LI:DESM} employs the basic law of Physics.
+Data Estimation using Physical Model(DEPM)\cite{li2008data} employs the basic law of Physics.
 They set up the prediction model,  
 \begin{equation}
 I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}
@@ -55,7 +55,7 @@ I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}
 $I_k$ is the intensity of target sensor,$j$ is the neighbour sensors, and P stands for the power radiated from two sources. 
 They build models of the imputation predictor according to the physical phenomenon, and solve the set of linear inhomogeneous equations to provide an accurate estimation for the light ambient sensors. However, it requires the precise  three-dimensional distance between two sensors, therefore it is not realistic in large sensors deployment.
 \subsubsection{Association Rule Mining Estimation}
- Researchers also propose to predict missing values based on the data mining techniques. Window Association Rule Mining(WARM)\cite{Gruenwald:WARM} and Freshness Association Rule Mining(FARM)\cite{Gruenwald:FARM} studied the estimations of missing data based on the association rules between spatially correlated neighbours. For example, given sensor $i$and $j$, where $i$ is the target sensor and $j$ is used to predict the value of $i$, and the state=\{M,L,H\} in the traffic loading sensors. The user-defined \textit{minsupport} is $7/13$. The \textit{actualweightsupport} which is computed from using the rule set and the weighting function (eq\ref{weight_fun}) by sensor $j$ reports on state M is:\{$S_{j} \rightarrow S_{i} \mbox{wrt }  M = 9/13$\}. After  this step, state M will put into the eligible state pool which is later used to do the final prediction. 
+ Researchers also propose to predict missing values based on the data mining techniques. Window Association Rule Mining(WARM)\cite{le2005estimating} and Freshness Association Rule Mining(FARM)\cite{Gruenwald:FARM} studied the estimations of missing data based on the association rules between spatially correlated neighbours. For example, given sensor $i$and $j$, where $i$ is the target sensor and $j$ is used to predict the value of $i$, and the state=\{M,L,H\} in the traffic loading sensors. The user-defined \textit{minsupport} is $7/13$. The \textit{actualweightsupport} which is computed from using the rule set and the weighting function (eq\ref{weight_fun}) by sensor $j$ reports on state M is:\{$S_{j} \rightarrow S_{i} \mbox{wrt }  M = 9/13$\}. After  this step, state M will put into the eligible state pool which is later used to do the final prediction. 
  \begin{equation}
  w(n) = p^{n-1}
  \label{weight_fun}
@@ -76,7 +76,7 @@ Last, it consumes unnecessary time since the sensor data may or may not related 
 According to past studies, algorithms that only use either spatial data or temporal data inevitably face problems\cite{Lim:robust}. In the environment when the radio transmission quality is poor or the packets collision happens frequently, exploiting only temporal information such as the linear interpolation is not ideal, like the linear interpolation. In contrast, for certain sensing applications like light sensor(point source), the spatial information is often unreliable since more than one light source can be sensed. The predictor using only spatial data can easily be harmed by the bias and drift from neighbourhood sensing data. Therefore, applying both temporal and spatial information on the sensory missing data problem seems inevitable. 
 Below we will introduce several such methods, and most of them rely on spatial correlation more than temporal correlation, and therefore it requires the knowledge of mutual distance between sensors.     
 \subsubsection{Spatial temporal imputation-STI}
-An algorithm that uses spatial and temporal imputation(STI) is proposed in \cite{Li:STI}. 
+An algorithm that uses spatial and temporal imputation(STI) is proposed in \cite{li2008spatial}. 
 When a packet is missing, the STI first checks if a neighbour node is within the missing sensor's sensing region. 
 The average of the neighbours in the range is then used to impute the missing value. 
 Otherwise, the last seen value of the missing sensor is used for prediction. 
@@ -86,7 +86,7 @@ However, problems can arise when the last seen value is far away from the curren
 Furthermore, the usage of circular region is problematic as most of the landforms might not be uniformly distributed. Finally, determining the range of the radius is tricky, as a larger radius can cause noise while a smaller one cannot highlight the effectiveness of this model(i.e. the results will be similar to linear interpolation).
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
 \subsubsection{Data Estimation using Statistical Model}
-Another algorithm which replying more on spatial more temporal is the Data Estimation using Statistical Model (DEPM)\cite{LI:DESM}.  
+Another algorithm which replying more on spatial more temporal is the Data Estimation using Statistical Model (DEPM)\cite{li2008data}.  
 The prediction value of sensor $i$ is:
 \begin{equation}
 \hat{y_{it}} = (1-\alpha)\hat{y_{i(t-1)}} + (\alpha)\hat{z}
@@ -103,7 +103,7 @@ $\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $
 The computation in DESM is simple and only little amount of memory is required to store the id of the nearest sensor. 
 Note that the temporal feature holds a very small portion of contribution to the prediction process and it often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e. blocked by a wall.
  \subsubsection{Applying K-nearest neighbour Estimation}
-Pan\cite{pan:ake} propose the Applying K-nearest neighbour Estimation algorithm(AKE) to exploit the spatial correlation in the missing sensory data problem. They argue that the past research on sensor imputation(STI) estimates the missing problem based on more temporal correlation than spatial correlation(STI). In their observation, the sensor data in WSN often changes rapidly and sharply especially in outside environment. The AKE adopts the linear regression model (eq.\ref{ake_j}),
+Pan\cite{pan2010k} propose the Applying K-nearest neighbour Estimation algorithm(AKE) to exploit the spatial correlation in the missing sensory data problem. They argue that the past research on sensor imputation(STI) estimates the missing problem based on more temporal correlation than spatial correlation(STI). In their observation, the sensor data in WSN often changes rapidly and sharply especially in outside environment. The AKE adopts the linear regression model (eq.\ref{ake_j}),
 \begin{equation}
 \hat{y}_{it} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}
 \label{ake_j}
