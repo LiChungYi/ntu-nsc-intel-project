@@ -8,6 +8,7 @@ We got no improvement after adding spatial regularization on random split and li
 . This is because TR-MF already learns the spatial correlation from the data: we will get similar factors for correlated sensor nodeg. 
 
 \begin{table} [htbp]
+\caption{RMSE of Berkeley Random split} \label{table:spatial_random}
 \setlength{\tabcolsep}{2pt}
 \centering
 \small
@@ -21,10 +22,10 @@ train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \be
 80\% & $ \mathbf{ 0.076 } $ & $ 0.324 $ & $ 0.084 $ & $ \mathbf{ 17.7 } $ & $ 84.4 $ & $ 18.1 $ & $ \mathbf{ 0.015 } $ & $ 0.148 $ & $ 0.027 $\\
 85\% & $ \mathbf{ 0.075 } $ & $ 0.326 $ & $ 0.083 $ & $ \mathbf{ 14.4 } $ & $ 82.0 $ & $ 15.8 $ & $ \mathbf{ 0.016 } $ & $ 0.138 $ & $ 0.028 $\\
 \end{tabular}
-\caption{RMSE of Berkeley Random split} \label{table:spatial_random}
 \end{table}
 
 \begin{table} [htbp]
+\caption{RMSE of Berkeley Temporal split} \label{table:spatial_temporal}
 \setlength{\tabcolsep}{2pt}
 \centering
 \small
@@ -38,5 +39,4 @@ train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \be
 80\% & $ 0.447 $&$ 0.299 $&$ \mathbf{ 0.261 } $&$ \mathbf{ 21.450 } $  & $ 112.694 $ &  $ 28.017 $&$ 0.132 $&$ \mathbf{ 0.108 } $&$ 0.114 $\\
 85\% & $ 0.323 $&$ \mathbf{ 0.166 } $&$ 0.256 $&$ \mathbf{ 8.310 } $   & $ 85.423 $  &  $ 12.079 $&$ 0.088 $&$ \mathbf{ 0.065 } $&$ 0.082 $\\
 \end{tabular}
-\caption{RMSE of Berkeley Temporal split} \label{table:spatial_temporal}
 \end{table}
