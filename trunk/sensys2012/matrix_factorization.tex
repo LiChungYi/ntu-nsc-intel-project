@@ -14,7 +14,6 @@ The approach of MF is strongly related to Singular Value Decomposition~(SVD).
 SVD decomposes a completely observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrices~$\mathbf{U}$ and~$\mathbf{V}$ such that
 \begin{equation*} \mathbf{R} = \mathbf{U}\mathbf{D}\mathbf{V}^T. \end{equation*}
 The largest $K$ singular values, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm. 
-
 Conventional SVD is undefined when the matrix~$\mathbf{R}$ is incomplete.
 In contrast to ealier systems which fill in missing entries and make the matrix dense, recent research shows\cite{koren2009matrix} that a better approach is to factorize $\mathbf{R}$ by considering observed entries only.
 Utilizing numerical optimization procedures, we generate two small matrices~$\mathbf{P}_{MK}$ and $\mathbf{Q}_{KN}$ that approximate the observed entries of $\mathbf{R}_{MN}$:
