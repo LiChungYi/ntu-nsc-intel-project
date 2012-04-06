@@ -1,0 +1,23 @@
+How the figure for the data plot for table 11 was created:
+
+1. create data file table11.dat
+
+2. create a fig file using gnuplot by creating and running
+     the file makeplot_table11
+
+3. use xfig to create file for latex
+     > xfig table11.fig
+     then : file -> export -> "Combined PS/PDF/LaTeX (3 parts)"
+     which will create :
+      table11_pspdftex.eps
+      table11_pspdftex.pdf
+      table11.pspdftex
+
+4. include the figure in latex with something like this:
+
+\begin{figure}[H]
+\centering
+\input{table11.pspdftex}
+\caption{RMSE of (traffic, temporal, temperature}
+\end{figure}
+
