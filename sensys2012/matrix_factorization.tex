@@ -27,7 +27,7 @@ Therefore, we have the prediction $\hat{r}_{m,n} = \mu_m + \mu_n + \mathbf{p}_m 
 After adding the regularization term, the whole objective function becomes
 \begin{equation*}\begin{aligned}
 \frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2 & + \frac{\beta_1}{2}\sum_m{\mu_m^2} + \frac{\beta_2}{2}\sum_n{\mu_n^2}\\
-& + \frac{\beta_3}{2}\sum_m{||\mathbf{p}_m||^2} + \frac{\beta_4}{2}\sum_n{||\mathbf{q}_n||^2}.\\
+& + \frac{\beta_3}{2}\sum_m{||\mathbf{p}_m||^2} + \frac{\beta_4}{2}\sum_n{||\mathbf{q}_n||^2}.
 \end{aligned}\end{equation*}
 In the equation, $\mathbf{p}_m$ are the row factors of $\mathbf{P}$ (for time $m$), and $\mathbf{q}_n$ are the column factors of $\mathbf{Q}$ (for sensor node $n$) respectively.
 $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$ are parameters that control the strength of regularization.
@@ -53,33 +53,55 @@ As the name may suggest, TR-MF adds a temporal regularization term to convention
 The temporal regularization forces the bias terms and features of adjacent rows to be similar, which reflects our intuition that readings in adjacent time steps should be similar.
 To achieve this effect, we modify our objective function as follows 
 \begin{equation*}\begin{aligned}
-\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2 &+ \frac{\beta_1}{2}\sum_m{\mu_m^2} + \frac{\beta_2}{2}\sum_n{\mu_n^2}\\
-&+ \frac{\beta_3}{2}\sum_m{||\mathbf{p}_m||^2} + \frac{\beta_4}{2}\sum_n{||\mathbf{q}_n||^2}\\ 
-&+ \frac{1}{2}\gamma_1\sum{(\mu_m-\mu_{m+1})^2} + \frac{1}{2}\gamma_2\sum{||\mathbf{p}_m-\mathbf{p}_{m+1}||^2}.
+&\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2 + \frac{\beta_1}{2}\sum_m{\mu_m^2} + \frac{\beta_2}{2}\sum_n{\mu_n^2}\\
++& \frac{\beta_3}{2}\sum_m{||\mathbf{p}_m||^2} + \frac{\beta_4}{2}\sum_n{||\mathbf{q}_n||^2}\\
++& \frac{1}{2}\gamma_1\sum{(\mu_m-\mu_{m+1})^2} 
++ \frac{1}{2}\gamma_2\sum{||\mathbf{p}_m-\mathbf{p}_{m+1}||^2}.
 \end{aligned}\end{equation*}
 
-\subsection{Optimization Procedure of TR-MF}
+\subsection{Spatio-Temporal-Regularized Matrix Factorization}
+%A strong argument that directly exploiting spatial information to specify the assumed inter-sensor node correlation may not be as good as directly learning these correlations directly from the sensor observations themselves.
+If the location information of the sensor nodes is known, we may add spatial regularization, which is much like temporal regularization, for each neighboring sensor node pair ($n_i$,~$n_j$) into our TR-MF model.
+The objective function becomes: 
+\begin{equation*}\begin{aligned}
+&\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2 + \frac{\beta_1}{2}\sum_m{\mu_m^2} + \frac{\beta_2}{2}\sum_n{\mu_n^2}\\
++&\frac{\beta_3}{2}\sum_m{||\mathbf{p}_m||^2} + \frac{\beta_4}{2}\sum_n{||\mathbf{q}_n||^2}\\ 
++&\frac{1}{2}\gamma_1\sum{(\mu_m-\mu_{m+1})^2}
++ \frac{1}{2}\gamma_2\sum{||\mathbf{p}_m-\mathbf{p}_{m+1}||^2}\\
++&\frac{1}{2}\gamma_3\sum{(\mu_{n_i}-\mu_{n_j})^2} 
++ \frac{1}{2}\gamma_4\sum{||\mathbf{p}_{n_i}-\mathbf{p}_{n_j}||^2}.
+\end{aligned}\end{equation*}
+We call this Spatio-Temporal-Regularized Matrix Factorization (STR-MF). Note that spatial regularization should be included only when appropriate. See Experiment Section \ref{subsec:exp_basic} for further information.
+
+\subsection{Optimization Procedure}
 \label{optimation_procedure}
 Several MF solving methodologies have been proposed, such as Stochastic Gradient Descent (SGD)\cite{koren2009matrix,chih2008large}, Alternating Least Square (ALS)\cite{koren2009matrix,zhou2008large}, Newton's method\cite{buchanan2005damped} and Wiberg Algorithm\cite{okatani2007wiberg}.
 In our work, we utilize SGD for its efficiency and simplicity. 
 
 In SGD, we incrementally update our model by considering one observed entry at a time.
 Focused on one observed reading $r_{m,n}$, the objective function of MF is
-\begin{equation*} \frac{1}{2}(r_{m,n} - \hat{r}_{m,n})^2 + \frac{\beta_1}{2}\mu_m^2 + \frac{\beta_2}{2}\mu_n^2 + \frac{\beta_3}{2}||\mathbf{p}_m||^2 + \frac{\beta_4}{2}||\mathbf{q}_n||^2\end{equation*}
+\begin{equation*} \frac{1}{2}(r_{m,n} - \hat{r}_{m,n})^2 + \frac{\beta_1}{2}\mu_m^2 + \frac{\beta_2}{2}\mu_n^2 + \frac{\beta_3}{2}||\mathbf{p}_m||^2 + \frac{\beta_4}{2}||\mathbf{q}_n||^2.\end{equation*}
 Thus, the update equation is\\
-$\begin{cases}
+\indent	$\begin{cases}
 	\mu_m' = \mu_m - \eta_1 ((\hat{r}_{m,n}-r_{m,n}) + \beta_1 \mu_m) \\
 	\mu_n' = \mu_n - \eta_1 ((\hat{r}_{m,n}-r_{m,n}) + \beta_2 \mu_n) \\
 	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta_2 ((\hat{r}_{m,n}-r_{m,n})\mathbf{q}_{n} + \beta_3 \mathbf{p}_{m})\\
 	\mathbf{q}_{n}' = \mathbf{q}_{n} - \eta_2 ((\hat{r}_{m,n}-r_{m,n})\mathbf{p}_{m} + \beta_4 \mathbf{q}_{n})\\
-\end{cases}$\\
-After we use every rating in the training set once, we update the model according to the temporal regularization
-$\begin{cases}
-	\mu_u' = \mu_u - \eta_1 \gamma_1((\mu_u-\mu_{u-1})+(\mu_u-\mu_{u+1}))\\
-	\mathbf{p}_{u}' = \mathbf{p}_{u} - \eta_2 \gamma_1((\mathbf{p}_{u}-\mathbf{p}_{u-1})+(\mathbf{p}_{u}-\mathbf{p}_{u+1}))\\
-\end{cases}$
+	\end{cases}$\\
+After we use every rating in the training set once, we update the model according to the temporal regularization:\\
+\indent $\begin{cases}
+	\mu_m' = \mu_m - \eta_1 \gamma_1((\mu_m-\mu_{m-1})+(\mu_m-\mu_{m+1}))\\
+	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta_2 \gamma_2((\mathbf{p}_{m}-\mathbf{p}_{m-1})+(\mathbf{p}_{m}-\mathbf{p}_{m+1}))\\
+	\end{cases}$\\
+Then, the spatial regularization if needed:\\
+\indent $\begin{cases}
+	\mu_{n_i}' = \mu_{n_i} - \eta_1 \gamma_3 (\mu_{n_i} - \mu_{n_j})\\
+	\mu_{n_j}' = \mu_{n_j} - \eta_1 \gamma_3 (\mu_{n_j} - \mu_{n_i})\\
+	\mathbf{q_{n_i}}' = \mathbf{q_{n_i}} - \eta_2 \gamma_4 (\mathbf{q_{n_i}} - \mathbf{q_{n_j}})\\
+	\mathbf{q_{n_j}}' = \mathbf{q_{n_j}} - \eta_2 \gamma_4 (\mathbf{q_{n_j}} - \mathbf{q_{n_i}})\\
+	\end{cases}$\\
 
-We summarize our algorithm in \textbf{Procedure \ref{alg:TRMF}} and provide details in the following sections.
+We summarize our algorithm in Procedure \ref{alg:STRMF} and provide details in the following sections.
 
 \paragraph*{Data Normalization}
 
@@ -90,7 +112,7 @@ While predicting the validation set and testing sets, we restore the prediction 
 There are two benefits to performing data normalization.
 When the global mean becomes zero, the origin of our model becomes a good initial point.
 This initial point impacts the performance of MF greatly because the MF objective function finds only a local minimum (i.e.\ the formulation is non-convex).
-Secondly, normalization forces different data sets to look similar which simplifies the parameter tuning task for TR-MF and is the foundation of Multivariate TR-MF (Section \ref{subsec:Multivariate_TRMF}). 
+Secondly, normalization forces different data sets to look similar which simplifies the parameter tuning task for (S)TR-MF and is the foundation of Multivariate (S)TR-MF (Section \ref{subsec:Multivariate_TRMF}). 
 
 
 \paragraph*{Initialization}
@@ -106,18 +128,18 @@ For all components of every $\mathbf{p}_{u}$ and $\mathbf{q}_{i}$, we set them t
 
 \paragraph*{Parameters}
 
-We seem to have many parameters: conventional regularization for user bias~$\beta_1$, item bias~$\beta_2$, user feature~$\beta_3$, item feature~$\beta_4$, temporal regularization term for bias~$\gamma_1$ and for feature~$\gamma_2$, learning rate for bias~$\eta_1$ and for feature~$\eta_2$, number of features~$K$, but in many cases we can achieve reasonable performance by setting 
-\begin{equation*}\beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \eta_1 = \eta_2. \end{equation*}
+We seem to have many parameters: conventional regularization for user bias~$\beta_1$, item bias~$\beta_2$, user factors~$\beta_3$, item factors~$\beta_4$, temporal regularization for bias~$\gamma_1$ and for factors~$\gamma_2$, spatial regularization for bias~$\gamma_3$ and for factors$~\gamma_4$, learning rate for bias~$\eta_1$ and for factors~$\eta_2$, number of factors~$K$, but in many cases we can achieve reasonable performance by setting 
+\begin{equation*}\beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \gamma_3 = \gamma_4, \eta_1 = \eta_2. \end{equation*}
 Which we use as the setting in our experiment.
-We share our experience about setting parameters in \textbf{Section \ref{subsec:parameter}}.
+We share our experience about setting parameters in Section \ref{subsec:parameter}.
 
 \paragraph*{Stopping Criterion}
 
 To decide when to cease updating the MF model, we use the validation set and cease training when the validation error is increasing and the current iteration number minus the best iteration number is greater than a threshold (we use an iteration threshold of $500$). 
 
 \begin{algorithm}
-	\caption{Temporally-Regularized Matrix Factorization}
-	\label{alg:TRMF}
+	\caption{(Spatio-)Temporally-Regularized MF}
+	\label{alg:STRMF}
 	\textbf{Parameter:} $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$, $\gamma_1$, $\gamma_2$, $\eta_1$, $\eta_2$, $K$\\
 	\textbf{Input:} training set, validation set
 	\begin{algorithmic}
@@ -126,7 +148,8 @@ To decide when to cease updating the MF model, we use the validation set and cea
 		\Repeat
 			\State \textbf{for} each observed reading $r_{m,n}$ in $\mathcal{D}$
 				\State \indent Update $\mu_m$, $\mu_n$, $\mathbf{p}_{m}$, $\mathbf{q}_{n}$
-			\State Update $\mu_m$, $\mathbf{p}_m$ for every $m$ by temporal regularization
+			\State Update $\mu_m$, $\mathbf{p}_m$ by temporal regularization
+			\State (Update $\mu_n$, $\mathbf{q}_n$ by spatial regularization)
 		\Until{stopping criterion is met}
 		\State Output the model for testing set prediction
 	\end{algorithmic}

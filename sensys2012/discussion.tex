@@ -92,25 +92,6 @@ We discuss the complexity of TF and TRMF model. Suppose the factor size of TRMF 
 $\mathbf{O}(K)$ to predict a missing value.\\
 Suppose the factor size of TF model is K, $F_1$, $F_2$, $F_3$ represent the number of three features use in TF. In the training phase. In the training phase, TF update factors 3NK times and update biases 3N times. After each iteration, the time regularization terms are also updates once. The complexity of a iteration is $\mathbf{O}(NK+N+F_1K+F_2K+F_3K)$. In the testing phase, TF also cost  $\mathbf{O}(K)$ to predict a missing. However,we found if you want to get the equally performance between TF and TRMF, the parameter $K$ of TF is usually smaller than TRMF.
 
-\subsection{Spatial Regularization}
-%A strong argument that directly exploiting spatial information to specify the assumed inter-sensor node correlation may not be as good as directly learning these correlations directly from the sensor observations themselves.
-We know the location of the sensor nodes in Berkeley data set. We may expect a correlation graph like:
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.5\textwidth]{expected.png}
-	\caption{Exptected Correlation}
-\end{figure}
-
-Thus, We add spatial regularization for all neighboring sensor node pairs on our TR-MF model. 
-
-\begin{equation*}\begin{aligned}
-\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2 &+ \frac{\beta_1}{2}\sum_m{\mu_m^2} + \frac{\beta_2}{2}\sum_n{\mu_n^2}\\
-&+ \frac{\beta_3}{2}\sum_m{||\mathbf{p}_m||^2} + \frac{\beta_4}{2}\sum_n{||\mathbf{q}_n||^2}\\ 
-&+ \frac{1}{2}\gamma_1\sum{(\mu_m-\mu_{m+1})^2}\\ 
-&+ \frac{1}{2}\gamma_2\sum{||\mathbf{p}_m-\mathbf{p}_{m+1}||^2}\\
-&+ \frac{1}{2}\gamma_3\sum{(\mu_{n_i}-\mu_{n_j})^2} \\
-&+ \frac{1}{2}\gamma_4\sum{||\mathbf{p}_{n_i}-\mathbf{p}_{n_j}||^2}.\\
-\end{aligned}\end{equation*}
 
 
 Table \ref{table:spatial_random_hum}, \ref{table:spatial_random_light}, \ref{table:spatial_random_tem}, \ref{table:spatial_temporal_hum}, \ref{table:spatial_temporal_light}, \ref{table:spatial_temporal_tem}  show the result of adding spatial regularization. STR-MF mean TR-MF with strong spatial regularization, while sTR-MF is with weak spatial regularization.........
