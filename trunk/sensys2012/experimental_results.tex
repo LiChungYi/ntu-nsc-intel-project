@@ -1,13 +1,14 @@
 \subsection{Multivariate Learning}
 \subsubsection{Multivariate TR-MF}
+%weilun please double check this section
+
+%more?
 To investigate the effectiveness of multivariate learning, temporal and humidity are selected, and we want to know whether one can help with the prediction of the other.
-We have two settings for this experiment. Assume we are filling the missing entries in the temperature matrix. In the first setting (denoted as TR-MF-all), we include the complete humidity matrix (i.e. training, validation and testing set), and see whether this helps with the prediction. In the second (denoted as TR-MF-part), we include only the observed entries of humidity matrix as those in temperature matrix. 
+We have two settings for this experiment. Assume we are predicting the missing entries in the temperature matrix. In the first setting (denoted as TR-MF-all), we include all humidity entries have (i.e. training, validation and testing set), and see whether this helps with the prediction. In the second (denoted as TR-MF-part), we include only the observed entries of humidity matrix as those in temperature matrix. However, to predict an entry in temperature matrix, TF needs the correspending enty in the humidity matrix. Thus, we will first predict that humidity entry by the humidity information by TR-MF and use it to do TF.
 
-Since spatial
+In general, we see that TR-MF-all is better then TR-MF, while TR-MF-part is about the same as TR-MF. 
 
-We see that MF improves significantly
-
-TF works well on traffic dataset while it does't take advantage from adding heterogeneous signal on Berkeley dataset.
+On the other hand, TF works well on traffic dataset while it does't take advantage from multi-source signal on Berkeley dataset.
 Sensors from traffic dataset are deployed outdoor so the variance of heterogeneous data is large.
 While sensors from Berkeley dataset are deployed indoor, it cause the variance of heterogeneous data is small.
 The small variance makes TF does't work well because we quantize the heterogeneous signal into nominal bins before training.
