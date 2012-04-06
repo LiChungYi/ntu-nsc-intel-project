@@ -3,17 +3,17 @@
 \section{Multivariate Factorization Model} \label{sec:tf}
 A given sensor node may contain multiple sensor types and thus able to sense various aspects of its environment (e.g.\ temperature and humidity) at the same time.
 These attributes may be correlated and this correlation may help in the missing data estimation process.
-We propose two methods, Multivariate (S)TR-MF (M(S)TR-MF)and Tensor Decomposition, that leverage this multivariate correlation.
+We propose two methods, Multivariate (S)TR-MF and Tensor Decomposition, that leverage this multivariate correlation.
 
-\subsection{Multivariate TR-MF} \label{subsec:Multivariate_TRMF}
+\subsection{Multivariate (S)TR-MF} %\label{subsec:Multivariate_TRMF}
 If two matrices are correlated, then some of their latent factors should be similar.
-This motivates us to design Multivariate TR-MF.
+This motivates us to design Multivariate (S)TR-MF.
 
 Assume we have two attributes: temperature and humidity.
-The $\mathbf{R}$ of Multivariate TR-MF is the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
+The $\mathbf{R}$ of Multivariate (S)TR-MF is the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
 \begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
 
-The objective function is similar to TR-MF except that for each row (time step) there are two bias terms: one for temperature readings and the other for humidity readings.
+The objective function is similar to (S)TR-MF except that for each row (time step) there are two bias terms: one for temperature readings and the other for humidity readings.
 Now $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances.
 The optimization process remains the same as in Section \ref{optimation_procedure}.
 
@@ -141,7 +141,7 @@ Finally, the objective function of tensor factorization is :\\
 \end{equation*}
 
 \begin{algorithm}[h]
-  \caption{Multiverse Tensor Factorization}
+  \caption{Multivariate Tensor Factorization}
   \label{alg::conjugateGradient}
   \begin{algorithmic}[1]
     \Require
