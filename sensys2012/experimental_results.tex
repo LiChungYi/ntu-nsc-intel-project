@@ -1,6 +1,5 @@
-
 \subsection{Multivariate Learning}
-\subsubsection{Multivariate TRMF}
+\subsubsection{Multivariate TR-MF}
 \redtext{The description is to be added, bad berkeley temporal!}
 
 \begin{table}[htbp]
@@ -9,7 +8,7 @@
 \caption{Multivariate RMSE (Berkeley, random)}
 \label{table:multi_berkeley_random}
 \begin{tabular}{r | r r r}
-train	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
+train	&TR-MF	&MtMF-Train	&MtMF-all \\ \hline
 humid10\%	&0.1424	&0.1420	&0.1222\\
 humid20\%	&0.1135	&0.1135	&0.0973\\
 humid40\%	&0.0916	&0.0909	&0.0822\\
@@ -25,14 +24,13 @@ humid85\%	&0.0751	&0.0739	&0.0712\\ \hline
 \end{tabular}
 \end{table}
 
-
 \begin{table}[htbp]
 \setlength{\tabcolsep}{2pt}
 \centering
 \caption{Multivariate RMSE (Berkeley, temporal)}
 \label{table:multi_berkeley_temporal}
 \begin{tabular}{r | r r r}
-train	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
+train	&TR-MF	&MtMF-Train	&MtMF-all \\ \hline
 humid10t	&0.957&0.996& 	0.991\\
 humid20t	&0.796&0.852& 	0.846\\
 humid40t	&0.771&0.835& 	0.807\\
@@ -54,7 +52,7 @@ humid85t	&0.323&0.356& 	0.348\\	\hline
 \caption{Multivariate RMSE (traffic Data, Random)}
 \label{table_multi_traffic_random}
 \begin{tabular}{r | r r r}
-train	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
+train	&TR-MF	&MtMF-Train	&MtMF-all \\ \hline
 humid10\%	&3.524 	&3.486 	&2.291\\  
 humid20\%	&2.583 	&2.558 	&1.796\\
 humid40\%	&1.932 	&1.921 	&1.523\\
@@ -76,7 +74,7 @@ humid85\%	&1.503 	&1.489 	&1.326\\ \hline
 \caption{Multivariate RMSE (traffic Data, temporal)}
 \label{table_multi_traffic_temporal}
 \begin{tabular}{r | r r r}
-train	&TRMF	&MtMF-Train	&MtMF-all \\ \hline
+train	&TR-MF	&MtMF-Train	&MtMF-all \\ \hline
 humid10\%	&5.195 	&5.346 	&4.103\\  
 humid20\%	&5.487 	&5.565 	&4.263\\
 humid40\%	&5.782 	&6.009 	&3.968\\
@@ -92,28 +90,25 @@ humid85\%	&4.248 	&4.248 	&3.254\\ \hline
 \end{tabular}
 \end{table}
 
-\subsubsection{Tensor Factorization} % need to be combined with multi TRMF 
-We compare our TF method with the models without modeling heterogeneous sensor correlations in this section.
-The Tensor Factorization naturally allow us to add additional nominal dimensions to the model, e.g.\ node id or sensor coordinates.
-The three-order TF is used in the experiment, each dimension represent node id, time frame number and heterogeneous signal.  
-Due to the indexes of each dimension are discrete, the heterogeneous sensor data are not able directly used.
+\subsubsection{Tensor Factorization} % need to be combined with multi TR-MF 
+We compare our TF method with models not incorporating heterogeneous sensor correlations in this section.
+The Tensor Factorization method naturally allows us to add additional nominal dimensions to the model, e.g.\ node id or sensor coordinates.
+The third-order TF is used for this experiment, with each dimension representing the node id, time step number and heterogeneous signal.  
+As the indices of each dimension are discrete, the heterogeneous sensor data is not able to be directly used.
 Therefore, the discretization of heterogeneous data is needed.
-Before training, the heterogeneous signal are divide into some bins according to the value.
-Each bin represents the index of the dimension.
+Before training, the heterogeneous signals are divided into bins according to their values, with each bin representing the index of the dimension.
 Table ? and ? show the TF result of random split and temporal split on Berkeley dataset while table ? and ? show the TF result of random split and temporal split on traffic dataset.
 
 \subsection{Prediction Performance}
-In this section, we measure the performance of missing value recovery algorithms by regression methods.
+In this section, we measure the performance of missing value estimation algorithms by regression methods.
 We demonstrate the experiment on traffic dataset.
 The readings of gateway node are to be predicted in offline mode.
-At the sane time the data from gateway is the label of a instance while the data from the other sensor nodes are the features of a instance.
-80 percent of instance are split to be training data, the remaining part is the testing data.
-Firstly, we filling the features from training and testing data by global mean, linear interpolation, KNN, and TRMF model.
-The regression model we choose is linear regression(LR) and support vector regression(SVR).
-The former is a linear model.
-In contrast, the latter is a nonlinear model.
-Table ? show the result with different data missing rate.
-It is obvious that the more higher quality filling value will help the regression model predicting the objective sensor more precise.
+For a given time step, the data from gateway serves as the label of a instance while the data from the other sensor nodes serve as features.
+We designate 80\% of the instances for training data, while the remaining part is used as testing data.
+We first fill the features from training and testing data by their global means, linear interpolation, KNN, and TR-MF model.
+The regression models we choose are linear regression(LR) and support vector regression(SVR), these being linear and non-linear, respectively.
+Table ? show the results with different data missing rates.
+It is obvious that a more accurate fill value will help the regression model in predicting the objective sensor more precisely.
 
 \begin{table} [htbp]
 \centering
@@ -121,7 +116,7 @@ It is obvious that the more higher quality filling value will help the regressio
 \label{table: LR}
    Filling method
 \begin{tabular}{ r | r r r r}
-        missing rate&global mean     &LI   &Hybrid-KNN &TRMF\\ \hline
+        missing rate&global mean     &LI   &Hybrid-KNN &TR-MF\\ \hline
         5\%      &4.144&3.857&2.512&2.473\\
         10\%    &4.143&3.868& 2.597&2.526\\
         30\%    &5.161&3.955&2.773&2.470\\
@@ -137,7 +132,7 @@ It is obvious that the more higher quality filling value will help the regressio
 \label{table: SVR}
    Filling method
 \begin{tabular}{ r | r r r r}
-        missing rate&global mean     &LI   &Hybrid-KNN &TRMF\\ \hline
+        missing rate&global mean     &LI   &Hybrid-KNN &TR-MF\\ \hline
         5\%&4.252&3.980&2.609&2.567\\
         10\%    &3.933 &4.006&2.749&2.591\\
         30\%    &5.172&4.083&2.814&2.532\\
