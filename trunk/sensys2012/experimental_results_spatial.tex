@@ -7,114 +7,36 @@ STR-MF mean TR-MF with strong spatial regularization, while sTR-MF is with weak 
 We got no improvement after adding spatial regularization on random split and light 
 . This is because TR-MF already learns the spatial correlation from the data: we will get similar factors for correlated sensor nodeg. 
 
-
-\begin{figure}[htbp]
-\caption{RMSE of Berkeley Random split}
-\subtable[humidity]{
-%\begin{table} [htbp]
-\setlength{\tabcolsep}{0pt}
-\centering
-%\caption{RMSE of (berkeley, random, humidity)}\\
-\label{table:spatial_random_hum}
-\begin{tabular} {r | r r r}
-	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
-	10\% & $ \mathbf{ 0.142 } $ & $ 0.484 $ & $ 0.173 $ \\
-	20\% & $ \mathbf{ 0.114 } $ & $ 0.424 $ & $ 0.135 $ \\
-	40\% & $ \mathbf{ 0.092 } $ & $ 0.352 $ & $ 0.104 $ \\
-	60\% & $ \mathbf{ 0.082 } $ & $ 0.337 $ & $ 0.093 $ \\
-	80\% & $ \mathbf{ 0.076 } $ & $ 0.324 $ & $ 0.084 $ \\
-	85\% & $ \mathbf{ 0.075 } $ & $ 0.326 $ & $ 0.083 $ \\
-\end{tabular}
-%\end{table}
-}
-\hspace{1in}
-\subtable[light]{
-%\begin{table} [htbp]
-\setlength{\tabcolsep}{0pt}
-\centering
-%\caption{RMSE of (berkeley, random, light)}
-\label{table:spatial_random_light}
-\begin{tabular} {r | r r r}
-	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
-	10\% & $ \mathbf{ 35.5 } $ & $ 97.4 $ & $ 38.3 $ \\
-	20\% & $ \mathbf{ 28.2 } $ & $ 90.6 $ & $ 28.9 $ \\
-	40\% & $ \mathbf{ 21.2 } $ & $ 85.8 $ & $ 22.8 $ \\
-	60\% & $ \mathbf{ 17.2 } $ & $ 83.3 $ & $ 18.3 $ \\
-	80\% & $ \mathbf{ 17.7 } $ & $ 84.4 $ & $ 18.1 $ \\
-	85\% & $ \mathbf{ 14.4 } $ & $ 82.0 $ & $ 15.8 $ \\
-\end{tabular}
-%\end{table}
-}
-\\
-\subtable[temperature]{
-%\begin{table} [htbp]
-\setlength{\tabcolsep}{0pt}
-\centering
-%\caption{RMSE of (berkeley, random, temperature)}
-\label{table:spatial_random_tem}
-\begin{tabular} {r | r r r}
-	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
-	10\% & $ \mathbf{ 0.046 } $ & $ 0.154 $ & $ 0.061 $ \\
-	20\% & $ \mathbf{ 0.032 } $ & $ 0.146 $ & $ 0.047 $ \\
-	40\% & $ \mathbf{ 0.023 } $ & $ 0.145 $ & $ 0.037 $ \\
-	60\% & $ \mathbf{ 0.018 } $ & $ 0.147 $ & $ 0.031 $ \\
-	80\% & $ \mathbf{ 0.015 } $ & $ 0.148 $ & $ 0.027 $ \\
-	85\% & $ \mathbf{ 0.016 } $ & $ 0.138 $ & $ 0.028 $ \\
-\end{tabular}
-%\end{table}
-}
-\end{figure}
-
-
-
-
-
 \begin{table} [htbp]
 \setlength{\tabcolsep}{2pt}
 \centering
-\caption{RMSE of (berkeley, temporal, humidity)}
-\label{table:spatial_temporal_hum}
-\begin{tabular} {r | r r r}
-	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
-	10\% & $ 0.957 $ & $ 0.573 $ & $ \mathbf{ 0.547 } $ \\
-	20\% & $ 0.796 $ & $ 0.657 $ & $ \mathbf{ 0.459 } $ \\
-	40\% & $ 0.771 $ & $ 0.520 $ & $ \mathbf{ 0.455 } $ \\
-	60\% & $ 0.540 $ & $ \mathbf{ 0.351 } $ & $ 0.708 $ \\
-	80\% & $ 0.447 $ & $ 0.299 $ & $ \mathbf{ 0.261 } $ \\
-	85\% & $ 0.323 $ & $ \mathbf{ 0.166 } $ & $ 0.256 $ \\
+\small
+\begin{tabular} {c | r r r | r r r | r r r}
+& \multicolumn{3}{ c|}{Humidity} & \multicolumn{3}{|c|}{Light} & \multicolumn{3}{|c }{Temperature} \\ \hline
+train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn}& \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn}& \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn} \\ \hline
+10\% & $ \mathbf{ 0.142 } $ & $ 0.484 $ & $ 0.173 $ & $ \mathbf{ 35.5 } $ & $ 97.4 $ & $ 38.3 $ & $ \mathbf{ 0.046 } $ & $ 0.154 $ & $ 0.061 $\\
+20\% & $ \mathbf{ 0.114 } $ & $ 0.424 $ & $ 0.135 $ & $ \mathbf{ 28.2 } $ & $ 90.6 $ & $ 28.9 $ & $ \mathbf{ 0.032 } $ & $ 0.146 $ & $ 0.047 $\\
+40\% & $ \mathbf{ 0.092 } $ & $ 0.352 $ & $ 0.104 $ & $ \mathbf{ 21.2 } $ & $ 85.8 $ & $ 22.8 $ & $ \mathbf{ 0.023 } $ & $ 0.145 $ & $ 0.037 $\\
+60\% & $ \mathbf{ 0.082 } $ & $ 0.337 $ & $ 0.093 $ & $ \mathbf{ 17.2 } $ & $ 83.3 $ & $ 18.3 $ & $ \mathbf{ 0.018 } $ & $ 0.147 $ & $ 0.031 $\\
+80\% & $ \mathbf{ 0.076 } $ & $ 0.324 $ & $ 0.084 $ & $ \mathbf{ 17.7 } $ & $ 84.4 $ & $ 18.1 $ & $ \mathbf{ 0.015 } $ & $ 0.148 $ & $ 0.027 $\\
+85\% & $ \mathbf{ 0.075 } $ & $ 0.326 $ & $ 0.083 $ & $ \mathbf{ 14.4 } $ & $ 82.0 $ & $ 15.8 $ & $ \mathbf{ 0.016 } $ & $ 0.138 $ & $ 0.028 $\\
 \end{tabular}
+\caption{RMSE of Berkeley Random split} \label{table:spatial_random}
 \end{table}
 
 \begin{table} [htbp]
 \setlength{\tabcolsep}{2pt}
 \centering
-\caption{RMSE of (berkeley, temporal, light)}
-\label{table:spatial_temporal_light}
-\begin{tabular} {r | r r r}
-	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
-	10\% & $ \mathbf{ 220.070 } $ & $ 281.607 $ & $ 264.763 $ \\
-	20\% & $ \mathbf{ 113.310 } $ & $ 236.865 $ & $ 230.054 $ \\
-	40\% & $ \mathbf{ 58.090 } $ & $ 110.758 $ & $ 64.388 $ \\
-	60\% & $ \mathbf{ 41.730 } $ & $ 150.149 $ & $ 69.235 $ \\
-	80\% & $ \mathbf{ 21.450 } $ & $ 112.694 $ & $ 28.017 $ \\
-	85\% & $ \mathbf{ 8.310 } $ & $ 85.423 $ & $ 12.079 $ \\
+\small
+\begin{tabular} {c | r r r | r r r | r r r}
+& \multicolumn{3}{ c|}{Humidity} & \multicolumn{3}{|c|}{Light} & \multicolumn{3}{|c }{Temperature} \\ \hline
+train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn}& \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn}& \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn} \\ \hline
+10\% & $ 0.957 $&$ 0.573 $&$ \mathbf{ 0.547 } $&$ \mathbf{ 220.070 } $&$ 281.607 $&$ 264.763 $&$ 0.515 $&$ \mathbf{ 0.242 } $&$ 0.307 $\\
+20\% & $ 0.796 $&$ 0.657 $&$ \mathbf{ 0.459 } $&$ \mathbf{ 113.310 } $&$ 236.865 $&$ 230.054 $&$ 0.392 $&$ \mathbf{ 0.179 } $&$ 0.187 $\\
+40\% & $ 0.771 $&$ 0.520 $&$ \mathbf{ 0.455 } $&$ \mathbf{ 58.090 } $  & $ 110.758 $ &  $ 64.388 $&$ 0.310 $&$ 0.196 $&$ \mathbf{ 0.189 } $\\
+60\% & $ 0.540 $&$ \mathbf{ 0.351 } $&$ 0.708 $&$ \mathbf{ 41.730 } $  & $ 150.149 $ &  $ 69.235 $&$ 0.206 $&$ \mathbf{ 0.191 } $&$ 0.243 $\\
+80\% & $ 0.447 $&$ 0.299 $&$ \mathbf{ 0.261 } $&$ \mathbf{ 21.450 } $  & $ 112.694 $ &  $ 28.017 $&$ 0.132 $&$ \mathbf{ 0.108 } $&$ 0.114 $\\
+85\% & $ 0.323 $&$ \mathbf{ 0.166 } $&$ 0.256 $&$ \mathbf{ 8.310 } $   & $ 85.423 $  &  $ 12.079 $&$ 0.088 $&$ \mathbf{ 0.065 } $&$ 0.082 $\\
 \end{tabular}
+\caption{RMSE of Berkeley Temporal split} \label{table:spatial_temporal}
 \end{table}
-
-
-\begin{table} [htbp]
-\setlength{\tabcolsep}{2pt}
-\centering
-\caption{RMSE of (berkeley, temporal, temperature)}
-\label{table:spatial_temporal_tem}
-\begin{tabular} {r | r r r}
-	train	& TR-MF	&	STR-MF	&	sTR-MF	\\ \hline
-	10\% & $ 0.515 $ & $ \mathbf{ 0.242 } $ & $ 0.307 $ \\
-	20\% & $ 0.392 $ & $ \mathbf{ 0.179 } $ & $ 0.187 $ \\
-	40\% & $ 0.310 $ & $ 0.196 $ & $ \mathbf{ 0.189 } $ \\
-	60\% & $ 0.206 $ & $ \mathbf{ 0.191 } $ & $ 0.243 $ \\
-	80\% & $ 0.132 $ & $ \mathbf{ 0.108 } $ & $ 0.114 $ \\
-	85\% & $ 0.088 $ & $ \mathbf{ 0.065 } $ & $ 0.082 $ \\
-\end{tabular}
-\end{table}
-
