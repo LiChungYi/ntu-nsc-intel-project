@@ -67,7 +67,6 @@ We can only rely on the spatial correlation, so we prefer fewer features and str
 0 & 0 & 1\\
 \end{bmatrix} 
 \end{equation}
-\redtext{(should be merged with TF)}
 To be specific, we share the actual values of the parameters.
 Firstly, the learning rate $\eta$ is $0.04$ to $0.004$, which is chosen as the largest value that still maintains stable optimization process.
 Secondly, a strong temporal regularization is always preferred.
@@ -87,6 +86,11 @@ While sensors from Berkeley dataset are deployed indoor, it cause the variance o
 The small variance makes TF does't work well because we quantize the heterogeneous signal into nominal bins before training.
 Most of heterogeneous sensor readings are divided into the same bin such that the additional dimension of TF is redundant.
 We finally make a conclusion that the high variance heterogeneous data are more suitable to use TF model.
+
+\subsection{Complexity}
+We discuss the complexity of TF and TRMF model. Suppose the factor size of TRMF model is K, the number of training samples is N and testing samples is T , the total time frame number is F and the total sensor number is S. In the training phase, TRMF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TRMF cost  
+$\mathbf{O}(K)$ to predict a missing value.\\
+Suppose the factor size of TF model is K, $F_1$, $F_2$, $F_3$ represent the number of three features use in TF. In the training phase. In the training phase, TF update factors 3NK times and update biases 3N times. After each iteration, the time regularization terms are also updates once. The complexity of a iteration is $\mathbf{O}(NK+N+F_1K+F_2K+F_3K)$. In the testing phase, TF also cost  $\mathbf{O}(K)$ to predict a missing. However,we found if you want to get the equally performance between TF and TRMF, the parameter $K$ of TF is usually smaller than TRMF.
 
 \subsection{Spatial Regularization}
 %A strong argument that directly exploiting spatial information to specify the assumed inter-sensor node correlation may not be as good as directly learning these correlations directly from the sensor observations themselves.
