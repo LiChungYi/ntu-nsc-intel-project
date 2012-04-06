@@ -1,5 +1,19 @@
 \subsection{Multivariate Learning}
 \subsubsection{Multivariate TR-MF}
+To investigate the effectiveness of multivariate learning, temporal and humidity are selected, and we want to know whether one can help with the prediction of the other.
+We have two settings for this experiment. Assume we are filling the missing entries in the temperature matrix. In the first setting (denoted as TR-MF-all), we include the complete humidity matrix (i.e. training, validation and testing set), and see whether this helps with the prediction. In the second (denoted as TR-MF-part), we include only the observed entries of humidity matrix as those in temperature matrix. 
+
+
+
+\redtext{working.....}
+
+TF works well on traffic dataset while it does't take advantage from adding heterogeneous signal on Berkeley dataset.
+Sensors from traffic dataset are deployed outdoor so the variance of heterogeneous data is large.
+While sensors from Berkeley dataset are deployed indoor, it cause the variance of heterogeneous data is small.
+The small variance makes TF does't work well because we quantize the heterogeneous signal into nominal bins before training.
+Most of heterogeneous sensor readings are divided into the same bin such that the additional dimension of TF is redundant.
+We finally make a conclusion that the high variance heterogeneous data are more suitable to use TF model.
+
 \redtext{The description is to be added, bad berkeley temporal!}
 
 \begin{table}[htbp]
