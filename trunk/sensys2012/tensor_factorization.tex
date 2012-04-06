@@ -3,7 +3,7 @@
 \section{Multivariate Factorization Model} \label{sec:tf}
 A given sensor node may contain multiple sensor types and thus able to sense various aspects of its environment (e.g.\ temperature and humidity) at the same time.
 These attributes may be correlated and this correlation may help in the missing data estimation process.
-We propose two methods, Multivariate (S)TR-MF and Tensor Decomposition, that leverage this multivariate correlation.
+We propose two methods, Multivariate (S)TR-MF and Tensor Factorization, that leverage this multivariate correlation.
 
 \subsection{Multivariate (S)TR-MF} %\label{subsec:Multivariate_TRMF}
 If two matrices are correlated, then some of their latent factors should be similar.
@@ -17,11 +17,7 @@ The objective function is similar to (S)TR-MF except that for each row (time ste
 Now $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances.
 The optimization process remains the same as in Section \ref{optimation_procedure}.
 
-\redtext{weilun please reorganize TF}
-
-Factorization models for tensors have been studied for many years~\cite{karatzoglou2010multiverse}.
-The main idea behind the use of Tensor Factorization (TF) is that we can take advantage of the principle behind Matrix Factorization to deal with additional features of the dataset. %multi-Order information.
-In sensor network data, temporal, spatial, and heterogeneous sensor information can be strongly correlated.
+Factorization models for tensors have been studied for many years~\cite{tg2009td}~\cite{bergqvist2010hosvd}. The main idea behind the use of Tensor Factorization (TF) is that we can take advantage of the principle behind Matrix Factorization to deal with additional features of the dataset. In sensor network data, temporal, spatial, and heterogeneous sensor information can be strongly correlated.
 Modeling these correlation can thus be a great benefit when estimating missing values.
  
 Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition (SVD).
@@ -86,8 +82,8 @@ The Tucker Decomposition and Canonical Decomposition are illustrated in Figure \
 \subsection{Tensor Factorization for Missing Data Estimation} \label{sec:tfmissing}
 \subsubsection{Objective function}
 
-Existing Tensor Decomposition models require a dense tensor, which is unsuitable for missing data estimation with a high missing rate.
-Therefore, we introduce an $N$-order Tensor Factorization for missing data estimation.
+Existing Tensor Decomposition models require a dense tensor, which is unsuitable for missing data estimation with a high missing rate. 
+Therefore, we introduce an $N$-order Tensor Factorization for missing data estimation. In the CF technology, the TF also use in context-aware recommender system recently~\cite{karatzoglou2010multiverse}~\cite{steffen2010pairwise}~\cite{zeno2010context}.
 Just like MF, it takes advantage of data sparsity while still exploiting the temporal correlation.
 Moreover, it models the correlation between different information, e.g.\ spatial correlation and heterogeneous sensor readings.
 The followings are the details of the model we propose.
