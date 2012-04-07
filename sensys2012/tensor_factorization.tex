@@ -32,7 +32,7 @@ In the followings, we will first introduce the tensor decomposition models and t
 
  
 \subsubsection{Tensor Decomposition}
-Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963 [1], which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimensions.
+Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963 ~\cite{tucker1963TF}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimensions.
 A $M\times N \times C $ tensor $\mathbf{T}$ can be decomposed as:
 
 \begin{equation*}
@@ -49,7 +49,7 @@ where the vectors $p_i$, $q_j$, and $w_k$ are the columns of matrices $\mathbf{P
 
 %\subsubsection{Canonical Decomposition}
 
-Tucker decomposition is computationally expensive, and researchers have proposed a more efficient decomposition named Canonical that factorizes a tensor into a sum of component rank-one tensors.
+Tucker decomposition is computationally expensive, and researchers have proposed a more efficient decomposition named Canonical ~\cite{carrol1970CD}that factorizes a tensor into a sum of component rank-one tensors.
 Formally, the Canonical Decomposition(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is superdiagonal.
 The Canonical Decomposition of $\mathbf{T}$ is
 \begin{equation*}
