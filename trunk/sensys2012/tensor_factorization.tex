@@ -6,16 +6,23 @@ These attributes may be correlated and this correlation may help in the missing 
 We propose two methods, Multivariate (S)TR-MF and Tensor Factorization, that leverage this multivariate correlation.
 
 \subsection{Multivariate (S)TR-MF} %\label{subsec:Multivariate_TRMF}
-If two matrices are correlated, then some of their latent factors should be similar.
-This motivates us to design Multivariate (S)TR-MF.
+In (S)TR-MF, the matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and $\mathbf{P}$ is the main focus in our learning process.
 
 Assume we have two attributes: temperature and humidity.
-The $\mathbf{R}$ of Multivariate (S)TR-MF is the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
-\begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
+Then, we get $\mathbf{P}_{tem}$ and $\mathbf{Q}_{tem}$ from temperature matrix $\mathbf{R}_{tem}$, and get $\mathbf{P}_{hum}$ and $\mathbf{Q}_{hum}$ from humidity matrix $\mathbf{R}_{hum}$. 
+Now we have two $\mathbf{P}$s, and they should be similar or at least correlated because every $\mathbf{p}_m$ represents the factors of time step $m$.
+This motivates us to design Multivariate (S)TR-MF.
 
-The objective function is similar to (S)TR-MF except that for each row (time step) there are two bias terms: one for temperature readings and the other for humidity readings.
-Now $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances.
-The optimization process remains the same as in Section \ref{optimation_procedure}.
+In Multivariate (S)TR-MF, the $\mathbf{R}$ is horizontally concatenate of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
+\begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
+The horizontal concatenation makes the temperature model and humidity model share the common $\mathbf{P}$, so they merge the similar factors and communicate the observed information with each other.
+
+Multivariate (S)TR-MF is very similar to (S)TR-MF: the objective function and the optimization process remains the same. 
+Yet, there are two important modifications: 
+Firstly, for each row (time step), we need two bias terms: one for temperature readings and the other for humidity readings.
+Besides, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. 
+
+%my part ends
 
 Factorization models for tensors have been studied for many years~\cite{tg2009td}~\cite{bergqvist2010hosvd}. The main idea behind the use of Tensor Factorization (TF) is that we can take advantage of the principle behind Matrix Factorization to deal with additional features of the dataset. In sensor network data, temporal, spatial, and heterogeneous sensor information can be strongly correlated.
 Modeling these correlation can thus be a great benefit when estimating missing values.
