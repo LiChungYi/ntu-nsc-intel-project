@@ -1,8 +1,9 @@
-\section{Matrix Factorization}  \label{sec:mf}
+\section{Matrix Factorization Model for Imputation}  \label{sec:mf}
 
-% need update and to be consistent with related work 
-Given a data matrix of observed and missing entries, the essence of Matrix Factorization~(MF) is to learn latent factors from the observed entries, and then leverage these factors to predict the missing entries.
-MF is one of the most successful Collaborative Filtering~(CF) models in the area of Recommendation Systems.
+% need update and to be consistent with related work, need to add the Netflix and our KDD2011 papers to support MF
+
+Matrix Factorization is one of the most successful Collaborative Filtering~(CF) techniques in the area of Recommendation Systems [cite]. 
+As we have shown in the introduction section Given a data matrix of observed and missing entries, the essence of Matrix Factorization~(MF) is to learn latent factors from the observed entries, and then leverage these factors to predict the missing entries.
 In CF, where we consider the rows of the matrix as users and the columns as items, and we wish to predict unknown item ratings by users which reflect known user preferences.
 The unknown rating prediction in CF is much like missing data recovery in Wireless Sensor Networks~(WSN), except the rows become time steps, the columns become sensor nodes, and the data characteristic is different. 
 
