@@ -76,10 +76,23 @@ Finally, we observe that a large $K$ doesn't lead to overfitting because SGD is 
 The number of factors $K$ is $54$ for TRMF, and 30 for TF in Berkeley data set while It is  $21$ for TRMF and 10 for TF in traffic data set, although in temporal split the $K$ may be much lowered to speed up the algorithm. 
 
 
-\subsection{Complexity}
-We discuss the complexity of TF and TRMF model. Suppose the factor size of TRMF model is K, the number of training samples is N and testing samples is T , the total number of time steps is F and the total sensor number is S. In the training phase, TRMF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TRMF cost  
-$\mathbf{O}(K)$ to predict a missing value.\\
-Suppose the factor size of TF model is K, $F_1$, $F_2$, $F_3$ represent the number of three features use in TF. In the training phase. In the training phase, TF update factors 3NK times and update biases 3N times. After each iteration, the time regularization terms are also updates once. The complexity of a iteration is $\mathbf{O}(NK+N+F_1K+F_2K+F_3K)$. In the testing phase, TF also cost  $\mathbf{O}(K)$ to predict a missing. However,we found if you want to get the equally performance between TF and TRMF, the parameter $K$ of TF is usually smaller than TRMF.
+\subsection{Time Complexity}
+Suppose the number of factors is $K$.
+For MF (TR-MF and STR-MF), the number of time steps is $F_1$ and the number of sensor nodes is $F_2$. 
+For TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
+If there are $R$ regularization terms (spatial and temporal), and there are $N$ observed entries from the training set, then the time spent in each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$)for both MF and TF. 
+The total iteration number varies with data and its missing rate. 
+However, the training time is not the main concern in our application, since we only need to train our model once.
+%The total iteration depends greatly on the data and the actual running time may 
 
+The imputation time is more important as we need the values for further learning task like event classification.
+Both MF and TF are very efficient in the testing phase.
+To predict a missing value, it takes $2K$ multiplication operations to MF and $3K$ multiplication operations to TF.
+Since $K$ is very small so the prediction can be done in real time.
+On a normal laptop, it takes less than a second to predict all values for our Berkey data matrix ($270000$ values).
 
-
+%\begin{comment}
+%In the training phase, TRMF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TRMF cost  
+%$\mathbf{O}(K)$ to predict a missing value.\\
+%Suppose the factor size of TF model is K, $F_1$, $F_2$, $F_3$ represent the number of three features use in TF. In the training phase. In the training phase, TF update factors 3NK times and update biases 3N times. After each iteration, the time regularization terms are also updates once. The complexity of a iteration is $\mathbf{O}(NK+N+F_1K+F_2K+F_3K)$. In the testing phase, TF also cost  $\mathbf{O}(K)$ to predict a missing. However,we found if you want to get the equally performance between TF and TRMF, the parameter $K$ of TF is usually smaller than TRMF.
+%\end{comment}
