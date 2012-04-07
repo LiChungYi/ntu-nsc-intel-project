@@ -1,19 +1,17 @@
 \section{Discussion}  \label{sec:disc}
 
-\subsection{Hybrid Temporal/Spatial Imputation Methods}
+%\subsection{Hybrid Temporal/Spatial Imputation Methods}
 
-Hybrid methods of temporal and spatial approaches are less common in the literature.
-For example, the average of the temporal approach of linear interpolation and the spatial approach of multivariate regression has been reported[8].
-Strictly speaking, this approach can be thought of as an ensemble approach between the two methods rather than a fully-integrated approach which considers both temporal and spatial aspects of WSN data.
+%Hybrid methods of temporal and spatial approaches are less common in the literature.
+%For example, the average of the temporal approach of linear interpolation and the spatial approach of multivariate %regression has been reported[8].
+%Strictly speaking, this approach can be thought of as an ensemble approach between the two methods rather than a fully-%integrated approach which considers both temporal and spatial aspects of WSN data.
 
 \subsection{Parameter Setting} \label{subsec:parameter}
 
-For both MF and TF model, we observe that the parameter setting in random split must be different from that in temporal split. Basically, we need stronger regularization in temporal split.  We provide some details and explanation here. 
+For both MF and TF models, we have realized that the parameter setting in random split has to be different from that in temporal split. In a nutshell, wstronger regularization is needed in temporal split. Below we provide some qualtative analysis using examples. 
 
-Let us look at two illustrating examples.
-Here we ignore bias terms for simplicity.
-Random split is like Equation \ref{randomSplit_matrix}.
-We have more confidence in our prediction and we rely mostly on temporal correlation, so we prefer more factors and weak conventional regularization.
+%Here we ignore bias terms for simplicity.
+Equation xxx shows a random split case and xxx shows a temporal split case. In random split, the confidence for prediction is usually higher and the model relies mostly on temporal correlation, therefore it is preferred to use more factors and weaken the strength of regularization.
 We also see that linear interpolation can be viewed as a solution of TRMF, in which the number of factors is large and no conventional regularization is applied. 
 \begin{equation}
 \label{randomSplit_matrix}
@@ -70,6 +68,7 @@ We can only rely on the spatial correlation, so we prefer fewer factors and stro
 
 To be specific, we share the actual values of the parameters.
 The learning rate $\eta$ is $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, which is chosen as the largest value that still maintains stable optimization process.
+A strong temporal regularization is always preferred.
 Temporal regularization times learning rate ($\gamma \times \eta$) is set to $0.2$ in all of our experiment.
 The conventional regularization is $0.001$ for temporal split and $0$ for random split in MF, while in TF, it is $0.005$ for temporal split and $0.001$ for random split.
 Finally, we observe that a large $K$ (although slower) doesn't lead to overfitting because SGD is a natural regularization that prefers small factor values. 
@@ -81,7 +80,7 @@ Suppose the number of factors is $K$.
 For MF (TR-MF and STR-MF), the number of time steps is $F_1$ and the number of sensor nodes is $F_2$. 
 For TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
 If there are $R$ regularization terms (spatial and temporal), and there are $N$ observed entries from the training set, then the time spent in each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$)for both MF and TF. 
-The total iteration number varies with data and its missing rate. Note that although TF sounds more complicated, it runs actually faster than MF, since its $K$ is smaller and it converges faster.
+The total iteration number varies with data and its missing rate. 
 However, the training time is not the main concern in our application, since we only need to train our model once.
 %The total iteration depends greatly on the data and the actual running time may 
 
