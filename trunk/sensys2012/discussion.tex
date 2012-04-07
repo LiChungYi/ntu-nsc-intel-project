@@ -70,7 +70,6 @@ We can only rely on the spatial correlation, so we prefer fewer factors and stro
 
 To be specific, we share the actual values of the parameters.
 The learning rate $\eta$ is $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, which is chosen as the largest value that still maintains stable optimization process.
-A strong temporal regularization is always preferred.
 Temporal regularization times learning rate ($\gamma \times \eta$) is set to $0.2$ in all of our experiment.
 The conventional regularization is $0.001$ for temporal split and $0$ for random split in MF, while in TF, it is $0.005$ for temporal split and $0.001$ for random split.
 Finally, we observe that a large $K$ (although slower) doesn't lead to overfitting because SGD is a natural regularization that prefers small factor values. 
@@ -82,7 +81,7 @@ Suppose the number of factors is $K$.
 For MF (TR-MF and STR-MF), the number of time steps is $F_1$ and the number of sensor nodes is $F_2$. 
 For TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
 If there are $R$ regularization terms (spatial and temporal), and there are $N$ observed entries from the training set, then the time spent in each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$)for both MF and TF. 
-The total iteration number varies with data and its missing rate. 
+The total iteration number varies with data and its missing rate. Note that although TF sounds more complicated, it runs actually faster than MF, since its $K$ is smaller and it converges faster.
 However, the training time is not the main concern in our application, since we only need to train our model once.
 %The total iteration depends greatly on the data and the actual running time may 
 
