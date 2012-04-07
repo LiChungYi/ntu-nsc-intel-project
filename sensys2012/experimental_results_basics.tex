@@ -1,13 +1,9 @@
-\subsection{Results on TR-MF} \label{subsec:exp_basic}%from Chung-Yi
-We  linear interpolation~(LI), TR-MF, AKE, DESM and STI on the two data sets. Note that the sensor location information is not available in traffic data set, so we assume the distance between all sensor node pairs are equal for DESM and STI.
-
-% more description??
+\subsection{Basic Experimental Results} \label{subsec:exp_basic}%from Chung-Yi
+We compare linear interpolation~(LI), TR-MF, AKE, DESM and STI on the two data sets. Note that the sensor location information is not available in traffic data set, so we assume the distance between all sensor node pairs are equal for DESM and STI.
 
 %validation setting
-%\subsubsection{Random Split}
+\subsubsection{Random Split}
 Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the result of random split on Berkeley data set. TR-MF outperforms others greatly in all cases. On the other hand, linear interpolation is quite competitive, especially when the size of training set is large. This is because the sampling rate of Berkeley data set is fairly high and the temporal correlation is prominent. 
-
-\begin{comment}
 
 \begin{table}[htbp]
 \setlength{\tabcolsep}{2pt}
@@ -59,11 +55,9 @@ Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \re
 	rank &2.00 &1.00 &3.00 &4.00 &5.00 \\
 \end{tabular}
 \end{table}
-\end{comment}
 
 Table \ref{table:traffic_random_hum} and \ref{table:traffic_random_tem} show the result of random split on traffic data set. Again, TR-MF outperforms other models significantly. However, the performance of linear interpolation deteriorates a lot. This corresponds to the low sampling rate in traffic data set. 
 
-\begin{comment}
 \begin{table} [htbp]
 \setlength{\tabcolsep}{2pt}
 \centering
@@ -97,13 +91,11 @@ Table \ref{table:traffic_random_hum} and \ref{table:traffic_random_tem} show the
 	rank &3.33 &1.00 &2.00 &4.83 &3.83 \\
 \end{tabular}
 \end{table}
-\end{comment}
 
-%\subsubsection{Temporal Split}
+\subsubsection{Temporal Split}
 Table \ref{table:berkeley_temporal_hum}, \ref{table:berkeley_temporal_light} and \ref{table:berkeley_temporal_tem} show the result of temporal split on Berkeley data set and Table \ref{table:traffic_temporal_hum} and \ref{table:traffic_temporal_tem} show the result of temporal split on traffic data set.
 In the temporal split, it is clear that linear interpolation performs terribly since its prediction is simply the last reading of the sensor. Our TR-MF and AKE show the best performance in temporal split.
 
-\begin{comment}
 \begin{table}[htbp]
 \setlength{\tabcolsep}{2pt}
 \centering
@@ -214,4 +206,3 @@ rank &4.17 &1.50 &1.83 &4.83 &2.67 \\
 
 \caption[nanana]{Global caption}
 \end{figure*}
-\end{comment}
