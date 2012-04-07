@@ -2,11 +2,11 @@
 
 \section{Multivariate Factorization Model} \label{sec:tf}
 A given sensor node may contain multiple sensor types and thus is capable of sensing various aspects of the environment (e.g.\ temperature and humidity) at the same time.
-These attributes can potentially be correlated, and being able to take advantage such correlation would results in better imputation quality.
+These attributes can potentially be correlated, and being able to take advantage such correlation would result in better imputation quality.
 This section proposes two models, the Multivariate (S)TR-MF and Tensor Factorization modeles, to leverage multivariate correlation for missing data recovery.
 
 \subsection{Multivariate (S)TR-MF} %\label{subsec:Multivariate_TRMF}
-In (S)TR-MF, as we normally have much longer time-steps than the nuumber of sensors, the latent matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and therefore being able to learn a faithful representatin of hidden features in the temporal-dimension is critical. 
+In (S)TR-MF, as we normally have much longer time-steps than the number of sensors, the latent matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and therefore being able to learn a faithful representatin of hidden features in the temporal-dimension is critical. 
 
 Assuming there are two types of sensor in one node: temperature and humidity. Then, using (S)TR-MF we can obtain $\mathbf{P}_{tem}$ and $\mathbf{Q}_{tem}$ from temperature matrix $\mathbf{R}_{tem}$, and get $\mathbf{P}_{hum}$ and $\mathbf{Q}_{hum}$ from humidity matrix $\mathbf{R}_{hum}$. These two $\mathbf{P}$s are identical in size, and it is not hard to imagine they should be correlated because they both represent the factors of time step $m$. Therefore, it might be benefitial if we can try to use both sides of information to learn a unified and better $\mathbf{P}_{hum}$.
 This observation motivates us to design the Multivariate (S)TR-MF.
