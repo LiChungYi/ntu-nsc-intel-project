@@ -50,7 +50,7 @@ We decompose a $M\times N \times C $ tensor $\mathbf{T}$ :
 \end{equation*}
 or for each component,
 \begin{equation*}
-\mathbf{T}_{\alpha\beta\gamma}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{\alpha i}\mathbf{Q}_{\beta j}\mathbf{W}_{\gamma k}
+\mathbf{T}_{mnc}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{m i}\mathbf{Q}_{n j}\mathbf{W}_{c k}
 \end{equation*}
 where the vectors $p_i$, $q_j$, and $w_k$ are the column of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
 They can be thought of as the principal components in each order.
@@ -67,7 +67,7 @@ The Canonical Decomposition of $\mathbf{T}$ is
 \end{equation*}
 or
 \begin{equation*}
-\mathbf{T}_{\alpha\beta\gamma}=\sum\limits_{k=1}^{K}\mathbf{X}_{\alpha k} \mathbf{Y}_{\beta k} \mathbf{Z}_{\gamma k}
+\mathbf{T}_{mnc}=\sum\limits_{k=1}^{K}\mathbf{X}_{m k} \mathbf{Y}_{n k} \mathbf{Z}_{c k}
 \end{equation*}
 where $x_i$,$y_i$ and $z_i$ are the column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, $K$ is the factor size. 
 
@@ -105,8 +105,8 @@ As MF, to increase the prediction accuracy, we also add bias term of $F_1, F_2, 
 so our prediction function is :
 \begin{equation*}
 \begin{aligned}
-\mathbf{\hat{T}}_{\alpha\beta\gamma}=\mu_\alpha+\mu_\beta+\mu_\gamma+p_\alpha \otimes q_\beta\otimes  w_\gamma
-\\=\mu_\alpha+\mu_\beta+\mu_\gamma+\sum\limits_{k=1}^{K}\mathbf{P}_{\alpha k} \mathbf{Q}_{\beta k} \mathbf{W}_{\gamma k}
+\mathbf{\hat{T}}_{mnc}=\mu_m+\mu_n+\mu_c+p_m \otimes q_n\otimes  w_c
+\\=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}\mathbf{P}_{m k} \mathbf{Q}_{n k} \mathbf{W}_{c k}
 \end{aligned}
 \end{equation*}
 to learn the latent features P, Q and W, we define the loss function :
@@ -128,11 +128,11 @@ To capture the temporal effect, similar to MF we state previous in section 3.2, 
 Finally, the objective function of tensor factorization is :\\
 \begin{equation*}
 \begin{aligned}
-&\sum\limits_{\alpha, \beta, \gamma} l( \hat{\mathbf{T}}_{\alpha\beta\gamma}, \mathbf{T}_{\alpha\beta \gamma} )+\lambda_1\|p_{\alpha}\|^2+\lambda_2\|q_\beta\|^2+\lambda_3\|w_\gamma\|^2+\lambda_4\|
-\mu_\alpha\|^2\\
-&+\lambda_5\|\mu_\beta\|^2+\lambda_6\|\mu_\gamma\|^2+\frac{1}{2}\lambda_7\sum(\mu_\alpha-\mu_{\alpha+1})^2+(\mu_\alpha-\mu_{\alpha-1})^2
+&\sum\limits_{m, n, c} l( \hat{\mathbf{T}}_{mnc}, \mathbf{T}_{mnc} )+\beta_1\|p_{\beta}\|^2+\beta_2\|q_n\|^2+\beta_3\|w_c\|^2+\beta_4\|
+\mu_m\|^2\\
+&+\beta_5\|\mu_n\|^2+\beta_6\|\mu_c\|^2+\frac{1}{2}\gamma_1\sum(\mu_m-\mu_{m+1})^2+(\mu_m-\mu_{m-1})^2
 \\&
-+\frac{1}{2}\lambda_8\sum(p_\alpha-p_{\alpha+1})^2+(p_\alpha-p_{\alpha-1})^2
++\frac{1}{2}\gamma_2\sum(p_m-p_{m+1})^2+(p_m-p_{m-1})^2
 \end{aligned}
 \end{equation*}
 
@@ -141,14 +141,14 @@ Finally, the objective function of tensor factorization is :\\
   \label{alg::conjugateGradient}
   \begin{algorithmic}[1]
     \Require
-    $\lambda_1,\lambda_2, \lambda_3, \lambda_4, \lambda_5, \lambda_6, \lambda_7, \lambda_8, \eta, k$
+    $\beta_1,\beta_2, \beta_3, \beta_4, \beta_5, \beta_6, \gamma_1, \gamma_2, \eta, k$
     \State Normalize the training set as $D$
-    \State initial the $p_\alpha, q_\beta, w_\gamma, \mu_\alpha, \mu_\beta, \mu_\gamma$ for all $\alpha, \beta, \gamma$
+    \State initial the $p_m, q_n, w_c, \mu_m, \mu_n, \mu_c$ for all $m, n, c$
     \Repeat
       \For    {each observed readings t in D}
-      \State Update $p_\alpha, q_\beta, w_\gamma, \mu_\alpha, \mu_\beta, \mu_\gamma$ 
+      \State Update $p_m, q_n, w_c, \mu_m, \mu_n, \mu_c$ 
      \EndFor
-     \State Update $p_\alpha,  \mu_\alpha $ for all u
+     \State Update $p_m,  \mu_m $ for all m
     \Until stopping criterion is met
     \State Output the model 
   \end{algorithmic}
@@ -158,22 +158,22 @@ Finally, the objective function of tensor factorization is :\\
 Minimizing this objective function can be done using many approaches.
 To deal with large datasets, there are simple and fast online algorithm which performs stochastic gradient descent (SGD) in the factors for a given tuple t simultaneously.
 we need to compute the gradients of the objective function with respect individual components of the model.
-Focus on a observed data t = $T_{\alpha\beta\gamma } $ from training data, the update rule is :
+Focus on a observed data t = $T_{m\beta\gamma } $ from training data, the update rule is :
 \begin{equation*}
 \begin{aligned}
-&{p_\alpha}^\prime={p_\alpha}+\eta(e*q_\beta w_\gamma - \lambda_1 p_\alpha)
-\\&{q_\beta}^\prime={q_\beta}+\eta(e*p_\alpha w_\gamma - \lambda_2 q_\beta)
-\\&{w_\gamma}^\prime={w_\gamma}+\eta(e*p_\alpha q_\beta - \lambda_3 w_\gamma)
-\\&{\mu_\alpha}^\prime=\mu_\alpha+\eta(e-\lambda_4\mu_\alpha)
-\\&{\mu_\beta}^\prime=\mu_\beta+\eta(e-\lambda_5\mu_\beta)
-\\&{\mu_\gamma}^\prime=\mu_\gamma+\eta(e-\lambda_6\mu_\gamma)
+&{p_m}^\prime={p_m}+\eta(e*q_n w_c - \beta_1 p_m)
+\\&{q_n}^\prime={q_n}+\eta(e*p_m w_c - \beta_2 q_n)
+\\&{w_c}^\prime={w_c}+\eta(e*p_m q_n - \beta_3 w_c)
+\\&{\mu_m}^\prime=\mu_m+\eta(e-\beta_4\mu_m)
+\\&{\mu_n}^\prime=\mu_n+\eta(e-\beta_5\mu_n)
+\\&{\mu_c}^\prime=\mu_c+\eta(e-\beta_6\mu_c)
 \end{aligned}
 \end{equation*}
 where $e=t-\hat{t}$, After a iteration, we update the model according to the temporal regularization :
 \begin{equation*}
 \begin{aligned}
-&{p_\alpha}^\prime={p_\alpha}+\eta\lambda_7(p_{\alpha+1}-p_\alpha+p_{\alpha-1}-p_\alpha)
-\\&{\mu_\alpha}^\prime=\mu_\alpha+\eta\lambda_8(\mu_{\alpha+1}-\mu_\alpha+\mu_{\alpha-1}-\mu_\alpha)
+&{p_m}^\prime={p_m}+\eta\gamma_1(p_{m+1}-p_m+p_{m-1}-p_m)
+\\&{\mu_m}^\prime=\mu_m+\eta\gamma_2(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
 \end{aligned}
 \end{equation*}
 The Tensor Factorization method is summarized in Procedure 2, which is easy to implement since it accesses only one row of P, Q ,W at a time.
@@ -182,8 +182,7 @@ The details about normalization, initialization and stop criterion are just like
 The parameters of TF are more than MF, but we can achieve reasonable performance by setting
 \begin{equation*}
 \begin{aligned}
-& \lambda_1=\lambda_2=\lambda_3,\\
-& \lambda_4=\lambda_5=\lambda_6\\
-&\lambda_7=\lambda_8\\
+& \beta_1=\beta_2=\beta_3=\beta_4=\beta_5=\beta_6\\
+&\gamma_1=\gamma_2\\
 \end{aligned}
 \end{equation*}
