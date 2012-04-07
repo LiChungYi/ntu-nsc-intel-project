@@ -3,7 +3,8 @@
 %weilun please double check this section
 
 %more?
-To investigate the effectiveness of multivariate learning, temporal and humidity are selected, and we want to know whether one can help with the prediction of the other.
+To investigate the effectiveness of multivariate learning, temporal and humidity are selected, and we want to know whether one can help with the prediction of the other. Here we compare MTR-MF and TF with TR-MF, which .
+
 We have two settings for this experiment. Assume we are predicting the missing entries in the temperature matrix. In the first setting (denoted as TR-MF-all), we include all humidity entries have (i.e. training, validation and testing set), and see whether this helps with the prediction. In the second (denoted as TR-MF-part), we include only the observed entries of humidity matrix as those in temperature matrix. However, to predict an entry in temperature matrix, TF needs the correspending enty in the humidity matrix. Thus, we will first predict that humidity entry by the humidity information by TR-MF and use it to do TF.
 
 In general, we see that TR-MF-all is better then TR-MF, while TR-MF-part is about the same as TR-MF. 
@@ -104,7 +105,7 @@ We finally make a conclusion that the high variance heterogeneous data are more 
 % temp85\%	&1.441 	&1.345 	&0.915&0.912&0.912\\
 %\end{tabular}
 %\end{table}
-\subsubsection{Tensor Factorization} % need to be combined with multi TR-MF 
+%\subsubsection{Tensor Factorization} % need to be combined with multi TR-MF 
 We compare our TF method with models not incorporating heterogeneous sensor correlations in this section.
 The Tensor Factorization method naturally allows us to add additional nominal dimensions to the model, e.g.\ node id or sensor coordinates.
 The third-order TF is used for this experiment, with each dimension representing the node id, time step number and heterogeneous signal.  

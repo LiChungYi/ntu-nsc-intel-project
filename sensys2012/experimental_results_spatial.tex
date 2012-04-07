@@ -37,13 +37,14 @@ train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \be
 
 
 
-Table \ref{table:spatial_random_hum}, \ref{table:spatial_random_light}, \ref{table:spatial_random_tem}, \ref{table:spatial_temporal_hum}, \ref{table:spatial_temporal_light}, \ref{table:spatial_temporal_tem}  show the result of adding spatial regularization. 
-STR-MF mean TR-MF with strong spatial regularization, while sTR-MF is with weak spatial regularization. We got no improvement in all random split data and (temporal, light). However, we see significant improvement on (temporal, humidity) and (temporal, temperature).
+%Table \ref{table:spatial_random_hum}, \ref{table:spatial_random_light}, \ref{table:spatial_random_tem}, \ref{table:spatial_temporal_hum}, \ref{table:spatial_temporal_light}, \ref{table:spatial_temporal_tem}  show the result of adding spatial regularization. 
+Table \ref{table:spatial_random} and \ref{table:spatial_temporal} compare STF-MF with TR-MF.
+STR-MF mean TR-MF with strong spatial regularization, while sTR-MF is with weak spatial regularization. We got no improvement in all random split data and either (temporal, light). However, we see significant improvement on (temporal, humidity) and (temporal, temperature).
 
-There are two reasons behind this phenomenon. 
-On the one hand, TR-MF already captures some of the spatial corelation. 
-Since we have thousands of readings for every sensor node, TR-MF can learn the spatail correlation from the data and create similar factors for similar sensor nodes. 
-On the other hand, the neighboring pairs in the deployment graph may not imply the actuall similarity.
+There are two factors that decide the successfulness of spatial regularization. 
+On the one hand, TR-MF already captures some of the spatial correlation. 
+Since we have thousands of readings for every sensor node, TR-MF can learn the spatial correlation from the data and create similar factors for similar sensor nodes. 
+On the other hand, the neighboring pairs in the deployment graph may not imply the actual similarity.
 For example, we can look at the similarity graph of humidity and light sensors.
 We define the similarity of sensor node $n_i$ and $n_j$ as by the factor similarity:
 %\begin{equation*}
@@ -51,17 +52,18 @@ $\frac{q_{n_i}^T q_{n_j}}{max(||q_{n_i}||^2, ||q_{n_j}||^2)},$
 %\end{equation*}
 and we get the similarity graph:
 \begin{figure}[ftbp]
+\centering
 \subfigure[Expected Similarity]{
-	\includegraphics[width=0.5\textwidth]{expected.png}
-}
+	\includegraphics[width=0.25\textwidth]{expected.png}
+}\\
 \subfigure[Humidity: top 100 similar pairs]{
-	\includegraphics[width=0.5\textwidth]{Hum_similarity.png}
+	\includegraphics[width=0.22\textwidth]{Hum_similarity.png}
 }
-\hspace{1in}
+\hspace{0in}
 \subfigure[Light: top 100 similar pairs]{
-	\includegraphics[width=0.5\textwidth]{Light_similarity.png}
+	\includegraphics[width=0.22\textwidth]{Light_similarity.png}
 }
 \end{figure}
 
-We can see that the similarity graph of humidity is similar to our expectation, while the similarity graph of light is not. We can only obtain improvement when the data information is insufficient, which is the temporal split case, and when our expectation similarity is not far from the actual similarity, which is the temperature and humidity.
+We can see that the similarity graph of humidity is more similar to our expectation, while the similarity graph of light is not. We can only obtain improvement when the data information is insufficient, which is the temporal split case, and when our expectation similarity is not far from the actual similarity, which is the temperature and humidity.
 

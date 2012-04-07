@@ -4,7 +4,7 @@ We implemented AKE, DESM, STI, and for MI we use the EM-imputation from LISREL.
 Note that the sensor location information is not available in traffic data set, so we assume the distance between all sensor node pairs are equal for DESM and STI.
 
 %validation setting
-\subsubsection{Random Split}
+%\subsubsection{Random Split}
 Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the result of random split on Berkeley data set. TR-MF outperforms others greatly in all cases. On the other hand, linear interpolation is quite competitive, especially when the size of training set is large. This is because the sampling rate of Berkeley data set is fairly high and the temporal correlation is prominent. 
 
 \begin{table}[htbp]
@@ -186,25 +186,27 @@ rank &4.17 &1.50 &1.83 &4.83 &2.67 \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[H]
-\centering
-\input{table11.pspdftex}
-\caption{RMSE of (traffic, temporal, temperature); LI and DESM not shown as RMSE is greater than 7}
-\end{figure}
 
 
-\begin{figure*}[ht]
-\centering
-
-\subfigure[subFig 1 caption]{
-	\includegraphics[width=0.45\textwidth]{table11_pspdftex.pdf}
-	\label{fig: 1}
-}
-\hspace{0in}
-\subfigure[subFig 2 caption]{
-	\includegraphics[width=0.45\textwidth]{table11_pspdftex.pdf}
-	\label{fig: 2}
-}
-
-\caption[nanana]{Global caption}
-\end{figure*}
+%\begin{figure}[H]
+%\centering
+%\input{table11.pspdftex}
+%\caption{RMSE of (traffic, temporal, temperature); LI and DESM not shown as RMSE is greater than 7}
+%\end{figure}
+%
+%
+%\begin{figure*}[ht]
+%\centering
+%
+%\subfigure[subFig 1 caption]{
+%	\includegraphics[width=0.45\textwidth]{table11_pspdftex.pdf}
+%	\label{fig: 1}
+%}
+%\hspace{0in}
+%\subfigure[subFig 2 caption]{
+%	\includegraphics[width=0.45\textwidth]{table11_pspdftex.pdf}
+%	\label{fig: 2}
+%}
+%
+%\caption[nanana]{Global caption}
+%\end{figure*}
