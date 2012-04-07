@@ -68,14 +68,13 @@ We can only rely on the spatial correlation, so we prefer fewer factors and stro
 \end{bmatrix} 
 \end{equation}
 To be specific, we share the actual values of the parameters.
-Firstly, the learning rate $\eta$ is $0.04$ to $0.004$, which is chosen as the largest value that still maintains stable optimization process.
+Firstly, the learning rate $\eta$ is $0.04$ to $0.004$. As for the TF model, the learning rate is $0.001$ to $0.0001$, which is chosen as the largest value that still maintains stable optimization process.
 Secondly, a strong temporal regularization is always preferred.
 Temporal regularization times learning rate ($\gamma \times \eta$) is set to $0.2$ in all of our experiment.
-The conventional regularization is $0.001$ for temporal split and $0$ for random split.
+Regarding TRMF, the conventional regularization is $0.001$ for temporal split and $0$ for random split.For TF, it is 0.005 for temporal split and 0.001 for random split
 Finally, we observe that a large $K$ doesn't lead to overfitting because SGD is a natural regularization that prefers small factor values and it may lead to several non-independent factors.
-The number of factors $K$ is $54$ in Berkeley data set and $21$ in traffic data set, although in temporal split the $K$ may be much lowered to speed up the algorithm. 
+The number of factors $K$ is $54$ for TRMF, and 30 for TF in Berkeley data set while It is  $21$ for TRMF and 10 for TF in traffic data set, although in temporal split the $K$ may be much lowered to speed up the algorithm. 
 
-As for the TF model, the learning rate is $0.001$ to $0.0001 $. In temporal split data, it is more easier to be over-fitting. Therefore, the conventianal regularization term should be higher than temporal split. we set conventional regularization term to 0.005 for temporal split and 0.001 for random split. Also, the larger $K$ does't lead to overfitting, In the experiment, the $K$ of TF model  is $30$ in Berkeley dataset and $10$ in traffic dataset.
 
 \subsection{Complexity}
 We discuss the complexity of TF and TRMF model. Suppose the factor size of TRMF model is K, the number of training samples is N and testing samples is T , the total number of time steps is F and the total sensor number is S. In the training phase, TRMF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TRMF cost  
