@@ -1,56 +1,39 @@
-%\section{Tensor Factorization}  \label{sec:tf}
+%\section{Tensor Factorization}   \label{sec:tf}
 
 \section{Multivariate Factorization Model} \label{sec:tf}
-A given sensor node may contain multiple sensor types and thus able to sense various aspects of its environment (e.g.\ temperature and humidity) at the same time.
-These attributes may be correlated and this correlation may help in the missing data estimation process.
-We propose two methods, Multivariate (S)TR-MF and Tensor Factorization, that leverage this multivariate correlation.
+A given sensor node may contain multiple sensor types and thus is capable of sensing various aspects of the environment (e.g.\ temperature and humidity) at the same time.
+These attributes can potentially be correlated, and being able to take advantage such correlation would results in better imputation quality.
+This section proposes two models, the Multivariate (S)TR-MF and Tensor Factorization modeles, to leverage multivariate correlation for missing data recovery.
 
 \subsection{Multivariate (S)TR-MF} %\label{subsec:Multivariate_TRMF}
-In (S)TR-MF, the matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and $\mathbf{P}$ is the main focus in our learning process.
+In (S)TR-MF, as we normally have much longer time-steps than the nuumber of sensors, the latent matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and therefore being able to learn a faithful representatin of hidden features in the temporal-dimension is critical. 
 
-Assume we have two attributes: temperature and humidity.
-Then, we get $\mathbf{P}_{tem}$ and $\mathbf{Q}_{tem}$ from temperature matrix $\mathbf{R}_{tem}$, and get $\mathbf{P}_{hum}$ and $\mathbf{Q}_{hum}$ from humidity matrix $\mathbf{R}_{hum}$. 
-Now we have two $\mathbf{P}$s, and they should be similar or at least correlated because every $\mathbf{p}_m$ represents the factors of time step $m$.
-This motivates us to design Multivariate (S)TR-MF.
+Assuming there are two types of sensor in one node: temperature and humidity. Then, using (S)TR-MF we can obtain $\mathbf{P}_{tem}$ and $\mathbf{Q}_{tem}$ from temperature matrix $\mathbf{R}_{tem}$, and get $\mathbf{P}_{hum}$ and $\mathbf{Q}_{hum}$ from humidity matrix $\mathbf{R}_{hum}$. These two $\mathbf{P}$s are identical in size, and it is not hard to imagine they should be correlated because they both represent the factors of time step $m$. Therefore, it might be benefitial if we can try to use both sides of information to learn a unified and better $\mathbf{P}_{hum}$.
+This observation motivates us to design the Multivariate (S)TR-MF.
 
-In Multivariate (S)TR-MF, the $\mathbf{R}$ is horizontally concatenate of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
+In Multivariate (S)TR-MF, $\mathbf{R}$ represents the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
 \begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
-The horizontal concatenation makes the temperature model and humidity model share the common $\mathbf{P}$, so they merge the similar factors and communicate the observed information with each other.
+, which allows the temperature model and humidity model to share the common $\mathbf{P}$ matrix, so they merge the similar factors and communicate the observed information with each other. Note that the $\mathbf{Q}$ matrix for them are different in the (S)TR-MF model, and remain such in multivariate (S)TR-MF.
 
-Multivariate (S)TR-MF is very similar to (S)TR-MF: the objective function and the optimization process remains the same. 
-Yet, there are two important modifications: 
-Firstly, for each row (time step), we need two bias terms: one for temperature readings and the other for humidity readings.
-Besides, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. 
+The learning process of multivariate (S)TR-MF is very similar to that of (S)TR-MF: the objective function and the optimization process remains the same. Yet, there are some important differences: 
+Firstly, for each row (time step), we need two bias terms: one for temperature readings and the other for humidity readings as they natually are biased differently. Furthermore, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. 
 
-%my part ends
-
-Factorization models for tensors have been studied for many years~\cite{tg2009td}~\cite{bergqvist2010hosvd}. The main idea behind the use of Tensor Factorization (TF) is that we can take advantage of the principle behind Matrix Factorization to deal with additional features of the dataset. In sensor network data, temporal, spatial, and heterogeneous sensor information can be strongly correlated.
-Modeling these correlation can thus be a great benefit when estimating missing values.
  
-Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition (SVD).
-In the section \ref{sec:sensordecomp} we introduce the methods of Tensor Decomposition.
-A general model of tensor decomposition is the Tucker decomposition (TD) also known as High-Order Singular Value Decomposition (HOSVD).
-The special case of Tucker decomposition is called canonical decomposition (CD) also known as parallel factor analysis (PARAFAC).
-Tensor Decomposition methods require a dense input matrix $\mathbf{R}$ with missing parts of input data ignored during optimization.
+\subsection{Tensor Factorization Model} \label{sec:tensordecomp}
+
+One main concern for the multivariate (S)TR-MF model is that it does not fully exploit the mutual-dependency between the multiple sensor signals in one node. For instance, we did not specify which column in $\mathbf{R}_{tem}$ is correspond to which column in $\mathbf{R}_{hum}$ as coming from the same node. Therefore, here we propose a more complex tensor model to capture such relationship. 
+
+Tensor can be regarded as a high-dimentional matrix, and is usually exploited to represent multi-dimentional data. The previously inroduced MF can model only 2-dimensional correlations such as the sensor/time-step readings. With a 3rd-order tensor, we can add one more dimension into the model (e.g. sensor1/sensor2/time-step or sensor/location/time-step). In order to deal with such high-dimensional data structure, mathmaticians have proposed the tensor-decomposition methods to capture its latern features. 
+
+Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition (SVD). Similar to SVD, Tensor Decomposition methods assume a fully occupied matrix $\mathbf{R}$, while such assumption is not as valid for data imputation purpose as for dimension reduction purpose.
 %Treating $\mathbf{R}$ as a dense tensor with missing entries being assume to be 0.
 %It would make predict missing value failed.
-We introduce and explain the details of how we have adapted the Tensor Decomposition models with latent factors for missing value estimation in Section \ref{sec:tfmissing}.
+In the followings, we will first introduce the tensor decomposition models and than describe how we can modify one of them into a tensor factorization model for missing data recovery. 
+
  
-\subsection{Tensor Decomposition} \label{sec:tensordecomp}
-
- If we want to decompose a $m\times n$ Matrix M, recall the Singular Value Decomposition(SVD) as being
-\begin{equation*} 
-\mathbf{M}=\mathbf{P}\Sigma \mathbf{Q}^\mathrm{T}=\sum\limits_{k=1}^r\sigma_kp_kq_k^\mathrm{T}=\sum\limits_{k=1}^r\sigma_kp_k\otimes q_k
-\end{equation*}
-Where $\otimes$ denoted the tensor product : $x\otimes y = xy^\mathrm{T}$.
-$r$ is the rank of $\mathbf{M}$,
-$\mathbf{P}$ is an $m\times m$ unitary matrix, $\mathbf{Q}$ is a $n\times n$ unitary matrix, $\Sigma$ is an $m\times n$ rectangular diagonal matrix with singular values of M, being adopted the following convention $\sigma_1>\sigma_2 >...\sigma_r>0=\sigma_{r+1}=...=\sigma_{n}$.
-The SVD may be generalized to High-Order Tensor decomposition.
-the following are two types of tensor decomposition, for simplicity and in practical, we present the decomposition for 3-order tensor.
-
-\subsubsection{Tucker Decomposition}
-The Tucker decomposition was first introduced by Tucker in 1963 [1], it factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and a factor matrix for each dimensions.
-We decompose a $M\times N \times C $ tensor $\mathbf{T}$ :
+\subsubsection{Tensor Decomposition}
+Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963 [1], which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimensions.
+A $M\times N \times C $ tensor $\mathbf{T}$ can be decomposed as:
 
 \begin{equation*}
 \mathbf{T}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}p_i\otimes q_j\otimes w_k
@@ -59,14 +42,14 @@ or for each component,
 \begin{equation*}
 \mathbf{T}_{mnc}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{m i}\mathbf{Q}_{n j}\mathbf{W}_{c k}
 \end{equation*}
-where the vectors $p_i$, $q_j$, and $w_k$ are the column of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
-They can be thought of as the principal components in each order.
-There are several algorithms for calculating Tucker decompositions.
-For data compression, the Tucker decomposition usually assumes that $I\le M$, $J \le N $ and $K \le C$.
+where the vectors $p_i$, $q_j$, and $w_k$ are the columns of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
+%They can be thought of as the principal components in each order.
+%There are several algorithms for calculating Tucker decompositions.
+%For data compression, the Tucker decomposition usually assumes that $I\le M$, $J \le N $ and $K \le C$.
 
-\subsubsection{Canonical Decomposition}
+%\subsubsection{Canonical Decomposition}
 
-The Canonical decomposition factorizes a tensor into a sum of component rank-one tensors.
+Tucker decomposition is computationally expensive, and researchers have proposed a more efficient decomposition named Canonical that factorizes a tensor into a sum of component rank-one tensors.
 Formally, the Canonical Decomposition(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is superdiagonal.
 The Canonical Decomposition of $\mathbf{T}$ is
 \begin{equation*}
@@ -78,61 +61,48 @@ or
 \end{equation*}
 where $x_i$,$y_i$ and $z_i$ are the column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, $K$ is the factor size. 
 
-The Tucker Decomposition and Canonical Decomposition are illustrated in Figure \ref{fig:tf:tuckcanon}.
-
 \begin{figure}[h] 
 \includegraphics[width=9cm]{tf.jpg} 
 \caption{ (a) the Tucker Decomposition (TD) model (b) the Canonical Decomposition model, a special case of the TD model.In sensor networks, the three dimension can be nominal features such as node id, time step index.} 
 \label{fig:tf:tuckcanon} 
 \end{figure}
 
-\subsection{Tensor Factorization for Missing Data Estimation} \label{sec:tfmissing}
-\subsubsection{Objective function}
+\subsubsection{Tensor Factorization for Data Imputation} \label{sec:tfmissing}
+%\subsubsection{Objective function}
 
-Existing Tensor Decomposition models require a dense tensor, which is unsuitable for missing data estimation with a high missing rate. 
-Therefore, we introduce an $N$-order Tensor Factorization for missing data estimation. In the CF technology, the TF also use in context-aware recommender system recently~\cite{karatzoglou2010multiverse}~\cite{steffen2010pairwise}~\cite{zeno2010context}.
-Just like MF, it takes advantage of data sparsity while still exploiting the temporal correlation.
-Moreover, it models the correlation between different information, e.g.\ spatial correlation and heterogeneous sensor readings.
-The followings are the details of the model we propose.
+Existing Tensor Decomposition models require a dense tensor, which is unsuitable for missing data estimation with a decent missing rate. 
+Therefore, we introduce an $N$-order Tensor Factorization (TF) model for missing data estimation. Although tensor factorization has been studied for a while ~\cite{tg2009td}~\cite{bergqvist2010hosvd} and enjoys certain level of success in building context-aware recommender systems ~\cite{karatzoglou2010multiverse}~\cite{steffen2010pairwise}~\cite{zeno2010context}, we have not yet seen any proposal to leverage such techniques for WSN data imputation.
 
-Assume that there are three features $F_1, F_2 , F_3$, $F_1$ is the time step number, $F_2$ and $F_3$ are the other features, it could be the sensor node ID, sensor node coordinates, heterogeneous sensor readings or other information.
-suppose the target sensor readings is $R$ such that tensor T containing  $R$ will be 3-dimensional tensor :
+Similar to MF, TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
+Considering each reading as a three-dimensional tensor element (e.g. the temparature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, the TF model can be described as :
+
 \begin{equation*}
-\mathbf{T} := \mathbf{F_1} \times  \mathbf{F_2} \times \mathbf{F_3} \rightarrow \mathbf{R}
+\mathbf{T} := \mathbf{R} \rightarrow \mathbf{F_1} \times  \mathbf{F_2} \times \mathbf{F_3} 
 \end{equation*}
 
-In contrast to conventional tensor decomposition, the learning model we propose is learning the latent factors $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$.
-Where $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ are the factors of $F_1, F_2, F_3$.
-To avoid over-fitting and decrease the complexity of computing prediction, our model is based on Canonical Decomposition.
-Its complexity of computing prediction is $\mathbf{O}(K)$, where K is the factor size of  P, Q and W.
-On the other hand, the complexity of Tuker Decomposition is $\mathbf{O}(K^3)$  by our optimization method,
-where $ K=min(K_P,K_Q,K_W) $ , $K_P$, $K_Q$, $ K_W$ are the factor size of $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ respectively.
+Such tensor factorization model decompose the reading tensors into three features $F_1, F_2 , F_3$, one of them represents the temporal dimension, the rest can represent sensor nodes, sensor node coordinates, heterogeneous sensor readings, etc. In the experiments, we implemented a 3rd-order tensor model and choose the sensor nodes as well as the multivariate sensor readings as the remaining two dimensions.
 
-As MF, to increase the prediction accuracy, we also add bias term of $F_1, F_2, F_3$ into our Tensor Factorization model.
-so our prediction function is :
+In contrast to a conventional tensor decomposition, the factorization model we proposed aims at learning the latent factors $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ of the three dimensions $F_1, F_2, F_3$.
+To avoid over-fitting and to reduce the complexity of prediction, our model borrows the idea of Canonical Decomposition rather than Tucker decomposition. Note that the time complexity for making prediction is only O(K), where K is the factor size of  P, Q and W. Note that the complexity is independent of the rank of the tensor, which is a favorable property because we can freely add new dimensions into the model without concerning about the efficiency.
+
+Similar to the MF model, we also add bias term of each dimension into the TF model. The prediction function is:
 \begin{equation*}
 \begin{aligned}
 \mathbf{\hat{T}}_{mnc}=\mu_m+\mu_n+\mu_c+p_m \otimes q_n\otimes  w_c
 \\=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}\mathbf{P}_{m k} \mathbf{Q}_{n k} \mathbf{W}_{c k}
 \end{aligned}
 \end{equation*}
-to learn the latent features P, Q and W, we define the loss function :
+To learn the latent features P, Q and W, we use the loss function :
 \begin{equation*}
 L(\mathbf{\hat{T}},\mathbf{T})=\frac{1}{\|\mathbf{D}\|_1} \sum\limits_{t\in \mathbf{D}}  l(\hat{t},t)
 \end{equation*}
-where $\mathbf{D}$ is the dataset and $\|\mathbf{D}\|$ means the amounts of data point.
+where $\|\mathbf{D}\|$ indicates the size of the observed readings.
 $l$ is a point-wise loss function penalizing the distance between estimate and observation.
-we choose $l$ being least squared error because the evaluation function is root mean square error (RMSE), so
-\begin{equation*}
-l(\hat{t},t)=\frac{1}{2}(t-\hat{t})^2
-\end{equation*}
+ideally $l$ should be as close to the eventual evaluation metrics (e.g. least square error in our implementation) as possible.
 
-Simply minimizing a loss function is known to lead to over-fitting.
-Given the factors P, Q, W and bias terms which constitute our model, we have a choice of ways to ensure that the model complexity does not grow without bound.
-we add a regularization term based on the $l_2$ norm of these
-factors.
-To capture the temporal effect, similar to MF we state previous in section 3.2, we add the time regularization term to our model.
-Finally, the objective function of tensor factorization is :\\
+Simply minimizing a loss function in TF is known to be prone to over-fitting. Here we add regularization terms based on the $l_2$ norm to ensure that the model complexity does not grow without bound to avoid over-fitting.
+Similar to our MF model, we also add the time regularization terms into our model.
+Finally, the objective function of tensor factorization becomes :\\
 \begin{equation*}
 \begin{aligned}
 &\sum\limits_{m, n, c} l( \hat{\mathbf{T}}_{mnc}, \mathbf{T}_{mnc} )+\beta_1\|p_{\beta}\|^2+\beta_2\|q_n\|^2+\beta_3\|w_c\|^2+\beta_4\|
@@ -162,10 +132,10 @@ Finally, the objective function of tensor factorization is :\\
 \end{algorithm}
 
 \subsubsection{Optimization}
-Minimizing this objective function can be done using many approaches.
-To deal with large datasets, there are simple and fast online algorithm which performs stochastic gradient descent (SGD) in the factors for a given tuple t simultaneously.
-we need to compute the gradients of the objective function with respect individual components of the model.
-Focus on a observed data t = $T_{m\beta\gamma } $ from training data, the update rule is :
+Minimizing the above objective function can be done using many different strategies.
+For efficiency and scalability, we suggest using the stochastic gradient descent (SGD) method.
+We need to compute the gradients of the objective function with respect to each individual component in the model.
+Focusing on an observed reading data t = $T_{m\beta\gamma } $, the update rules are:
 \begin{equation*}
 \begin{aligned}
 &{p_m}^\prime={p_m}+\eta(e*q_n w_c - \beta_1 p_m)
@@ -176,17 +146,17 @@ Focus on a observed data t = $T_{m\beta\gamma } $ from training data, the update
 \\&{\mu_c}^\prime=\mu_c+\eta(e-\beta_6\mu_c)
 \end{aligned}
 \end{equation*}
-where $e=t-\hat{t}$, After a iteration, we update the model according to the temporal regularization :
+where $e=t-\hat{t}$. After a round of updating, we then adjust the parameters according to temporal regularization :
 \begin{equation*}
 \begin{aligned}
 &{p_m}^\prime={p_m}+\eta\gamma_1(p_{m+1}-p_m+p_{m-1}-p_m)
 \\&{\mu_m}^\prime=\mu_m+\eta\gamma_2(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
 \end{aligned}
 \end{equation*}
-The Tensor Factorization method is summarized in Procedure 2, which is easy to implement since it accesses only one row of P, Q ,W at a time.
+The Tensor Factorization method is summarized in Procedure 2, which is not hard to implement since it accesses only one row of P, Q ,W at a time.
 
-The details about normalization, initialization and stop criterion are just like MF, which are stated in previous part.
-The parameters of TF are more than MF, but we can achieve reasonable performance by setting
+TF applies similar normalization and stopping criterion trick as shown in section 3.
+Empirically one can usually achieve reasonable performance by imposing the following constraints on the parameter learning:  
 \begin{equation*}
 \begin{aligned}
 & \beta_1=\beta_2=\beta_3=\beta_4=\beta_5=\beta_6\\
