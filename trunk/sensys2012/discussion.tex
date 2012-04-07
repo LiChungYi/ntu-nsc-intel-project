@@ -68,12 +68,12 @@ We can only rely on the spatial correlation, so we prefer fewer factors and stro
 \end{bmatrix} 
 \end{equation}
 To be specific, we share the actual values of the parameters.
-Firstly, the learning rate $\eta$ is $0.04$ to $0.004$. As for the TF model, the learning rate is $0.001$ to $0.0001$, which is chosen as the largest value that still maintains stable optimization process.
-Secondly, a strong temporal regularization is always preferred.
+The learning rate $\eta$ is $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, which is chosen as the largest value that still maintains stable optimization process.
+A strong temporal regularization is always preferred.
 Temporal regularization times learning rate ($\gamma \times \eta$) is set to $0.2$ in all of our experiment.
-Regarding TRMF, the conventional regularization is $0.001$ for temporal split and $0$ for random split.For TF, it is 0.005 for temporal split and 0.001 for random split
-Finally, we observe that a large $K$ doesn't lead to overfitting because SGD is a natural regularization that prefers small factor values and it may lead to several non-independent factors.
-The number of factors $K$ is $54$ for TRMF, and 30 for TF in Berkeley data set while It is  $21$ for TRMF and 10 for TF in traffic data set, although in temporal split the $K$ may be much lowered to speed up the algorithm. 
+The conventional regularization is $0.001$ for temporal split and $0$ for random split in MF, while in TF, it is $0.005$ for temporal split and $0.001$ for random split.
+Finally, we observe that a large $K$ (although slower) doesn't lead to overfitting because SGD is a natural regularization that prefers small factor values. 
+The number of factors $K$ is $54$ for MF and $30$ for TF in Berkeley data set, and it is $21$ for MF and $10$ for TF in traffic data set. 
 
 
 \subsection{Time Complexity}
