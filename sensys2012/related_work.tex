@@ -1,18 +1,5 @@
 \section{Related Work}\label{sec:rw}
-\begin{table*}
-\centering
-\caption{Methods for Sensory Data Imputation}
-\begin{tabular}{|l|l|l|} \hline
-Collection&Hot-Deck Imputation&Prediction Models\\ \hline
-\multirow{2}{*} {Temporal} & Last-seen\cite{Granger:lastseen} & Linear Interpolation\\ 
-& Mean&\\ \hline
-\multirow{3}{*}{Spatial}& WARM\cite{le2005estimating}& DEPM\cite{li2008data}\\ 
-&FARM\cite{Gruenwald:FARM}&K-NN\cite{pan2010k}\\ 
-&&Multi-Im\cite{yuan2000multiple}\\\hline
-\multirow{3}{*}{Hybrid Spatio-Temporal}& &DESM\cite{li2008data}\\ 
-&STI\cite{Jian-Zhong:STI}&AKE\cite{pan2010k}\\
-&&Imputation Method\cite{Lim:robust} \\\hline \end{tabular}
-\end{table*}
+
 Missing data imputation is the process used to fill the missing data items by determine or assign values\cite{Little:hotdeck}. The physical characteristic of WSNs has shown that there are strong spatial and temporal correlation between sensor nodes and its past historical readings\cite{akyildiz2004exploiting}. Sensors, according to their physical phenomenon, have multivariate correlations\cite{lou:multivariate_gap}. They build a probabilistic model to estimate the missing values exploiting spatial, temporal, and multivariate correlation conditioned on the observations. 
 
 According to the strategy deployed to fill in the missing values,  sensory data imputation method can be partitioned into hot-deck imputation, and prediction models\cite{Garcia:KNNreview}. 
@@ -20,8 +7,8 @@ Hot-deck imputation methods directly replace the value from either neighbourhood
 The prediction models provide a function to estimate the missing value using the historical data. 
 %\begin{equation}
 %y_{it} = f( y_{i(t-1)} , y_{j(t-1})
-Table 1 summarize the sensory data imputation methods. 
-The vertical dimension in table 1 shows whether it exploits the temporal, spatial, or hybrid hybrid of both information. 
+Table~\ref{tbl:methods} summarize the sensory data imputation methods. 
+The vertical dimension in Table~\ref{tbl:methods} shows whether it exploits the temporal, spatial, or hybrid hybrid of both information. 
 The horizontal dimension classifies the methods by how the missing value is produced, either direct substitution or through prediction. 
 
 \subsection{Predictions based on Temporal Information }
