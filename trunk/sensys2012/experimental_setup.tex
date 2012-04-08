@@ -18,7 +18,7 @@ The dataset includes 2.3M sensor observations, over 210K samples along the tempo
 \paragraph*{NTU Traffic Dataset}
 
 The NTU Traffic Dataset records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
-This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan\cite{liu2011developed}. The sampling rate is roughly once per 30 minutes. We use the full length of dataset that consistes of roughly 43K time stamps.
+This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan\cite{liu2011developed}. The sampling rate is roughly once per 30 minutes. We use the full length of dataset that consistes of roughly 43K time stamps. This dataset only reveals 8 
 
 Note that for both Berkeley and NTU datasets, simple preprocessing rules were applied to remove apparent outlies. In Berkeley dataset, observations are removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}. In traffic dataset, observation removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
 \begin{figure}[H]
@@ -49,7 +49,7 @@ Althought both datasets intrinsically have missing readlings, we cannot use thos
 \paragraph*{Random Missing Pattern}
 
 This pattern reflects choosing a random time and random sensor to be missing and hence removed from the training set. Here we follow the standard evaluation process in machine learning to divide the data into training, validation, and testing sets.
-We define two values $x$ and $y$ as follows.
+We define two variables $x$ and $y$ during our experiment, and the X-axis of the resulting plot varies with $x$.
 
 \begin{itemize}
 \item $10\%$ of the existing readings are randomly selected (without replacement) to be the validation set
