@@ -49,9 +49,9 @@ where the vectors $\mathbf{p}_i$, $\mathbf{q}_j$, and $\mathbf{w}_k$ are the col
 
 %\subsubsection{Canonical Decomposition}
 
-Tucker decomposition is computationally expensive, and researchers have proposed a more efficient Canonical Decomposition~\cite{carrol1970CD} that factorizes a tensor into a sum of component rank-one tensors.
-Formally, the Canonical Decomposition~(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is super-diagonal.
-The Canonical Decomposition of $\mathbf{T}$ is
+Tucker decomposition is computationally expensive, and researchers have proposed a more efficient Decomposition called Canonical Decomposition~\cite{carrol1970CD}, which factorizes a tensor into a sum of $K$ rank-one tensors.
+Canonical Decomposition~(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is super-diagonal.
+Formally, The Canonical Decomposition of $\mathbf{T}$ is
 \begin{equation*}
 \mathbf{T}=\sum\limits_{k=1}^{K}\mathbf{x}_k\otimes \mathbf{y}_k\otimes \mathbf{z}_k
 \end{equation*}
@@ -59,7 +59,7 @@ or
 \begin{equation*}
 \mathbf{T}_{mnc}=\sum\limits_{k=1}^{K}\mathbf{X}_{m k} \mathbf{Y}_{n k} \mathbf{Z}_{c k}
 \end{equation*}
-where $\mathbf{x}_i$,$\mathbf{y}_i$ and $\mathbf{z}_i$ are the column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, $K$ is the factor size. 
+$\mathbf{x}_i$,$\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, and $K$ is the number of columns. 
 
 \begin{figure}[h] 
 \includegraphics[width=9cm]{tf.jpg} 
@@ -74,18 +74,18 @@ Existing Tensor Decomposition models require a dense tensor, which is unsuitable
 Therefore, we introduce an $N$-order Tensor Factorization (TF) model for missing data estimation. Although tensor factorization has been studied for a while~\cite{tg2009td,bergqvist2010hosvd} and enjoys certain level of success in building context-aware recommender systems~\cite{karatzoglou2010multiverse,steffen2010pairwise,zeno2010context}, we have not yet seen any proposal to leverage such techniques for WSN data imputation.
 
 Similar to MF, TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
-Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, the TF model can be described as :
+Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, a TF can be described as :
 
 \begin{equation*}
-\mathbf{T} := \mathbf{R} \rightarrow F_1 \times  F_2 \times F_3 
+\mathbf{T} := F_1 \times  F_2 \times F_3 \rightarrow \mathbf{R} 
 \end{equation*}
 
 Such tensor factorization model decomposes the reading tensors into three features $F_1, F_2, F_3$, one of them represents the temporal dimension, the rest can represent sensor nodes, sensor node coordinates, heterogeneous sensor readings, etc. In the experiments, we implemented a 3rd-order tensor model and choose the sensor nodes as well as the multivariate sensor readings as the remaining two dimensions.
 
 In contrast to the conventional tensor decomposition, the factorization model we proposed aims at learning the latent factors $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ of the three dimensions $F_1, F_2, F_3$.
-To avoid over-fitting and to reduce the complexity of prediction, our model borrows the idea of Canonical Decomposition rather than Tucker decomposition. Note that the time complexity for making prediction is only $O(K)$, where $K$ is the factor size of $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$. Note that the complexity is independent of the rank of the tensor, which is a favorable property because we can freely add new dimensions into the model without concerning about the efficiency.
+To avoid over-fitting and to reduce the complexity of prediction, our model borrows the idea of Canonical Decomposition rather than Tucker decomposition. Note that the time complexity for making prediction is only $O(K)$, where $K$ is the factor size of $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$. Thus, the complexity is independent of the rank of the tensor, which is a favorable property because we can freely add new dimensions into the model without concerning about the efficiency.
 
-Similar to the MF model, we also add bias term of each dimension into the TF model. The prediction function is:
+Similar to the MF model, we also add bias terms to each dimension into the TF model. The prediction function is:
 \begin{equation*}
 \begin{aligned}
 \mathbf{\hat{T}}_{mnc}=\mu_m+\mu_n+\mu_c + \mathbf{p}_m \otimes \mathbf{q}_n\otimes \mathbf{w}_c
@@ -113,20 +113,20 @@ Finally, the objective function of tensor factorization becomes :\\
 \end{equation*}
 
 \begin{algorithm}[h]
-  \caption{Multivariate Tensor Factorization}
+  \caption{Temporally-Regularized Tensor Factorization}
   \label{alg::conjugateGradient}
+  \textbf{Parameter:} $\beta_1,\beta_2, \beta_3, \beta_4, \beta_5, \beta_6, \gamma_1, \gamma_2, \eta, K$
+  \textbf{Input:} training set, validation set
   \begin{algorithmic}[1]
-    \Require
-    $\beta_1,\beta_2, \beta_3, \beta_4, \beta_5, \beta_6, \gamma_1, \gamma_2, \eta, k$
-    \State Normalize the training set as $D$
-    \State initial the $\mathbf{p}_m, \mathbf{q}_n, \mathbf{w}_c, \mu_m, \mu_n, \mu_c$ for all $m, n, c$
+    \State Normalize the training set as $\mathcal{D}$
+    \State Initialize $\mu_m, \mu_n, \mu_c, \mathbf{p}_m, \mathbf{q}_n, \mathbf{w}_c $ for all $m, n, c$
     \Repeat
-      \For    {each observed readings t in D}
-      \State Update $\mathbf{p}_m, \mathbf{q}_n, \mathbf{w}_c, \mu_m, \mu_n, \mu_c$ 
-     \EndFor
-     \State Update $\mathbf{p}_m,  \mu_m $ for all $m$
+      \For {each observed readings $t$ in $\mathcal{D}$}
+     	 \State Update $\mu_m, \mu_n, \mu_c, \mathbf{p}_m, \mathbf{q}_n, \mathbf{w}_c$ 
+      \EndFor
+     \State Update $\mu_m, \mathbf{p}_m$ for all $m$ by temporal regularization
     \Until stopping criterion is met
-    \State Output the model 
+    \State Output the model for testing set prediction 
   \end{algorithmic}
 \end{algorithm}
 
@@ -152,10 +152,10 @@ where $e=t-\hat{t}$. After a round of updating, we then adjust the parameters ac
 \\&{\mu_m}^\prime=\mu_m+\eta\gamma_2(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
 \end{aligned}
 \end{equation*}
-The Tensor Factorization method is summarized in Procedure \ref{alg::conjugateGradient}, which is not hard to implement since it accesses only one row of $\mathbf{P}$, $\mathbf{Q}$, $\mathbf{W}$ at a time.
+The Temporally-Regularized Tensor Factorization is summarized in Procedure \ref{alg::conjugateGradient}, which is not hard to implement since it accesses only one row of $\mathbf{P}$, $\mathbf{Q}$, $\mathbf{W}$ at a time.
 
 TF applies similar normalization and stopping criterion trick as shown in Section \ref{sec:mf}.
-Empirically one can usually achieve reasonable performance by imposing the following constraints on the parameter learning:  
+Empirically, one can achieve reasonable performance by imposing the following constraints on the parameter learning:  
 \begin{equation*}
 \beta_1=\beta_2=\beta_3=\beta_4=\beta_5=\beta_6, \gamma_1=\gamma_2.
 \end{equation*}
