@@ -103,7 +103,7 @@ As to the MTR-MF model, the results show that MTR-MF-part does not outperform TR
 %We compare our TF method with models not incorporating heterogeneous sensor correlations in this section.
 %Table ? and ? show the TF result of random split and temporal split on Berkeley dataset while table ? and ? show the TF result of random split and temporal split on traffic dataset.
 
-\subsection{Designing Prediction Models after Imputation}
+\subsection{Designing Prediction Models after Imputation}\label{subsec:furtherPredict}
 As stated previously, one main reason to conduct data imputation is that most off-the-shelf data analysis tools cannot deal with inputs with missing values. Here one practical question to ask is: whether our imputation outcomes can indeed lead to the development of a better analysis model? Here we conduct an experiment using the 20 sensors in the traffic dataset to build two regression models (linear regression and support-vector regression). In the epxeriment, we first remove the gateway signal from the matrix, and use TR-MF as well as the other competitor models (including global mean, LI, hybrid-KNN) to fill in all the missing values in the remaining 20 sensors. Then for each imputation model, we use the filled-in readings of these 20 sensors as the inputs X and the gateway values as the output Y to train the regression models for gateway-value prediction. We divide the data randomly into 80\% training and 20\% testing, and show the results of both regression models in Table 6 and Table 7. The results confirm our hypothesis that the a better imputation model does lead to the production of a better prediction model, and TR-MF again outperforms the other models in this aspect.
 
 \begin{table} [htbp]
