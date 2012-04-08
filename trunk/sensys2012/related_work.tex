@@ -40,7 +40,7 @@ Such methods the advantage of handling categorical sensor data, but the performa
 %  The two major drawbacks of KNN-based model that predicts only from the spatial correlation are: first of all,  they cannot capture temporal correlation, and the second reason is that most of these methods rely on the knowledge of distance between each sensor, which might not be available or accurate in the real world.
 
 The multiple imputation(MI) procedure\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values instead of filling in a single value. Various methods including multiple linear regression, propensity score method, and Markov chain Monte Carlo method are are reported and used in MI. The missing data are filled in $M$ times($M$=3-10,\cite{Little:hotdeck}) to generate M complete data sets, and the results from M generated data sets are combined for the inference\cite{yuan2000multiple}. The final estimate comes from the average of these $M$ values. 
-However, this method is critized on various grounds by WSNs imputation researchers\cite{jiang2007estimating} \cite{Gruenwald:FARM}. First, in sensor data stream, we do not know how many rounds of information shall we use in order to get the associated information.
+However, this method is criticized on various grounds by WSNs imputation researchers\cite{jiang2007estimating} \cite{Gruenwald:FARM}. First, in sensor data stream, we do not know how many rounds of information shall we use in order to get the associated information.
 In addition, it is difficult to draw a pool of similar complete cases for a certain round of a certain sensor. 
 Last, it consumes unnecessary time since the sensor data may or may not related to all of the available information.
 
