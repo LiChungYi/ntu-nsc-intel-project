@@ -8,11 +8,11 @@
 
 \subsection{Parameter Setting} \label{subsec:parameter}
 
-For both MF and TF models, we have realized that the parameter setting in random split experiments has to be different from that in temporal split experiments. In a nutshell, wstronger regularization is needed in temporal split. Below we provide some qualtative analysis using examples. 
+For both MF and TF models, we have realized that the parameter setting in random missing experiments has to be different from that in consecutive missing experiments. In a nutshell, stronger regularization is needed in consecutive missing scenario. Below we provide some qualitative analysis using examples. 
 
 %Here we ignore bias terms for simplicity.
-Equation 6.1 shows a random missing case and 6.2 shows a continuous missing case. In random missing, the confidence for prediction is usually higher and the model relies more on temporal correlation, therefore it is preferred to use more factors and weaken the strength of conventional regularization (i.e. try to overfit the data). Note that here the term conventional refers to the normal regularization imposing to the latent features, not the additonal ones we proposed. 
-As shown in equation 6.1, the linear interpolation model can be viewed as a special-case solution for TRMF, in which the number of factors is large and less regularization is applied. 
+Equation \ref{randomSplit_matrix} shows a random missing case and \ref{temporalSplit_matrix} shows a consecutive missing case. In random missing, the confidence for prediction is usually higher and the model relies more on temporal correlation. Therefore it is preferred to use more factors and weaken the strength of conventional regularization (i.e. try to over-fit the data). Note that here the term conventional refers to the normal regularization imposing to the latent features, not the additional ones we proposed. 
+As shown in equation 6.1, the linear interpolation model can be viewed as a special-case solution for TR-MF, in which the number of factors is large and less regularization is applied. 
 \begin{equation}
 \label{randomSplit_matrix}
 \begin{bmatrix}
@@ -38,7 +38,7 @@ As shown in equation 6.1, the linear interpolation model can be viewed as a spec
 \end{bmatrix} 
 \end{equation}
 
-In contrast to the random missing case, in continuous missing scenario we can't rely too much on temporal correlations because they do not exist. Therefore, the model tries to rely more on the correlations between sensors or spatial information, and is less confident about the prediction it makes. In this case, we want to avoid overfitting by imposing stronger conventioal regularization.
+In contrast to the random missing case, in consecutive missing scenario we can't rely on temporal correlations because the readings on the neighboring time steps are also missing. Therefore, the model tries to rely mostly on the correlations between sensors or spatial information, and is less confident about the prediction it makes. In this case, we want to avoid over-fitting by imposing stronger conventional regularization.
 
 \begin{equation}
 \label{temporalSplit_matrix}
@@ -66,24 +66,23 @@ In contrast to the random missing case, in continuous missing scenario we can't 
 
 Below we share the actual values of the parameters that yield the results of decent quality.
 The learning rate $\eta$ is $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, which is chosen as the largest value that is capable of producing stable and consistent improvement during the optimization.
-Also a strong temporal regularization is always preferred.
-Temporal regularization is set to 0.2/learning-rate in all of our experiment.
-The conventional regularization is $0.001$ for temporal split and $0$ for random split in MF, while in TF, it is $0.005$ for temporal split and $0.001$ for random split.
-Finally, we observe that using larger latent features $K$ usually doesn't lead to overfitting because SGD is a natural regularization that prefers small factor values, but the training time becomes longer.
+The temporal regularization is set to $0.2$ divided by learning-rate $\eta$ in all of our experiment.
+The conventional regularization is $0.001$ in consecutive missing and $0$ for random missing in MF, while in TF, it is $0.005$ for consecutive missing and $0.001$ for random missing.
+Finally, we observe that using more latent factors (large $K$) usually doesn't lead to over-fitting because SGD is a natural regularization that prefers small factor values, but the training time becomes longer.
 The number of factors $K$ is $54$ for MF and $30$ for TF in Berkeley data set, and it is $21$ for MF and $10$ for TF in traffic data set. 
 
 \subsection{Time Complexity Analysis}
 Here we first discuss the complexity in learning MF and TF models, and then we discuss their complexity in prediction.
 Let us denote the number of factors as $K$, the number of sampling (i.e. time steps) as $F_1$ and the number of sensor nodes as $F_2$ in TR-MF and STR-MF. For 3rd-order TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
 Assuming there are $R$ spatial and temporal regularization terms, and there are $N$ observed readings from the training set, then the time required for each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$)for both MF and TF.
-The total iteration number varies with data quaility, the missing rate, and some paramters such as the learning rate as well as the stopping criteria. 
-Note that we would like to emphasize that the training time is not as important as the prediction time, as normally we only need to train our model once to learn the optimal features and paramters for prediction.
+The total iteration number varies with data quality, the missing rate, and some parameters such as the learning rate as well as the stopping criterion. 
+Note that we would like to emphasize that the training time is not as important as the prediction time, as normally we only need to train our model once to learn the optimal biases and factors for prediction.
 
-The imputation time is more critical as ideally we hope to achieve real-time prediction given a learned model. 
-Both MF and TF are very efficient in prediction in thoery and practice.
+The imputation time is critical as ideally we hope to achieve real-time prediction given a learned model. 
+Both MF and TF are very efficient in prediction in theory and practice.
 To predict a missing value, it takes $2K$ multiplication operations to MF and $3K$ multiplication operations to TF.
 Since $K$ is relatively small so the prediction can be done in real time.
-On a normal laptop, it takes less than a second to predict all values for our Berkey data matrix ($270000$ values).
+On a normal laptop, it takes less than a second to predict all values for our Berkeley data matrix ($270000$ values).
 
 %\begin{comment}
 %In the training phase, TRMF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TRMF cost  
