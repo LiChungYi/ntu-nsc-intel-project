@@ -32,7 +32,7 @@ In the followings, we will first introduce the tensor decomposition models and t
 
  
 \subsubsection{Tensor Decomposition}
-Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963~\cite{tucker1963TF}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimension.
+Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963~\cite{tucker1963implications}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimension.
 A $M\times N \times C $ tensor $\mathbf{T}$ can be decomposed as:
 
 \begin{equation*}
@@ -49,7 +49,7 @@ where the vectors $\mathbf{p}_i$, $\mathbf{q}_j$, and $\mathbf{w}_k$ are the col
 
 %\subsubsection{Canonical Decomposition}
 
-Tucker decomposition is computationally expensive, and researchers have proposed a more efficient Decomposition called Canonical Decomposition~\cite{carrol1970CD}, which factorizes a tensor into a sum of $K$ rank-one tensors.
+Tucker decomposition is computationally expensive, and researchers have proposed a more efficient Decomposition called Canonical Decomposition~\cite{carroll1970analysis}, which factorizes a tensor into a sum of $K$ rank-one tensors.
 Canonical Decomposition~(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is super-diagonal.
 Formally, The Canonical Decomposition of $\mathbf{T}$ is
 \begin{equation*}
@@ -71,7 +71,7 @@ $\mathbf{x}_i$,$\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\math
 %\subsubsection{Objective function}
 
 Existing Tensor Decomposition models require a dense tensor, which is unsuitable for missing data estimation with a decent missing rate. 
-Therefore, we introduce an $N$-order Tensor Factorization (TF) model for missing data estimation. Although tensor factorization has been studied for a while~\cite{tg2009td,bergqvist2010hosvd} and enjoys certain level of success in building context-aware recommender systems~\cite{karatzoglou2010multiverse,steffen2010pairwise,zeno2010context}, we have not yet seen any proposal to leverage such techniques for WSN data imputation.
+Therefore, we introduce an $N$-order Tensor Factorization (TF) model for missing data estimation. Although tensor factorization has been studied for a while~\cite{kolda2009tensor,bergqvist2010higher} and enjoys certain level of success in building context-aware recommender systems~\cite{karatzoglou2010multiverse,rendle2010pairwise,gantner2010factorization}, we have not yet seen any proposal to leverage such techniques for WSN data imputation.
 
 Similar to TR-MF, TR-TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
 Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, a Tensor can be described as :
