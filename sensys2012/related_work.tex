@@ -76,7 +76,8 @@ It measures the influence of the data sensed by the active node i on the data of
 In the method, the temporal feature holds a very small portion of contribution to the prediction process and it often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e. blocked by a wall.
 % \subsubsection{Applying K-nearest neighbour Estimation}
 
-K-nearest neighbours algorithm(KNN) is a intuitive spatial correlation based imputation method. It has been adopted to estimate the missing value of DNA micro-arrays\cite{Troyanskaya:DNAKNN}. However, it only directly uses the weight average of other genes to fill the missing data. While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
+K-nearest neighbours algorithm(KNN) is an intuitive yet effective spatial correlation based imputation method. It directly uses the weighted average of the neighbor signals to fill the missing data, and has been adopted to successfully estimate the missing values of DNA micro-arrays\cite{Troyanskaya:DNAKNN}.  
+%While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
 Pan\cite{pan2010k} propose the Applying K-nearest neighbour Estimation algorithm(AKE) to exploit the spatial correlation in the missing sensory data problem. They argue that the past research on sensor imputation(STI) estimates the missing problem based on more temporal correlation than spatial correlation(STI). In their observation, the sensor data in WSN often changes rapidly and sharply especially in outside environment. The AKE adopts the linear regression model,
 %\begin{equation}
 $\hat{y}_{it} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}$
@@ -107,8 +108,7 @@ Moreover, in certain scenarios where two far away sensors have higher correlatio
 Finally, the preference on spatial over temporal is also being challenged when the sampling rates is very high, i.e. the body sensors, using temporal linear interpolation has better prediction.   
 
 %\subsubsection{Imputation Method-ImM}
- In \cite{Lim:robust}, an imputation method(ImM) consists of two temporal and one spatial predictors was introduced.  The algorithm argues that it is not robust to set the preference for its spatial predictor over temporal predictor, or vice versa.
-They assume that the predictor which yields the most accurate results in the training data set is used to predict the missing packets. 
+% In \cite{Lim:robust}, an imputation method(ImM) consists of two temporal and one spatial predictors was introduced.  The algorithm argues that it is not robust to set the preference for its spatial predictor over temporal predictor, or vice versa. They assume that the predictor which yields the most accurate results in the training data set is used to predict the missing packets. 
 %The first temporal predictor(LRS) uses the last transmitted packet as the predicted value eq\ref{lrs}.
 %\begin{equation}
 %\hat{y}_{t} =y_{t-1} \label{lrs}
@@ -124,37 +124,15 @@ They assume that the predictor which yields the most accurate results in the tra
 %\label{ImM_Spatial}
 %\end{equation}
 % where the weights is determined by weighted coefficients(WC) using least square method$[a_1,a_2,\dots,a_L]^T = (O^TO)^{-1}O^To$.
-However, the performance of the ImM may degrades if the changes in the continuous data stream are sharp in the high sampling rate data set. 
-For example, the wind sensors in the windy climate area may affect the method applied on the target sensor.  
-\subsection{Review of Matrix Factorization  }
-Matrix factorization has many applications in computer visions, recommendation system\cite{chen2011linear}, and data imputation. Their goals are to factorize the measurement matrix R and find the two subspace: U and V, $M_{d\times n}= U_{d\times k}V^t_{k\times n}$. 
-We will introduce two applications other than WSNs data imputation in the following sections. The first application is the EOF-based prediction method in satellite photography and the second one is the Structure-from-motion(SFM) in computer vision.
-%\begin{equation}
+%However, the performance of the ImM may degrades if the changes in the continuous data stream are sharp in the high sampling rate data set. 
+%For example, the wind sensors in the windy climate area may affect the method applied on the target sensor.  
 
-%\end{equation}
+\subsection{Matrix Decomposition Models}
 %\subsubsection{Prediction based on Empirical Orthogonal Functions }
-Empirical Orthogonal Functions(EOF) has been applied to oceanographic application to solve the problem of missing or unreliable satellite data\cite{beckers2003eof}. 
-They propose the DINEOF (Data Interpolating Empirical Orthogonal Functions) which is an Singular value decomposition(SVD)-based technique for the reconstruction of missing data.
-In their method, given a matrix $X_{m*n}$ with its entry $(X)_{ij}$ which contains the observations values at $i$ and moment $j$. 
-%in eq\ref{EOF}, $X_\gamma$ is the matrix whose items are zero except the missing data points.
-$U_N$ is the matrix constructed by the first $N$ spatial EOFs, which have the same meaning as $N$-modes in SVD. 
-At the beginning, the missing values are filled with zero first, then the prediction is by:
-%\begin{equation}
-$(X_\gamma)_{ij} = (U_ND_NV_N^T)_{ij}$
-\label{EOF}
-%\end{equation}
-The operations stop when $X_{ij}$ is filled by all the missing item with their prediction in $(X_\gamma)_{ij}$. 
-Researchers of \cite{alvera2009enhancing} point out that when large gap of data missing due to clouds or rains, the remained observations may not be representative of the whole spatial variability of the domain. Therefore they apply a Laplacian filter $F$ on the terms of $X$ before the estimations of EOFs. After filtering, two consecutive images in matrix $X$ with a large time gap between them are less related than two consecutive images. 
-%\begin{eqnarray}
-%&&\tilde{B} = F^TBF \\
-%&&B=X^TX
-%\label{enhance_eof}
-%\end{eqnarray} 
-However, there are several drawbacks in the SVD-based methods when apply to impute large-scale sensors network. First, SVD needs to fill all the missing values before factorization which can be very expensive as it significantly increases the amount of data. The inaccurate imputation might also distort the data considerably\cite{koren2009matrix}. In addition,\cite{ke2005robust} point out SVD is sensitive to outliers and missing data. 
+The Matrix decomposition model is the one that is closest to our solution. Here we introduce the Empirical Orthogonal Functions(EOF), which has been applied to oceanographic application to solve the problem of missing or unreliable satellite data\cite{beckers2003eof}. 
+They propose a Singular Value Decomposition(SVD)-based technique for the reconstruction of missing data. In EOF, they have to first fill in the missing values (e.g. using all zero or mean values) and then perform SVD to decompose the matrix. Then they use the first k spatial-EOF (i.e. the top-k singular values in SVD) to reconstruct the matrix (i.e. perform dimension reduction) for imputation, where k is determined through cross validation over data.
+Researchers have pointed out several drawbacks in the SVD-based methods when applying to impute large-scale sensors network. First, given large data, performing SVD is extremely computational demanding as the inverse of a dense matrix is required. Second, it requires to fill all the missing values before the decomposition can be performed, and imperfect initial imputation (i.e. reseachers argue that filling all zeros is questionable) can significantly hurt the final imputation results, in particular when the missing ratio is high \cite{koren2009matrix}\cite{ke2005robust}. 
   
 %\subsubsection{Matrix Factorization on Structure of Motion} 
-Structure from motion(SFM)\cite{tomasi1992shape} and motion estimation are among the most important application in computer vision.   
-A number of studies have investigated different approaches to the MF-based structure from motion problem. \cite{buchanan2005damped} performs the L2-norm minimization using the standard Newton algorithm with a damping factor. In \cite{okatani2011efficient}, they propose a new method incorporates the damping factor into the Wiberg method to solve the L2-norm problem. A L1-norm factorization using Wiberg method is proposed in\cite{eriksson2010efficient}. 
-%They turn the objective function into a non-linear least square problem and adopt Gauss-Newton method to solve the problem. 
-However, the size and ranks of the video data is different from the long-term and densely deployed sensor data. 
-The rank of linear subspace in SFM has rank of three after it is subtracted by its column-wise mean. It is also noted that the video camera in essential is an univariate sensor device which is different from the nature of heterogeneity of sensor networks. 
+%tructure from motion(SFM)\cite{tomasi1992shape} and motion estimation are among the most important application in computer vision.   A number of studies have investigated different approaches to the MF-based structure from motion problem. \cite{buchanan2005damped} performs the L2-norm minimization using the standard Newton algorithm with a damping factor. In \cite{okatani2011efficient}, they propose a new method incorporates the damping factor into the Wiberg method to solve the L2-norm problem. A L1-norm factorization using Wiberg method is proposed in\cite{eriksson2010efficient}. 
+%They turn the objective function into a non-linear least square problem and adopt Gauss-Newton method to solve the problem. However, the size and ranks of the video data is different from the long-term and densely deployed sensor data. The rank of linear subspace in SFM has rank of three after it is subtracted by its column-wise mean. It is also noted that the video camera in essential is an univariate sensor device which is different from the nature of heterogeneity of sensor networks. 
