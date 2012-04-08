@@ -1,4 +1,4 @@
-\subsection{Results on STR-MF} \label{experimental_results_spatial}
+\subsection{Experimental Results on STR-MF} \label{experimental_results_spatial}
 Next we focus on using the Berkeley dataset to verify the STR-MF model because the traffic data do not contain sufficient location information to be exploited.
 
 \begin{table} [htbp]
@@ -41,11 +41,11 @@ train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \be
 Table \ref{table:spatial_random} and \ref{table:spatial_temporal} compare STF-MF with TR-MF.
 Note that the capital STR-MF stands for TR-MF plus strong spatial regularization, while the small sTR-MF represents weaker spatial-regularized TR-MF. The results show that for random missing pattern, adding spatial regularization indeed hurts the performance. It is because in random missing cases, the information is sufficient for TR-MF to learn the spatial correlation between sensors, while enforcing similarity between near-by sensors can hurt the performance because they might not be that correlated. On the other hand, in the consecutive missing cases, adding spatial regularization does show sigificant improvement on humidity and temporature signal. In a nutshell, comparing TR-MF with STR-MF, the former is a pure data-driven model while the 2nd is slightly knowledge-driven. The experiments show that when we have sufficient data to learn the correlation between sensors for imputation, it is better to ignore the given knowledge because they might not be accurate; however, if the given data is not sufficient for us to learn a good model, incorporating the external spatial knowledge can be helpful.
 
-We conduct an interesting experiment to see whether the correlation learned by TR-MF in random missing cases does reflect our hypothesis of spatial correlation (i.e. Figure 7(a)). For each of the humidity and light data, we first use the TR-MF model to learn the latent factors of each sensor node given random missing under 85% training data. Based on the latent factors q, we can then define the similarity between sensor nodes $n_i$ and $n_j$ as:
+We conduct an interesting experiment to see whether the correlation learned by TR-MF in random missing cases does reflect our hypothesis of spatial correlation (i.e. Figure 7(a)). For each of the humidity and light data, we first use the TR-MF model to learn the latent factors of each sensor node given random missing under 85\% training data. Based on the latent factors q, we can then define the similarity between sensor nodes $n_i$ and $n_j$ as:
 %\begin{equation*}
 $\frac{q_{n_i}^T q_{n_j}}{max(||q_{n_i}||^2, ||q_{n_j}||^2)},$
 %\end{equation*}
-and we get the similarity graph:
+
 \begin{figure}[ftbp]
 \centering
 \subfigure[Expected Similarity]{
@@ -61,4 +61,4 @@ and we get the similarity graph:
 \caption{similarity graph}
 \end{figure}
 
-Then we identify the top 100 closest pairs and draw a line between them on the floor plan. We can see that the manually hypothesized spatial correlation plot 7(a) is indeed more similar to the one learned from humidity data (Figure 7(b)) than to the one learned from light data (Figure 7(c)). This experiment shows two intereseting insights. First, the manuallly crafted spatial correlation might not reflect the true correlation between sensor signals, because they might not consider other factors such as those described in the example of Figure 1. Second, if the human knowledge of spatial correlation does to some extent reflect the true correlation of certain sensor signal, incorporating them in scenarios with limited information (e.g. the consecutive missing pattens) can be helpful (i.e. the humidity imputation in Table 5 improves with spatial information); otherwise it is useless (i.e. no improvement for the light imputation in Table 5).
+Then we identify the top 100 similar pairs and draw a line between each of them on the floor plan. We can see that the manually hypothesized spatial correlation plot 7(a) is indeed more similar to the one learned from humidity data (Figure 7(b)) than to the one learned from light data (Figure 7(c)). This experiment shows two intereseting insights. First, the manuallly crafted spatial correlation might not reflect the true correlation between sensor signals, because they might not consider other factors such as those described in the example of Figure 1. Second, if the human knowledge of spatial correlation does to some extent reflect the true correlation of certain sensor signal, incorporating them in scenarios with limited information (e.g. the consecutive missing pattens) can be helpful (i.e. the humidity imputation in Table 5 improves with spatial information); otherwise it is useless (i.e. no improvement for the light imputation in Table 5).
