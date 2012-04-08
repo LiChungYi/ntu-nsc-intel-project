@@ -85,7 +85,7 @@ Since $K$ is relatively small so the prediction can be done in real time.
 On a normal laptop, it takes less than a second to predict all values for our Berkeley data matrix ($270000$ values).
 
 %\begin{comment}
-%In the training phase, TRMF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TRMF cost  
+%In the training phase, TR-MF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TR-MF cost  
 %$\mathbf{O}(K)$ to predict a missing value.\\
-%Suppose the factor size of TF model is K, $F_1$, $F_2$, $F_3$ represent the number of three features use in TF. In the training phase. In the training phase, TF update factors 3NK times and update biases 3N times. After each iteration, the time regularization terms are also updates once. The complexity of a iteration is $\mathbf{O}(NK+N+F_1K+F_2K+F_3K)$. In the testing phase, TF also cost  $\mathbf{O}(K)$ to predict a missing. However,we found if you want to get the equally performance between TF and TRMF, the parameter $K$ of TF is usually smaller than TRMF.
+%Suppose the factor size of TF model is K, $F_1$, $F_2$, $F_3$ represent the number of three features use in TF. In the training phase. In the training phase, TF update factors 3NK times and update biases 3N times. After each iteration, the time regularization terms are also updates once. The complexity of a iteration is $\mathbf{O}(NK+N+F_1K+F_2K+F_3K)$. In the testing phase, TF also cost  $\mathbf{O}(K)$ to predict a missing. However,we found if you want to get the equally performance between TF and TR-MF, the parameter $K$ of TF is usually smaller than TR-MF.
 %\end{comment}

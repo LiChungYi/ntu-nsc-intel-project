@@ -185,7 +185,7 @@ exhibit high correlation in both time and space (subject to the above
 caveats on space).  To incorporate this property, we first modify MF
 to model temporal correlations and learn latent relationships among
 sensors.  Specifically, we add a {\em temporal regulation} bias to
-MF---we call this {\em temporally-regulated MF} (TRMF).
+MF---we call this {\em temporally-regulated MF} (TR-MF).
 
 Second, we consider sensor networks with multiple sensor types at each node.
 We are able to exploit such heterogeneous sensor information in our
@@ -195,7 +195,7 @@ signals (for example, estimating the temperature at a given sensor
 node utilizing the humidity, temperature, and light trends from other
 sensors in the network) to provide more accurate imputation than 
 prior approaches.  We present two techniques for extending 
-TRMF to account for possible correlations among sensor types: {\em Multivariate TRMF} and 
+TR-MF to account for possible correlations among sensor types: {\em Multivariate TR-MF} and 
 {\em Temporally-regularized Tensor Factorization} (TRTF).
 
 We evaluate our approaches using two environmental sensor network
@@ -209,14 +209,14 @@ random readings (modeling intermittent reading failures) and (ii)
 covering all readings for a subset of sensor nodes from a particular time onwards 
 (modeling long temporal gaps such as with failed sensors).
 
-Our results show that TRMF provides significantly higher estimation accuracy than 
+Our results show that TR-MF provides significantly higher estimation accuracy than 
 both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches 
 such as the hybrid-KNN model.
-Interestingly, adding spatial coordinate information into TRMF is shown to be ineffective---TRMF already
+Interestingly, adding spatial coordinate information into TR-MF is shown to be ineffective---TR-MF already
 captures the latent relationships among sensors, including spatial correlations.  
 
 For the heterogeneous setting, our results show that both TRTF and
-Multivariate TRMF are significantly more accurate than prior
+Multivariate TR-MF are significantly more accurate than prior
 approaches, and each has its strengths, depending on the observed
 variance in the readings.  Finally, we consider a popular data
 analysis task---building regression-based prediction models---and show
