@@ -74,13 +74,13 @@ Existing Tensor Decomposition models require a dense tensor, which is unsuitable
 Therefore, we introduce an $N$-order Tensor Factorization (TF) model for missing data estimation. Although tensor factorization has been studied for a while~\cite{tg2009td,bergqvist2010hosvd} and enjoys certain level of success in building context-aware recommender systems~\cite{karatzoglou2010multiverse,steffen2010pairwise,zeno2010context}, we have not yet seen any proposal to leverage such techniques for WSN data imputation.
 
 Similar to MF, TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
-Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, a TF can be described as :
+Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, a Tensor can be described as :
 
 \begin{equation*}
 \mathbf{T} := F_1 \times  F_2 \times F_3 \rightarrow \mathbf{R} 
 \end{equation*}
 
-Such tensor factorization model decomposes the reading tensors into three features $F_1, F_2, F_3$, one of them represents the temporal dimension, the rest can represent sensor nodes, sensor node coordinates, heterogeneous sensor readings, etc. In the experiments, we implemented a 3rd-order tensor model and choose the sensor nodes as well as the multivariate sensor readings as the remaining two dimensions.
+Tensor factorization model decomposes the reading tensors T into three features, one of them represents the temporal dimension, the rest can represent sensor nodes, sensor node coordinates, heterogeneous sensor readings, etc. In the experiments, we implemented a 3rd-order tensor model and choose the sensor nodes as well as the multivariate sensor readings as the remaining two dimensions.
 
 In contrast to the conventional tensor decomposition, the factorization model we proposed aims at learning the latent factors $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ of the three dimensions $F_1, F_2, F_3$.
 To avoid over-fitting and to reduce the complexity of prediction, our model borrows the idea of Canonical Decomposition rather than Tucker decomposition. Note that the time complexity for making prediction is only $O(K)$, where $K$ is the factor size of $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$. Thus, the complexity is independent of the rank of the tensor, which is a favorable property because we can freely add new dimensions into the model without concerning about the efficiency.
