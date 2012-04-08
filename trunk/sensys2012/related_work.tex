@@ -62,8 +62,7 @@ The prediction function of sensor $i$ is:
 %\begin{equation}
 $\hat{y_{it}} = (1-\alpha)\hat{y_{i(t-1)}} + (\alpha)\hat{z}$
 %\end{equation}
-
-where $\hat{y_{i(t-1)}}$ and $\hat{y_{i(t-1)}}$ represent the signal value in the current and the previous time stamp, and $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and the nearest sensor $j$.
+where $\hat{y_{i(t)}}$ and $\hat{y_{i(t-1)}}$ represent the signal value in the current and the previous time stamp, and $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and the nearest sensor $j$.
 The above equation assumes that the sensor $X_i$ and $X_j$ have the similar data fluctuation trend. 
 %$\alpha$ is expected to have more impact on the prediction if $X_i$ is more correlated with $X_j$. 
 $\hat{y_{it}}$ is the last estimated value, which measures the influence of the historical sensing data on the current value at node i. 
