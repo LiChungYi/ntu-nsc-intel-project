@@ -23,7 +23,7 @@ Firstly, for each row (time step), we need two bias terms: one for temperature r
 
 One main concern for the multivariate (S)TR-MF model is that it does not fully exploit the mutual-dependency between the multiple sensor signals in one node. For instance, we did not specify which column in $\mathbf{R}_{tem}$ corresponds to which column in $\mathbf{R}_{hum}$ as coming from the same node. Therefore, here we propose a more complex tensor model to capture such relationship. 
 
-Tensor can be regarded as a high-dimensional matrix, and is usually exploited to represent multi-dimensional data. The previously introduced MF can model only 2-dimensional correlations such as the sensor/time-step readings. With a 3rd-order tensor, we can add one more dimension into the model (e.g. sensor1/sensor2/time-step or sensor/location/time-step). In order to deal with such high-dimensional data structure, mathematicians have proposed the tensor-decomposition methods to capture its latent factors. 
+Tensor can be regarded as a high-dimensional matrix, and is usually exploited to represent multi-dimensional data. The previously introduced TR-MF can model only 2-dimensional correlations such as the sensor/time-step readings. With a 3rd-order tensor, we can add one more dimension into the model (e.g. sensor1/sensor2/time-step or sensor/location/time-step). In order to deal with such high-dimensional data structure, mathematicians have proposed the tensor-decomposition methods to capture its latent factors. 
 
 Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition (SVD). Similar to SVD, Tensor Decomposition methods assume a fully occupied matrix $\mathbf{R}$, while such assumption is not as valid for data imputation purpose as for dimension reduction purpose.
 %Treating $\mathbf{R}$ as a dense tensor with missing entries being assume to be 0.
@@ -73,7 +73,7 @@ $\mathbf{x}_i$,$\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\math
 Existing Tensor Decomposition models require a dense tensor, which is unsuitable for missing data estimation with a decent missing rate. 
 Therefore, we introduce an $N$-order Tensor Factorization (TF) model for missing data estimation. Although tensor factorization has been studied for a while~\cite{tg2009td,bergqvist2010hosvd} and enjoys certain level of success in building context-aware recommender systems~\cite{karatzoglou2010multiverse,steffen2010pairwise,zeno2010context}, we have not yet seen any proposal to leverage such techniques for WSN data imputation.
 
-Similar to MF, TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
+Similar to TR-MF, TR-TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
 Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, a Tensor can be described as :
 
 \begin{equation*}
@@ -85,7 +85,7 @@ Tensor factorization model decomposes the reading tensors T into three features,
 In contrast to the conventional tensor decomposition, the factorization model we proposed aims at learning the latent factors $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ of the three dimensions $F_1, F_2, F_3$.
 To avoid over-fitting and to reduce the complexity of prediction, our model borrows the idea of Canonical Decomposition rather than Tucker decomposition. Note that the time complexity for making prediction is only $O(K)$, where $K$ is the factor size of $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$. Thus, the complexity is independent of the rank of the tensor, which is a favorable property because we can freely add new dimensions into the model without concerning about the efficiency.
 
-Similar to the MF model, we also add bias terms to each dimension into the TF model. The prediction function is:
+Similar to the TR-MF model, we also add bias terms to each dimension into the TF model. The prediction function is:
 \begin{equation*}
 \begin{aligned}
 \mathbf{\hat{T}}_{mnc}=\mu_m+\mu_n+\mu_c + \mathbf{p}_m \otimes \mathbf{q}_n\otimes \mathbf{w}_c
@@ -101,7 +101,7 @@ $l$ is a point-wise loss function penalizing the distance between estimate and o
 ideally $l$ should be as close to the eventual evaluation metrics (e.g. least square error in our implementation) as possible.
 
 Simply minimizing a loss function in TF is prone to over-fitting. Here we add regularization terms based on the $L_2$ norm to ensure that the model complexity does not grow without bound to avoid over-fitting.
-Similar to our MF model, we also add the time regularization terms into our model.
+Similar to our TR-MF model, we also add the time regularization terms into our model.
 Finally, the objective function of tensor factorization becomes :\\
 \begin{equation*}
 \begin{aligned}
