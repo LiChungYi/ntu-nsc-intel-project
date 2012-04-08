@@ -10,7 +10,8 @@ We also exploit two missing patterns: random missing and consecutive missing.
 The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature, humidity, light, and voltage for 54 sensors (with one sensor completely missing) for which locations are given (see Figure \ref{berkeley_lab}) during February 28th and April 5th, 2004 in an indoor lab environment.
 The dataset includes 2.3M sensor observations, over 210K samples along the temporal dimension.
 Since the completeness of data degrades after 10000 samples, in our experiments only the first 2500, 5000, or 10000 samples were used.
-We found the performances of models are similar in these three cases, therefore we report only results from 5000 samples. 
+We found the performances of models are similar in these three cases, therefore we report only results from 5000 samples.
+The inherent missing rate for these first 5000 samples is roughly 49\%.
 
 \begin{figure}[H]
 \centering
@@ -23,7 +24,7 @@ We found the performances of models are similar in these three cases, therefore 
 The NTU Traffic Dataset records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
 This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan\cite{liu2011developed}.
 The sampling rate is roughly once every 30 minutes.
-Along the temporal dimension, we use the entire range which consists of roughly 43K time stamps.
+Along the temporal dimension, we use the entire range which consists of roughly 43K time stamps which has an inherent missing rate of roughly 58\%.
 %This dataset only reveals 8 
 
 Note that for both Berkeley and NTU datasets, simple preprocessing rules were applied to remove apparent outliers.
@@ -53,7 +54,7 @@ In the traffic dataset, observations are removed if temperature \mbox{$>100\degc
 %Datasets of various lengths are produced from the single input dataset for our experiments, namely 2500, 5000, and 10000.
 %There is an initially missing portion of the observations which can be considered Missing At Random (MAR).To this, we impose two different types of Missing Completely At Random (MCAR) sampling techniques to build validation and testing datasets.
 
-Although both datasets intrinsically have missing readlings, we cannot use those for evaluation because their true values are unknown.
+Although both datasets intrinsically have missing readings, we cannot use those for evaluation because their true values are unknown.
 Instead we devised two strategies to produce artificial missing data.
 \paragraph*{Random Missing Pattern}
 
