@@ -11,16 +11,16 @@ To incorporate this property, we modify the widely successful Matrix Factorizati
 to model temporal correlations and learn latent relationships among sensors.
 We evaluate the approach using two environmental sensor network datasets, one indoor and one outdoor, and
 two imputation tasks, corresponding to intermittent readings and failed sensors.
-The results show that our Temporally-regularized MF (TRMF) approach provides significantly higher estimation accuracy than 
+The results show that our Temporally-regularized MF (TR-MF) approach provides significantly higher estimation accuracy than 
 both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches 
 such as the hybrid-KNN model.
-Interestingly, adding spatial coordinate information into TRMF is shown to be ineffective---TRMF already
+Interestingly, adding spatial coordinate information into TR-MF is shown to be ineffective---TR-MF already
 captures the latent relationships among sensors, including spatial correlations.
 
 Next, we consider sensor networks with multiple sensor types at each
-node.  We present two techniques for extending TRMF to account for
+node.  We present two techniques for extending TR-MF to account for
 possible correlations among sensor types (e.g., temperature and
-humidity): Multivariate TRMF and Temporally-regularized Tensor
+humidity): Multivariate TR-MF and Temporally-regularized Tensor
 Factorization.  Our results show that both techniques are
 significantly more accurate than prior approaches, and each has its
 strengths, depending on the observed variance in the readings.
