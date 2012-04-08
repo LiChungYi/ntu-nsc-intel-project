@@ -7,23 +7,19 @@ Note that we only know the location information of 8 out of 20 sensors in traffi
 %Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the results of different models random split on Berkeley data set. In the plot, the x-axis represents the missing ratio. Conceivably the difficulty of an imputation task arises with th increase of missing ratio, therefore we can see that the slopes for most of the lines in the plot are nonpositive. Also note that to highlight the difference between the better models, we cut the overflowed RMSE values of the inferior models to the maximum values that can be displayed in the plot. That says, the flat lines on top of the plots usually indicate the exact RMSE is even higher than what has been shown.
 
 Figure \ref{fig:berkeley_random_hum}, \ref{fig:berkeley_random_light}, \ref{fig:berkeley_random_tem}, \ref{fig:traffic_random_hum} and \ref{fig:traffic_random_tem} show the result of random missing. The outcome indicates several interesting facts. First, TR-MF outperforms the original MF significantly, which demonstrates the effectiveness of the temporal regularization. In general, TR-MF shows significant improvement over all the other methods. On the other hand, LT is quite competitive on Berkeley data, especially for lower missing ratio cases. This is because the sampling rate of Berkeley data set is fairly high, so using only temporal correlation is sufficient to obtain decent results. In a data set with lower sampling rate as the traffic data, the spatial-oriented methods such as AKE outperform LI. 
-
-%\begin{table}[htbp]
-%\setlength{\tabcolsep}{2pt}
-%\centering
-%\caption{RMSE of (Berkeley, random, humidity)}
-%\label{table:berkeley_random_hum}
-%\begin{tabular}{ r | r r r r r r}
-%	train	&LI	&TR-MF	&AKE	&DESM	&STI &MI\\ \hline
-%	10\% & $ 0.171_{(2)} $ & $ \mathbf{ 0.142_{(1)} } $ & $ 0.264_{(3)} $ & $ 0.544_{(4)} $ & $ 1.220_{(5)} $&$0.190$ \\
-%	20\% & $ 0.127_{(2)} $ & $ \mathbf{ 0.114_{(1)} } $ & $ 0.244_{(3)} $ & $ 0.318_{(4)} $ & $ 1.472_{(5)} $ &$ 0.151$\\
-%	40\% & $ 0.095_{(2)} $ & $ \mathbf{ 0.092_{(1)} } $ & $ 0.199_{(3)} $ & $ 0.219_{(4)} $ & $ 1.648_{(5)} $ &$ 0.101$\\
-%	60\% & $ 0.085_{(2)} $ & $ \mathbf{ 0.082_{(1)} } $ & $ 0.181_{(4)} $ & $ 0.180_{(3)} $ & $ 1.649_{(5)} $ &$ 0.092$\\
-%	80\% & $ \mathbf{ 0.075_{(1)} } $ & $ 0.076_{(2)} $ & $ 0.127_{(3)} $ & $ 0.160_{(4)} $ & $ 1.604_{(5)} $ &$0.079$ \\
-%	85\% & $ \mathbf{ 0.074_{(1)} } $ & $ 0.075_{(2)} $ & $ 0.121_{(3)} $ & $ 0.148_{(4)} $ & $ 1.549_{(5)} $ &$0.082$ \\ \hline
-%	rank &1.67 &1.33 &3.17 &3.83 &5.00 \\
-%\end{tabular}
-%\end{table}
+The result of comparison between TR-MF and EOF is in \ref{table:trmf_eof}. The high missing rate in sensory data influence the performance of EOF. The result reveals that the EOF is outperformed by TR-MF in both RMSE and computation time. 
+\begin{table}[htbp]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{RMSE of TR-MF and EOF on (Berkeley,Random,Humid)}
+\label{table:trmf_eof}
+\begin{tabular}{ r | r r r r r r}
+		&10\%	&20\%	&40\%	&60\%	&80\% &85\% \\ 
+	 \hline
+	 TR-MF & 0.142 &0.114 &0.092&0.082&0.076 & 0.075 \\
+     EOF	 &0.645 &0.656 &0.734 &1.000 &1.385 &2.423\\
+\end{tabular}
+\end{table}
 %
 %\begin{table} [htbp]
 %\setlength{\tabcolsep}{2pt}
