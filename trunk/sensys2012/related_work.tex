@@ -39,7 +39,7 @@ Such methods the advantage of handling categorical sensor data, but the performa
 %\subsubsection{K-Nearest Neighbours Imputation} 
 %  The two major drawbacks of KNN-based model that predicts only from the spatial correlation are: first of all,  they cannot capture temporal correlation, and the second reason is that most of these methods rely on the knowledge of distance between each sensor, which might not be available or accurate in the real world.
 
-The multiple imputation(MI) procedure\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values instead of filling in a single value. Various methods including multiple linear regression, propensity score method, and Markov chain Monte Carlo method are are reported and used in MI. The missing data are filled in M times(M=3-10,\cite{Little:hotdeck}) to generate M complete data sets, and the results from all the M generated data sets are combined for the inference\cite{yuan2000multiple}. 
+The multiple imputation(MI) procedure\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values instead of filling in a single value. Various methods including multiple linear regression, propensity score method, and Markov chain Monte Carlo method are are reported and used in MI. The missing data are filled in $M$ times($M$=3-10,\cite{Little:hotdeck}) to generate M complete data sets, and the results from M generated data sets are combined for the inference\cite{yuan2000multiple}. The final estimate comes from the average of these $M$ values. 
 However, this method is critized on various grounds by WSNs imputation researchers\cite{jiang2007estimating} \cite{Gruenwald:FARM}. First, in sensor data stream, we do not know how many rounds of information shall we use in order to get the associated information.
 In addition, it is difficult to draw a pool of similar complete cases for a certain round of a certain sensor. 
 Last, it consumes unnecessary time since the sensor data may or may not related to all of the available information.
@@ -58,22 +58,22 @@ However, problems can arise if the last seen value is far away from the current 
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
 
 Another hybrid algorithm replying more on spatial than temporal is the Data Estimation using Statistical Model (DESM)\cite{li2008data}.  
-The prediction founction of sensor $i$ is:
+The prediction function of sensor $i$ is:
 %\begin{equation}
 $\hat{y_{it}} = (1-\alpha)\hat{y_{i(t-1)}} + (\alpha)\hat{z}$
 %\end{equation}
 
-where $\hat{y_{i(t-1)}}$ represents the signal value in the previous time stamp, and $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and the nearest sensor $j$.
-The above equation assumes that the $X_i$ and $X_j$ have the similar data fluctuation trend. 
+where $\hat{y_{i(t-1)}}$ and $\hat{y_{i(t-1)}}$ represent the signal value in the current and the previous time stamp, and $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and the nearest sensor $j$.
+The above equation assumes that the sensor $X_i$ and $X_j$ have the similar data fluctuation trend. 
 %$\alpha$ is expected to have more impact on the prediction if $X_i$ is more correlated with $X_j$. 
 $\hat{y_{it}}$ is the last estimated value, which measures the influence of the historical sensing data on the current value at node i. 
-$\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $i$ at the time $m$. 
-$\hat{z} = X_{j(m)}(1+\frac{X_{i(m+1)}-X_{(im)}}{X_{i(m)}})$
+$\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $i$. 
+$\hat{z} = X_{j(t-1)}(1+\frac{X_{i(t)}-X_{i(t-1)}}{X_{i(t-1)}})$
 It measures the influence of the data sensed by the active node i on the data of the nearest node j.  
 %\begin{equation}
 %\label{z-hat}
 %\end{equation}
-In the method, the temporal feature holds a very small portion of contribution to the prediction process and it often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e. blocked by a wall.
+In DESM, because $\alpha$ is usually high around the target sensor. Therefore, the temporal feature multiplied by $1-\alpha$ holds a very small portion of contribution to the prediction process. It often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e. blocked by a wall.
 % \subsubsection{Applying K-nearest neighbour Estimation}
 
 K-nearest neighbours algorithm(KNN) is an intuitive yet effective spatial correlation based imputation method. It directly uses the weighted average of the neighbor signals to fill the missing data, and has been adopted to successfully estimate the missing values of DNA micro-arrays\cite{Troyanskaya:DNAKNN}.  
@@ -96,7 +96,7 @@ For given node $i$ whose data is missing at time $t$, and the m nearest neighbou
 %\end{array}
 %\right)
 %\]
-In eq\ref{ake_impute}, the estimated $\hat{y}_{it}^{j}$ is computed by node $j$ using the coefficients of [$i,j$]. In designing the weighting function, the AKE gives higher correlation pairs a larger weight. They adopts the r-square statistics to rank their correlations due to when sensors have the higher $R^2$, they have the better regression equation fit. 
+In eq\ref{ake_impute}, the estimated $\hat{y}_{it}^{j}$ is computed by node $j$ using their linear regression coefficients($\alpha$, $\beta$). In designing the weighting function, the AKE gives higher correlation pairs a larger weight. They adopts the r-square statistics to rank their correlations due to when sensors have the higher $R^2$, they have the better regression equation fit. 
 %Based on the (eq\ref{ake_j}), the $R^2$ is computed by:
 %\begin{equation}
 %R_(j)^2 = \sum_{n=1}^{h} \frac{(\hat{y}_{in}^(j)-\bar{y}_i)^2}{(y_{in}-\bar{y}_i)^2}
