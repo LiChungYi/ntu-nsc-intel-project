@@ -20,33 +20,30 @@ The dataset includes 2.3M sensor observations, over 210K samples along the tempo
 The NTU Traffic Dataset records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
 This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan\cite{liu2011developed}. The sampling rate is roughly once per 30 minutes. We use the full length of dataset that consistes of roughly 43K time stamps.
 
-Note that for both Berkeley and NTU datasets, we wrote some simple preprocessing rules to remove apparent outlies. In Berkeley dataset, observations are removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}. In traffic dataset, observation removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
+Note that for both Berkeley and NTU datasets, simple preprocessing rules were applied to remove apparent outlies. In Berkeley dataset, observations are removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}. In traffic dataset, observation removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{traffic_wsn.png}
 \caption{NTU Traffic Sensor Deployment Configuration (8 sensors of 20 shown)}
 \end{figure}
 
-*\subsubsection{Dataset Preparation}
+%\subsubsection{Dataset Preparation}
 
-\paragraph*{Berkeley Dataset Outlier Removal and Gridding}
+%\paragraph{Berkeley Dataset Outlier Removal and Gridding}
 
-*Gridding : Dataset falls on even 30s intervals for the first 5000 time steps (which is all we consider), so no additional gridding need be performed.
-*Outlier Filtering : We use some simple rules to removed apparent errors. Observation removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
+%Gridding : Dataset falls on even 30s intervals for the first 5000 time steps (which is all we consider), so no additional gridding need be performed.
+%Outlier Filtering : We use some simple rules to removed apparent errors. Observation removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
 
-*\paragraph*{Traffic Dataset Outlier Removal and Gridding}
+%\paragraph*{Traffic Dataset Outlier Removal and Gridding}
 
 
-*Gridding : The original dataset recorded most readings at around the $xx:03$ and $xx:33$ minute marks, so a $6$ min window centered at these points captured the data for $30$ minute internal readings. Where more than one reading was recorded for a given node within a given window, the closest to the $3$ or $33$ minute mark was chosen. The full length of the dataset was used, which consists of $\approx 43$K 
+%Gridding : The original dataset recorded most readings at around the $xx:03$ and $xx:33$ minute marks, so a $6$ min window centered at these points captured the data for $30$ minute internal readings. Where more than one reading was recorded for a given node within a given window, the closest to the $3$ or $33$ minute mark was chosen. The full length of the dataset was used, which consists of $\approx 43$K 
 
-*Outlier Filtering : Observation removed if temperature \mbox{$<5\degc$} or \mbox{$>60\degc$} or if humidity \mbox{$<10\%$} or \mbox{$>100\%$}.
-time-steps.
-
-*\paragraph*{Common Methodology}
+%Outlier Filtering : Observation removed if temperature \mbox{$<5\degc$} or \mbox{$>60\degc$} or if humidity \mbox{$<10\%$} or \mbox{$>100\%$}.
+\subsubsection{Missing Data Generation}
 
 %Datasets of various lengths are produced from the single input dataset for our experiments, namely 2500, 5000, and 10000.
-*There is an initially missing portion of the observations which can be considered Missing At Random (MAR).
-*To this, we impose two different types of Missing Completely At Random (MCAR) sampling techniques to build *validation and testing datasets.
+%There is an initially missing portion of the observations which can be considered Missing At Random (MAR).To this, we impose two different types of Missing Completely At Random (MCAR) sampling techniques to build validation and testing datasets.
 
 Althought both datasets intrinsically have missing readlings, we cannot use those for evaluation because their true values are unknown. Instead we devised two strategies to produce artificial missing data.
 \paragraph*{Random Missing Pattern}
@@ -58,7 +55,7 @@ We define two values $x$ and $y$ as follows.
 \item $10\%$ of the existing readings are randomly selected (without replacement) to be the validation set
 \item $y\%$ of the existing readings are randomly selected (without replacement) to be the testing set
 \item The remaining readings (x%) are part of the training set. That is, x+y+10=100 that accounts for all the observed readings.
-
+\end{itemize}
 \paragraph*{Consecutive Missing Pattern}
 
 This pattern reflects testing the effect of all data missing after a certain point in time.
