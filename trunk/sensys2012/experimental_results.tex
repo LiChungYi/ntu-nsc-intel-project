@@ -104,38 +104,27 @@ As to the MTR-MF model, the results show that MTR-MF-part does not outperform TR
 %Table ? and ? show the TF result of random split and temporal split on Berkeley dataset while table ? and ? show the TF result of random split and temporal split on traffic dataset.
 
 \subsection{Designing Prediction Models after Imputation}\label{subsec:furtherPredict}
-As stated previously, one main reason to conduct data imputation is that most off-the-shelf data analysis tools cannot deal with inputs with missing values. Here one practical question to ask is: whether our imputation outcomes can indeed lead to the development of a better analysis model? Here we conduct an experiment using the 20 sensors in the traffic dataset to build two regression models (linear regression and support-vector regression). In the epxeriment, we first remove the gateway signal from the matrix, and use TR-MF as well as the other competitor models (including global mean, LI, hybrid-KNN) to fill in all the missing values in the remaining 20 sensors. Then for each imputation model, we use the filled-in readings of these 20 sensors as the inputs X and the gateway values as the output Y to train the regression models for gateway-value prediction. We divide the data randomly into 80\% training and 20\% testing, and show the results of both regression models in Table 6 and Table 7. The results confirm our hypothesis that the a better imputation model does lead to the production of a better prediction model, and TR-MF again outperforms the other models in this aspect.
+As stated previously, one main reason to conduct data imputation is that most off-the-shelf data analysis tools cannot deal with inputs with missing values. Here one practical question to ask is: whether our imputation outcomes can indeed lead to the development of a better analysis model? Here we conduct an experiment using the 20 sensors in the traffic dataset to build two regression models (linear regression and support-vector regression). In the epxeriment, we first remove the gateway signal from the matrix, and use TR-MF as well as the other competitor models (including global mean, LI, AKE) to fill in all the missing values in the remaining 20 sensors. Then for each imputation model, we use the filled-in readings of these 20 sensors as the inputs X and the gateway values as the output Y to train the regression models for gateway-value prediction. We divide the data randomly into 80\% training and 20\% testing, and show the results of both regression models in Table 6 and Table 7. The results confirm our hypothesis that the a better imputation model does lead to the production of a better prediction model, and TR-MF again outperforms the other models in this aspect.
+
+
+
 
 \begin{table} [htbp]
+\caption{RMSE of gateway prediction} \label{table:gateway prediction}
 \setlength{\tabcolsep}{2pt}
 \centering
-\caption{predict gateway humidity by LR (RMSE) }
-\label{table: LR}
-   Filling method
-\begin{tabular}{ r | r r r r}
-        missing rate&global mean     &LI   &Hybrid-KNN &TR-MF\\ \hline
-        5\%      &4.144&3.857&2.512&2.473\\
-        10\%    &4.143&3.868& 2.597&2.526\\
-        30\%    &5.161&3.955&2.773&2.470\\
-        50\%    &6.234&4.282&3.158&2.756\\
-        70\%   &7.728&5.082&3.310&2.743\\
-        80\%   &9.019&7.458&3.306&2.802\\
-\end{tabular}
-\end{table}
+\small
+\begin{tabular} {c | r r r r | r r r r}
+& \multicolumn{4}{ c|}{LR} & \multicolumn{4}{|c}{SVR}  \\ \hline
+train & \begin{turn}{65}Mean\end{turn} & \begin{turn}{65}LI\end{turn} & \begin{turn}{65}AKE\end{turn}& \begin{turn}{65}TR-MF\end{turn}& \begin{turn}{65}Mean\end{turn} & \begin{turn}{65}LI\end{turn} & \begin{turn}{65}AKE\end{turn}& \begin{turn}{65}TR-MF\end{turn}  \\ \hline
+    80\%   &6.021&4.973&3.812&3.001   &6.222&5.012&4.101&3.144\\
+   60\%   &5.086&4.385&3.722&2.943    &5.524&4.551&3.972&2.807\\
+    50\%    &4.992&4.180&3.158&2.964     &5.281&4.241&3.244&2.877\\
+      30\%    &4.978&4.075&2.822&2.570     &5.003&4.175&3.058&2.692\\
+      10\%    &4.642&3.868& 2.874&2.526 &4.502&3.713& 2.891&2.681\\ 
+   5\%   &4.497&3.799&2.796&2.512      &4.323&4.018&2.895&2.409\\
 
-\begin{table}[htbp]
-\setlength{\tabcolsep}{2pt}
-\centering
-\caption{predict gateway humidity by SVR (RMSE) }
-\label{table: SVR}
-   Filling method
-\begin{tabular}{ r | r r r r}
-        missing rate&global mean     &LI   &Hybrid-KNN &TR-MF\\ \hline
-        5\%&4.252&3.980&2.609&2.567\\
-        10\%    &3.933 &4.006&2.749&2.591\\
-        30\%    &5.172&4.083&2.814&2.532\\
-        50\%    &6.234&4.384&3.260&2.813\\
-        70\%   &7.686&5.235&3.313&2.822\\
-        80\%  &9.039&8.508&3.464&2.910\\
+   
+
 \end{tabular}
 \end{table}
