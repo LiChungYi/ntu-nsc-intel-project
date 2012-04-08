@@ -2,18 +2,18 @@
 
 \section{Multivariate Factorization Model} \label{sec:tf}
 A given sensor node may contain multiple sensor types and thus is capable of sensing various aspects of the environment (e.g.\ temperature and humidity) at the same time.
-These attributes can potentially be correlated, and being able to take advantage such correlation would result in better imputation quality.
-This section proposes two models, the Multivariate (S)TR-MF and Tensor Factorization modeles, to leverage multivariate correlation for missing data recovery.
+These attributes can potentially be correlated, and being able to take advantage of such correlation would result in better imputation quality.
+This section proposes two models, the Multivariate (S)TR-MF and Tensor Factorization models, to leverage multivariate correlation for missing data recovery.
 
 \subsection{Multivariate (S)TR-MF} %\label{subsec:Multivariate_TRMF}
-In (S)TR-MF, as we normally have much longer time-steps than the number of sensors, the latent matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and therefore being able to learn a faithful representatin of hidden features in the temporal-dimension is critical. 
+In (S)TR-MF, as we normally have much longer time-steps than the number of sensors, the latent matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and therefore being able to learn a faithful representation of hidden features in the temporal-dimension is critical. 
 
-Assuming there are two types of sensor in one node: temperature and humidity. Then, using (S)TR-MF we can obtain $\mathbf{P}_{tem}$ and $\mathbf{Q}_{tem}$ from temperature matrix $\mathbf{R}_{tem}$, and get $\mathbf{P}_{hum}$ and $\mathbf{Q}_{hum}$ from humidity matrix $\mathbf{R}_{hum}$. These two $\mathbf{P}$s are identical in size, and it is not hard to imagine they should be correlated because they both represent the factors of time step $m$. Therefore, it might be benefitial if we can try to use both sides of information to learn a unified and better $\mathbf{P}_{hum}$.
+Assuming there are two types of sensors in one node: temperature and humidity. Then, using (S)TR-MF we can obtain $\mathbf{P}_{tem}$ and $\mathbf{Q}_{tem}$ from temperature matrix $\mathbf{R}_{tem}$, and get $\mathbf{P}_{hum}$ and $\mathbf{Q}_{hum}$ from humidity matrix $\mathbf{R}_{hum}$. These two $\mathbf{P}$s are identical in size, and it is not hard to imagine that they should be correlated because row factors $\mathbf{p}_m$ in both matrices represents the factors of time step $m$. Therefore, it might be beneficial if we can try to use both sides of information to learn a unified and better $\mathbf{P}$.
 This observation motivates us to design the Multivariate (S)TR-MF.
 
-In Multivariate (S)TR-MF, $\mathbf{R}$ represents the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$
-\begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix} \end{equation*}
-, which allows the temperature model and humidity model to share the common $\mathbf{P}$ matrix, so they merge the similar factors and communicate the observed information with each other. Note that the $\mathbf{Q}$ matrix for them are different in the (S)TR-MF model, and remain such in multivariate (S)TR-MF.
+In Multivariate (S)TR-MF, $\mathbf{R}$ represents the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and humidity matrix $\mathbf{R}_{hum}$
+\begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix}, \end{equation*}
+which allows the temperature model and humidity model to share the common $\mathbf{P}$ matrix, so they merge the similar factors and communicate the observed information with each other. Note that the $\mathbf{Q_{tem}}$ and $\mathbf{Q_{hum}}$ matrix in the (S)TR-MF model remain independent in the new $\mathbf{Q}$ in multivariate (S)TR-MF.
 
 The learning process of multivariate (S)TR-MF is very similar to that of (S)TR-MF: the objective function and the optimization process remains the same. Yet, there are some important differences: 
 Firstly, for each row (time step), we need two bias terms: one for temperature readings and the other for humidity readings as they natually are biased differently. Furthermore, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. 
