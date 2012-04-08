@@ -2,17 +2,17 @@
 
 % need update and to be consistent with related work, need to add the Netflix and our KDD2011 papers to support MF
 
-Matrix Factorization (MF) is arguably the most successful Collaborative Filtering~(CF) techniques in the area of Recommendation Systems [cite]. Comparing to other recommendation model such as regression-based prediction models, graph-based random walk models, or simple statistic models, MF model possesses the edge of being more accurate and scalable to data size.
-The key advantage of MF models lies in the capability to learn latent factors from the relatively sparsed observation, and leverage these factors to reproduce the missing elements in the matrix.
+Matrix Factorization (MF) is arguably the most successful Collaborative Filtering~(CF) techniques in the area of Recommendation Systems \cite{, chen2011linear}[cite]. Comparing to other recommendation model such as regression-based prediction models, graph-based random walk models, or simple statistic models, MF model possesses the edge of being more accurate and scalable to data size.
+The key advantage of MF models lies in the capability to learn latent factors from the relatively sparse observation, and leverage these factors to reproduce the missing elements in the matrix.
 In the following, we will first introduce the fundamentals of the MF methodology, communicate our novel sensor network data specific modifications to the MF objective function, and finally provide the complete training procedure of the proposed method.
 
 \subsection{Introducing Matrix Factorization}
 
 Matrix Factorization is designed to amend the limitations of a widely known dimension reduction technique called Singular Value Decomposition~(SVD) in dealing with incomplete or sparse data.
-The goal of SVD is to decompose a fullly observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrices~$\mathbf{U}$ and~$\mathbf{V}$ such that
+The goal of SVD is to decompose a fully observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrices~$\mathbf{U}$ and~$\mathbf{V}$ such that
 \begin{equation*} \mathbf{R} = \mathbf{U}\mathbf{D}\mathbf{V}^T. \end{equation*}
-The largest $K$ singular values, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm. It has been shown that given a complete matrix, SVD can identify the k-latent features that minimizes the L2 error. Unfortunately, SVD cannot be performed when the matrix~$\mathbf{R}$ is incomplete. Therefore, to exploit latent dimensions through SVD for imputation, the ealier works have to fill in missing entries first (usually using zeros or an averaged value) and then perform dimensions reduction through multiplying the matrixes of the k-largest sigular values [cite]. Such strategy does create some dilemma as a high-quality imputation model is needed in the first stage to guarantee the quality of data reproducing in the later stage, but it is such high-quality we are looking for eventually for data imputation. In a nutshell, SVD model, although proven to be ideal for dimension reduction, can hardly be applied to sparse matrix where decent amount of data are missing.
-To address such drawback, recently researchers have shown \cite{koren2009matrix} that the matrix factorization model is indeed a better approach to learn the latent factors given sparse matrixes, because during the factorization procedure only the observed entries are exploited.
+The largest $K$ singular values, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm. It has been shown that given a complete matrix, SVD can identify the k-latent features that minimizes the L2 error. Unfortunately, SVD cannot be performed when the matrix~$\mathbf{R}$ is incomplete. Therefore, to exploit latent dimensions through SVD for imputation, the earlier works have to fill in missing entries first (usually using zeros or an averaged value) and then perform dimensions reduction through multiplying the matrices of the $K$-largest singular values [cite]. Such strategy does create some dilemma as a high-quality imputation model is needed in the first stage to guarantee the quality of data reproducing in the later stage, but it is such high-quality we are looking for eventually for data imputation. In a nutshell, SVD model, although proven to be ideal for dimension reduction, can hardly be applied to sparse matrix where decent amount of data are missing.
+To address such drawback, recently researchers have shown \cite{koren2009matrix} that the matrix factorization model is indeed a better approach to learn the latent factors given sparse matrices, because during the factorization procedure only the observed entries are exploited.
 Utilizing numerical optimization procedures, for a partially observed matrix~$\mathbf{R}$, MF produced two latent matrices~$\mathbf{P}_{MxK}$ and $\mathbf{Q}_{KxN}$ whose multiplication tries to approximate the observed entries in $\mathbf{R}_{MxN}$:
 \begin{equation*}\mathbf{R} \approx \mathbf{P} \mathbf{Q}.\end{equation*}
 Given $\mathbf{R}$ being the sensor network readings, each row of $\mathbf{P}$ represents latent factors in the temporal dimension and each column of $\mathbf{Q}$ represents the latent factors in the dimension of correlation among sensors.
@@ -39,7 +39,7 @@ $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$ are parameters that control the stren
 %cite temporal reference
 
 Although we analogize the WSN data recovery task as a CF-based recommendation task, there are indeed some major differences in terms of the property of data.
-Normal CF or MF models assume the users (i.e. temporal dimension) are indepent of each other. That is, we can randomly swap the columns in the matrix without affected the factorization outcome. However, such independency does not exist in WSN data as a sensor's signal in time t is highly dependent on that of time t-1. In other words, an ideal model should consider such order dependency, and under such model the swap of columns shall significantly affect the outcome of factorization.
+Normal CF or MF models assume the users (i.e. temporal dimension) are independent of each other. That is, we can randomly swap the columns in the matrix without affected the factorization outcome. However, such independency does not exist in WSN data as a sensor's signal in time t is highly dependent on that of time t-1. In other words, an ideal model should consider such order dependency, and under such model the swap of columns shall significantly affect the outcome of factorization.
 
 With this observation, we propose a Temporally-Regularized Matrix Factorization (TR-MF) to better model the characteristic of WSN data. 
 
@@ -55,7 +55,7 @@ The modified objective function looks like:
 
 \subsection{Spatio-Temporal-Regularized Matrix Factorization}
 %A strong argument that directly exploiting spatial information to specify the assumed inter-sensor node correlation may not be as good as directly learning these correlations directly from the sensor observations themselves.
-Although previously we argue that near-by sensors might not necessary possess the higheset correlation with each other, here we would like to show that the previously proposed MF model can easily be adopted to accomendate spatial correlation if one decides to do so. Given the distance (or any kind of 'closeness' measure) between sensors, we can add spatial regularization terms to strengthen the spatial correlation. Therefore, this model enforces sensors closer to each other to have similar sensor measures. 
+Although previously we argue that near-by sensors might not necessary possess the highest correlation with each other, here we would like to show that the previously proposed MF model can easily be adopted to accomendate spatial correlation if one decides to do so. Given the distance (or any kind of 'closeness' measure) between sensors, we can add spatial regularization terms to strengthen the spatial correlation. Therefore, this model enforces sensors closer to each other to have similar sensor measures. 
 The objective function then becomes: 
 \begin{equation*}\begin{aligned}
 &\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2 + \frac{\beta_1}{2}\sum_m{\mu_m^2} + \frac{\beta_2}{2}\sum_n{\mu_n^2}\\
@@ -82,7 +82,7 @@ It is not hard to derive the update equations as \\
 	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta_2 ((\hat{r}_{m,n}-r_{m,n})\mathbf{q}_{n} + \beta_3 \mathbf{p}_{m})\\
 	\mathbf{q}_{n}' = \mathbf{q}_{n} - \eta_2 ((\hat{r}_{m,n}-r_{m,n})\mathbf{p}_{m} + \beta_4 \mathbf{q}_{n})\\
 	\end{cases}$\\
-For each reading, we update the all $\mu_m$ and $\mathbf{p}_m$. Then after a full scan of every observed readings, we perform temporal regularization by updatig all $\mu_m$ and $\mathbf{p}_m$ simultaneously according to the following equations:\\
+For each reading, we update the all $\mu_m$ and $\mathbf{p}_m$. Then after a full scan of every observed readings, we perform temporal regularization by update all $\mu_m$ and $\mathbf{p}_m$ simultaneously according to the following equations:\\
 \indent $\begin{cases}
 	\mu_m' = \mu_m - \eta_1 \gamma_1((\mu_m-\mu_{m-1})+(\mu_m-\mu_{m+1}))\\
 	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta_2 \gamma_2((\mathbf{p}_{m}-\mathbf{p}_{m-1})+(\mathbf{p}_{m}-\mathbf{p}_{m+1}))\\
@@ -102,7 +102,7 @@ If the spatial regularization is exploited, we can update all $\mu_n$ and $\math
 Unlike the ratings in recommendation which normally are within certain range (e.g. 1 star to 5 star), readings from WSN are real-valued, and the range may vary with the sensor locations.
 Here we propose to normalize the training set to N(0,1) before conducting MF learning, and once the missing values are produced by our model, we need to rescale the values to the original mean and variance.
 Although this procedure does not change the quality of outcomes theoretically, in practice we do find some benefits: 
-First, when the global mean becomes zero, the origin of our model natually becomes a fine initial point for MF training, which is very important for non-convex optimization techniques such as MF.
+First, when the global mean becomes zero, the origin of our model naturrally becomes a fine initial point for MF training, which is very important for non-convex optimization techniques such as MF.
 Secondly, normalization forces different data sets to look similar, which simplifies the parameter tuning task for (S)TR-MF. As will be shown in the next section, this trick also facilitates parameter tunings in our multivariate models.  
 
 
@@ -112,7 +112,7 @@ There are several parameters in our model: conventional regularization for user 
 \begin{equation*}\beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \gamma_3 = \gamma_4, \eta_1 = \eta_2. \end{equation*}
 Advanced discussion in this aspect will be shown in Section \ref{subsec:parameter}.
 
-Finally, to determine when to cease updating the MF model, we use the randomly split validation set to learn the stopping criteria. More speicifically, the training stops when the validation error keeps increasing for certain amount of iterations (currently setup to $500$). 
+Finally, to determine when to cease updating the MF model, we use the randomly split validation set to learn the stopping criteria. More specifically, the training stops when the validation error keeps increasing for certain amount of iterations (currently setup to $500$). 
 
 \begin{algorithm}
 	\caption{(Spatio-)Temporally-Regularized MF}
