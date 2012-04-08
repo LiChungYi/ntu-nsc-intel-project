@@ -47,11 +47,11 @@ However, when the missing rate is high and the complete data of all sensors at t
 
 
 
-\subsection{Hybrid Spatio-temporal Imputation}    
+\subsection{Spatio-temporal Imputation}    
 Past studies indicate that imputation algorithms using only spatial or temporal information cannot produce satisfiable outcomes \cite{Lim:robust}. In the environment when the radio transmission quality is poor or the packets collision happens frequently, exploiting only temporal information is not ideal. In contrast, the predictors using only spatial data can easily be harmed by the bias and drift from neighbourhood sensing data. Moreover, in some outdoor environment, the spatial information about the sensors could be erroneous or missing in themselves. Therefore, researchers have proposed to exploit both temporal and spatial information for imputation.
 Below we introduce several such methods.   
 
-An spatial and temporal imputation (STI) altorithm is proposed in \cite{li2008spatial}. 
+A spatial and temporal imputation (STI) algorithm is proposed in \cite{li2008spatial}. 
 For each missing record, STI first checks if some nodes are within the sensing neighborhood, and utilize 
 the average of the neighbours to impute the missing value. If no sensors are in the neighborhood, the last seen value of the missing sensor is used for imputation. The method favors spatial info than temporal info. 
 
@@ -59,7 +59,7 @@ the average of the neighbours to impute the missing value. If no sensors are in 
 %Furthermore, the usage of circular region is problematic as most of the landforms might not be uniformly distributed. Finally, determining the range of the radius is tricky, as a larger radius can cause noise while a smaller one cannot highlight the effectiveness of this model(i.e. the results will be similar to linear interpolation).
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
 
-Another hybrid algorithm relying more on spatial than temporal is the Data Estimation using Statistical Model (DESM)\cite{li2008data}.  
+Another spatio-temporal algorithm relying more on spatial than temporal is the Data Estimation using Statistical Model (DESM)\cite{li2008data}.  
 Given two sensors data stream, $\{X_{i1},X_{i2},\dots,X_{im}\}$, and $\{X_{j1},X_{j2},\dots,X_{jm}\}$. 
 Assume the value of $X_{i(m+1)}$ is missing,
 the prediction on sensor $i$ by its nearest sensor $j$ is:
@@ -80,9 +80,9 @@ $\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
 In DESM, because $\alpha$ is usually high around the target sensor. Therefore, the temporal feature multiplied by $1-\alpha$ holds a very small portion of contribution to the prediction process. It often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e. blocked by a wall.
 % \subsubsection{Applying K-nearest neighbour Estimation}
 
-K-nearest neighbours algorithm(KNN) is an intuitive yet effective spatial correlation based imputation method. It directly uses the weighted average of the neighbor signals to fill the missing data, and has been adopted to successfully estimate the missing values of DNA micro-arrays\cite{Troyanskaya:DNAKNN}.  
+K-nearest neighbors algorithm (KNN) is an intuitive yet effective spatial correlation based imputation method. It directly uses the weighted average of the neighbor signals to fill the missing data, and has been adopted to successfully estimate the missing values of DNA micro-arrays\cite{Troyanskaya:DNAKNN}.  
 %While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
-Pan\cite{pan2010k} propose the Applying K-nearest neighbour Estimation algorithm(AKE) to exploit the spatial correlation in the missing sensory data problem. 
+Pan\cite{pan2010k} propose the Applying K-nearest neighbor Estimation algorithm (AKE) to exploit the spatial correlation in the missing sensory data problem. 
 AKE adopts linear regression model to describe the spatial correlation of node i and j. 
 \begin{equation}
 y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} 

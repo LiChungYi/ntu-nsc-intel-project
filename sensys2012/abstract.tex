@@ -1,16 +1,23 @@
 \begin{abstract}
 Data sets gathered from sensor networks often suffer from a significant fraction of missing data, due to issues such as 
 communication interference, sensor interference, power depletion, and hardware failure. 
-Many standard data analysis tools such as classification engines, time-sequence pattern analysis modules, and even statistical tools are ill-equipped to deal will missing values---hence, there is a need to impute missing readings prior to analysis.
+Many standard data analysis tools such as classification engines, time-sequence pattern analysis modules, and even statistical 
+tools are ill-equipped to deal will missing values---hence, there is a vital need for highly-accurate techniques for imputing
+missing readings prior to analysis.
 
 In this paper, we present novel imputation methods that take a ``Recommendation Systems'' view of the problem: 
 the sensors and their readings at each time step are viewed as products and user product ratings, with the goal of estimating the missing ratings.
 Sensor readings differ from product ratings, however, in that the former exhibit high correlation in both time and space.
 To incorporate this property, we modify the widely successful Matrix Factorization (MF) approach for recommendation systems to model inter-sensor and intra-sensor correlations and learn latent relationships among these dimensions.
 We evaluate the approach using two environmental sensor network datasets, one indoor and one outdoor, and
-two imputation tasks, corresponding to intermittent readings and failed sensors.
-The results show that our Temporally-regularized MF (TR-MF) approach provides significantly higher estimation accuracy than both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches such as the -Adopt K-nearest neighbour(AKE) model.
-The experiments also show that adding spatial coordinate information into TR-MF yields even better results  when the missing data tend to appear consecutively. 
+two imputation scenarios, corresponding to intermittent readings and failed sensors.
+The results show that our Temporally-regularized MF (TR-MF) approach provides significantly higher estimation accuracy than 
+both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches 
+%such as the Applying K-nearest neighbor (AKE) model.
+such as AKE.
+The experiments also show that adding spatial coordinate information into TR-MF yields even better results
+in the failed sensors scenario, but {\em not} in the intermittent readings scenario.
+
 Next, we consider sensor networks with multiple sensor types at each node.  We present two techniques for extending TR-MF to account for possible correlations among sensor types (e.g., temperature and
 humidity): Multivariate TR-MF and Temporally-regularized Tensor Factorization.  Our results show that both techniques are significantly more accurate than prior approaches, and each has its strengths, depending on the observed variance in the readings.
 Finally, we consider a popular data analysis task---building regression-based prediction models---and show that, compared to prior approaches, applying our more-accurate imputation techniques leads to higher-quality prediction models.  
@@ -23,4 +30,5 @@ Finally, we consider a popular data analysis task---building regression-based pr
 
 %\terms{Delphi theory}
 
-\keywords{missing data recovery, matrix factorization, tensor factorization, temporal regularization, multivariate learning, data imputation}
+%Omit for submission, to save space:
+%\keywords{missing data recovery, matrix factorization, tensor factorization, temporal regularization, multivariate learning, data imputation}

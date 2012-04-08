@@ -1,5 +1,5 @@
-\redtext{Note: Neither the abstract nor the introduction have been updated to reflect our recent findings that spatial
-regularization can help for the temporal split case.}
+%\redtext{Note: Neither the abstract nor the introduction have been updated to reflect our recent findings that spatial
+%regularization can help for the temporal split case.}
 
 \section{Introduction}
 
@@ -21,11 +21,12 @@ regularization can help for the temporal split case.}
 % Many standard data analysis tools such as classification engines, time-sequence pattern analysis modules, and even statistical tools are ill-equipped to deal will missing values---hence, there is a need to impute missing readings prior to analysis.
 
 Wireless sensor networks (WSNs) are especially susceptible to interference,
-battery depletion, and other environmental and communications ailments
-which lead to data loss.  Data sets gathered from sensor networks are
-often missing 10\%--40\% of the possible readings, depending on the
-severity of the environmental factors~\cite{give cites}.  These
-missing values are problematic for data analysis tools such as
+battery depletion, hardware failures, and other environmental and communications ailments
+that lead to data loss.  Data sets gathered from sensor networks are
+often missing a significant fraction of the possible readings
+(e.g., the Intel Berkeley Research lab dataset~\cite{berkeley2004lab}
+is missing roughly 50\% of its readings).
+These missing values are problematic for data analysis tools such as
 classification engines, time-sequence pattern analysis modules, and
 other machine learning tasks, which are often ill-equipped to deal
 with missing values.  Support Vector Machine
@@ -34,11 +35,11 @@ to name but a few examples, require complete datasets with no missing
 values.  Popular statistical packages such as SAS, Stata, and R
 provide a few default options for handling missing data, as a
 preprocessing step, because the core algorithms need all data filled
-in.  Typical options are (i) remove the entire row if there is a
-missing value, or (ii) fill in the missing value (called {\em
+in.  Typical options are (i) remove the entire ``column'' if there is a
+missing value or (ii) fill in the missing value (called {\em
 imputation}) using either simple defaults like the average of
 neighboring values or user-written code.  The first option discards
-otherwise useful data, and in fact, may discard most of the rows in
+otherwise useful data, and in fact, may discard most of the columns in
 datasets with high data loss.  Thus, imputation is a vital tool in the
 preparation of sensor data for subsequent analysis. Because the
 accuracy of the target data analysis depends on the accuracy of the
@@ -59,23 +60,7 @@ the value of effective imputation techniques.
 Imputation techniques as applied to sensor data can be divided into three categories:
 temporal methods (i.e., estimation using the observations from the target sensor at nearby time-steps), 
 spatial methods (i.e., estimation using neighboring sensor node observations), 
-and hybrid spatio-temporal methods, as shown in Table~\ref{tbl:methods}.
-
-\begin{table*}
-\centering
-\caption{Salient Methods for Sensor Data Imputation}
-\label{tbl:methods}
-\begin{tabular}{|l|l|l|} \hline
-Collection&Hot-Deck Imputation&Prediction Models\\ \hline
-\multirow{2}{*} {Temporal} & Last-seen~\cite{Granger:lastseen} & Linear Interpolation\\ 
-& Mean&\\ \hline
-\multirow{3}{*}{Spatial}& WARM~\cite{le2005estimating}& DEPM~\cite{li2008data}\\ 
-&FARM~\cite{Gruenwald:FARM}&K-NN~\cite{pan2010k}\\ 
-&&Multi-Im~\cite{yuan2000multiple}\\\hline
-\multirow{3}{*}{Hybrid Spatio-Temporal}& &DESM~\cite{li2008data}\\ 
-&STI~\cite{Jian-Zhong:STI}&AKE~\cite{pan2010k}\\
-&&Imputation Method~\cite{Lim:robust} \\\hline \end{tabular}
-\end{table*}
+and spatio-temporal methods, as shown in Table~\ref{tbl:methods}.
 
 %The feasibility of estimating missing sensor observations based on historical data is grounded by the known temporal correlation in WSN data~\cite{akyildiz2004exploiting}.
 %Moreover, where there is a potential for global communication issues to affect the availability for sensor node observations \emph{en masse} during a given duration of time, utilizing spatial correlations as a basis for estimation may be not be possible.
@@ -86,19 +71,28 @@ data mean~\cite{madden2005tinydb,setz2009combining}, last
 seen~\cite{Granger:lastseen}, and linear interpolation.  These methods
 suffer, however, when there are long temporal gaps of data for a given
 sensor; such gaps can be frequent in WSNs due to power depletion in
-energy-harvesting sensors, communication ailments that last multiple
-time steps, etc.  As a result, the usefulness of temporal imputation
-methods drop rapidly as the number of consecutively missing readings
+energy-harvesting sensors, long-lived communication ailments, etc.  
+As a result, the usefulness of temporal imputation
+methods drops rapidly as the number of consecutively missing readings
 becomes large.
 
 % (i.e., as can happen when intermittent communications starvation occurs in large WSNs).  
 
-\begin{figure}[ht]
+\begin{table}
+\caption{Salient Methods for Sensor Data Imputation}
+\label{tbl:methods}
 \centering
-\includegraphics[scale=0.35]{house_floorplan.png}
-\caption{Example home floorplan showing five deployed temperature sensors} \label{house_floorplan}
-\label{fig:example_home_floorplan}
-\end{figure}
+{\small
+\begin{tabular}{|l|l|l|} \hline
+   &{\bf Hot-Deck Imputation}&{\bf Prediction Models}\\ \hline
+{\bf Temporal} & Last-seen~\cite{Granger:lastseen}, Mean& Linear Interpolation\\ \hline
+\multirow{2}{*}{\bf Spatial}& WARM~\cite{le2005estimating},& DEPM~\cite{li2008data}, K-NN~\cite{pan2010k},\\ 
+&FARM~\cite{Gruenwald:FARM}&Multi-Im~\cite{yuan2000multiple}\\\hline
+{\bf Spatio-}&STI~\cite{Jian-Zhong:STI}&DESM~\cite{li2008data}, AKE~\cite{pan2010k},\\
+{\bf Temporal}&&Imputation Method~\cite{Lim:robust} \\\hline \end{tabular}
+}
+\vspace{-0.1in}
+\end{table}
 
 {\em Spatial methods} leverage the spatial correlation among readings
 by nearby sensor nodes; salient methods include associations rule
@@ -108,36 +102,40 @@ FARM~\cite{Gruenwald:FARM})
 and weighted functions of nearby sensors (e.g., DEPM~\cite{li2008data},
 K-NN\cite{pan2010k}, and Multi-Im\cite{yuan2000multiple}).
 These methods require reasonably accurate spatial coordinates, and
-more importantly, suffer when there are ailments that affect entire
-spatial regions such as may arise in the presence of a large obstacle
-to sensing and/or communication.
-Spatial methods also fail to take into account barriers or other
-sources of sharp environmental gradients that may deter the usage of
-spatial information as a first-order inter-sensor node correlation
-approximation.  For example, in Figure~\ref{house_floorplan}, we find
-sensors $1$ \& $2$ deployed in the kitchen, nearby the stove and
-outside window, respectively. While these sensors are close in
-proximity, assuming the stove is in use and the temperature outside is
-cold, there may be a large temperature difference between these two
-sensors despite their close proximity.  Similarly, sensors $2$ \& $5$
+more importantly, suffer when ailments arise that affect entire
+spatial regions (such as large, temporary obstacles to sensing and/or communication).
+Spatial methods can also fail to account for barriers or other
+sources of sharp environmental gradients.
+For example, in Figure~\ref{house_floorplan}, we find
+sensors $1$ \& $2$ deployed in the kitchen, next to the stove and
+outside window, respectively. While these sensors are nearby, 
+there may be a large temperature difference between the two if
+the stove is in use and the outside temperature is cold.
+Similarly, sensors $2$ \& $5$
 may be quite uncorrelated despite their relative proximity due to the
 wall between them and the presence of kitchen or laundry appliance
-use.  On the other hand, sensors $3$ \& $4$, while located further
-from one another may be quite correlated despite their remote
-placement as they are both near an outside wall and both within the
-same room.  The calculation of
-inter-node signal strength or line of sight distance between nodes can
-help to mitigate the issues of spatially-based imputation, though it is not
-a complete remedy.  In the end, the incorporation of spatial
-information can lead to worse imputation results as non-existent (or
-at least inconsistent) correlations are imposed between sensors.
+use.  On the other hand, relatively distant sensors $3$ \& $4$
+may be quite correlated as they are within the same room and both
+near an outside wall. The calculation of
+inter-node signal strength or line of sight distance between nodes
+helps to mitigate these issues, though it is not
+a complete remedy.  In the end, using spatial
+coordinates can often lead to worse imputation results.
+% as non-existent or time-varying correlations are imposed between nearby sensors.
 
 Certain methods consider not strictly the distance between sensors,
 but instead establish a ``neighborhood of influence'' whose size
-becomes a tuning parameter of this approach, which adds to the
-complexity of this approach.
+becomes a tuning parameter, which adds to the complexity of such methods.
 
-Finally, {\em hybrid spatio-temporal methods} consider both the
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.3]{house_floorplan.png}
+\caption{Example home floorplan showing five deployed temperature sensors} \label{house_floorplan}
+\label{fig:example_home_floorplan}
+\vspace{-0.1in}
+\end{figure}
+
+Finally, {\em spatio-temporal methods} consider both the
 temporal and spatial correlation; salient methods include
 STI~\cite{Jian-Zhong:STI}, DESM~\cite{li2008data}, 
 AKE~\cite{pan2010k}, and Imputation Method~\cite{Lim:robust}.  These
@@ -211,7 +209,7 @@ covering all readings for a subset of sensor nodes from a particular time onward
 
 Our results show that TR-MF provides significantly higher estimation accuracy than 
 both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches 
-such as AKE which has the top performance among hybrid spatio-temporal methods.
+such as AKE which has the top performance among spatio-temporal methods.
 Furthermore, adding spatial information into TR-MF is shown to be useful only when there are less temporal information provided through data. ---with sufficient readings, TR-MF can capture the latent relationships among sensors, including spatial correlations.  
 
 For the heterogeneous setting, our results show that both TRTF and
