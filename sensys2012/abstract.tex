@@ -9,7 +9,7 @@ Sensor readings differ from product ratings, however, in that the former exhibit
 To incorporate this property, we modify the widely successful Matrix Factorization (MF) approach for recommendation systems to model inter-sensor and intra-sensor correlations and learn latent relationships among these dimensions.
 We evaluate the approach using two environmental sensor network datasets, one indoor and one outdoor, and
 two imputation tasks, corresponding to intermittent readings and failed sensors.
-The results show that our Temporally-regularized MF (TR-MF) approach provides significantly higher estimation accuracy than both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches such as the hybrid-KNN model.
+The results show that our Temporally-regularized MF (TR-MF) approach provides significantly higher estimation accuracy than both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches such as the -Adopt K-nearest neighbour(AKE) model.
 The experiments also show that adding spatial coordinate information into TR-MF yields even better results  when the missing data tend to appear consecutively. 
 Next, we consider sensor networks with multiple sensor types at each node.  We present two techniques for extending TR-MF to account for possible correlations among sensor types (e.g., temperature and
 humidity): Multivariate TR-MF and Temporally-regularized Tensor Factorization.  Our results show that both techniques are significantly more accurate than prior approaches, and each has its strengths, depending on the observed variance in the readings.
