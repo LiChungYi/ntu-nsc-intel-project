@@ -12,7 +12,7 @@ For both MF and TF models, we have realized that the parameter setting in random
 
 %Here we ignore bias terms for simplicity.
 Equation \ref{randomSplit_matrix} shows a random missing case and \ref{temporalSplit_matrix} shows a consecutive missing case. In random missing, the confidence for prediction is usually higher and the model relies more on temporal correlation. Therefore it is preferred to use more factors and weaken the strength of conventional regularization (i.e. try to over-fit the data). Note that here the term conventional refers to the normal regularization imposing to the latent features, not the additional ones we proposed. 
-As shown in equation 6.1, the linear interpolation model can be viewed as a special-case solution for TR-MF, in which the number of factors is large and less regularization is applied. 
+As shown in Equation \ref{randomSplit_matrix}, the linear interpolation model can be viewed as a special-case solution for TR-MF, in which the number of factors is large and less regularization is applied. 
 \begin{equation}
 \label{randomSplit_matrix}
 \begin{bmatrix}

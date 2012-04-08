@@ -82,7 +82,7 @@ Considering each reading as a three-dimensional tensor element (e.g. the tempara
 
 Such tensor factorization model decompose the reading tensors into three features $F_1, F_2 , F_3$, one of them represents the temporal dimension, the rest can represent sensor nodes, sensor node coordinates, heterogeneous sensor readings, etc. In the experiments, we implemented a 3rd-order tensor model and choose the sensor nodes as well as the multivariate sensor readings as the remaining two dimensions.
 
-In contrast to a conventional tensor decomposition, the factorization model we proposed aims at learning the latent factors $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ of the three dimensions $F_1, F_2, F_3$.
+In contrast to the conventional tensor decomposition, the factorization model we proposed aims at learning the latent factors $\mathbf{P}$,  $\mathbf{Q}$, $\mathbf{W}$ of the three dimensions $F_1, F_2, F_3$.
 To avoid over-fitting and to reduce the complexity of prediction, our model borrows the idea of Canonical Decomposition rather than Tucker decomposition. Note that the time complexity for making prediction is only O(K), where K is the factor size of  P, Q and W. Note that the complexity is independent of the rank of the tensor, which is a favorable property because we can freely add new dimensions into the model without concerning about the efficiency.
 
 Similar to the MF model, we also add bias term of each dimension into the TF model. The prediction function is:
@@ -153,9 +153,9 @@ where $e=t-\hat{t}$. After a round of updating, we then adjust the parameters ac
 \\&{\mu_m}^\prime=\mu_m+\eta\gamma_2(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
 \end{aligned}
 \end{equation*}
-The Tensor Factorization method is summarized in Procedure 2, which is not hard to implement since it accesses only one row of P, Q ,W at a time.
+The Tensor Factorization method is summarized in Procedure \ref{alg::conjugateGradient}, which is not hard to implement since it accesses only one row of P, Q ,W at a time.
 
-TF applies similar normalization and stopping criterion trick as shown in section 3.
+TF applies similar normalization and stopping criterion trick as shown in Section \ref{sec:mf}.
 Empirically one can usually achieve reasonable performance by imposing the following constraints on the parameter learning:  
 \begin{equation*}
 \begin{aligned}
