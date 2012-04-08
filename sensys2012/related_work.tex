@@ -40,9 +40,10 @@ Such methods enjoy the advantage of being able to handle categorical sensor data
 %  The two major drawbacks of KNN-based model that predicts only from the spatial correlation are: first of all,  they cannot capture temporal correlation, and the second reason is that most of these methods rely on the knowledge of distance between each sensor, which might not be available or accurate in the real world.
 
 The multiple imputation(MI) procedure\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values instead of filling in a single value. Various methods including multiple linear regression, propensity score method, and Markov chain Monte Carlo method have been used in MI. The missing data are filled in $M$ times($M$=3-10,\cite{Little:hotdeck}) to generate M complete data sets, and the results from M generated data sets are averaged to obtained a single prediction \cite{yuan2000multiple}. 
-However, this method is criticized on various grounds by WSNs imputation researchers\cite{jiang2007estimating} \cite{Gruenwald:FARM}. First, in sensor data stream, we do not know how many rounds of information shall we use in order to get the associated information.
-In addition, it is difficult to draw a pool of similar complete cases for a certain round of a certain sensor. 
-Last, it consumes unnecessary time since the sensor data may or may not related to all of the available information.
+However, when the missing rate is high and the complete data of all sensors at the same time is rare. The numbers of sufficient imputations may increase the cost to compute the multiple imputations. 
+%However, this method is criticized on various grounds by WSNs imputation researchers\cite{jiang2007estimating} \cite{Gruenwald:FARM}. First, in sensor data stream, we do not know how many rounds of information shall we use in order to get the associated information.
+%In addition, it is difficult to draw a pool of similar complete cases for a certain round of a certain sensor. 
+%Last, it consumes unnecessary time since the sensor data may or may not related to all of the available information.
 
 
 
@@ -59,17 +60,20 @@ the average of the neighbours to impute the missing value. If no sensors are in 
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
 
 Another hybrid algorithm relying more on spatial than temporal is the Data Estimation using Statistical Model (DESM)\cite{li2008data}.  
-The prediction function of sensor $i$ is:
+Given two sensors data stream, $\{X_{i1},X_{i2},\dots,X_{im}\}$, and $\{X_{j1},X_{j2},\dots,X_{jm}\}$. 
+Assume the value of $X_{i(m+1)}$ is missing,
+the prediction on sensor $i$ by its nearest sensor $j$ is:
 %\begin{equation}
-$\hat{y_{it}} = (1-\alpha)\hat{y_{i(t-1)}} + (\alpha)\hat{z}$
+
+$\hat{X}_{i(m+1)} = (1-\alpha)X_{im} + (\alpha)\hat{z}$
 %\end{equation}
-where $\hat{y_{i(t)}}$ and $\hat{y_{i(t-1)}}$ represent the signal value in the current and the previous time stamp, $\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $i$, and $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and the nearest sensor $j$.
-The above equation assumes that the sensor $X_i$ and $X_j$ have the similar data fluctuation trend. 
+
+where $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and $j$, and $\hat{z}$ is the estimation of sensor $i$ based on the observation from sensor $j$, it measures the influence of the data sensed by the active node i on the data of the nearest node j. 
+
+$\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
+
+%The above equation assumes that the sensor $X_i$ and $X_j$ have the similar data fluctuation trend. 
 %$\alpha$ is expected to have more impact on the prediction if $X_i$ is more correlated with $X_j$. 
-$\hat{y_{it}}$ is the last estimated value, which measures the influence of the historical sensing data on the current value at node i. 
-$\hat{z}$ is the estimation of sensor $j$ based on the observation from sensor $i$. 
-$\hat{z} = X_{j(t-1)}(1+\frac{X_{i(t)}-X_{i(t-1)}}{X_{i(t-1)}})$
-It measures the influence of the data sensed by the active node i on the data of the nearest node j.  
 %\begin{equation}
 %\label{z-hat}
 %\end{equation}
@@ -78,14 +82,20 @@ In DESM, because $\alpha$ is usually high around the target sensor. Therefore, t
 
 K-nearest neighbours algorithm(KNN) is an intuitive yet effective spatial correlation based imputation method. It directly uses the weighted average of the neighbor signals to fill the missing data, and has been adopted to successfully estimate the missing values of DNA micro-arrays\cite{Troyanskaya:DNAKNN}.  
 %While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
-Pan\cite{pan2010k} propose the Applying K-nearest neighbour Estimation algorithm(AKE) to exploit the spatial correlation in the missing sensory data problem. The AKE adopts the linear regression model,
-%\begin{equation}
-$\hat{y}_{it} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}$
-%\label{ake_j}
-%\end{equation}
- where $it$ means the time t of sensor i,  and j is its neighbour nodes.  
+Pan\cite{pan2010k} propose the Applying K-nearest neighbour Estimation algorithm(AKE) to exploit the spatial correlation in the missing sensory data problem. 
+AKE adopts linear regression model to describe the spatial correlation of node i and j. 
+\begin{equation}
+y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} 
+\end{equation}
+$y_{it}$ is the observation of sensor $i$ at time t, $y_{jt}$ is the data of sensor $j$ at the same time, and $\mu_{jt}$ is the random error at time t.   
+When the data of sensor $i$ at time $t$ is missing, the estimated value of sensor $i$ by sensor $j$ at the same time is:
+\begin{equation}
+\hat{y}_{it}^{(j)} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}
+\label{ake_j}
+\end{equation}
+The $\hat{\alpha}$ and $\hat{\beta}$ are the estimated values of  $\alpha$ and $\beta$, based on the sample data according to least squares principle.
 They claim that using a linear combination of the estimation from neighbour sensors can lower the random error caused by only using a single sensor. 
-For given node $i$ whose data is missing at time $t$, and the m nearest neighbour sensors who have values at time $t$[$y_{1t}, y_{2t},\dots, y_{mt}$], the missing value is predicted by :   
+Therefore, given the m nearest neighbour sensors who have values at time $t$[$y_{1t}, y_{2t},\dots, y_{mt}$], the missing value is predicted by :   
  \begin{equation}
  \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}
  \label{ake_impute}
@@ -96,13 +106,13 @@ For given node $i$ whose data is missing at time $t$, and the m nearest neighbou
 %\end{array}
 %\right)
 %\]
-In eq\ref{ake_impute}, the estimated $\hat{y}_{it}^{j}$ is computed by node $j$ using their linear regression coefficients($\alpha$, $\beta$). In designing the weighting function, the AKE gives higher correlation pairs a larger weight. They adopts the r-square statistics to rank their correlations due to when sensors have the higher $R^2$, they have the better regression equation fit. 
+where $w_j$ is the weight of sensor $j$ used to predict sensor $i$. In designing the weighting function, the AKE gives higher correlation pairs a larger weight. They adopts the r-square statistics to rank their correlations. The value of $w_j$ is the weighted average of the corresponding r-square value in $m$ sensors. 
 %Based on the (eq\ref{ake_j}), the $R^2$ is computed by:
 %\begin{equation}
 %R_(j)^2 = \sum_{n=1}^{h} \frac{(\hat{y}_{in}^(j)-\bar{y}_i)^2}{(y_{in}-\bar{y}_i)^2}
 %\end{equation}
-%Previous study [2] has showed that for high sampling rates sensing, the temporal correlation is higher than the spatial correlation from nearby sensors. 
-%Therefore, if the consecutive missing frames are within the threshold learned by AKE , the linear interpolation is used to predict the value. 
+Previous study [2] has showed that for high sampling rates sensing, the temporal correlation is higher than the spatial correlation from nearby sensors. 
+Therefore, if there are less consecutive missing frames than the threshold learned by AKE , the linear interpolation is used to predict the value. 
 However, in some environment, the distance used to decide the m nearest neighbours is not feasible. 
 Moreover, in certain scenarios where two far away sensors have higher correlation, i.e. two sensors place under the same air-conditioning tuyere, the AKE will ignore the far away sensor.
 Finally, the preference on spatial over temporal is also being challenged when the sampling rates is very high, i.e. the body sensors, using temporal linear interpolation has better prediction.   
