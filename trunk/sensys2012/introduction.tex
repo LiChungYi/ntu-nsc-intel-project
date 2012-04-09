@@ -130,7 +130,7 @@ becomes a tuning parameter, which adds to the complexity of such methods.
 \begin{figure}[t]
 \centering
 \includegraphics[scale=0.3]{house_floorplan.png}
-\caption{Example home floorplan showing five deployed temperature sensors} \label{house_floorplan}
+\caption{Example home floor plan showing five deployed temperature sensors} \label{house_floorplan}
 \label{fig:example_home_floorplan}
 \vspace{-0.1in}
 \end{figure}
@@ -183,7 +183,7 @@ exhibit high correlation in both time and space (subject to the above
 caveats on space).  To incorporate this property, we first modify MF
 to model temporal correlations and learn latent relationships among
 sensors.  Specifically, we add {\em temporal regulation} bias terms to
-MF---we call this {\em temporally-regulated MF} (TR-MF). Similarily, we can enforce spatial correlation among sensors into our model by adding the {\em spatial regulation} bias terms, which we call the {\em spatially-temporally-regulated} MF (STR-MF).
+MF---we call this {\em temporally-regulated MF} (TR-MF). Similarly, we can enforce spatial correlation among sensors into our model by adding the {\em spatial regulation} bias terms, which we call the {\em spatially-temporally-regulated} MF (STR-MF).
 
 Second, we consider sensor networks with multiple sensor types at each node.
 We are able to exploit such heterogeneous sensor information in our
@@ -215,7 +215,7 @@ Furthermore, adding spatial information into TR-MF is shown to be useful only wh
 For the heterogeneous setting, our results show that both TR-TF and
 Multivariate TR-MF can be more accurate than prior approaches under certain circumstances. Finally, we consider a popular data analysis task---building regression-based prediction models---and show that, compared to prior approaches, applying our more-accurate imputation techniques leads to higher-quality prediction models.
 
-These results validate our novel approach of equating sensor imputation with recommendation systems.  CF approaches such as Matrix Factorization and Tensor Factorization are adept at handling sceanarios with large numbers of missing values.  Correlations are captured by grouping correlated sensor nodes and correlated time
+These results validate our novel approach of equating sensor imputation with recommendation systems.  CF approaches such as Matrix Factorization and Tensor Factorization are adept at handling scenarios with large numbers of missing values.  Correlations are captured by grouping correlated sensor nodes and correlated time
 steps---unlike prior sensor data imputation approaches, our CF
 approaches use this {\em latent} information to impute values, and optimize the evaluation metrics directly. 
 Moreover, our CF approaches are global, taking into account all
