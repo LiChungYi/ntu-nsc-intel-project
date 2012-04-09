@@ -35,7 +35,7 @@ The inherent missing rate is roughly 58\%.
 
 Note that for both Berkeley and Traffic datasets, simple preprocessing rules were applied to remove apparent outliers.
 In the Berkeley dataset, observations are removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
-In the Traffic dataset, observations are removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
+In the Traffic dataset, observations are removed if temperature \mbox{$>60\degc$}, temperature \mbox{$<5\degc$}, humidity \mbox{$>100\%$} or humidity \mbox{$<10\%$}.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{traffic_wsn.png}
