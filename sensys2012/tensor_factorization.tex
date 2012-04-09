@@ -62,7 +62,7 @@ or
 $\mathbf{x}_i$,$\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, and $K$ is the number of columns. 
 
 \begin{figure}[h] 
-\includegraphics[width=9cm]{tf.jpg} 
+\includegraphics[width=5cm]{tf.jpg} 
 \caption{ (a) the Tucker Decomposition (TD) model (b) the Canonical Decomposition model, a special case of the TD model. In sensor networks, the three dimension can be nominal features such as node id, time step index.} 
 \label{fig:tf:tuckcanon} 
 \end{figure}
@@ -112,23 +112,23 @@ Finally, the objective function of tensor factorization becomes :\\
 \end{aligned}
 \end{equation*}
 
-\begin{algorithm}[h]
-  \caption{Temporally-Regularized Tensor Factorization}
-  \label{alg::conjugateGradient}
-  \textbf{Parameter:} $\beta_1,\beta_2, \beta_3, \beta_4, \beta_5, \beta_6, \gamma_1, \gamma_2, \eta, K$
-  \textbf{Input:} training set, validation set
-  \begin{algorithmic}[1]
-    \State Normalize the training set as $\mathcal{D}$
-    \State Initialize $\mu_m, \mu_n, \mu_c, \mathbf{p}_m, \mathbf{q}_n, \mathbf{w}_c $ for all $m, n, c$
-    \Repeat
-      \For {each observed readings $t$ in $\mathcal{D}$}
-     	 \State Update $\mu_m, \mu_n, \mu_c, \mathbf{p}_m, \mathbf{q}_n, \mathbf{w}_c$ 
-      \EndFor
-     \State Update $\mu_m, \mathbf{p}_m$ for all $m$ by temporal regularization
-    \Until stopping criterion is met
-    \State Output the model for testing set prediction 
-  \end{algorithmic}
-\end{algorithm}
+%\begin{algorithm}[h]
+%  \caption{Temporally-Regularized Tensor Factorization}
+%  \label{alg::conjugateGradient}
+%  \textbf{Parameter:} $\beta_1,\beta_2, \beta_3, \beta_4, \beta_5, \beta_6, \gamma_1, \gamma_2, \eta, K$
+%  \textbf{Input:} training set, validation set
+%  \begin{algorithmic}[1]
+%    \State Normalize the training set as $\mathcal{D}$
+%    \State Initialize $\mu_m, \mu_n, \mu_c, \mathbf{p}_m, \mathbf{q}_n, \mathbf{w}_c $ for all $m, n, c$
+%    \Repeat
+%      \For {each observed readings $t$ in $\mathcal{D}$}
+%     	 \State Update $\mu_m, \mu_n, \mu_c, \mathbf{p}_m, \mathbf{q}_n, \mathbf{w}_c$ 
+%      \EndFor
+%     \State Update $\mu_m, \mathbf{p}_m$ for all $m$ by temporal regularization
+%    \Until stopping criterion is met
+%    \State Output the model for testing set prediction 
+%  \end{algorithmic}
+%\end{algorithm}
 
 \subsubsection{Optimization}
 Minimizing the above objective function can be done using many different strategies.
