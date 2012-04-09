@@ -1,5 +1,4 @@
-\documentclass[10pt,nocopyrightspace]{sensys-proc}
-%\documentclass[10pt]{sensys-proc}
+\documentclass[10pt]{sensys-proc}
 \usepackage{tabularx}
 \usepackage{subfigure}
 \usepackage{graphicx}
@@ -23,16 +22,16 @@
 \usepackage{fancyhdr}                                                    %
 \pagestyle{fancy}                                                        %
 \fancyhf{}                                                               %
-%\lhead{--- DRAFT ---}                                                    %
-%\rhead{Section \thesection}                                              %
-%\lfoot{\today}                                                           %
-\lfoot{DRAFT}                                                    %
+\lhead{--- DRAFT ---}                                                    %
+\rhead{Section \thesection}                                              %
+\lfoot{\today}                                                           %
 \rfoot{Page \thepage\ of \pageref{LastPage}}                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\redtext}[1]{\textcolor{red}{#1}}
 \newcommand{\rednote}[1]{\textcolor{red}{\small #1}}
 \newcommand{\degc}{\ensuremath{\,^{\circ}\mathrm{C}}}
+\newcommand{\captionfonts}{\small}
 %\newcommand{\aPoint}[1]{\vspace{.5\baselineskip} \noindent\textbf{[#1]}} %Chung-Yi
 
 \numberofauthors{2}
@@ -67,19 +66,16 @@
 %\email{phillip.b.gibbons@intel.com}
 %}
 
-%\title{A Collaborative Filtering Approach\\to Estimating Missing Sensor Data}
-%\title{Estimating Missing Sensor Data via Collaborative Filtering}
-\title{Using Collaborative Filtering to Estimate Missing Sensor Data}
+\title{A Collaborative Filtering Approach\\to Estimating Missing Sensor Data}
 
 \crdata{978-1-4503-1169-4}
-\conferenceinfo{Submitted to SenSys'12,} {November 6--9, 2012, Toronto, ON, Canada.}
+\conferenceinfo{SenSys'12,} {November 6--9, 2012, Toronto, ON, Canada.}
 \CopyrightYear{2012}
 
 \begin{document}
 
 \maketitle
 \input{abstract}
-\newpage
 \input{introduction}
 \input{related_work}
 \input{matrix_factorization}
