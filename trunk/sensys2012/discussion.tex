@@ -64,14 +64,14 @@ In contrast to the random missing case, in consecutive missing scenario we can't
 \end{bmatrix} 
 \end{equation}
 Below we share the actual values of the parameters that yield the results of decent quality.
-The learning rate $\eta$ is $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, which is chosen as the largest value that is capable of producing stable and consistent improvement during the optimization.
+The learning rate $\eta$ is $0.04$ to $0.004$ for (STR-)MF and $0.001$ to $0.0001$ for TR-TF, which is chosen as the largest value that is capable of producing stable and consistent improvement during the optimization.
 The temporal regularization is set to $0.2$ divided by learning-rate $\eta$ in all of our experiment.
-The conventional regularization is $0.001$ in consecutive missing and $0$ for random missing in MF, while in TF, it is $0.005$ for consecutive missing and $0.001$ for random missing.
+The conventional regularization is $0.001$ in consecutive missing and $0$ for random missing in (STR-)MF, while in TR-TF, it is $0.005$ for consecutive missing and $0.001$ for random missing.
 Finally, we observe that using more latent factors (large $K$) usually doesn't lead to over-fitting because SGD is a natural regularization that prefers small factor values, but the training time becomes longer.
-The number of factors $K$ is $54$ for MF and $30$ for TF in Berkeley dataset, and it is $21$ for MF and $10$ for TF in traffic dataset. 
+The number of factors $K$ is $54$ for (STR-)MF and $30$ for TR-TF in Berkeley dataset, and it is $21$ for (STR-)MF and $10$ for TR-TF in traffic dataset. 
 
 \subsection{Time Complexity Analysis}
-Here we first discuss the complexity in learning MF and TF models, and then we discuss their complexity in prediction.
+Here we first discuss the complexity in learning MF and TR-TF models, and then we discuss their complexity in prediction.
 Let us denote the number of factors as $K$, the number of sampling (i.e. time steps) as $F_1$ and the number of sensor nodes as $F_2$ in TR-MF and STR-MF. For 3rd-order TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
 Assuming there are $R$ spatial and temporal regularization terms, and there are $N$ observed readings from the training set, then the time required for each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$)for both MF and TF.
 The total iteration number varies with data quality, the missing rate, and some parameters such as the learning rate as well as the stopping criterion. Normally it takes several minutes to train a TR-MF model using Xeon 2.53GHZ processor with 16~64G memory for random missing pattern in traffic data, but in some circumstances the training time can boost to 1~2 hours. TR-TF models can be trained even more efficiently, because it usually consists of fewer factors and do not take a lot of iterations to converge. 
