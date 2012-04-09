@@ -16,7 +16,7 @@ Hot-deck imputation methods directly fill in the missing values using either nei
 \subsection{Predictions based on Temporal Information }
 Linear interpolation is a common temporal correlation based technique for missing data prediction. 
 It is usually regarded as a baseline method, and has been implemented into some data analysis tools. Mathematically, the estimated value $\hat{y_{it}}$ is:
-$\hat{y_{it}} = y_{iu} + \frac{y_{iv}-y{_iu}}{T_v-T_u}(t-T_u)$, where $y_{iu}$and $y_{iv}$ are the previous and the next observations for sensor $i$ at time $t$.
+$\hat{y_{it}} = y_{iu} + \frac{y_{iv}-y_{iu}}{T_v-T_u}(t-T_u)$, where $y_{iu}$and $y_{iv}$ are the previous and the next observations for sensor $i$ at time $t$.
 Linear interpolation method does not considers correlation among sensors. In general, its performance is acceptable when the missing data are scattered. 
 However, the quality of imputation goes down significantly when the sampling rate is low or facing consecutive data missing. 
 Imputation based on the last-seen, moving average, and other statistics methods apply on the target sensors generally belong to the temporal-based method as well.
