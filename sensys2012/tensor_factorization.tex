@@ -34,6 +34,7 @@ Tensor decomposition is a multi-dimensional extension of Singular Value Decompos
 %Treating $\mathbf{R}$ as a dense tensor with missing entries being assume to be 0.
 %It would make predict missing value failed.
 In the followings, we will first introduce the tensor decomposition models and then describe how we modify one of them into a tensor factorization model for missing data recovery. 
+
  
 \subsubsection{Tensor Decomposition}
 Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963~\cite{tucker1963implications}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimension.
@@ -66,8 +67,7 @@ $\mathbf{T}_{mnc}=\sum\limits_{k=1}^{K}\mathbf{X}_{m k} \mathbf{Y}_{n k} \mathbf
 $\mathbf{x}_i$,$\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, and $K$ is the number of columns. 
 
 \begin{figure}[h] 
-\centering
-\includegraphics[width=5cm]{tf.jpg} 
+\includegraphics[width=8cm]{tf.jpg} 
 \caption{ (a) the Tucker Decomposition (TD) model (b) the Canonical Decomposition model, a special case of the TD model. In sensor networks, the three dimension can be nominal features such as node id, time step index.} 
 \label{fig:tf:tuckcanon} 
 \end{figure}
@@ -79,7 +79,7 @@ Existing Tensor Decomposition models require a dense tensor, which is unsuitable
 Therefore, we introduce an $N$-order Tensor Factorization (TF) model for missing data estimation. Although tensor factorization has been studied for a while and enjoys certain level of success in building context-aware recommender systems~\cite{karatzoglou2010multiverse,rendle2010pairwise}, we have not yet seen any proposal to leverage such techniques for WSN data imputation.
 
 Similar to TR-MF, TR-TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
-Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, a tensor can be described as:
+Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, a Tensor can be described as :
 %\begin{equation*}
 %\small
 $\mathbf{T} := F_1 \times  F_2 \times F_3 \rightarrow \mathbf{R} $
