@@ -1,6 +1,3 @@
-%\redtext{Note: Neither the abstract nor the introduction have been updated to reflect our recent findings that spatial
-%regularization can help for the temporal split case.}
-
 \section{Introduction}
 
 %\subsection{Problem Statement \redtext{(what is the problem to be solved?)}}
@@ -156,7 +153,7 @@ discussed above.
 
 \subsection{Our Approach: Collaborative Filtering}
 
-In this paper, we employ a novel collaborative-filtering (CF) approach
+In this paper, we employ a novel {\em Collaborative Filtering} (CF) approach
 to sensor data imputation inspired by the field of Recommendation
 Systems.  In typical CF approaches, the elements of interest are users
 and items (e.g., products), and the values are user ratings of those
@@ -174,52 +171,64 @@ widely successful {\em Matrix Factorization} (MF) technique for CF.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.35]{recommend_imputation.png}
-\caption{Bridge from Recommendation Systems to Sensor Data Imputation} 
+\caption{Bridge from Recommendation Systems to Sensor Data Imputation \redtext{Need to swap rows/columns}} 
 \label{recommend_imputation}
+\vspace{-0.1in}
 \end{figure}
 
 Sensor readings differ from user ratings, however, in that the former
 exhibit high correlation in both time and space (subject to the above
 caveats on space).  To incorporate this property, we first modify MF
 to model temporal correlations and learn latent relationships among
-sensors.  Specifically, we add {\em temporal regulation} bias terms to
-MF---we call this {\em temporally-regulated MF} (TR-MF). Similarly, we can enforce spatial correlation among sensors into our model by adding the {\em spatial regulation} bias terms, which we call the {\em spatially-temporally-regulated} MF (STR-MF).
+sensors.  Specifically, we add temporal-proximity bias terms to
+MF---we call this {\em Temporally-Regularized MF} (TR-MF). 
+Similarily, we can also add spatial-proximity bias terms---we 
+call this {\em Spatially-Temporally-Regularized} MF (STR-MF).
 
 Second, we consider sensor networks with multiple sensor types at each node.
-We are able to exploit such heterogeneous sensor information in our
-solution, which few other methods have proposed a proper way to
-incorporate.  Our method incorporates these heterogeneous sensor
+We are readily able to exploit such heterogeneous sensor information in our
+solution, in contrast to most prior imputation methods that use more ad hoc means.
+Our method incorporates these heterogeneous sensor
 signals (for example, estimating the temperature at a given sensor
-node utilizing the humidity, temperature, and light trends from other
+node utilizing the humidity and temperature trends from other
 sensors in the network) to provide more accurate imputation than 
 prior approaches.  We present two techniques for extending 
 TR-MF to account for possible correlations among sensor types: {\em Multivariate TR-MF} and 
-{\em Temporally-regularized Tensor Factorization} (TR-TF).
+{\em Temporally-Regularized Tensor Factorization} (TR-TF).
 
 We evaluate our approaches using two environmental sensor network
 datasets, one indoor and one outdoor.
 Both datasets record temperature, humidity, and light within its deployed
-environment.  Each dataset has an initial missing rate (strengthening
+environment.  Each dataset has a roughly 50\% initial missing rate (strengthening
 the claim that missing data in WSNs is a common issue), to which we
 additionally cover known observations to use for validation and
 testing purposes.  We study two patterns for missing data: (i) covering
-random readings (modeling intermittent reading failures) and (ii)
-covering all readings for a subset of sensor nodes from a particular time onwards 
+{\em random} readings (modeling intermittent reading failures) and (ii)
+covering {\em consecutive} readings for some sensor nodes
 (modeling long temporal gaps such as with failed sensors).
 
-Our results show that TR-MF provides significantly higher estimation accuracy than 
+Our study shows that TR-MF provides significantly higher estimation accuracy than 
 both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches 
-such as AKE which has the top performance among spatio-temporal methods.
-Furthermore, adding spatial information into TR-MF is shown to be useful only when there are less temporal information provided through data. ---with sufficient readings, TR-MF can capture the latent relationships among sensors, including spatial correlations.  
+such as AKE (which is the most accurate prior spatio-temporal method).
+Furthermore, our study shows that STR-MF, which adds spatial coordinate information into TR-MF, 
+is useful {\em only} in the ``consecutive'' pattern---perhaps surprisingly,
+STR-MF is significantly {\em less} accurate than TR-MF in the ``random'' pattern.  This is because TR-MF
+effectively leverages the latent relationships among sensors, including any spatial correlations, while avoiding the
+pitfalls of spatial-proximity biases.
 
-For the heterogeneous setting, our results show that both TR-TF and
-Multivariate TR-MF can be more accurate than prior approaches under certain circumstances. Finally, we consider a popular data analysis task---building regression-based prediction models---and show that, compared to prior approaches, applying our more-accurate imputation techniques leads to higher-quality prediction models.
+For the heterogeneous setting, our study shows that both TR-TF and
+Multivariate TR-MF can significantly improve the accuracy over TR-MF,
+and each has its strengths, depending on the observed variance in the
+readings.  Finally, we consider a popular data analysis task---building regression-based prediction models---and show that,
+compared to prior approaches for imputation, using TR-MF leads to a much higher quality prediction model.
 
-These results validate our novel approach of equating sensor imputation with recommendation systems.  CF approaches such as Matrix Factorization and Tensor Factorization are adept at handling scenarios with large numbers of missing values.  Correlations are captured by grouping correlated sensor nodes and correlated time
+These results validate our novel approach of equating sensor imputation with recommendation systems.  
+CF approaches such as Matrix Factorization and Tensor Factorization are adept at handling sceanarios 
+with large numbers of missing values.  Correlations are captured by grouping correlated sensor nodes and correlated time
 steps---unlike prior sensor data imputation approaches, our CF
 approaches use this {\em latent} information to impute values, and optimize the evaluation metrics directly. 
 Moreover, our CF approaches are global, taking into account all
-collected observations, and not overly tied to distance-based spatial
+collected observations, and not overly tied to spatial-proximity
 correlations.  For example, they can capture the correlations between
 distant sensors $3$ \& $4$ in Figure~\ref{house_floorplan}, while
 grouping sensors $1$, $2$ \& $5$ only if the observed readings warrant
@@ -250,7 +259,7 @@ In summary, the main contributions of this paper are:
 \item We propose viewing sensor data imputation as a recommendation systems problem, and apply state-of-the-art collaborative filtering methods of recommendation systems (namely, matrix and tensor factorization) to the sensor network domain.
 \item We augment collaborative filtering with temporal regularization and multi-sensor signals, and provide efficient optimization methods to learn the inherent model parameters effectively.
 \item We present an empirical study on two sensor datasets, considering two
-imputation tasks that correspond to intermittent readings and failed
+missing data patterns corresponding to intermittent readings and failed
 sensors. The results show that our proposed approaches provide
 significantly higher estimation accuracy than state-of-the-art prior
 approaches, and moreover, such accuracy improvements can result in the
@@ -259,10 +268,11 @@ generation of higher-quality prediction models.
 
 % which finds that our method works well without the incorporation spatial information and that our approach can facilitate the generation of better prediction models
 
-\subsection{Paper Organization}
+%\subsection{Paper Organization}
 
-The remainder of our paper is organized as follows.  Related Work is
-reviewed in Section \ref{sec:rw}.  In Sections \ref{sec:mf} and
-\ref{sec:tf} we describe our Matrix and Tensor Factorization
-approaches to WSN data imputation, respectively. Section \ref{sec:exp} discusses the experiment results. Sections \ref{sec:disc} and \ref{sec:conc} provide discussion of our findings
-and the conclusion.
+{\bf Roadmap.}
+%The remainder of our paper is organized as follows.  
+Related work is reviewed in Section~\ref{sec:rw}.  In Sections~\ref{sec:mf} and~\ref{sec:tf} 
+we describe our factorization and multivariate factorization
+approaches to sensor data imputation, respectively. Section \ref{sec:exp} presents our experimental study. 
+Sections \ref{sec:disc} and \ref{sec:conc} provide discussions of our findings and conclusions.
