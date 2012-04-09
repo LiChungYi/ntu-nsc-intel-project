@@ -63,15 +63,13 @@ Another spatio-temporal algorithm relying more on spatial than temporal is the D
 Given two sensors data stream, $\{X_{i1},X_{i2},\dots,X_{im}\}$, and $\{X_{j1},X_{j2},\dots,X_{jm}\}$. 
 Assume the value of $X_{i(m+1)}$ is missing,
 the prediction on sensor $i$ by its nearest sensor $j$ is:
-%\begin{equation}
-
+\begin{center}
 $\hat{X}_{i(m+1)} = (1-\alpha)X_{im} + (\alpha)\hat{z}$
-%\end{equation}
-
+\end{center}
 where $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and $j$, and $\hat{z}$ is the estimation of sensor $i$ based on the observation from sensor $j$, it measures the influence of the data sensed by the active node i on the data of the nearest node j. 
-
+\begin{center}
 $\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
-
+\end{center}
 %The above equation assumes that the sensor $X_i$ and $X_j$ have the similar data fluctuation trend. 
 %$\alpha$ is expected to have more impact on the prediction if $X_i$ is more correlated with $X_j$. 
 %\begin{equation}
