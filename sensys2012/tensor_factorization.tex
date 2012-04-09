@@ -12,7 +12,12 @@ Assuming there are two types of sensors in one node: temperature and humidity. T
 This observation motivates us to design the Multivariate (S)TR-MF.
 
 In Multivariate (S)TR-MF, $\mathbf{R}$ represents the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and humidity matrix $\mathbf{R}_{hum}$
-\begin{equation*} \mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix}, \end{equation*}
+%\begin{equation*} 
+
+\begin{center}
+ $\mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix}$,
+\end{center} 
+%\end{equation*}
 which allows the temperature model and humidity model to share the common $\mathbf{P}$ matrix, so they merge the similar factors and communicate the observed information with each other. Note that the $\mathbf{Q}_{tem}$ and $\mathbf{Q}_{hum}$ matrix in the (S)TR-MF model remain independent in the new $\mathbf{Q}$ in multivariate (S)TR-MF.
 
 The learning process of multivariate (S)TR-MF is very similar to that of (S)TR-MF: the objective function and the optimization process remains the same. Yet, there are some important differences: 
@@ -35,13 +40,13 @@ In the followings, we will first introduce the tensor decomposition models and t
 Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963~\cite{tucker1963implications}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimension.
 A $M\times N \times C $ tensor $\mathbf{T}$ can be decomposed as:
 
-\begin{equation*}
-\mathbf{T}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{p}_i\otimes \mathbf{q}_j\otimes \mathbf{w}_k
-\end{equation*}
+\begin{center}
+$\mathbf{T}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{p}_i\otimes \mathbf{q}_j\otimes \mathbf{w}_k$
+\end{center}
 or for each component,
-\begin{equation*}
-\mathbf{T}_{mnc}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{m i}\mathbf{Q}_{n j}\mathbf{W}_{c k}
-\end{equation*}
+\begin{center}
+$\mathbf{T}_{mnc}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{m i}\mathbf{Q}_{n j}\mathbf{W}_{c k}$
+\end{center}
 where the vectors $\mathbf{p}_i$, $\mathbf{q}_j$, and $\mathbf{w}_k$ are the columns of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
 %They can be thought of as the principal components in each order.
 %There are several algorithms for calculating Tucker decompositions.
@@ -52,13 +57,13 @@ where the vectors $\mathbf{p}_i$, $\mathbf{q}_j$, and $\mathbf{w}_k$ are the col
 Tucker decomposition is computationally expensive, and researchers have proposed a more efficient Decomposition called Canonical Decomposition~\cite{carroll1970analysis}, which factorizes a tensor into a sum of $K$ rank-one tensors.
 Canonical Decomposition~(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is super-diagonal.
 Formally, The Canonical Decomposition of $\mathbf{T}$ is
-\begin{equation*}
-\mathbf{T}=\sum\limits_{k=1}^{K}\mathbf{x}_k\otimes \mathbf{y}_k\otimes \mathbf{z}_k
-\end{equation*}
+\begin{center}
+$\mathbf{T}=\sum\limits_{k=1}^{K}\mathbf{x}_k\otimes \mathbf{y}_k\otimes \mathbf{z}_k$
+\end{center}
 or
-\begin{equation*}
-\mathbf{T}_{mnc}=\sum\limits_{k=1}^{K}\mathbf{X}_{m k} \mathbf{Y}_{n k} \mathbf{Z}_{c k}
-\end{equation*}
+\begin{center}
+$\mathbf{T}_{mnc}=\sum\limits_{k=1}^{K}\mathbf{X}_{m k} \mathbf{Y}_{n k} \mathbf{Z}_{c k}$
+\end{center}
 $\mathbf{x}_i$,$\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, and $K$ is the number of columns. 
 
 \begin{figure}[h] 
@@ -75,10 +80,10 @@ Therefore, we introduce an $N$-order Tensor Factorization (TF) model for missing
 
 Similar to TR-MF, TR-TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
 Consider each reading as a three-dimensional tensor element (e.g. the temperature reading of a sensor given certain time-stamp and certain humidity reading) in $R$, a Tensor can be described as :
-
-\begin{equation*}
-\mathbf{T} := F_1 \times  F_2 \times F_3 \rightarrow \mathbf{R} 
-\end{equation*}
+%\begin{equation*}
+%\small
+$\mathbf{T} := F_1 \times  F_2 \times F_3 \rightarrow \mathbf{R} $
+%\end{equation*}
 
 Tensor factorization model decomposes the reading tensors T into three features, one of them represents the temporal dimension, the rest can represent sensor nodes, sensor node coordinates, heterogeneous sensor readings, etc. In the experiments, we implemented a 3rd-order tensor model and choose the sensor nodes as well as the multivariate sensor readings as the remaining two dimensions.
 
@@ -87,15 +92,16 @@ To avoid over-fitting and to reduce the complexity of prediction, our model borr
 
 Similar to the TR-MF model, we also add bias terms to each dimension into the TF model. The prediction function is:
 \begin{equation*}
+\small
 \begin{aligned}
 \mathbf{\hat{T}}_{mnc}=\mu_m+\mu_n+\mu_c + \mathbf{p}_m \otimes \mathbf{q}_n\otimes \mathbf{w}_c
 \\=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}\mathbf{P}_{m k} \mathbf{Q}_{n k} \mathbf{W}_{c k}
 \end{aligned}
 \end{equation*}
 To learn the latent factors $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$, we use the loss function :
-\begin{equation*}
-L(\mathbf{\hat{T}},\mathbf{T})=\frac{1}{\|\mathbf{D}\|_1} \sum\limits_{t\in \mathbf{D}}  l(\hat{t},t)
-\end{equation*}
+\begin{center}
+$L(\mathbf{\hat{T}},\mathbf{T})=\frac{1}{\|\mathbf{D}\|_1} \sum\limits_{t\in \mathbf{D}}  l(\hat{t},t)$
+\end{center}
 where $\|\mathbf{D}\|$ indicates the size of the observed readings.
 $l$ is a point-wise loss function penalizing the distance between estimate and observation.
 ideally $l$ should be as close to the eventual evaluation metrics (e.g. least square error in our implementation) as possible.
@@ -104,6 +110,7 @@ Simply minimizing a loss function in TF is prone to over-fitting. Here we add re
 Similar to our TR-MF model, we also add the time regularization terms into our model.
 Finally, the objective function of tensor factorization becomes :\\
 \begin{equation*}
+\small
 \begin{aligned}
 &\sum\limits_{m, n, c} l( \hat{\mathbf{T}}_{mnc}, \mathbf{T}_{mnc} )+\beta_1\|\mathbf{p}_{\beta}\|^2+\beta_2\|\mathbf{q}_n\|^2+\beta_3\|\mathbf{w}_c\|^2+\beta_4\|\mu_m\|^2\\
 &+\beta_5\|\mu_n\|^2+\beta_6\|\mu_c\|^2+\frac{1}{2}\gamma_1\sum(\mu_m-\mu_{m+1})^2+(\mu_m-\mu_{m-1})^2
@@ -136,6 +143,7 @@ For efficiency and scalability, we suggest Stochastic Gradient Descent~(SGD) met
 We need to compute the gradients of the objective function with respect to each individual component in the model.
 Focusing on an observed reading data t = $T_{mnc} $, the update rules are:
 \begin{equation*}
+\small
 \begin{aligned}
 &{\mathbf{p}_m}^\prime={\mathbf{p}_m}+\eta(e*\mathbf{q}_n \mathbf{w}_c - \beta_1 \mathbf{p}_m)
 \\&{\mathbf{q}_n}^\prime={\mathbf{q}_n}+\eta(e*\mathbf{p}_m \mathbf{w}_c - \beta_2 \mathbf{q}_n)
@@ -147,6 +155,7 @@ Focusing on an observed reading data t = $T_{mnc} $, the update rules are:
 \end{equation*}
 where $e=t-\hat{t}$. After a round of updating, we then adjust the parameters according to temporal regularization :
 \begin{equation*}
+\small
 \begin{aligned}
 &{\mathbf{p}_m}^\prime={\mathbf{p}_m}+\eta\gamma_1(\mathbf{p}_{m+1}-\mathbf{p}_m+\mathbf{p}_{m-1}-\mathbf{p}_m)
 \\&{\mu_m}^\prime=\mu_m+\eta\gamma_2(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
@@ -156,6 +165,6 @@ where $e=t-\hat{t}$. After a round of updating, we then adjust the parameters ac
 
 TF applies similar normalization and stopping criterion trick as shown in Section \ref{sec:mf}.
 Empirically, one can achieve reasonable performance by imposing the following constraints on the parameter learning:  
-\begin{equation*}
-\beta_1=\beta_2=\beta_3=\beta_4=\beta_5=\beta_6, \gamma_1=\gamma_2.
-\end{equation*}
+%\begin{equation*}
+$\beta_1=\beta_2=\beta_3=\beta_4=\beta_5=\beta_6, \gamma_1=\gamma_2.$
+%\end{equation*}
