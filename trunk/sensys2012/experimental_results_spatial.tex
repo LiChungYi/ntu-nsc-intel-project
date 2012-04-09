@@ -1,5 +1,5 @@
 \subsection{Experimental Results on STR-MF} \label{experimental_results_spatial}
-Next we focus on using the Berkeley dataset to verify the STR-MF model as the sensor node location information for the traffic data is incompletely specified and thus unable to be exploited.
+Next we focus on using the Berkeley dataset to verify the STR-MF model as the sensor node location information for the Traffic data is incompletely specified and thus unable to be properly exploited.
 \begin{table} [htbp]
 \caption{RMSE of Berkeley, Random Missing} \label{table:spatial_random}
 \setlength{\tabcolsep}{2pt}
@@ -34,7 +34,8 @@ train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \be
 \end{table}
 
 %Table \ref{table:spatial_random_hum}, \ref{table:spatial_random_light}, \ref{table:spatial_random_tem}, \ref{table:spatial_temporal_hum}, \ref{table:spatial_temporal_light}, \ref{table:spatial_temporal_tem}  show the result of adding spatial regularization.
-Table \ref{table:spatial_random} and \ref{table:spatial_temporal} compares STR-MF with TR-MF.
+
+Tables~\ref{table:spatial_random} and~\ref{table:spatial_temporal} compare STR-MF with TR-MF.
 The spatial regularization used for STR-MF was defined based on manually-determined neighborhood nodes established via inspection of the floor plan, as shown in Figure \ref{fig:expected_similarity}.
 Note that STR-MF and sTR-MF stand for TR-MF with strong and relatively weaker spatial regularization, respectively.
 The results show that for the random missing pattern, adding spatial regularization indeed hurts the performance.
