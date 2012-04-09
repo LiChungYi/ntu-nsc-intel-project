@@ -68,7 +68,7 @@ The learning rate $\eta$ is $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for
 The temporal regularization is set to $0.2$ divided by learning-rate $\eta$ in all of our experiment.
 The conventional regularization is $0.001$ in consecutive missing and $0$ for random missing in MF, while in TF, it is $0.005$ for consecutive missing and $0.001$ for random missing.
 Finally, we observe that using more latent factors (large $K$) usually doesn't lead to over-fitting because SGD is a natural regularization that prefers small factor values, but the training time becomes longer.
-The number of factors $K$ is $54$ for MF and $30$ for TF in Berkeley data set, and it is $21$ for MF and $10$ for TF in traffic data set. 
+The number of factors $K$ is $54$ for MF and $30$ for TF in Berkeley dataset, and it is $21$ for MF and $10$ for TF in traffic dataset. 
 
 \subsection{Time Complexity Analysis}
 Here we first discuss the complexity in learning MF and TF models, and then we discuss their complexity in prediction.
