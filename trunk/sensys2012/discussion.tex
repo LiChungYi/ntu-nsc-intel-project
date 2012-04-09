@@ -70,24 +70,27 @@ In this case, we want to avoid over-fitting by imposing stronger conventional re
 \end{bmatrix} 
 \end{equation}
 Below we share the actual values of the parameters that yield the results of decent quality.
-The learning rate $\eta$ is $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, which is chosen as the largest value that is capable of producing stable and consistent improvement during the optimization.
-The temporal regularization is set to $0.2$ divided by learning-rate $\eta$ in all of our experiment.
+The learning rate $\eta$ is set to $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, the upper range value chosen as the largest value capable of producing stable and consistent improvement during the optimization.
+The temporal regularization is set to $0.2$ divided by learning-rate $\eta$ in all of our experiments.
 The conventional regularization is $0.001$ in consecutive missing and $0$ for random missing in MF, while in TF, it is $0.005$ for consecutive missing and $0.001$ for random missing.
-Finally, we observe that using more latent factors (large $K$) usually doesn't lead to over-fitting because SGD is a natural regularization that prefers small factor values, but the training time becomes longer.
-The number of factors $K$ is $54$ for MF and $30$ for TF in Berkeley dataset, and it is $21$ for MF and $10$ for TF in traffic dataset. 
+Finally, we observe that using more latent factors (large $K$) usually does not lead to over-fitting because SGD is a natural regularization that prefers small factor values, however increases in number of factors leads to longer training times.
+The number of factors $K$ is $54$ for MF and $30$ for TF for the Berkeley dataset, and $21$ for MF and $10$ for TF in the traffic dataset. 
 
 \subsection{Time Complexity Analysis}
 Here we first discuss the complexity in learning MF and TF models, and then we discuss their complexity in prediction.
-Let us denote the number of factors as $K$, the number of sampling (i.e. time steps) as $F_1$ and the number of sensor nodes as $F_2$ in MF. For 3rd-order TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
-Assuming there are $R$ spatial and temporal regularization terms, and there are $N$ observed readings from the training set, then the time required for each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$)for both MF and TF.
-The total iteration number varies with data quality, the missing rate, and some parameters such as the learning rate as well as the stopping criterion. Normally it takes several minutes to train a TR-MF model using Xeon 2.53GHZ processor with 16~64G memory for random missing pattern in traffic data, but in some circumstances the training time can boost to 1~2 hours. TR-TF models can be trained even more efficiently, because it usually consists of fewer factors and do not take a lot of iterations to converge. 
-Note that we would like to emphasize that the training time is not as important as the prediction time, as normally we only need to train our model once to learn the optimal biases and factors for prediction.
+Let us denote the number of factors as $K$, the number of sampling (i.e.\ time steps) as $F_1$ and the number of sensor nodes as $F_2$ in MF.
+For third order TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
+Assuming there are $R$ spatial and temporal regularization terms, and there are $N$ observed readings from the training set, the time required for each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$) for both MF and TF.
+The total nuber of iterations varies with data quality, the missing rate, and some parameters such as the learning rate as well as the stopping criterion.
+Normally it takes several minutes to train a TR-MF model using a Xeon 2.53GHZ processor with 16~64G memory for the random missing pattern with the traffic data, but in some circumstances the training time can grow to 1~2 hours.
+TR-TF models can be trained even more efficiently, because it usually consists of fewer factors and does not require many iterations to converge. 
+Note that we would like to emphasize that the training time is not as important as the prediction time, as normally we need only to train our model once to learn the optimal biases and factors for prediction.
 
 The imputation time is critical as ideally we hope to achieve real-time prediction given a learned model. 
 Both MF and TF are very efficient in prediction in theory and practice.
-To predict a missing value, it takes $2K$ multiplication operations to MF and $3K$ multiplication operations to TF.
-Since $K$ is relatively small so the prediction can be done in real time.
-On a normal laptop, it takes less than a second to predict all values for our Berkeley data matrix ($270000$ values).
+To predict a missing value, it takes $2K$ multiplication operations for MF and $3K$ multiplication operations for TF.
+Since $K$ is relatively small, the predictions can be performed in real time.
+On a normal laptop, it takes less than one second to predict all values for our Berkeley data matrix ($270000$ values).
 
 %\begin{comment}
 %In the training phase, TR-MF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TR-MF cost  
