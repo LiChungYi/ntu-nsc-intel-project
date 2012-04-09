@@ -5,7 +5,7 @@ Note that we only know the location information of 8 out of 20 sensors in traffi
 
 %validation setting
 %Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the results of different models random split on Berkeley data set. In the plot, the x-axis represents the missing ratio. Conceivably the difficulty of an imputation task arises with th increase of missing ratio, therefore we can see that the slopes for most of the lines in the plot are nonpositive. Also note that to highlight the difference between the better models, we cut the overflowed RMSE values of the inferior models to the maximum values that can be displayed in the plot. That says, the flat lines on top of the plots usually indicate the exact RMSE is even higher than what has been shown.
-Note that we also compare TR-MF with its predecessor the EOF mode. Table 2 shows that TR-MF outperforms EOF significantly in every aspect. We didn't generate more EOF results for other experiments because EOF requires the execution of several rounds of SVD, which is computational expensive and much less efficient comparing to other models. 
+Note that we also compare TR-MF with its predecessor the EOF mode. Table \ref{table:trmf_eof} shows that TR-MF outperforms EOF significantly in every aspect. We didn't generate more EOF results for other experiments because EOF requires the execution of several rounds of SVD, which is computational expensive and much less efficient comparing to other models. 
 
 \begin{table}[htbp]
 \setlength{\tabcolsep}{2pt}
