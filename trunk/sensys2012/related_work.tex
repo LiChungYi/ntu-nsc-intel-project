@@ -84,23 +84,22 @@ K-nearest neighbors algorithm (KNN) is an intuitive yet effective spatial correl
 %While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
 Pan\cite{pan2010k} propose the Applying K-nearest neighbor Estimation algorithm (AKE) to exploit the spatial correlation in the missing sensory data problem. 
 AKE adopts linear regression model to describe the spatial correlation of node i and j. 
-\begin{equation}
-y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} 
-\end{equation}
+\begin{center}
+$y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} $
+\end{center}
 $y_{it}$ is the observation of sensor $i$ at time t, $y_{jt}$ is the data of sensor $j$ at the same time, and $\mu_{jt}$ is the random error at time t.   
 When the data of sensor $i$ at time $t$ is missing, the estimated value of sensor $i$ by sensor $j$ at the same time is:
-\begin{equation}
-\hat{y}_{it}^{(j)} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}
-\label{ake_j}
-\end{equation}
+\begin{center}
+$\hat{y}_{it}^{(j)} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}$
+%\label{ake_j}
+\end{center}
 The $\hat{\alpha}$ and $\hat{\beta}$ are the estimated values of  $\alpha$ and $\beta$, based on the sample data according to least squares principle.
 %They claim that using a linear combination of the estimation from neighbour sensors can lower the random error caused by only using a single sensor. 
 Therefore, given the m nearest neighbour sensors who have values at time $t$[$y_{1t}, y_{2t},\dots, y_{mt}$], the missing value is predicted by :   
- \begin{equation}
- \small
- \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}
+ \begin{center}
+$ \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}$
  %\label{ake_impute}
- \end{equation}
+ \end{center}
 % First they build a matrix 
 %\[ \left( \begin{array}{cccc}
 %

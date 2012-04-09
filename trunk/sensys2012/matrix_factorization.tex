@@ -32,7 +32,7 @@ $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$ are parameters that control the stren
 \subsection{Temporally-Regularized Matrix Factorization}
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.3\textwidth]{TRMF_illustration.png}
+	\includegraphics[width=0.25\textwidth]{TRMF_illustration.png}
 	\caption{illustration of TR-MF}
 \end{figure}
 %cite temporal reference
@@ -107,7 +107,7 @@ Secondly, normalization forces different data sets to look similar, which simpli
 
 \paragraph*{Parameters Setting}
 There are several parameters in our model: conventional regularization for user biases~$\beta_1$, item biases~$\beta_2$, user factors~$\beta_3$, item factors~$\beta_4$, temporal regularization for biases~$\gamma_1$ and for factors~$\gamma_2$, spatial regularization for biases~$\gamma_3$ and for factors$~\gamma_4$, learning rate for biases~$\eta_1$ and for factors~$\eta_2$, number of factors~$K$, and it can be time consuming to search for a good combination. Here we provide some empirical suggestions to reduce the search space while still obtain results with decent quality: the rule of thumb is to setup parameters of similar physical meanings to be identical. For example: the following setup is what we exploited for the experiments:
-\begin{equation*}\small \beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \gamma_3 = \gamma_4, \eta_1 = \eta_2. \end{equation*}
+$ \beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \gamma_3 = \gamma_4, \eta_1 = \eta_2$. %\end{equation*}
 Advanced discussion in this aspect will be shown in Section \ref{subsec:parameter}.
 
 Finally, to determine when to cease updating the MF model, we use the randomly split validation set to learn the stopping criteria. More specifically, the training stops when the validation error keeps increasing for certain amount of iterations (currently setup to $500$). 
