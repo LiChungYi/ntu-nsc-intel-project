@@ -32,7 +32,7 @@ $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$ are parameters that control the stren
 \subsection{Temporally-Regularized Matrix Factorization}
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.25\textwidth]{TRMF_illustration.png}
+	\includegraphics[width=0.4\textwidth]{TRMF_illustration.png}
 	\caption{illustration of TR-MF}
 \end{figure}
 %cite temporal reference
@@ -101,7 +101,7 @@ Unlike the ratings in recommendation which normally are within certain range (e.
 Here we propose to normalize the training set to N(0,1) before conducting MF learning, and once the missing values are produced by our model, we need to rescale the values to the original mean and variance.
 Although this procedure does not change the quality of outcomes theoretically, in practice we do find some benefits: 
 First, when the global mean becomes zero, the origin of our model naturrally becomes a fine initial point for MF training, which is very important for non-convex optimization techniques such as MF.
-Secondly, normalization forces different datasets to look similar, which simplifies the parameter tuning task for (S)TR-MF. As will be shown in the next section, this trick also facilitates parameter tunings in our multivariate models.  
+Secondly, normalization forces different data sets to look similar, which simplifies the parameter tuning task for (S)TR-MF. As will be shown in the next section, this trick also facilitates parameter tunings in our multivariate models.  
 
 
 
