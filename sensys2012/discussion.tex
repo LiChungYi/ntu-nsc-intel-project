@@ -12,7 +12,9 @@ For both MF and TF models, we have realized that the parameter settings for rand
 Below we provide some qualitative analysis using examples. 
 
 %Here we ignore bias terms for simplicity.
-Equation \ref{randomSplit_matrix} shows a random missing case and \ref{temporalSplit_matrix} shows a consecutive missing case.
+Equation \ref{randomSplit_matrix} shows a random missing case and \ref{temporalSplit_matrix} shows a consecutive missing case. On the left hand side it is an example of observed matrix, and on the right hand side it is an illustrating solution of TR-MF.
+
+
 In random missing, the confidence for prediction is usually higher and the model relies more on temporal correlation.
 It is therefore preferred to use more factors and weaken the strength of conventional regularization (i.e.\ try to over-fit the data).
 Note that here the term ``conventional'' refers to the normal regularization imposing to the latent factors, not the additional ones we propose. 
@@ -42,6 +44,7 @@ As shown in Equation \ref{randomSplit_matrix}, the linear interpolation model ca
 0 & 0 & 1\\
 \end{bmatrix} 
 \end{equation}
+
 In contrast to the random missing case, in the consecutive missing scenario we may not rely on temporal correlations as the corresponding readings of the neighboring nodes at the same time steps are also missing.
 Therefore, the model relies mostly on the correlations between sensors or spatial information, and the accuracy of its predictions suffer as a consequence.
 In this case, we want to avoid over-fitting by imposing stronger conventional regularization.
@@ -69,6 +72,7 @@ In this case, we want to avoid over-fitting by imposing stronger conventional re
 0 & 0 & 1\\
 \end{bmatrix} 
 \end{equation}
+
 Below we share the actual values of the parameters that yield the results of decent quality.
 The learning rate $\eta$ is set to $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, the upper range value chosen as the largest value capable of producing stable and consistent improvement during the optimization.
 The temporal regularization is set to $0.2$ divided by learning-rate $\eta$ in all of our experiments.
