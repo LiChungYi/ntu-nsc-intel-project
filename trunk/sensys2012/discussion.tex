@@ -14,6 +14,7 @@ For both MF and TF models, we have realized that the parameter setting in random
 Equation \ref{randomSplit_matrix} shows a random missing case and \ref{temporalSplit_matrix} shows a consecutive missing case. In random missing, the confidence for prediction is usually higher and the model relies more on temporal correlation. Therefore it is preferred to use more factors and weaken the strength of conventional regularization (i.e. try to over-fit the data). Note that here the term conventional refers to the normal regularization imposing to the latent factors, not the additional ones we proposed. 
 As shown in Equation \ref{randomSplit_matrix}, the linear interpolation model can be viewed as a special-case solution for TR-MF, in which the number of factors is large and less regularization is applied. 
 \begin{equation}
+\small
 \label{randomSplit_matrix}
 \begin{bmatrix}
 16 & 22 & 18\\
@@ -39,6 +40,7 @@ As shown in Equation \ref{randomSplit_matrix}, the linear interpolation model ca
 \end{equation}
 In contrast to the random missing case, in consecutive missing scenario we can't rely on temporal correlations because the readings on the neighboring time steps are also missing. Therefore, the model tries to rely mostly on the correlations between sensors or spatial information, and is less confident about the prediction it makes. In this case, we want to avoid over-fitting by imposing stronger conventional regularization.
 \begin{equation}
+\small
 \label{temporalSplit_matrix}
 \begin{bmatrix}
 30 & 30 & 28\\
