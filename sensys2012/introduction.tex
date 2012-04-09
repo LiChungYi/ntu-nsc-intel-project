@@ -194,7 +194,7 @@ node utilizing the humidity, temperature, and light trends from other
 sensors in the network) to provide more accurate imputation than 
 prior approaches.  We present two techniques for extending 
 TR-MF to account for possible correlations among sensor types: {\em Multivariate TR-MF} and 
-{\em Temporally-regularized Tensor Factorization} (TRTF).
+{\em Temporally-regularized Tensor Factorization} (TR-TF).
 
 We evaluate our approaches using two environmental sensor network
 datasets, one indoor and one outdoor.
@@ -212,7 +212,7 @@ both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor
 such as AKE which has the top performance among spatio-temporal methods.
 Furthermore, adding spatial information into TR-MF is shown to be useful only when there are less temporal information provided through data. ---with sufficient readings, TR-MF can capture the latent relationships among sensors, including spatial correlations.  
 
-For the heterogeneous setting, our results show that both TRTF and
+For the heterogeneous setting, our results show that both TR-TF and
 Multivariate TR-MF can be more accurate than prior approaches under certain circumstances. Finally, we consider a popular data analysis task---building regression-based prediction models---and show that, compared to prior approaches, applying our more-accurate imputation techniques leads to higher-quality prediction models.
 
 These results validate our novel approach of equating sensor imputation with recommendation systems.  CF approaches such as Matrix Factorization and Tensor Factorization are adept at handling sceanarios with large numbers of missing values.  Correlations are captured by grouping correlated sensor nodes and correlated time
