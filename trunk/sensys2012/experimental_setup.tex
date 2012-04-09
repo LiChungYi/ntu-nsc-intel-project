@@ -1,8 +1,13 @@
 \section{Experimental Results}  \label{sec:exp}
 
+We conducted an experimental study comparing the accuracy of our proposed TR-MF, STR-MF, MTR-MF, and TR-TF methods to
+prior state-of-the-art methods.
+
 \subsection{Experimental Setup}
-We did experiment on one indoor dataset, the Berkeley Dataset, and one outdoor dataset, the NTU Traffic dataset.
-We also exploit two missing patterns: random missing and consecutive missing.
+We performed our study using two datasets: an indoor dataset, the ``Berkeley'' dataset, and an outdoor dataset, the ``Traffic''
+dataset.  For each dataset, we study two patterns for missing data: ``random missing'' and ``consecutive missing.''  This section
+details these datasets and patterns.
+
 \subsubsection{Datasets}
 
 \paragraph*{Berkeley Dataset}
@@ -10,8 +15,8 @@ We also exploit two missing patterns: random missing and consecutive missing.
 The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature, humidity, light, and voltage for 54 sensors (with one sensor completely missing) for which locations are given (see Figure \ref{berkeley_lab}) during February 28th and April 5th, 2004 in an indoor lab environment.
 The dataset includes 2.3M sensor observations, over 210K samples along the temporal dimension.
 Since the completeness of data degrades after 10000 samples, in our experiments only the first 2500, 5000, or 10000 samples were used.
-We found the performances of models are similar in these three cases, therefore we report only results from 5000 samples.
-The inherent missing rate for these first 5000 samples is roughly 49\%.
+We found the relative performance of the compared methods to be similar in these three cases; thus, we report only results from 
+5000 samples.  The inherent missing rate (i.e., before we introduce our missing value patterns) for these first 5000 samples is roughly 49\%.
 
 \begin{figure}[H]
 \centering
@@ -19,21 +24,23 @@ The inherent missing rate for these first 5000 samples is roughly 49\%.
 \caption{Intel Berkeley Research Lab Floorplan} \label{berkeley_lab}
 \end{figure}
 
-\paragraph*{NTU Traffic Dataset}
+\paragraph*{Traffic Dataset}
 
-The NTU Traffic Dataset records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
-This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan\cite{liu2011developed}.
+The Traffic Dataset~\cite{liu2011developed} records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
+This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan (see Figure~\ref{fig:traffic}).
 The sampling rate is roughly once every 30 minutes.
-Along the temporal dimension, we use the entire range which consists of roughly 43K time stamps which has an inherent missing rate of roughly 58\%.
+Along the temporal dimension, we use the entire range which consists of roughly 43K time stamps.
+The inherent missing rate is roughly 58\%.
 %This dataset only reveals 8 
 
-Note that for both Berkeley and NTU datasets, simple preprocessing rules were applied to remove apparent outliers.
+Note that for both Berkeley and Traffic datasets, simple preprocessing rules were applied to remove apparent outliers.
 In the Berkeley dataset, observations are removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
-In the traffic dataset, observations are removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
+In the Traffic dataset, observations are removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{traffic_wsn.png}
-\caption{NTU Traffic Sensor Deployment Configuration (8 sensors of 20 shown)}
+\caption{Traffic Sensor Deployment Configuration (8 sensors of 20 shown)}
+\label{fig:traffic}
 \end{figure}
 
 %\subsubsection{Dataset Preparation}
@@ -58,7 +65,7 @@ Although both datasets intrinsically have missing readings, we cannot use those 
 Instead we devised two strategies to produce artificial missing data.
 \paragraph*{Random Missing Pattern}
 
-This pattern reflects choosing a random time and random sensor to be missing and hence removed from the training set.
+This pattern reflects repeatedly choosing a random time and random sensor to be missing and hence removed from the training set.
 Here we follow the standard evaluation process in machine learning to divide the data into training, validation, and testing sets.
 
 We define two variables $x$ and $y$ during our experiment, and the X-axis of the resulting plot varies with $x$.
