@@ -152,7 +152,7 @@ where $e=t-\hat{t}$. After a round of updating, we then adjust the parameters ac
 \\&{\mu_m}^\prime=\mu_m+\eta\gamma_2(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
 \end{aligned}
 \end{equation*}
-The Temporally-Regularized Tensor Factorization is summarized in Procedure \ref{alg::conjugateGradient}, which is not hard to implement since it accesses only one row of $\mathbf{P}$, $\mathbf{Q}$, $\mathbf{W}$ at a time.
+%The Temporally-Regularized Tensor Factorization is summarized in Procedure \ref{alg::conjugateGradient}, which is not hard to implement since it accesses only one row of $\mathbf{P}$, $\mathbf{Q}$, $\mathbf{W}$ at a time.
 
 TF applies similar normalization and stopping criterion trick as shown in Section \ref{sec:mf}.
 Empirically, one can achieve reasonable performance by imposing the following constraints on the parameter learning:  
