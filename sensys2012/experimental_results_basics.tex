@@ -21,6 +21,8 @@ Note that we also compare TR-MF with its predecessor the EOF mode. Table \ref{ta
 \end{tabular}
 \end{table}
 
+\input{experimental_figures_basics}
+
 Figure \ref{fig:berkeley_random_hum}, \ref{fig:berkeley_random_light}, \ref{fig:berkeley_random_tem}, \ref{fig:traffic_random_hum} and \ref{fig:traffic_random_tem} show the result of random missing. The outcome indicates several interesting facts. First, TR-MF outperforms the original MF significantly, which demonstrates the effectiveness of the temporal regularization. In general, TR-MF shows significant improvement over all the other methods. On the other hand, LT is quite competitive on Berkeley data, especially for lower missing ratio cases. This is because the sampling rate of Berkeley data set is fairly high, so using only temporal correlation is sufficient to obtain decent results. In a data set with lower sampling rate as the traffic data, the spatial-oriented methods such as AKE outperform LI. 
 
 %
