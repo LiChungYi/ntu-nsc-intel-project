@@ -5,68 +5,85 @@
 %Sensors, according to their physical phenomenon, have multivariate correlations\cite{lou:multivariate_gap}. 
 %\end{comment}
 
-Table~\ref{tbl:methods} summarizes the data imputation methods in two dimensions: one describing the information utilized for imputation, and the other describing the imputation strategy. The missing-values filling strategy can be further categorized as hot-deck imputation and prediction models\cite{Garcia:KNNreview}. 
-Hot-deck imputation methods directly fill in the missing values using either neighbour values or historical records from itself such as the \textit{last-seen} method, while the prediction models exploits a function to estimate the missing values. 
+Table~\ref{tbl:methods} summarizes the data imputation methods in two dimensions: one describing the information utilized for imputation, and the other describing the imputation strategy. The missing-values filling strategy can be further categorized as hot-deck imputation and prediction models~\cite{Garcia:KNNreview}. 
+Hot-deck imputation methods directly fill in the missing values using either neighbor values or historical records from itself 
+such as the \textit{last-seen} method, while the prediction models exploit a function (involving metrics other than just sensor 
+values) to estimate the missing values. 
 
 
 %\begin{equation}
 %y_{it} = f( y_{i(t-1)} , y_{j(t-1})
 %Table~\ref{tbl:methods} summarize the sensory data imputation methods. The vertical dimension in Table~\ref{tbl:methods} shows whether it exploits the temporal, spatial, or hybrid hybrid of both information. The horizontal dimension classifies the methods by how the missing value is produced, either direct substitution or through prediction. 
 
-\subsection{Predictions based on Temporal Information }
+\subsection{Temporal Imputation Methods}
 Linear interpolation is a common temporal correlation based technique for missing data prediction. 
-It is usually regarded as a baseline method, and has been implemented into some data analysis tools. Mathematically, the estimated value $\hat{y_{it}}$ is:
-$\hat{y_{it}} = y_{iu} + \frac{y_{iv}-y_{iu}}{T_v-T_u}(t-T_u)$, where $y_{iu}$and $y_{iv}$ are the previous and the next observations for sensor $i$ at time $t$.
-Linear interpolation method does not considers correlation among sensors. In general, its performance is acceptable when the missing data are scattered. 
+It is usually regarded as a baseline method, and has been implemented into some data analysis tools. Mathematically, the estimated value $\hat{y_{it}}$ for sensor $i$ at time $t$ is:
+$\hat{y_{it}} = y_{iu} + \frac{y_{iv}-y_{iu}}{T_v-T_u}(t-T_u)$, where $y_{iu}$ ($y_{iv}$) at time $T_u$ ($T_v$) is the first 
+observation for sensor $i$ prior to (after, respectively) time $t$.
+Our Linear interpolation baseline does not considers correlation among sensors. In general, its performance is acceptable when the missing data are scattered. 
 However, the quality of imputation goes down significantly when the sampling rate is low or facing consecutive data missing. 
-Imputation based on the last-seen, moving average, and other statistics methods apply on the target sensors generally belong to the temporal-based method as well.
+Imputation based on the last-seen, moving average, and other statistics applied to the target sensor generally belong to the 
+temporal-based methods as well.
 %These methods share the advantage of comprehensible and easy implementation. 
 %However,their performance depends significantly on the sensor data missing pattern as well as sampling rate.   
-\subsection{Prediction models using spatial information}
+
+\subsection{Spatial Imputation Methods}
 %The physical phenomenon of spatial correlation in sensors measurement can further be divided into two categories, the point source and the field source\cite{viran:spatialtemporal}. 
-In some point source sensors where the strength of the sensed signal in a region satisfies certain physical laws. The imputation values can be obtained as the results of linear superposition of neighbourhood sensors. 
-For instance, the Data Estimation using Physical Model(DEPM)\cite{li2008data} model employs the basic law of Physics and design a prediction function as,  
+In some point source sensors where the strength of the sensed signal in a region satisfies certain physical laws, the imputation values can be obtained as the result of linear superposition of neighborhood sensors.
+For instance, the Data Estimation using Physical Model (DEPM)~\cite{li2008data} method employs the basic laws of Physics and 
+designs a prediction function as,  
 %\begin{equation}
 $I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}$
 %\label{DEPM}
 %\end{equation} 
-where $I_k$ is the intensity of the target sensor value, $j$ represents the neighbour sensors, and P stands for the power radiated from one source to another. 
-However, such models are only applicable to limited types of signals, and genreally require the precise three-dimensional distance among sensors.
+where $I_k$ is the intensity of the target sensor value, $j$ represents the neighbor sensors, and P stands for the power radiated from one source to another. 
+However, such models are only applicable to limited types of signals, and generally require the precise three-dimensional distance among sensors.
 
-Researchers also propose to predict missing values based on the data mining techniques. Window Association Rule Mining(WARM)\cite{le2005estimating} and Freshness Association Rule Mining(FARM)\cite{Gruenwald:FARM} studied the estimations of missing data based on the association rules among spatially correlated neighbours. 
-Such methods enjoy the advantage of being able to handle categorical sensor data, but the performance is limited in continuous sensor data streams due to the inherent limitation of association rules. 
+Researchers also propose to predict missing values based on data mining techniques. Window Association Rule Mining (WARM)~\cite{le2005estimating} and Freshness Association Rule Mining (FARM)~\cite{Gruenwald:FARM} studied the estimations of missing data based on the association rules among spatially-correlated neighbors. 
+Such methods enjoy the advantage of being able to handle categorical sensor data, but the performance is limited in continuous sensor data due to the inherent limitations of association rules (basically, the continuous data needs to be quantized into suitable
+categories for association matches).
 %Moreover, the support, confidence of the mined rules need to be predefined by the users which can cause difficulties for building a satisfying model by users without profound knowledge about the environment of deployment. 
 %\subsubsection{K-Nearest Neighbours Imputation} 
 %  The two major drawbacks of KNN-based model that predicts only from the spatial correlation are: first of all,  they cannot capture temporal correlation, and the second reason is that most of these methods rely on the knowledge of distance between each sensor, which might not be available or accurate in the real world.
 
-The multiple imputation(MI) procedure\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values instead of filling in a single value. Various methods including multiple linear regression, propensity score method, and Markov chain Monte Carlo method have been used in MI. The missing data are filled in $M$ times($M$=3-10,\cite{Little:hotdeck}) to generate M complete datasets, and the results from M generated datasets are averaged to obtained a single prediction \cite{yuan2000multiple}. 
-This model burdens with the high computation cost since multiple models have to be learned. Moreover, a poor model might contribute to the inferior averaged results. 
-%However, this method is criticized on various grounds by WSNs imputation researchers\cite{jiang2007estimating} \cite{Gruenwald:FARM}. First, in sensor data stream, we do not know how many rounds of information shall we use in order to get the associated information.
+The Multi-Im (MI) method~\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values instead of filling in a single value. Various methods including multiple linear regression, propensity score method, and Markov chain Monte Carlo method have been used in MI. The missing data are filled in $M$ times ($M=3-10$~\cite{Little:hotdeck}) 
+to generate M complete datasets, and the results from M generated datasets are averaged to obtain a single prediction~\cite{yuan2000multiple}. 
+This model suffers from high computation cost because multiple models have to be learned. Moreover, a poor model might unduly 
+contribute to an inferior averaged result. 
+%However, this method is criticized on various grounds by WSNs imputation researchers~\cite{jiang2007estimating,Gruenwald:FARM}. 
+%First, in sensor data we do not know how many rounds of information to use in order to get the associated information.
 %In addition, it is difficult to draw a pool of similar complete cases for a certain round of a certain sensor. 
 %Last, it consumes unnecessary time since the sensor data may or may not related to all of the available information.
 
 
 
-\subsection{Spatio-temporal Imputation}    
-Past studies indicate that imputation algorithms using only spatial or temporal information cannot produce satisfiable outcomes \cite{Lim:robust}. In the environment when the radio transmission quality is poor or the packets collision happens frequently, exploiting only temporal information is not ideal. In contrast, the predictors using only spatial data can easily be harmed by the bias and drift from neighbourhood sensing data. Moreover, in some outdoor environment, the spatial information about the sensors could be erroneous or missing in themselves. Therefore, researchers have proposed to exploit both temporal and spatial information for imputation.
-Below we introduce several such methods.   
+\subsection{Spatio-temporal Imputation Methods}
 
-A spatial and temporal imputation (STI) algorithm is proposed in \cite{li2008spatial}. 
-For each missing record, STI first checks if some nodes are within the sensing neighborhood, and utilize 
-the average of the neighbours to impute the missing value. If no sensors are in the neighborhood, the last seen value of the missing sensor is used for imputation. The method favors spatial info than temporal info. 
+%Past studies indicate that imputation methods using only spatial or temporal information cannot produce satisfiable outcomes~\cite{Lim:robust}. 
+%Given the weaknesses of prior imputation methods that use only temporal or spatial information,
+%researchers have proposed various methods that exploit both temporal and spatial information.
+%Below we highlight the salient such methods.
+
+%In the environment when the radio transmission quality is poor or the packets collision happens frequently, exploiting only temporal information is not ideal. In contrast, the predictors using only spatial data can easily be harmed by the bias and drift from neighbourhood sensing data. Moreover, in some outdoor environment, the spatial information about the sensors could be erroneous or missing in themselves. Therefore, 
+
+The Spatial and Temporal Imputation (STI) algorithm is proposed in~\cite{li2008spatial}. 
+For each missing record, STI first checks if some nodes are within the sensing neighborhood, and utilizes
+the average of the neighbors to impute the missing value. If no sensors are in the neighborhood, the last seen value of the 
+missing sensor is used for imputation. The method favors spatial information over temporal information.
 
 %It has the advantage of simple and fast, but suffers when last seen value is far away from the current time stamp, or when most of the nodes in the sensing region has high missing rate.
 %Furthermore, the usage of circular region is problematic as most of the landforms might not be uniformly distributed. Finally, determining the range of the radius is tricky, as a larger radius can cause noise while a smaller one cannot highlight the effectiveness of this model(i.e. the results will be similar to linear interpolation).
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
-
-Another spatio-temporal algorithm relying more on spatial than temporal is the Data Estimation using Statistical Model (DESM)\cite{li2008data}.  
-Given two sensors data stream, $\{X_{i1},X_{i2},\dots,X_{im}\}$, and $\{X_{j1},X_{j2},\dots,X_{jm}\}$. 
-Assume the value of $X_{i(m+1)}$ is missing,
+Another spatio-temporal algorithm relying more on spatial than temporal is the Data Estimation using Statistical Model (DESM)~\cite{li2008data}.  
+Given two sensors data streams, $\{X_{i1},X_{i2},\dots,X_{im}\}$, and $\{X_{j1},X_{j2},\dots,X_{jm}\}$, and assuming
+the value of $X_{i(m+1)}$ is missing,
 the prediction on sensor $i$ by its nearest sensor $j$ is:
 \begin{center}
 $\hat{X}_{i(m+1)} = (1-\alpha)X_{im} + (\alpha)\hat{z}$
 \end{center}
-where $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and $j$, and $\hat{z}$ is the estimation of sensor $i$ based on the observation from sensor $j$, it measures the influence of the data sensed by the active node i on the data of the nearest node j. 
+where $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and $j$, and $\hat{z}$ is the estimation of sensor $i$ 
+based on the observation from sensor $j$---it measures the influence of the data sensed by node $i$ on the data of 
+the nearest node $j$:
 \begin{center}
 $\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
 \end{center}
@@ -78,22 +95,26 @@ $\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
 %In DESM, because $\alpha$ is usually high around the target sensor. Therefore, the temporal feature multiplied by $1-\alpha$ holds a very small portion of contribution to the prediction process. It often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e. blocked by a wall.
 % \subsubsection{Applying K-nearest neighbour Estimation}
 
-K-nearest neighbors algorithm (KNN) is an intuitive yet effective spatial correlation based imputation method. It directly uses the weighted average of the neighbor signals to fill the missing data, and has been adopted to successfully estimate the missing values of DNA micro-arrays\cite{Troyanskaya:DNAKNN}.  
+K-nearest neighbors algorithm (KNN) is an intuitive yet effective spatial-correlation-based imputation method. 
+It directly uses the weighted average of the neighbor signals to impute the missing data, and has been adopted to successfully 
+estimate the missing values of DNA micro-arrays~\cite{Troyanskaya:DNAKNN}.  
 %While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
-Pan\cite{pan2010k} propose the Applying K-nearest neighbor Estimation algorithm (AKE) to exploit the spatial correlation in the missing sensory data problem. 
-AKE adopts linear regression model to describe the spatial correlation of node i and j. 
+Pan~\cite{pan2010k} proposes the Applying K-nearest neighbor Estimation (AKE) algorithm to exploit the spatial correlation in the 
+missing sensory data problem. 
+AKE adopts a linear regression model to describe the spatial correlation of nodes $i$ and $j$,
 \begin{center}
-$y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} $
+$y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} $,
 \end{center}
-$y_{it}$ is the observation of sensor $i$ at time t, $y_{jt}$ is the data of sensor $j$ at the same time, and $\mu_{jt}$ is the random error at time t.   
+where $y_{it}$ is the observation of sensor $i$ at time $t$, $y_{jt}$ is the data of sensor $j$ at the same time, 
+and $\mu_{jt}$ is the random error at time t.   
 When the data of sensor $i$ at time $t$ is missing, the estimated value of sensor $i$ by sensor $j$ at the same time is:
 \begin{center}
 $\hat{y}_{it}^{(j)} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}$
 %\label{ake_j}
 \end{center}
-The $\hat{\alpha}$ and $\hat{\beta}$ are the estimated values of  $\alpha$ and $\beta$, based on the sample data according to least squares principle.
+The $\hat{\alpha}$ and $\hat{\beta}$ are the estimated values of  $\alpha$ and $\beta$, based on the sample data according to the least squares principle.
 %They claim that using a linear combination of the estimation from neighbour sensors can lower the random error caused by only using a single sensor. 
-Therefore, given the m nearest neighbour sensors who have values at time $t$[$y_{1t}, y_{2t},\dots, y_{mt}$], the missing value is predicted by :   
+Therefore, given the $m$ nearest neighbor sensors who have values at time $t$[$y_{1t}, y_{2t},\dots, y_{mt}$], the missing value is predicted by :   
  \begin{center}
 $ \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}$
  %\label{ake_impute}
@@ -104,9 +125,17 @@ $ \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}$
 %\end{array}
 %\right)
 %\]
-where $w_j$ is the weight of sensor $j$ used to predict sensor $i$. In designing the weighting function, the AKE gives higher correlation pairs a larger weight. They adopts the r-square statistics to rank their correlations. The value of $w_j$ is the weighted average of the corresponding r-square value in $m$ sensors. 
+where $w_j$ is the weight of sensor $j$ used to predict sensor $i$, and is larger for more highly correlated pairs.
+They adopt the r-square statistics to rank their correlations. The value of $w_j$ is the weighted average of the corresponding 
+r-square values for the $m$ sensors. 
 
-The above models suffer a serious concern as they make some unverified assumptions about the data. For example, some models consider temporal correlation as more important than spatial correlation so nearby sensors' readings were not used only when the near-by time steps are missing (or vice versa), while some assumes that sensors of the same distance should correlated similarly regardless of their orientation or other factors. Those assumption might or might not hold for various types of data, while imposing them anyway to the model might lead to inconsistent results. Our model, however, try not to rely so much on such pre-requisite knowledge, and learn the latent correlation directly from data.
+The above models suffer a serious concern as they make some unverified assumptions about the data. For example, some models consider temporal correlation as more important than spatial correlation so nearby sensors' readings are used only when near-by time steps are missing (or vice versa), while some assume that sensors of the same distance should have similar correlation regardless of their 
+orientation or other factors.  Such assumptions might or might not hold for various types of data, while imposing them a priori
+to the model might lead to inconsistent results.  The models we propose, however, try not to rely so much on such a priori 
+knowledge, and learn the latent correlation directly from the data.  The Imputation Method (ImM)~\cite{Lim:robust}, tries to learn
+the appropriate weighting of temporal and spatial features by considering two temporal predictors, the last-seen predictor
+and an autocorrelation-based temporal linear predictor, and one spatial linear predictor.
+
 %Based on the (eq\ref{ake_j}), the $R^2$ is computed by:
 %\begin{equation}
 %R_(j)^2 = \sum_{n=1}^{h} \frac{(\hat{y}_{in}^(j)-\bar{y}_i)^2}{(y_{in}-\bar{y}_i)^2}
@@ -134,10 +163,27 @@ The above models suffer a serious concern as they make some unverified assumptio
 %For example, the wind sensors in the windy climate area may affect the method applied on the target sensor.  
 
 \subsection{Matrix Decomposition Models}
-%\subsubsection{Prediction based on Empirical Orthogonal Functions }
-The Matrix decomposition model is the one that is closest to our solution. Here we introduce the Empirical Orthogonal Functions(EOF), which has been applied to oceanographic application to solve the problem of missing or unreliable satellite data\cite{beckers2003eof}. 
-They propose a Singular Value Decomposition(SVD)-based technique for the reconstruction of missing data. In EOF, they have to first fill in the missing values (e.g. using all zero or mean values) and then perform SVD to decompose the matrix. Then they use the first k spatial-EOF (i.e. the top-k singular values in SVD) to reconstruct the matrix (i.e. perform dimension reduction) for imputation, where k is determined through cross validation over data.
-Researchers have pointed out several drawbacks in the SVD-based methods when applying to impute large-scale sensors network. First, given large data, performing SVD is extremely computational demanding as the inverse of a dense matrix is required. Second, it requires to fill all the missing values before the decomposition can be performed, and imperfect initial imputation (i.e. reseachers argue that filling all zeros is questionable) can significantly hurt the final imputation results, in particular when the missing ratio is high \cite{koren2009matrix}\cite{ke2005robust}. 
+
+The Matrix Decomposition model is the one that is closest to our
+solution, but applies a Singular Value Decomposition (SVD)-based
+approach.  A salient example is the Empirical Orthogonal Functions
+(EOF) model, which has been applied to oceanographic applications to
+solve the problem of missing or unreliable satellite
+data~\cite{beckers2003eof}.  EOF first fills in the missing values
+(e.g., using all zeros or the mean values) and then performs SVD to
+decompose the matrix. The first $k$ spatial-EOF (i.e., the top-$k$
+singular values in SVD) is used to reconstruct the matrix (i.e.,
+perform dimension reduction) for imputation, where $k$ is determined
+through cross validation over the data.  Researchers have pointed out
+several drawbacks in the SVD-based methods when applying to impute
+large-scale sensors network data. First, given large data, performing
+SVD is extremely computational demanding as the inverse of a dense
+matrix is required. Second, it requires to fill all the missing values
+before the decomposition can be performed, and imperfect initial
+imputation (i.e., reseachers argue that filling all zeros is
+questionable) can significantly hurt the final imputation results, in
+particular when the missing ratio is
+high~\cite{koren2009matrix,ke2005robust}.
 
 %The major differences between those models and ours is that them rely more on the spatial correlation than temporal correlation, while our model does not require specific spatial infromation as it tries to learn sensor correlations from data. 
   
