@@ -19,9 +19,9 @@
 
 Wireless sensor networks (WSNs) are especially susceptible to interference,
 battery depletion, hardware failures, and other environmental and communications ailments
-that lead to data loss.  Data sets gathered from sensor networks are
+that lead to data loss.  Datasets gathered from sensor networks are
 often missing a significant fraction of the possible readings
-(e.g., the Intel Berkeley Research lab dataset~\cite{berkeley2004lab}
+(e.g.\ the Intel Berkeley Research lab dataset~\cite{berkeley2004lab}
 is missing roughly 50\% of its readings).
 These missing values are problematic for data analysis tools such as
 classification engines, time-sequence pattern analysis modules, and
@@ -31,11 +31,11 @@ with missing values.  Support Vector Machine
 to name but a few examples, require complete datasets with no missing
 values.  Popular statistical packages such as SAS, Stata, and R
 provide a few default options for handling missing data, as a
-preprocessing step, because the core algorithms need all data filled
+preprocessing step, because the core algorithms require that all data be filled
 in.  Typical options are (i) remove the entire ``column'' if there is a
 missing value or (ii) fill in the missing value (called {\em
 imputation}) using either simple defaults like the average of
-neighboring values or user-written code.  The first option discards
+neighboring values or utilizing user-written code.  The first option discards
 otherwise useful data, and in fact, may discard most of the columns in
 datasets with high data loss.  Thus, imputation is a vital tool in the
 preparation of sensor data for subsequent analysis. Because the
@@ -55,8 +55,8 @@ the value of effective imputation techniques.
 \subsection{Existing Imputation Techniques}
 
 Imputation techniques as applied to sensor data can be divided into three categories:
-temporal methods (i.e., estimation using the observations from the target sensor at nearby time-steps), 
-spatial methods (i.e., estimation using neighboring sensor node observations), 
+temporal methods (i.e.\ estimation using the observations from the target sensor at nearby time steps), 
+spatial methods (i.e.\ estimation using neighboring sensor node observations), 
 and spatio-temporal methods, as shown in Table~\ref{tbl:methods}.
 
 %The feasibility of estimating missing sensor observations based on historical data is grounded by the known temporal correlation in WSN data~\cite{akyildiz2004exploiting}.
@@ -66,14 +66,14 @@ and spatio-temporal methods, as shown in Table~\ref{tbl:methods}.
 readings by the same sensor node; salient methods include observed
 data mean~\cite{madden2005tinydb}, last
 seen~\cite{Granger:lastseen}, and linear interpolation.  These methods
-suffer, however, when there are long temporal gaps of data for a given
+suffer, however, when there are long temporal gaps in observations for a given
 sensor; such gaps can be frequent in WSNs due to power depletion in
 energy-harvesting sensors, long-lived communication ailments, etc.  
 As a result, the usefulness of temporal imputation
 methods drops rapidly as the number of consecutively missing readings
 becomes large.
 
-% (i.e., as can happen when intermittent communications starvation occurs in large WSNs).  
+% (i.e.\ as can happen when intermittent communications starvation occurs in large WSNs).  
 
 \begin{table}
 \caption{Salient Methods for Sensor Data Imputation}
@@ -93,10 +93,10 @@ becomes large.
 
 {\em Spatial methods} leverage the spatial correlation among readings
 by nearby sensor nodes; salient methods include associations rule
-mining (e.g., WARM~\cite{le2005estimating} and
+mining (e.g.\ WARM~\cite{le2005estimating} and
 FARM~\cite{Gruenwald:FARM}) 
 %\cite{jiang2007estimating} 
-and weighted functions of nearby sensors (e.g., DEPM~\cite{li2008data},
+and weighted functions of nearby sensors (e.g.\ DEPM~\cite{li2008data},
 K-NN\cite{pan2010k}, and Multi-Im\cite{yuan2000multiple}).
 These methods require reasonably accurate spatial coordinates, and
 more importantly, suffer when ailments arise that affect entire
@@ -156,7 +156,7 @@ discussed above.
 In this paper, we employ a novel {\em Collaborative Filtering} (CF) approach
 to sensor data imputation inspired by the field of Recommendation
 Systems.  In typical CF approaches, the elements of interest are users
-and items (e.g., products), and the values are user ratings of those
+and items (e.g.\ products), and the values are user ratings of those
 items (as in the left-hand side of
 Figure~\ref{recommend_imputation}).  Typically, most of the ratings
 are missing, and the goal is to predict (impute) the missing ratings
@@ -233,19 +233,15 @@ correlations.  For example, they can capture the correlations between
 distant sensors $3$ \& $4$ in Figure~\ref{house_floorplan}, while
 grouping sensors $1$, $2$ \& $5$ only if the observed readings warrant
 it.  The CF framework also provides a unified approach to incorporate
-any number of additional sensor types for even more accurate imputation.
-
-
+any number of additional sensor types for an even more accurate imputation.
 
 %The reason we believe our method outperforms the results of other methods are as follows.
 %\begin{itemize}
-%\item A CF approach utilizes {\em latent} information between sensors, e.g., inter-sensor correlation
+%\item A CF approach utilizes {\em latent} information between sensors, e.g.\ inter-sensor correlation
 %\item utilizing heterogeneous sensor information (e.g.\ utilizing humidity information when estimating temperature) provides additional features which enables a more refined estimation model
 %\item we provide an efficient optimization method to learn the inherent model parameters effectively
 %\item our method provides a global solution, where all sensor observations available in the dataset can potentially aid in the estimation of a given missing observation
 %\end{itemize}
-
-
 
 % Given these experimental conditions, we show that our temporal and spatial-oriented collaborative filtering approach to data imputation for WSNs performs more accurately than existing methods such as linear regression and hybrid-kNN.
 % In Matrix Factorization, we impose the temporal regularization and Temporal-Regularied MF show the best performance compared to all competitor algorithmss.
