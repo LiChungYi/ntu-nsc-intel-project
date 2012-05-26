@@ -112,7 +112,7 @@ If the spatial regularization is exploited, we can update all $\mu_n$ and $\math
 
 \paragraph*{Data Normalization}
 Unlike the ratings in recommendation systems that are normally within certain range (e.g., 1 star to 5 star), readings from WSNs are real-valued (rounded to a desired level of precision), and the range may vary with the sensor locations.
-Here we propose to normalize the training set to N(0,1) before conducting MF learning, and once the missing values are produced by our model, we need to rescale the values to the original mean and variance.
+Here we propose to normalize the training set to zero mean and unit variance before conducting MF learning, and once the missing values are produced by our model, we need to rescale the values to the original mean and variance.
 Although this procedure does not change the quality of outcomes theoretically, in practice we do find some benefits: 
 First, when the global mean becomes zero, the origin of our model naturally becomes a fine initial point for MF training, which is very important for non-convex optimization techniques such as MF.
 Second, normalization forces different data sets to look similar, which simplifies the parameter tuning task for (S)TR-MF. 
