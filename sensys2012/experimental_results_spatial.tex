@@ -44,7 +44,7 @@ On the other hand, for consecutive missing cases, adding spatial regularization 
 Generally, the distinction between TR-MF and STR-MF is that the former is a pure data-driven model while the latter is slightly knowledge-driven.
 The experiments show that when we have sufficient data to learn the correlation between sensors, it is better to ignore the given knowledge because they might not be accurate; however, if the given data is less abundant, incorporating external spatial knowledge can be helpful.
 
-We also conduct an interesting experiment to see whether the correlations learned by TR-MF in random missing cases reflect our hypothesis of spatial correlation (i.e.\ Figure \ref{fig:expected_similarity}).
+We also conduct an interesting experiment to see whether the correlations learned by TR-MF in random missing cases reflect our hypothesis of spatial correlation (i.e., Figure \ref{fig:expected_similarity}).
 For the humidity and light data, we first use the TR-MF model to learn the latent factors of each sensor node given random missing under 85\% training data.
 Based on the latent factors $\mathbf{q}$, we can then define the similarity between sensor nodes $n_i$ and $n_j$ as:
 %\begin{equation*}
@@ -74,4 +74,4 @@ Then we identify the top 100 similar pairs and draw a line between each of them 
 We can see that the manually hypothesized spatial correlation plot Figure \ref{fig:expected_similarity} is more similar to the one learned from humidity data (Figure \ref{fig:humidity_similarity}) than to the one learned from light data (Figure \ref{fig:light_similarity}).
 This experiment shows two interesting insights.
 First, the manually-crafted spatial correlations do not necessary reflect the true correlations between sensor signals, because they might have not yet considered other factors such as those described in the example of Figure \ref{fig:example_home_floorplan}.
-Second, if the human knowledge of spatial correlation does to some extent reflect the true correlations between sensors, incorporating them in scenarios with limited information (i.e.\ the consecutive missing pattens) can be helpful (e.g.\ the humidity imputation in Table \ref{table:spatial_temporal} improves with spatial information); otherwise it is useless (e.g.\ no improvement for the light imputation in Table \ref{table:spatial_temporal}).
+Second, if the human knowledge of spatial correlation does to some extent reflect the true correlations between sensors, incorporating them in scenarios with limited information (i.e., the consecutive missing pattens) can be helpful (e.g., the humidity imputation in Table \ref{table:spatial_temporal} improves with spatial information); otherwise it is useless (e.g., no improvement for the light imputation in Table \ref{table:spatial_temporal}).

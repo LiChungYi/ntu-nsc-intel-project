@@ -21,7 +21,7 @@ Wireless sensor networks (WSNs) are especially susceptible to interference,
 battery depletion, hardware failures, and other environmental and communications ailments
 that lead to data loss.  Datasets gathered from sensor networks are
 often missing a significant fraction of the possible readings
-(e.g.\ the Intel Berkeley Research lab dataset~\cite{berkeley2004lab}
+(e.g., the Intel Berkeley Research lab dataset~\cite{berkeley2004lab}
 is missing roughly 50\% of its readings).
 These missing values are problematic for data analysis tools such as
 classification engines, time-sequence pattern analysis modules, and
@@ -55,8 +55,8 @@ the value of effective imputation techniques.
 \subsection{Existing Imputation Techniques}
 
 Imputation techniques as applied to sensor data can be divided into three categories:
-temporal methods (i.e.\ estimation using the observations from the target sensor at nearby time steps), 
-spatial methods (i.e.\ estimation using neighboring sensor node observations), 
+temporal methods (i.e., estimation using the observations from the target sensor at nearby time steps), 
+spatial methods (i.e., estimation using neighboring sensor node observations), 
 and spatio-temporal methods, as shown in Table~\ref{tbl:methods}.
 
 %The feasibility of estimating missing sensor observations based on historical data is grounded by the known temporal correlation in WSN data~\cite{akyildiz2004exploiting}.
@@ -73,7 +73,7 @@ As a result, the usefulness of temporal imputation
 methods drops rapidly as the number of consecutively missing readings
 becomes large.
 
-% (i.e.\ as can happen when intermittent communications starvation occurs in large WSNs).  
+% (i.e., as can happen when intermittent communications starvation occurs in large WSNs).  
 
 \begin{table}
 \caption{Salient Methods for Sensor Data Imputation}
@@ -93,10 +93,10 @@ becomes large.
 
 {\em Spatial methods} leverage the spatial correlation among readings
 by nearby sensor nodes; salient methods include associations rule
-mining (e.g.\ WARM~\cite{le2005estimating} and
+mining (e.g., WARM~\cite{le2005estimating} and
 FARM~\cite{Gruenwald:FARM}) 
 %\cite{jiang2007estimating} 
-and weighted functions of nearby sensors (e.g.\ DEPM~\cite{li2008data},
+and weighted functions of nearby sensors (e.g., DEPM~\cite{li2008data},
 K-NN\cite{pan2010k}, and Multi-Im\cite{yuan2000multiple}).
 These methods require reasonably accurate spatial coordinates, and
 more importantly, suffer when ailments arise that affect entire
@@ -156,7 +156,7 @@ discussed above.
 In this paper, we employ a novel {\em Collaborative Filtering} (CF) approach
 to sensor data imputation inspired by the field of Recommendation
 Systems.  In typical CF approaches, the elements of interest are users
-and items (e.g.\ products), and the values are user ratings of those
+and items (e.g., products), and the values are user ratings of those
 items (as in the left-hand side of
 Figure~\ref{recommend_imputation}).  Typically, most of the ratings
 are missing, and the goal is to predict (impute) the missing ratings
@@ -237,8 +237,8 @@ any number of additional sensor types for an even more accurate imputation.
 
 %The reason we believe our method outperforms the results of other methods are as follows.
 %\begin{itemize}
-%\item A CF approach utilizes {\em latent} information between sensors, e.g.\ inter-sensor correlation
-%\item utilizing heterogeneous sensor information (e.g.\ utilizing humidity information when estimating temperature) provides additional features which enables a more refined estimation model
+%\item A CF approach utilizes {\em latent} information between sensors, e.g., inter-sensor correlation
+%\item utilizing heterogeneous sensor information (e.g., utilizing humidity information when estimating temperature) provides additional features which enables a more refined estimation model
 %\item we provide an efficient optimization method to learn the inherent model parameters effectively
 %\item our method provides a global solution, where all sensor observations available in the dataset can potentially aid in the estimation of a given missing observation
 %\end{itemize}

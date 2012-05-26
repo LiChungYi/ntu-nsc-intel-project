@@ -39,7 +39,7 @@ $I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}$
 where $I_k$ is the intensity of the target sensor value, $j$ represents the neighbor sensors, and P stands for the power radiated from one source to another. 
 However, such models are only applicable to limited types of signals, and generally require the precise three-dimensional distance among sensors.
 
-Researchers also propose predicting missing values based on data mining techniques. Window Association Rule Mining (WARM)~\cite{le2005estimating} and Freshness Association Rule Mining (FARM)~\cite{Gruenwald:FARM} study the estimations of missing data based on the association rules among spatially-correlated neighbors. 
+Researchers also propose predicting missing values based on data mining techniques. Window Association Rule Mining (WARM)~\cite{le2005estimating} and Freshness Association Rule Mining (FARM)~\cite{Gruenwald:FARM} study the estimation of missing data based on the association rules among spatially-correlated neighbors. 
 Such methods enjoy the advantage of being able to handle categorical sensor data, but the performance is limited in continuous sensor data due to the inherent limitations of association rules (basically, the continuous data needs to be quantized into suitable
 categories for association matches).
 %Moreover, the support, confidence of the mined rules need to be predefined by the users which can cause difficulties for building a satisfying model by users without profound knowledge about the environment of deployment. 
@@ -72,7 +72,7 @@ the average of the neighbors to impute the missing value. If no sensors are with
 missing sensor is used for imputation. The method favors spatial information over temporal information.
 
 %It has the advantage of simple and fast, but suffers when last seen value is far away from the current time stamp, or when most of the nodes in the sensing region has high missing rate.
-%Furthermore, the usage of circular region is problematic as most of the landforms might not be uniformly distributed. Finally, determining the range of the radius is tricky, as a larger radius can cause noise while a smaller one cannot highlight the effectiveness of this model(i.e. the results will be similar to linear interpolation).
+%Furthermore, the usage of circular region is problematic as most of the landforms might not be uniformly distributed. Finally, determining the range of the radius is tricky, as a larger radius can cause noise while a smaller one cannot highlight the effectiveness of this model(i.e., the results will be similar to linear interpolation).
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
 Another spatio-temporal algorithm which relies more on spatial than temporal is the Data Estimation using Statistical Model (DESM)~\cite{li2008data} approach.  
 Given two sensors data streams, $\{X_{i1},X_{i2},\dots,X_{im}\}$, and $\{X_{j1},X_{j2},\dots,X_{jm}\}$, and assuming
@@ -92,7 +92,7 @@ $\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
 %\begin{equation}
 %\label{z-hat}
 %\end{equation}
-%In DESM, because $\alpha$ is usually high around the target sensor. Therefore, the temporal feature multiplied by $1-\alpha$ holds a very small portion of contribution to the prediction process. It often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e. blocked by a wall.
+%In DESM, because $\alpha$ is usually high around the target sensor. Therefore, the temporal feature multiplied by $1-\alpha$ holds a very small portion of contribution to the prediction process. It often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e., blocked by a wall.
 % \subsubsection{Applying K-nearest neighbour Estimation}
 
 K-nearest neighbors algorithm (KNN) is an intuitive yet effective spatial-correlation-based imputation method. 
@@ -131,7 +131,7 @@ r-square values for the $m$ sensors.
 
 The above models suffer from an issue as they make some unverified assumptions about the data. For example, some models consider temporal correlation as more important than spatial correlation such that the reading of nearby sensors are used only when nearby time steps are missing (or vice versa), while some assume that sensors of the same distance should have a similar correlation regardless of their 
 orientation or other factors.  Such assumptions might or might not hold for various types of data, while imposing them a priori
-to the model might lead to inconsistent results.  The models we propose, however, try not to rely so much on such a priori 
+to the model build might lead to inconsistent results.  The models we propose, however, try to rely less on such a priori 
 knowledge, and learn the latent correlation directly from the data.  The Imputation Method (ImM)~\cite{Lim:robust}, tries to learn
 the appropriate weighting of temporal and spatial features by considering two temporal predictors, the last-seen predictor
 and an autocorrelation-based temporal linear predictor, and one spatial linear predictor.
@@ -140,7 +140,7 @@ and an autocorrelation-based temporal linear predictor, and one spatial linear p
 %\begin{equation}
 %R_(j)^2 = \sum_{n=1}^{h} \frac{(\hat{y}_{in}^(j)-\bar{y}_i)^2}{(y_{in}-\bar{y}_i)^2}
 %\end{equation}
-%Previous study [2] has showed that for high sampling rates sensing, the temporal correlation is higher than the spatial correlation from nearby sensors. Therefore, if there are less consecutive missing frames than the threshold learned by AKE , the linear interpolation is used to predict the value. However, in some environment, the distance used to decide the m nearest neighbours is not feasible. Moreover, in certain scenarios where two far away sensors have higher correlation, i.e. two sensors place under the same air-conditioning tuyere, the AKE will ignore the far away sensor. Finally, the preference on spatial over temporal is also being challenged when the sampling rates is very high, i.e. the body sensors, using temporal linear interpolation has better prediction.   
+%Previous study [2] has showed that for high sampling rates sensing, the temporal correlation is higher than the spatial correlation from nearby sensors. Therefore, if there are less consecutive missing frames than the threshold learned by AKE , the linear interpolation is used to predict the value. However, in some environment, the distance used to decide the m nearest neighbours is not feasible. Moreover, in certain scenarios where two far away sensors have higher correlation, i.e., two sensors place under the same air-conditioning tuyere, the AKE will ignore the far away sensor. Finally, the preference on spatial over temporal is also being challenged when the sampling rates is very high, i.e., the body sensors, using temporal linear interpolation has better prediction.   
 
 %\subsubsection{Imputation Method-ImM}
 % In \cite{Lim:robust}, an imputation method(ImM) consists of two temporal and one spatial predictors was introduced.  The algorithm argues that it is not robust to set the preference for its spatial predictor over temporal predictor, or vice versa. They assume that the predictor which yields the most accurate results in the training dataset is used to predict the missing packets. 
@@ -180,7 +180,7 @@ large-scale sensors network data. First, given large data, performing
 SVD is extremely computational demanding as the inverse of a dense
 matrix is required. Second, it requires to fill in all missing values
 before the decomposition can be performed, and imperfect initial
-imputation (i.e.\ reseachers argue that filling all zeros is
+imputation (i.e., reseachers argue that filling all zeros is
 questionable) can significantly hurt the final imputation results, in
 particular when the missing data rate is
 high~\cite{koren2009matrix,ke2005robust}.

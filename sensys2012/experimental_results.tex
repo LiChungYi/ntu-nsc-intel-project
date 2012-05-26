@@ -24,7 +24,7 @@ With focus on the TR-TF model, we first observe that TR-TF-part and TR-TF-all pr
 The results further show that the TR-TF model outperforms all other models significantly for the traffic dataset, but performs less well for the Berkeley dataset.
 We believe the reason for this different is as the follows.
 To perform TR-TF, it is required that each dimension of the tensor be discretized.
-While the sensor and time-step dimensions are already discretized, the third dimension (i.e.\ humidity or temperature) is not.
+While the sensor and time-step dimensions are already discretized, the third dimension (i.e., humidity or temperature) is not.
 Therefore we need to perform discretization before conducting tensor factorization.
 The problem for the Berkeley dataset is that as an indoor dataset, the variances in temperature and humidity readings are not as large as those of the traffic dataset, therefore a uniform discretization would lead to an uneven split of values across this third dimension, which then limits its power in explaining the data.
  
