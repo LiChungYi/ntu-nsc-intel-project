@@ -86,7 +86,7 @@ Let us denote the number of factors as $K$, the number of sampling (i.e.\ time s
 For third order TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
 Assuming there are $R$ spatial and temporal regularization terms, and there are $N$ observed readings from the training set, the time required for each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$) for both MF and TF.
 The total nuber of iterations varies with data quality, the missing rate, and some parameters such as the learning rate as well as the stopping criterion.
-Normally it takes several minutes to train a TR-MF model using a Xeon 2.53GHZ processor with 16~64G memory for the random missing pattern with the traffic data, but in some circumstances the training time can grow to 1~2 hours.
+Normally it takes several minutes to train a TR-MF model using a Xeon 2.53GHZ processor with 16 to 64G memory for the random missing pattern with the traffic data, but in some circumstances the training time can grow to 1 to 2 hours.
 TR-TF models can be trained even more efficiently, because it usually consists of fewer factors and does not require many iterations to converge. 
 Note that we would like to emphasize that the training time is not as important as the prediction time, as normally we need only to train our model once to learn the optimal biases and factors for prediction.
 
