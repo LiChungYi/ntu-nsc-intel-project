@@ -1,0 +1,103 @@
+\section{Discussion}  \label{sec:disc}
+
+%\subsection{Hybrid Temporal/Spatial Imputation Methods}
+
+%Hybrid methods of temporal and spatial approaches are less common in the literature.
+%For example, the average of the temporal approach of linear interpolation and the spatial approach of multivariate %regression has been reported[8].
+%Strictly speaking, this approach can be thought of as an ensemble approach between the two methods rather than a fully-%integrated approach which considers both temporal and spatial aspects of WSN data.
+
+\subsection{Parameter Setting} \label{subsec:parameter}
+
+For both MF and TF models, we have realized that the parameter settings for random missing experiments has to be different from those used in consecutive missing experiments. Specifically, stronger regularization is needed in consecutive missing scenario.
+Below we provide some qualitative analysis using examples. 
+
+%Here we ignore bias terms for simplicity.
+Equation \ref{randomSplit_matrix} shows a random missing case and \ref{temporalSplit_matrix} shows a consecutive missing case. On the left hand side it is an example of observed matrix, and on the right hand side it is an illustrating solution of TR-MF.
+
+
+In random missing, the confidence for prediction is usually higher and the model relies more on temporal correlation.
+It is therefore preferred to use more factors and weaken the strength of conventional regularization (i.e., try to over-fit the data).
+Note that here the term ``conventional'' refers to the normal regularization imposing to the latent factors, not the additional ones we propose. 
+As shown in Equation \ref{randomSplit_matrix}, the linear interpolation model can be viewed as a special-case solution for TR-MF, in which the number of factors is large and less regularization is applied. 
+\begin{equation}
+\small
+\label{randomSplit_matrix}
+\begin{bmatrix}
+16 & 22 & 18\\
+ ? & 22 & 19\\
+18 &  ?	& 22\\
+19 & 24 &  ?\\
+20 & 26 & 26\\
+\end{bmatrix} 
+= 
+\begin{bmatrix}
+16 & 22 & 18\\
+\mathbf{17} & 22 & 19\\
+18 & \mathbf{23}	& 22\\
+19 & 24 & \mathbf{24}\\
+20 & 26 & 26\\
+\end{bmatrix} 
+\times
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{bmatrix} 
+\end{equation}
+
+In contrast to the random missing case, in the consecutive missing scenario we may not rely on temporal correlations as the corresponding readings of the same node at the neighboring time steps are also missing.
+Therefore, the model relies mostly on the correlations between sensors or spatial information, and the accuracy of its predictions suffer as a consequence.
+In this case, we want to avoid over-fitting by imposing stronger conventional regularization.
+\begin{equation}
+\small
+\label{temporalSplit_matrix}
+\begin{bmatrix}
+30 & 30 & 28\\
+31 & 31 & 28\\
+32 &  ? & 28\\
+33 &  ? & 28\\
+32 &  ? & 28\\
+\end{bmatrix} 
+= 
+\begin{bmatrix}
+30 & 28\\
+31 & 28\\
+\mathbf{32} & 28\\
+\mathbf{33} & 28\\
+\mathbf{32} & 28\\
+\end{bmatrix} 
+\times
+\begin{bmatrix}
+1 & 1 & 0\\
+0 & 0 & 1\\
+\end{bmatrix} 
+\end{equation}
+
+Below we share the actual values of the parameters that yield the results of decent quality.
+The learning rate $\eta$ is set to $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF, the upper range value chosen as the largest value capable of producing stable and consistent improvement during the optimization.
+The temporal regularization is set to $0.2$ divided by learning-rate $\eta$ in all of our experiments.
+The conventional regularization is $0.001$ in consecutive missing and $0$ for random missing in MF, while in TF, it is $0.005$ for consecutive missing and $0.001$ for random missing.
+Finally, we observe that using more latent factors (large $K$) usually does not lead to over-fitting because SGD is a natural regularization that prefers small factor values, however increases in number of factors leads to longer training times.
+The number of factors $K$ is $54$ for MF and $30$ for TF for the Berkeley dataset, and $21$ for MF and $10$ for TF in the traffic dataset. 
+
+\subsection{Time Complexity Analysis}
+Here we first discuss the complexity in learning MF and TF models, and then we discuss their complexity in prediction.
+Let us denote the number of factors as $K$, the number of sampling (i.e., time steps) as $F_1$ and the number of sensor nodes as $F_2$ in MF.
+For third order TF, the numbers of three features are $F_1$, $F_2$, $F_3$.  
+Assuming there are $R$ spatial and temporal regularization terms, and there are $N$ observed readings from the training set, the time required for each update is $\Theta(KN + KR)$ (independent of $F_1$, $F_2$ and $F_3$) for both MF and TF.
+The total nuber of iterations varies with data quality, the missing rate, and some parameters such as the learning rate as well as the stopping criterion.
+Normally it takes several minutes to train a TR-MF model using a Xeon 2.53GHZ processor with 16 to 64G memory for the random missing pattern with the traffic data, but in some circumstances the training time can grow to 1 to 2 hours.
+TR-TF models can be trained even more efficiently, because it usually consists of fewer factors and does not require many iterations to converge. 
+Note that we would like to emphasize that the training time is not as important as the prediction time, as normally we need only to train our model once to learn the optimal biases and factors for prediction.
+
+The imputation time is critical as ideally we hope to achieve real-time prediction given a learned model. 
+Both MF and TF are very efficient in prediction in theory and practice.
+To predict a missing value, it takes $2K$ multiplication operations for MF and $3K$ multiplication operations for TF.
+Since $K$ is relatively small, the predictions can be performed in real time.
+On a normal laptop, it takes less than one second to predict all values for our Berkeley data matrix ($270000$ values).
+
+%\begin{comment}
+%In the training phase, TR-MF update factors 2NK times and update biases 2N times. After each iteration, the time regularization terms are updated once. So the complexity of a iteration is $\mathbf{O}(NK+N+SK+FK)$. In testing phase, TR-MF cost  
+%$\mathbf{O}(K)$ to predict a missing value.\\
+%Suppose the factor size of TF model is K, $F_1$, $F_2$, $F_3$ represent the number of three features use in TF. In the training phase. In the training phase, TF update factors 3NK times and update biases 3N times. After each iteration, the time regularization terms are also updates once. The complexity of a iteration is $\mathbf{O}(NK+N+F_1K+F_2K+F_3K)$. In the testing phase, TF also cost  $\mathbf{O}(K)$ to predict a missing. However,we found if you want to get the equally performance between TF and TR-MF, the parameter $K$ of TF is usually smaller than TR-MF.
+%\end{comment}
