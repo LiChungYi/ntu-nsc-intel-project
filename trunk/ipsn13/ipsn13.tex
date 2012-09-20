@@ -1,0 +1,97 @@
+\documentclass[10pt,nocopyrightspace]{ipsn13}
+\usepackage{tabularx}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{cite}
+\usepackage{balance}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{array}
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{rotating}
+\usepackage{multirow}
+\floatname{algorithm}{Procedure}
+\numberwithin{equation}{section}
+%%%%%% FOR DRAFT VERSION - REMOVE FOR FINAL VERSION %%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{lastpage} % for the number of the last page in the document  %
+%\usepackage{fancyhdr}                                                    %
+%\pagestyle{fancy}                                                        %
+%\fancyhf{}                                                               %
+%\lhead{--- DRAFT ---}                                                    %
+%\rhead{Section \thesection}                                              %
+%\lfoot{\today}                                                           %
+%\rfoot{Page \thepage\ of \pageref{LastPage}}                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\redtext}[1]{\textcolor{red}{#1}}
+\newcommand{\rednote}[1]{\textcolor{red}{\small #1}}
+\newcommand{\degc}{\ensuremath{\,^{\circ}\mathrm{C}}}
+\newcommand{\captionfonts}{\small}
+%\newcommand{\aPoint}[1]{\vspace{.5\baselineskip} \noindent\textbf{[#1]}} %Chung-Yi
+
+\numberofauthors{2}
+
+%\author{ %anon style
+%{Scribus Primus}\\
+%\affaddr{Primus Address}\\
+%\emai	l{primus@somewhere.com} \and
+%{Scribus Secundus}\\
+%\affaddr{Secundus Address}\\
+%\email{secondus@elsewhere.com}
+%}
+%
+
+%\author{ % ntu/intel separated style
+%{Chung-Yi Li, Wei-Lun Su, Todd G.\ McKenzie, Fu-Chun Hsu, %students
+%Shou-De Lin, Jane Yung-jen Hsu}\\ %professors
+%\affaddr{Department of Computer Science and Information Engineering, National Taiwan University, Taiwan}\\
+%\email{\{r00922051,r00922050,d97041,r94082,sdlin,yjhsu\}@csie.ntu.edu.tw} \and
+%{Phillip B.\ Gibbons}\\
+%\affaddr{Intel Research Pittsburgh, USA}\\
+%\email{phillip.b.gibbons@intel.com}
+%}
+
+% Removed this, for anonymized submission
+%\author{ % ntu/intel combined style
+%{Chung-Yi Li$^1$, Wei-Lun Su$^1$, Todd G.\ McKenzie$^1$, Fu-Chun Hsu$^1$,}\and %students
+%{Shou-De Lin$^1$, Phillip B.\ Gibbons$^2$, Jane Yung-jen Hsu$^1$}\vspace{3pt}\\ %professors + phil
+%\affaddr{$^1$Department of Computer Science and Information Engineering, National Taiwan University, Taiwan}\\
+%\email{\{r00922051,r00922050,d97041,r94082,sdlin,yjhsu\}@csie.ntu.edu.tw}\\
+%\affaddr{$^2$Intel Labs Pittsburgh, USA}\\
+%\email{phillip.b.gibbons@intel.com}
+%}
+
+%\title{A Collaborative Filtering Approach\\to Estimating Missing Sensor Data}
+%\title{Using Collaborative Filtering to Estimate Missing Sensor Data}
+\title{Recommending Missing Sensor Values}
+
+\crdata{978-1-4503-1169-4}
+\conferenceinfo{SenSys'12,} {November 6--9, 2012, Toronto, ON, Canada.}
+\CopyrightYear{2012}
+
+\begin{document}
+
+\maketitle
+\input{abstract}
+\newpage
+\input{introduction}
+%\input{related_work}
+%\input{matrix_factorization}
+%\input{tensor_factorization}
+%\input{experimental_setup}
+%\input{experimental_results_basics}
+%\input{experimental_results_spatial}
+%\input{experimental_results}
+%\input{discussion}
+%\input{conclusion}
+
+%\input{acknowledgement}
+%\balance
+\bibliographystyle{abbrv}
+\bibliography{ipsn13}
+\end{document}

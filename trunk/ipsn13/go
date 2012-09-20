@@ -1,0 +1,3 @@
+#!/bin/bash
+make
+scp ipsn13.pdf r00922051@linux11.csie.org:~/htdocs/a.pdf
