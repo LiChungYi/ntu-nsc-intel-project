@@ -39,23 +39,19 @@ In the following, we will first introduce the tensor decomposition models and th
  
 \subsubsection{Tensor Decomposition}
 Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963~\cite{tucker1963implications}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimension.
-A $M\times N \times C $ tensor $\mathbf{T}$ can be decomposed as:
+%A $M\times N \times C $ tensor $\mathbf{T}$ can be decomposed as:
 
-\begin{center}
-$\mathbf{T}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{p}_i\otimes \mathbf{q}_j\otimes \mathbf{w}_k$
-\end{center}
-or for each component,
-\begin{center}
-$\mathbf{T}_{mnc}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{m i}\mathbf{Q}_{n j}\mathbf{W}_{c k}$
-\end{center}
-where the vectors $\mathbf{p}_i$, $\mathbf{q}_j$, and $\mathbf{w}_k$ are the columns of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
-%They can be thought of as the principal components in each order.
-%There are several algorithms for calculating Tucker decompositions.
-%For data compression, the Tucker decomposition usually assumes that $I\le M$, $J \le N $ and $K \le C$.
+%\begin{center}
+%$\mathbf{T}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{p}_i\otimes \mathbf{q}_j\otimes \mathbf{w}_k$
+%\end{center}
+%or for each component,
+%\begin{center}
+%$\mathbf{T}_{mnc}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{m i}\mathbf{Q}_{n j}\mathbf{W}_{c k}$
+%\end{center}
+%where the vectors $\mathbf{p}_i$, $\mathbf{q}_j$, and $\mathbf{w}_k$ are the columns of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
 
-%\subsubsection{Canonical Decomposition}
+However, Tucker decomposition is computationally expensive, and researchers have proposed a more efficient decomposition called Canonical Decomposition~\cite{carroll1970analysis}, which factorizes a tensor into a sum of $K$ rank-one tensors.
 
-Tucker decomposition is computationally expensive, and researchers have proposed a more efficient decomposition called Canonical Decomposition~\cite{carroll1970analysis}, which factorizes a tensor into a sum of $K$ rank-one tensors.
 Canonical Decomposition~(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is super-diagonal.
 Formally, the Canonical Decomposition of $\mathbf{T}$ is
 \begin{center}
