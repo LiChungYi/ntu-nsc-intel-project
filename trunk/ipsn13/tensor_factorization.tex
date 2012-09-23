@@ -3,29 +3,33 @@
 \section{Multivariate Factorization Model} \label{sec:tf}
 A given sensor node may contain multiple sensor types and thus is capable of sensing various aspects of the environment (e.g., temperature and humidity) at the same time.
 These attributes can potentially be correlated~\cite{deshpande2005}, and being able to take advantage of such correlation would result in better imputation quality.
-This section proposes two models, Multivariate (S)TR-MF and Temporally-Regularized Tensor Factorization (TR-TF), to leverage multivariate correlation for missing data recovery.
+This section proposes two models, Multivariate TR-MF and Temporally-Regularized Tensor Factorization (TR-TF), to leverage multivariate correlation for missing data recovery.
 
-\subsection{Multivariate (S)TR-MF} %\label{subsec:Multivariate_TRMF}
-In (S)TR-MF, as we normally have many more time-steps than sensors, the latent matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and therefore being able to learn a faithful representation of latent factors in the temporal-dimension is critical. 
+\subsection{Multivariate TR-MF} %\label{subsec:Multivariate_TRMF}
+In TR-MF, as we normally have many more time-steps than sensor nodes, the latent matrix $\mathbf{P}$ is much larger than $\mathbf{Q}$, and therefore being able to learn a faithful representation of latent factors in the temporal-dimension is critical. 
 
-Assume there are two types of sensors in one node: temperature and humidity. Then, using (S)TR-MF we can obtain $\mathbf{P}_{tem}$ and $\mathbf{Q}_{tem}$ from temperature matrix $\mathbf{R}_{tem}$, and get $\mathbf{P}_{hum}$ and $\mathbf{Q}_{hum}$ from humidity matrix $\mathbf{R}_{hum}$. These two $\mathbf{P}$s are identical in size, and it is not hard to imagine that they should be correlated because row factors $\mathbf{p}_m$ in both matrices represents the factors of time step $m$. Therefore, it might be beneficial if we can use both sides of information to learn a unified and better $\mathbf{P}$.
-This observation motivates us to design the Multivariate (S)TR-MF.
+Assume there are two types of sensors in one node: temperature and humidity.
+Then, using TR-MF we can obtain $\mathbf{P}_{tem}$ and $\mathbf{Q}_{tem}$ from temperature matrix $\mathbf{R}_{tem}$, and get $\mathbf{P}_{hum}$ and $\mathbf{Q}_{hum}$ from humidity matrix $\mathbf{R}_{hum}$.
+These two $\mathbf{P}$s are identical in size, and it is not hard to imagine that they should be correlated because row factors $\mathbf{p}_m$ in both matrices represent the factors of time step $m$.
+Therefore, it might be beneficial if we can use both sides of information to learn a unified and better $\mathbf{P}$.
+This observation motivates us to design the Multivariate TR-MF.
 
-In Multivariate (S)TR-MF, $\mathbf{R}$ represents the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and humidity matrix $\mathbf{R}_{hum}$
+In Multivariate TR-MF, $\mathbf{R}$ represents the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and humidity matrix $\mathbf{R}_{hum}$
 %\begin{equation*} 
 
 \begin{center}
  $\mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix}$,
 \end{center} 
 %\end{equation*}
-which allows the temperature model and humidity model to share the common $\mathbf{P}$ matrix, so they merge the similar factors and communicate the observed information with each other. Note that the $\mathbf{Q}_{tem}$ and $\mathbf{Q}_{hum}$ matrices in the 
-STR-MF model remain independent in the new $\mathbf{Q}$ in MTR-MF. Also, the spatial regularization can be freely added and it becomes MSTR-MF.
+which allows the temperature model and humidity model to share the common $\mathbf{P}$ matrix, so they merge the similar factors and communicate the observed information with each other.
+Note that the $\mathbf{Q}_{tem}$ and $\mathbf{Q}_{hum}$ matrices in the TR-MF model remain independent in the new $\mathbf{Q}$ in MTR-MF.
+Also, the spatial regularization can be freely added and it becomes MSTR-MF.
 
-The learning process of Multivariate (S)TR-MF is very similar to that of (S)TR-MF: the objective function and the optimization process remains the same. Yet, there are some important differences: 
+The learning process of Multivariate TR-MF is very similar to that of TR-MF: the objective function and the optimization process remains the same. Yet, there are some important differences: 
 Firstly, for each row (time step), we need two bias terms: one for temperature readings and the other for humidity readings as they naturally are biased differently. Furthermore, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. 
 
  
-\subsection{Temporally-Regularized Tensor Factorization Model} \label{sec:tensordecomp}
+\subsection{Temporally-Regularized Tensor Factorization} \label{sec:tensordecomp}
 
 One main concern for the Multivariate TR-MF model is that it does not fully exploit the mutual-dependency between the multiple sensor signals in one node. For instance, we did not specify which column in $\mathbf{R}_{tem}$ corresponds to which column in $\mathbf{R}_{hum}$ as coming from the same node. Therefore, here we propose a more complex tensor model to capture such relationship. 
 
@@ -65,7 +69,7 @@ where $\mathbf{x}_i$,$\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices 
 
 \begin{figure}[h] 
 \includegraphics[width=8cm]{tf.jpg} 
-\caption{(a) Tucker Decomposition (TD) model. (b) Canonical Decomposition model, a special case of TD.}
+\caption{(a) Tucker Decomposition (TD). (b) Canonical Decomposition, a special case of TD.}
 %In sensor networks, the three dimension can be nominal features such as node id, time step index.} 
 \label{fig:tf:tuckcanon} 
 \end{figure}

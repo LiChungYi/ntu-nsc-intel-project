@@ -87,27 +87,26 @@ Focused on one observed reading $r_{m,n}$ with the following objective function
 \begin{equation*} \small \frac{1}{2}(r_{m,n} - \hat{r}_{m,n})^2
 + \frac{\beta}{2}(\mu_m^2 + \mu_n^2 + ||\mathbf{p}_m||^2 + ||\mathbf{q}_n||^2).\end{equation*}
 It is not hard to derive the update equations as \\
-\indent	$\left\{ \begin{array}{lll} 
-	\mu_m' &=& \mu_m - \eta ((\hat{r}_{m,n}-r_{m,n}) + \beta \mu_m) \\
-	\mu_n' &=& \mu_n - \eta ((\hat{r}_{m,n}-r_{m,n}) + \beta \mu_n) \\
-	\mathbf{p}_{m}' &=& \mathbf{p}_{m} - \eta ((\hat{r}_{m,n}-r_{m,n})\mathbf{q}_{n} + \beta \mathbf{p}_{m})\\
-	\mathbf{q}_{n}' &=& \mathbf{q}_{n} - \eta ((\hat{r}_{m,n}-r_{m,n})\mathbf{p}_{m} + \beta \mathbf{q}_{n})\\
-	\end{array} \right.$ \\
+\indent	$ \begin{cases} 
+	\mu_m' = \mu_m - \eta ((\hat{r}_{m,n}-r_{m,n}) + \beta \mu_m) \\
+	\mu_n' = \mu_n - \eta ((\hat{r}_{m,n}-r_{m,n}) + \beta \mu_n) \\
+	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta ((\hat{r}_{m,n}-r_{m,n})\mathbf{q}_{n} + \beta \mathbf{p}_{m})\\
+	\mathbf{q}_{n}' = \mathbf{q}_{n} - \eta ((\hat{r}_{m,n}-r_{m,n})\mathbf{p}_{m} + \beta \mathbf{q}_{n})\\
+	\end{cases} $ \\
 For each reading, we update all the $\mu_m$ and $\mathbf{p}_m$. Then after a full scan of all observed readings, 
 we perform temporal regularization by updating all $\mu_m$ and $\mathbf{p}_m$ simultaneously according to the following equations:\\
-\indent $\begin{cases}
+\indent $ \begin{cases}
 	\mu_m' = \mu_m - \eta \gamma_1((\mu_m-\mu_{m-1})+(\mu_m-\mu_{m+1}))\\
 	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta \gamma_1((\mathbf{p}_{m}-\mathbf{p}_{m-1})+(\mathbf{p}_{m}-\mathbf{p}_{m+1}))\\
-	\end{cases}$\\
-
+	\end{cases} $\\
 The updating procedure is summarized in Procedure~\ref{alg:STRMF}. Note that we propose to avoid updating the temporal regularization with the update of each reading, because doing so can bias the model toward the time steps that possess fewer missing readings, which contradicts the goal of data imputation. 
 
 If the spatial regularization is exploited, we can update all $\mu_n$ and $\mathbf{q_n}$ simultaneously as:\\
 \indent $\begin{cases}
-	\mu_{n_i}' = \mu_{n_i} - \eta_1 \gamma_2 \sum_{n_j}{(\mu_{n_i} - \mu_{n_j})}\\
-	\mathbf{q_{n_i}}' = \mathbf{q_{n_i}} - \eta_2 \gamma_2 \sum_{n_j}{(\mathbf{q_{n_i}} - \mathbf{q_{n_j}})}\\
+	\mu_{n_i}' = \mu_{n_i} - \eta \gamma_2 \sum_{n_j}{(\mu_{n_i} - \mu_{n_j})}\\
+	\mathbf{q_{n_i}}' = \mathbf{q_{n_i}} - \eta \gamma_2 \sum_{n_j}{(\mathbf{q_{n_i}} - \mathbf{q_{n_j}})}\\
 	\end{cases}$\\
-
+where $n_i$ and $n_j$ is a pair of neighboring sensor nodes.
 
 \paragraph*{Data Normalization}
 Unlike the ratings in recommendation systems that are normally within certain range (e.g., 1 star to 5 star), readings from WSNs are real-valued (rounded to a desired level of precision), and the range may vary with the sensors.
@@ -117,20 +116,19 @@ First, when the global mean becomes zero, the origin of our model naturally beco
 Second, normalization forces different data sets to look similar, which simplifies the parameter tuning task. 
 
 
-
 \paragraph*{Parameters Setting}
 %There are several parameters in our model: conventional regularization for user biases~$\beta_1$, item biases~$\beta_2$, user factors~$\beta_3$, item factors~$\beta_4$, temporal regularization for biases~$\gamma_1$ and for factors~$\gamma_2$, spatial regularization for biases~$\gamma_3$ and for factors$~\gamma_4$, learning rate for biases~$\eta_1$ and for factors~$\eta_2$, number of factors~$K$, and it can be time consuming to search for a good combination. 
 %Here we provide some empirical suggestions to reduce the search space while still obtaining results with decent quality: the rule of thumb is to setup parameters of similar physical meanings to be identical. For example: the following setup is what we exploited for the experiments:
 %$ \beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \gamma_3 = \gamma_4, \eta_1 = \eta_2$. %\end{equation*}
 %Advanced discussion on this aspect appears later in Section~\ref{subsec:parameter}.
-The parameters in our model are conventional regularization~$\beta$, temporal regularization~$\gamma$, learing rate~$\eta$, number of factors~$K$.
-A too small~$\eta$ or a too large~$K$ can slow down the training process, but it doesn't hurt the performance.
+The parameters in our model are conventional regularization~$\beta$, temporal regularization~$\gamma$, learning rate~$\eta$, number of factors~$K$.
+A too small~$\eta$ or a too large~$K$ can slow down the training process, but it won't degrade the model.
 The validation set is used to determine the parameters and when to cease updating the MF model. More specifically, the training stops when the validation error keeps increasing for a certain amount of iterations (currently setup to $500$). 
 
 \begin{algorithm}
 	\caption{(Spatio-)Temporally-Regularized MF}
 	\label{alg:STRMF}
-	\textbf{Parameter:} $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$, $\gamma_1$, $\gamma_2$, $\eta_1$, $\eta_2$, $K$\\
+	\textbf{Parameters:} $\beta$, $\gamma$, $\eta$, $K$\\
 	\textbf{Input:} training set, validation set
 	\begin{algorithmic}
 		\State Normalize the training set as $\mathcal{D}$
