@@ -99,29 +99,29 @@ Similar to the TR-MF model, we also add bias terms to each dimension into the TR
 \begin{equation*}
 \small
 \begin{aligned}
-\mathbf{\hat{T}}_{mnc}=\mu_m+\mu_n+\mu_c + \mathbf{p}_m \otimes \mathbf{q}_n\otimes \mathbf{w}_c
-\\=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}\mathbf{P}_{m k} \mathbf{Q}_{n k} \mathbf{W}_{c k}
+\mathbf{\hat{T}}_{mnc}
+&=\mu_m+\mu_n+\mu_c + \mathbf{p}_m \otimes \mathbf{q}_n \otimes \mathbf{w}_c\\
+&=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}\mathbf{P}_{m k} \mathbf{Q}_{n k} \mathbf{W}_{c k}
 \end{aligned}
 \end{equation*}
-To learn the latent factors $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$, we use the loss function :
-\begin{center}
-$L(\mathbf{\hat{T}},\mathbf{T})=\frac{1}{\|\mathbf{D}\|_1} \sum\limits_{t\in \mathbf{D}}  l(\hat{t},t)$
-\end{center}
-where $\|\mathbf{D}\|$ indicates the size of the observed readings.
-$l$ is a point-wise loss function penalizing the distance between estimate and observation.
-We select $L_2$ norm in our implementation.
-%Ideally $l$ should be as close to the final evaluation metrics (e.g. least square error in our implementation) as possible.
-
-Simply minimizing a loss function is prone to over-fitting. Here we add regularization terms based on the $L_2$ norm to ensure that the model complexity does not grow without bound to avoid over-fitting.
-Similar to our TR-MF model, we also add the time regularization terms into our model.
-Finally, the objective function of tensor factorization becomes :\\
+%To learn the latent factors $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$, we use the loss function :
+%\begin{center}
+%$L(\mathbf{\hat{T}},\mathbf{T})=\frac{1}{\|\mathbf{D}\|_1} \sum\limits_{t\in \mathbf{D}}  l(\hat{t},t)$
+%\end{center}
+%where $\|\mathbf{D}\|$ indicates the size of the observed readings.
+%$l$ is a point-wise loss function penalizing the distance between estimate and observation.
+%We select $L_2$ norm in our implementation.
+%%Ideally $l$ should be as close to the final evaluation metrics (e.g. least square error in our implementation) as possible.
+%
+%Simply minimizing a loss function is prone to over-fitting. Here we add regularization terms based on the $L_2$ norm to ensure that the model complexity does not grow without bound to avoid over-fitting.
+%Similar to our TR-MF model, we also add the time regularization terms into our model.
+After adding regularization, the final objective function of tensor factorization becomes :\\
 \begin{equation*}
 \small
 \begin{aligned}
-&\sum\limits_{m, n, c} l( \hat{\mathbf{T}}_{mnc}, \mathbf{T}_{mnc} )+\beta_1\|\mathbf{p}_{\beta}\|^2+\beta_2\|\mathbf{q}_n\|^2+\beta_3\|\mathbf{w}_c\|^2+\beta_4\|\mu_m\|^2\\
-&+\beta_5\|\mu_n\|^2+\beta_6\|\mu_c\|^2+\frac{1}{2}\gamma_1\sum(\mu_m-\mu_{m+1})^2+(\mu_m-\mu_{m-1})^2
-\\&
-+\frac{1}{2}\gamma_2\sum(\mathbf{p}_m-\mathbf{p}_{m+1})^2+(\mathbf{p}_m-\mathbf{p}_{m-1})^2
+&\sum\limits_{m, n, c} (\hat{\mathbf{T}}_{mnc}, \mathbf{T}_{mnc})^2\\
+&+ \frac{\beta}{2}(\sum_m(\mu_m + \|\mathbf{p}_m\|^2) + \sum_n(\mu_n + \|\mathbf{q}_n\|^2) + \sum_c(\mu_c + \|\mathbf{w}_c\|^2))\\
+&+ \frac{\gamma}{2}\sum_m((\mu_m-\mu_{m+1})^2 + (\mathbf{p}_m-\mathbf{p}_{m+1})^2)\\
 \end{aligned}
 \end{equation*}
 
@@ -147,30 +147,30 @@ Finally, the objective function of tensor factorization becomes :\\
 Minimizing the above objective function can be done using many different strategies.
 For efficiency and scalability, we suggest the Stochastic Gradient Descent~(SGD) method.
 We need to compute the gradients of the objective function with respect to each individual component in the model.
-Focusing on an observed reading data t = $T_{mnc} $, the update rules are:
+Focusing on an observed reading data $T_{mnc} $, the update rules are:
 \begin{equation*}
 \small
 \begin{aligned}
-&{\mathbf{p}_m}^\prime={\mathbf{p}_m}+\eta(e*\mathbf{q}_n \mathbf{w}_c - \beta_1 \mathbf{p}_m)
-\\&{\mathbf{q}_n}^\prime={\mathbf{q}_n}+\eta(e*\mathbf{p}_m \mathbf{w}_c - \beta_2 \mathbf{q}_n)
-\\&{\mathbf{w}_c}^\prime={\mathbf{w}_c}+\eta(e*\mathbf{p}_m \mathbf{q}_n - \beta_3 \mathbf{w}_c)
-\\&{\mu_m}^\prime=\mu_m+\eta(e-\beta_4\mu_m)
-\\&{\mu_n}^\prime=\mu_n+\eta(e-\beta_5\mu_n)
-\\&{\mu_c}^\prime=\mu_c+\eta(e-\beta_6\mu_c)
+&{\mathbf{p}_m}^\prime={\mathbf{p}_m}+\eta(e*\mathbf{q}_n \mathbf{w}_c - \beta \mathbf{p}_m)
+\\&{\mathbf{q}_n}^\prime={\mathbf{q}_n}+\eta(e*\mathbf{p}_m \mathbf{w}_c - \beta \mathbf{q}_n)
+\\&{\mathbf{w}_c}^\prime={\mathbf{w}_c}+\eta(e*\mathbf{p}_m \mathbf{q}_n - \beta \mathbf{w}_c)
+\\&{\mu_m}^\prime=\mu_m+\eta(e-\beta\mu_m)
+\\&{\mu_n}^\prime=\mu_n+\eta(e-\beta\mu_n)
+\\&{\mu_c}^\prime=\mu_c+\eta(e-\beta\mu_c)
 \end{aligned}
 \end{equation*}
 where $e=t-\hat{t}$. After a round of updating, we then adjust the parameters according to temporal regularization :
 \begin{equation*}
 \small
 \begin{aligned}
-&{\mathbf{p}_m}^\prime={\mathbf{p}_m}+\eta\gamma_1(\mathbf{p}_{m+1}-\mathbf{p}_m+\mathbf{p}_{m-1}-\mathbf{p}_m)
-\\&{\mu_m}^\prime=\mu_m+\eta\gamma_2(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
+&{\mathbf{p}_m}^\prime={\mathbf{p}_m}+\eta\gamma(\mathbf{p}_{m+1}-\mathbf{p}_m+\mathbf{p}_{m-1}-\mathbf{p}_m)
+\\&{\mu_m}^\prime=\mu_m+\eta\gamma(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
 \end{aligned}
 \end{equation*}
 %The Temporally-Regularized Tensor Factorization is summarized in Procedure \ref{alg::conjugateGradient}, which is not hard to implement since it accesses only one row of $\mathbf{P}$, $\mathbf{Q}$, $\mathbf{W}$ at a time.
 
 TR-TF applies similar normalization and stopping criterion techniques as in Section~\ref{sec:mf}.
-Empirically, one can achieve reasonable performance by imposing the following constraints on the parameter learning:  
+%Empirically, one can achieve reasonable performance by imposing the following constraints on the parameter learning:  
 %\begin{equation*}
 $\beta_1=\beta_2=\beta_3=\beta_4=\beta_5=\beta_6$ \mbox{ and } $\gamma_1=\gamma_2$.
 %\end{equation*}
