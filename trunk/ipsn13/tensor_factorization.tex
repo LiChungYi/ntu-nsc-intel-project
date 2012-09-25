@@ -150,20 +150,20 @@ Focusing on an observed reading data $T_{mnc} $, the update rules for all $k$s a
 \begin{equation*}
 \small
 \begin{aligned}
-&{\mathbf{p}_m}^\prime={\mathbf{p}_m}-\eta(e*\mathbf{q}_n \mathbf{w}_c + \beta \mathbf{p}_m)
-\\&{\mathbf{q}_n}^\prime={\mathbf{q}_n}-\eta(e*\mathbf{p}_m \mathbf{w}_c + \beta \mathbf{q}_n)
-\\&{\mathbf{w}_c}^\prime={\mathbf{w}_c}-\eta(e*\mathbf{p}_m \mathbf{q}_n + \beta \mathbf{w}_c)
+  &p_{mk}^\prime=p_{mk}-\eta(e\times q_{nk}\times w_{ck} + \beta p_{mk})
+\\&q_{nk}^\prime=q_{nk}-\eta(e\times p_{mk}\times w_{ck} + \beta q_{nk})
+\\&w_{ck}^\prime=w_{ck}-\eta(e\times p_{mk}\times q_{nk} + \beta w_{ck})
 \\&{\mu_m}^\prime=\mu_m-\eta(e+\beta\mu_m)
 \\&{\mu_n}^\prime=\mu_n-\eta(e+\beta\mu_n)
 \\&{\mu_c}^\prime=\mu_c-\eta(e+\beta\mu_c)
 \end{aligned}
 \end{equation*}
-where $e=t-\hat{t}$. After a round of updating, we then update the model according to temporal regularization :
+where $e=\hat{t}_{mnc}-t_{mnc}$. After a round of updating, we then update the model according to temporal regularization :
 \begin{equation*}
 \small
 \begin{aligned}
-&{\mathbf{p}_m}^\prime={\mathbf{p}_m}+\eta\gamma(\mathbf{p}_{m+1}-\mathbf{p}_m+\mathbf{p}_{m-1}-\mathbf{p}_m)
-\\&{\mu_m}^\prime=\mu_m+\eta\gamma(\mu_{m+1}-\mu_m+\mu_{m-1}-\mu_m)
+&{\mathbf{p}_m}^\prime={\mathbf{p}_m}-\eta\gamma((\mathbf{p}_m-\mathbf{p}_{m+1})+(\mathbf{p}_m-\mathbf{p}_{m-1}))
+\\&{\mu_m}^\prime=\mu_m-\eta\gamma((\mu_m-\mu_{m+1})+(\mu_m-\mu_{m-1}))
 \end{aligned}
 \end{equation*}
 %The Temporally-Regularized Tensor Factorization is summarized in Procedure \ref{alg::conjugateGradient}, which is not hard to implement since it accesses only one row of $\mathbf{P}$, $\mathbf{Q}$, $\mathbf{W}$ at a time.
