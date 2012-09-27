@@ -28,12 +28,12 @@ matrices~$\mathbf{P}_{M \times K}$ and $\mathbf{Q}_{K \times N}$ whose multiplic
 \begin{equation*}\small \mathbf{R} \approx \mathbf{P} \mathbf{Q}.\end{equation*}
 Given $\mathbf{R}$ being the sensor network readings, each row of $\mathbf{P}$ represents latent factors in the temporal dimension and each column of $\mathbf{Q}$ represents the latent factors in the dimension of correlation among sensors.
 
-We adopt the biased-MF which includes row and column biases $\mu_m$ and $\mu_n$. % is added for predicting $r_{m,n}$.
+We adopt the biased-MF which includes row and column biases $\mu_m$ and $\mu_n$. 
 In a temperature monitoring system, the row bias can be understood as the average temperature at a given time, and the column bias reflects the average temperature at the location plus the systematic bias of the sensor node.
-The predictions of missing values can be obtained through $\hat{r}_{m,n} = \mu_m + \mu_n + \mathbf{p}_m \mathbf{q}_n$.
+The predictions of missing values can be obtained through $\hat{r}_{mn} = \mu_m + \mu_n + \mathbf{p}_m \mathbf{q}_n$.
 After adding the regularization term to constraint the scale of latent factors, the objective function of MF becomes to minimize:
 \begin{equation*}\small \begin{aligned}
-\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2
+\frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
 + \frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}),
 \end{aligned}\end{equation*}
 where $\mathbf{p}_m$ are the row factors of $\mathbf{P}$ (for time $m$), and $\mathbf{q}_n$ are the column factors of $\mathbf{Q}$ (for sensor node $n$) respectively.
@@ -55,7 +55,7 @@ The temporal regularization forces the latent factors of adjacent rows to be sim
 readings in adjacent time steps should be similar. We also add similar regularization term for row bias.
 The modified objective function looks like: 
 \begin{equation*}\small \begin{aligned}
-\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2
+\frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
 &+ \frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}) \\
 &+ \frac{\gamma}{2} \sum{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}.
 \end{aligned}\end{equation*}
@@ -68,7 +68,7 @@ Given the distance (or any kind of `closeness' measure) between sensors, we can 
 possible spatial correlation.
 The objective function then becomes: 
 \begin{equation*}\small \begin{aligned}
-\frac{1}{2}\sum_{m,n}{(r_{m,n} - \hat{r}_{m,n})}^2
+\frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
 &+ \frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}) \\
 &+ \frac{\gamma_1}{2} \sum{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}\\
 &+ \frac{\gamma_2}{2} \sum{((\mu_{n_i}-\mu_{n_j})^2 + ||\mathbf{p}_{n_i}-\mathbf{p}_{n_j}||^2)}.
@@ -83,15 +83,15 @@ Several methods to learn MF have been proposed, such as Stochastic Gradient Desc
 For sensor data, we suggest SGD for its efficiency and simplicity. 
 
 In SGD, we incrementally update our model by considering one reading at a time.
-Focused on one observed reading $r_{m,n}$ with the following objective function
-\begin{equation*} \small \frac{1}{2}(r_{m,n} - \hat{r}_{m,n})^2
+Focused on one observed reading $r_{mn}$ with the following objective function
+\begin{equation*} \small \frac{1}{2}(r_{mn} - \hat{r}_{mn})^2
 + \frac{\beta}{2}(\mu_m^2 + \mu_n^2 + ||\mathbf{p}_m||^2 + ||\mathbf{q}_n||^2).\end{equation*}
 It is not hard to derive the update equations as \\
 \indent	$ \begin{cases} 
-	\mu_m' = \mu_m - \eta ((\hat{r}_{m,n}-r_{m,n}) + \beta \mu_m) \\
-	\mu_n' = \mu_n - \eta ((\hat{r}_{m,n}-r_{m,n}) + \beta \mu_n) \\
-	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta ((\hat{r}_{m,n}-r_{m,n})\mathbf{q}_{n} + \beta \mathbf{p}_{m})\\
-	\mathbf{q}_{n}' = \mathbf{q}_{n} - \eta ((\hat{r}_{m,n}-r_{m,n})\mathbf{p}_{m} + \beta \mathbf{q}_{n})\\
+	\mu_m' = \mu_m - \eta ((\hat{r}_{mn}-r_{mn}) + \beta \mu_m) \\
+	\mu_n' = \mu_n - \eta ((\hat{r}_{mn}-r_{mn}) + \beta \mu_n) \\
+	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta ((\hat{r}_{mn}-r_{mn})\mathbf{q}_{n} + \beta \mathbf{p}_{m})\\
+	\mathbf{q}_{n}' = \mathbf{q}_{n} - \eta ((\hat{r}_{mn}-r_{mn})\mathbf{p}_{m} + \beta \mathbf{q}_{n})\\
 	\end{cases} $ \\
 For each reading, we update all the $\mu_m$ and $\mathbf{p}_m$. Then after a full scan of all observed readings, 
 we perform temporal regularization by updating all $\mu_m$ and $\mathbf{p}_m$ simultaneously according to the following equations:\\
@@ -134,7 +134,7 @@ The validation set is used to determine the parameters and when to cease updatin
 		\State Normalize the training set as $\mathcal{D}$
 		\State Initialize $\mu_m$, $\mu_n$, $\mathbf{p}_m$, $\mathbf{q}_n$ to random small numbers
 		\Repeat
-			\State \textbf{for} each observed reading $r_{m,n}$ in $\mathcal{D}$
+			\State \textbf{for} each observed reading $r_{mn}$ in $\mathcal{D}$
 				\State \indent Update $\mu_m$, $\mu_n$, $\mathbf{p}_{m}$, $\mathbf{q}_{n}$
 			\State Update $\mu_m$, $\mathbf{p}_m$ by temporal regularization
 			\State (Update $\mu_n$, $\mathbf{q}_n$ by spatial regularization)

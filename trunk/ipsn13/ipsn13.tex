@@ -57,7 +57,7 @@
 %\email{phillip.b.gibbons@intel.com}
 %}
 
-% Removed this, for anonymized submission
+%% Removed this, for anonymized submission
 %\author{ % ntu/intel combined style
 %{Chung-Yi Li$^1$, Wei-Lun Su$^1$, Todd G.\ McKenzie$^1$, Fu-Chun Hsu$^1$,}\and %students
 %{Shou-De Lin$^1$, Phillip B.\ Gibbons$^2$, Jane Yung-jen Hsu$^1$}\vspace{3pt}\\ %professors + phil
@@ -77,6 +77,11 @@
 %\CopyrightYear{2012}
 
 \begin{document}
+
+% Skip copywrite for now
+\makeatletter
+\let\@copyrightspace\relax
+\makeatother
 
 \maketitle
 \input{abstract}
