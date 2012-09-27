@@ -14,18 +14,14 @@ These two $\mathbf{P}$s are identical in size, and it is not hard to imagine tha
 Therefore, it might be beneficial if we can use both sides of information to learn a unified and better $\mathbf{P}$.
 This observation motivates us to design the Multivariate TR-MF.
 
-In Multivariate TR-MF, $\mathbf{R}$ represents the horizontal concatenation of the temperature matrix $\mathbf{R}_{tem}$ and humidity matrix $\mathbf{R}_{hum}$
-%\begin{equation*} 
-
-\begin{center}
- $\mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix}$,
-\end{center} 
-%\end{equation*}
-which allows the temperature model and humidity model to share the common $\mathbf{P}$ matrix, so they merge the similar factors and communicate the observed information with each other.
+In Multivariate TR-MF, we let 
+$\mathbf{R} = \begin{bmatrix}\mathbf{R}_{tem} & \mathbf{R}_{hum} \end{bmatrix}$,
+which is the horizontal concatenation of the temperature matrix and humidity matrix.
+This allows the temperature model and humidity model to share the common $\mathbf{P}$ matrix, so they merge the similar factors and communicate the observed information with each other.
 Note that the $\mathbf{Q}_{tem}$ and $\mathbf{Q}_{hum}$ matrices in the TR-MF model remain independent in the new $\mathbf{Q}$ in MTR-MF.
 Also, the spatial regularization can be freely added and it becomes MSTR-MF.
 
-The learning process of Multivariate TR-MF is very similar to that of TR-MF: the objective function and the optimization process remains the same. Yet, there are some important differences: 
+The learning process of Multivariate TR-MF is very similar to that of TR-MF except two differences:
 Firstly, for each row (time step), we need two bias terms: one for temperature readings and the other for humidity readings as they naturally are biased differently. Furthermore, $\mathbf{R}_{tem}$ and $\mathbf{R}_{hum}$ of $\mathbf{R}$ must be normalized independently with their own means and variances. 
 
  
