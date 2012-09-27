@@ -63,7 +63,7 @@ $\mathbf{T}=\sum\limits_{k=1}^{K}\mathbf{x}_k\otimes \mathbf{y}_k\otimes \mathbf
 \end{center}
 or
 \begin{center}
-$t_{m,n,c}=\sum\limits_{k=1}^{K}x_{m,k} y_{n,k} z_{c,k}$
+$t_{mnc}=\sum\limits_{k=1}^{K}x_{mk} y_{nk} z_{ck}$
 \end{center}
 where $\mathbf{x}_i$, $\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, and $K$ is the number of columns. 
 
@@ -101,7 +101,7 @@ Similar to the TR-MF model, we also add bias terms to each dimension into the TR
 \begin{aligned}
 \hat{t}_{mnc}
 &=\mu_m+\mu_n+\mu_c + \mathbf{p}_m \otimes \mathbf{q}_n \otimes \mathbf{w}_c\\
-&=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}{p_{m,k} q_{n,k} w_{c,k}}
+&=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}{p_{mk} q_{nk} w_{ck}}
 \end{aligned}
 \end{equation*}
 %To learn the latent factors $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$, we use the loss function :
