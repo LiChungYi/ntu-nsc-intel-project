@@ -42,7 +42,9 @@ In the following, we will first introduce the tensor decomposition models and th
 
  
 \subsubsection{Tensor Decomposition}
-Here we introduce two tensor decomposition models in Figure \ref{fig:tf:tuckcanon}. The Tucker decomposition model was first introduced in 1963~\cite{tucker1963implications}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimension.
+Here we introduce two tensor decomposition models.
+%in Figure \ref{fig:tf:tuckcanon}.
+The Tucker decomposition model was first introduced in 1963~\cite{tucker1963implications}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimension.
 %A $M\times N \times C $ tensor $\mathbf{T}$ can be decomposed as:
 
 %\begin{center}
@@ -60,19 +62,19 @@ Canonical Decomposition~(CD) is the special case of the Tucker decomposition whe
 Formally, the Canonical Decomposition of $\mathbf{T}$ is
 \begin{center}
 $\mathbf{T}=\sum\limits_{k=1}^{K}\mathbf{x}_k\otimes \mathbf{y}_k\otimes \mathbf{z}_k$
-\end{center}
+%\end{center}
 or
-\begin{center}
+%\begin{center}
 $t_{mnc}=\sum\limits_{k=1}^{K}x_{mk} y_{nk} z_{ck}$
 \end{center}
 where $\mathbf{x}_i$, $\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, and $K$ is the number of columns. 
 
-\begin{figure}[h] 
-\includegraphics[width=8cm]{tf.jpg} 
-\caption{(a) Tucker Decomposition (TD). (b) Canonical Decomposition, a special case of TD.}
-%In sensor networks, the three dimension can be nominal features such as node id, time step index.} 
-\label{fig:tf:tuckcanon} 
-\end{figure}
+%\begin{figure}[h] 
+%\includegraphics[width=8cm]{tf.jpg} 
+%\caption{(a) Tucker Decomposition (TD). (b) Canonical Decomposition, a special case of TD.}
+%%In sensor networks, the three dimension can be nominal features such as node id, time step index.} 
+%\label{fig:tf:tuckcanon} 
+%\end{figure}
 
 \subsubsection{Tensor Factorization for Data Imputation} \label{sec:tfmissing}
 %\subsubsection{Objective function}
@@ -150,9 +152,9 @@ Focusing on an observed reading data $T_{mnc} $, the update rules for all $k$s a
 \begin{equation*}
 \small
 \begin{aligned}
-  &p_{mk}^\prime=p_{mk}-\eta(e\times q_{nk}\times w_{ck} + \beta p_{mk})
-\\&q_{nk}^\prime=q_{nk}-\eta(e\times p_{mk}\times w_{ck} + \beta q_{nk})
-\\&w_{ck}^\prime=w_{ck}-\eta(e\times p_{mk}\times q_{nk} + \beta w_{ck})
+  &p_{mk}^\prime=p_{mk}-\eta(e\times q_{nk}\times w_{ck} + \beta \times p_{mk})
+\\&q_{nk}^\prime=q_{nk}-\eta(e\times p_{mk}\times w_{ck} + \beta \times q_{nk})
+\\&w_{ck}^\prime=w_{ck}-\eta(e\times p_{mk}\times q_{nk} + \beta \times w_{ck})
 \\&{\mu_m}^\prime=\mu_m-\eta(e+\beta\mu_m)
 \\&{\mu_n}^\prime=\mu_n-\eta(e+\beta\mu_n)
 \\&{\mu_c}^\prime=\mu_c-\eta(e+\beta\mu_c)
