@@ -31,7 +31,7 @@ One main concern for the Multivariate TR-MF model is that it does not fully expl
 
 Tensor can be regarded as a high-dimensional matrix, and is usually exploited to represent multi-dimensional data. The previously introduced TR-MF can model only 2-dimensional correlations such as the sensor/time-step readings. With a third-order tensor, we can have three dimensions in one model (e.g., sensor1/sensor2/time-step or sensor/location/time-step).% In order to deal with such high-dimensional data structures, mathematicians have proposed the tensor-decomposition methods to capture its latent factors. 
 
-Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition (SVD). Similar to SVD, Tensor Decomposition methods assume a fully occupied matrix $\mathbf{R}$, while such assumption is not as valid for data imputation purposes as for dimension reduction purposes.
+Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition (SVD). Similar to SVD, conventional Tensor Decomposition methods assume a fully occupied matrix $\mathbf{R}$, while such assumption is not as valid for data imputation purposes as for dimension reduction purposes.
 In the following, we will first introduce the tensor decomposition models and then describe how to modify one of them into a tensor factorization model for missing data recovery. 
 
  
@@ -49,10 +49,9 @@ The Tucker decomposition model was first introduced in 1963~\cite{tucker1963impl
 %$\mathbf{T}_{mnc}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{P}_{m i}\mathbf{Q}_{n j}\mathbf{W}_{c k}$
 %\end{center}
 %where the vectors $\mathbf{p}_i$, $\mathbf{q}_j$, and $\mathbf{w}_k$ are the columns of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
-
 However, Tucker decomposition is computationally expensive, and researchers have proposed a more efficient decomposition called Canonical Decomposition~\cite{carroll1970analysis}, which factorizes a tensor into a sum of $K$ rank-one tensors.
-
 Canonical Decomposition~(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is super-diagonal.
+
 Formally, the Canonical Decomposition of $\mathbf{T}$ is
 \begin{center}
 $\mathbf{T}=\sum\limits_{k=1}^{K}\mathbf{x}_k\otimes \mathbf{y}_k\otimes \mathbf{z}_k$
@@ -92,10 +91,10 @@ In contrast to the conventional tensor decomposition, the factorization model we
 To avoid over-fitting and to reduce the complexity of prediction, our model borrows the idea of Canonical Decomposition rather than Tucker decomposition. Note that the time complexity for making a prediction is only $O(K)$, where $K$ is the factor size of $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$. Thus, the complexity is independent of the size of the tensor, which is a favorable property because we can freely add new dimensions into the model without concerns about prediction efficiency.
 
 Similar to the TR-MF model, we also add bias terms to each dimension into the TR-TF model. The prediction function is:
-\begin{equation}
+\begin{equation*}
 \small
 \hat{t}_{mnc}=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}{p_{mk} q_{nk} w_{ck}}
-\end{equation}
+\end{equation*}
 %To learn the latent factors $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$, we use the loss function :
 %\begin{center}
 %$L(\mathbf{\hat{T}},\mathbf{T})=\frac{1}{\|\mathbf{D}\|_1} \sum\limits_{t\in \mathbf{D}}  l(\hat{t},t)$
