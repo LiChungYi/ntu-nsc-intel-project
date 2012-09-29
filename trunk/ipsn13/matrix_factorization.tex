@@ -116,13 +116,14 @@ First, when the global mean becomes zero, the origin of our model naturally beco
 Second, normalization forces different data sets to look similar, which simplifies the parameter tuning task. 
 
 
-\paragraph*{Parameters Setting}
+%\paragraph*{Parameters Setting}
 %There are several parameters in our model: conventional regularization for user biases~$\beta_1$, item biases~$\beta_2$, user factors~$\beta_3$, item factors~$\beta_4$, temporal regularization for biases~$\gamma_1$ and for factors~$\gamma_2$, spatial regularization for biases~$\gamma_3$ and for factors$~\gamma_4$, learning rate for biases~$\eta_1$ and for factors~$\eta_2$, number of factors~$K$, and it can be time consuming to search for a good combination. 
 %Here we provide some empirical suggestions to reduce the search space while still obtaining results with decent quality: the rule of thumb is to setup parameters of similar physical meanings to be identical. For example: the following setup is what we exploited for the experiments:
 %$ \beta_1 = \beta_2 = \beta_3 = \beta_4, \gamma_1 = \gamma_2, \gamma_3 = \gamma_4, \eta_1 = \eta_2$. %\end{equation*}
 %Advanced discussion on this aspect appears later in Section~\ref{subsec:parameter}.
-The parameters in our model are conventional regularization~$\beta$, temporal regularization~$\gamma$, learning rate~$\eta$, number of factors~$K$.
-A too small~$\eta$ or a too large~$K$ can slow down the training process, but it won't degrade the model.
+%The parameters in our model are conventional regularization~$\beta$, temporal regularization~$\gamma$, learning rate~$\eta$, number of factors~$K$.
+%A too small~$\eta$ or a too large~$K$ can slow down the training process, but it won't degrade the model.
+\paragraph*{Stopping Criterion}
 The validation set is used to determine the parameters and when to cease updating the MF model. More specifically, the training stops when the validation error keeps increasing for a certain amount of iterations (currently setup to $500$). 
 
 \begin{algorithm}
@@ -132,7 +133,7 @@ The validation set is used to determine the parameters and when to cease updatin
 	\textbf{Input:} training set, validation set
 	\begin{algorithmic}
 		\State Normalize the training set as $\mathcal{D}$
-		\State Initialize $\mu_m$, $\mu_n$, $\mathbf{p}_m$, $\mathbf{q}_n$ to random small numbers
+		\State Initialize $\mu_m$, $\mu_n$, $\mathbf{p}_m$, $\mathbf{q}_n$ to small random numbers
 		\Repeat
 			\State \textbf{for} each observed reading $r_{mn}$ in $\mathcal{D}$
 				\State \indent Update $\mu_m$, $\mu_n$, $\mathbf{p}_{m}$, $\mathbf{q}_{n}$
