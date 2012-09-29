@@ -32,6 +32,7 @@ One main concern for the Multivariate TR-MF model is that it does not fully expl
 Tensor can be regarded as a high-dimensional matrix, and is usually exploited to represent multi-dimensional data. The previously introduced TR-MF can model only 2-dimensional correlations such as the sensor/time-step readings. With a third-order tensor, we can have three dimensions in one model (e.g., sensor1/sensor2/time-step or sensor/location/time-step).% In order to deal with such high-dimensional data structures, mathematicians have proposed the tensor-decomposition methods to capture its latent factors. 
 
 Tensor decomposition is a multi-dimensional extension of Singular Value Decomposition (SVD). Similar to SVD, conventional Tensor Decomposition methods assume a fully occupied matrix $\mathbf{R}$, while such assumption is not as valid for data imputation purposes as for dimension reduction purposes.
+
 In the following, we will first introduce the tensor decomposition models and then describe how to modify one of them into a tensor factorization model for missing data recovery. 
 
  
@@ -40,7 +41,6 @@ Here we introduce tensor decomposition models.
 %in Figure \ref{fig:tf:tuckcanon}.
 The Tucker decomposition model was first introduced in 1963~\cite{tucker1963implications}, which factorizes a higher-order tensor into a core tensor $\mathbf{S}$ and one factor matrix for each dimension.
 %A $M\times N \times C $ tensor $\mathbf{T}$ can be decomposed as:
-
 %\begin{center}
 %$\mathbf{T}=\sum\limits_{i=1}^{I}\sum\limits_{j=1}^{J}\sum\limits_{k=1}^{K}\mathbf{S}_{ijk}\mathbf{p}_i\otimes \mathbf{q}_j\otimes \mathbf{w}_k$
 %\end{center}
@@ -50,17 +50,17 @@ The Tucker decomposition model was first introduced in 1963~\cite{tucker1963impl
 %\end{center}
 %where the vectors $\mathbf{p}_i$, $\mathbf{q}_j$, and $\mathbf{w}_k$ are the columns of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$ respectively, which are the factor matrices and usually orthogonal.
 However, Tucker decomposition is computationally expensive, and researchers have proposed a more efficient decomposition called Canonical Decomposition~\cite{carroll1970analysis}, which factorizes a tensor into a sum of $K$ rank-one tensors.
-Canonical Decomposition~(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is super-diagonal.
 
+Canonical Decomposition~(CD) is the special case of the Tucker decomposition when $\mathbf{S}$ is super-diagonal.
 Formally, the Canonical Decomposition of $\mathbf{T}$ is
 \begin{center}
-$\mathbf{T}=\sum\limits_{k=1}^{K}\mathbf{x}_k\otimes \mathbf{y}_k\otimes \mathbf{z}_k$
+$\mathbf{T}=\sum\limits_{k=1}^{K}\mathbf{p}_k\otimes \mathbf{q}_k\otimes \mathbf{w}_k$
 %\end{center}
 or
 %\begin{center}
-$t_{mnc}=\sum\limits_{k=1}^{K}x_{mk} y_{nk} z_{ck}$
+$t_{mnc}=\sum\limits_{k=1}^{K}p_{mk} q_{nk} w_{ck}$
 \end{center}
-where $\mathbf{x}_i$, $\mathbf{y}_i$ and $\mathbf{z}_i$ are a column of matrices $\mathbf{X}$, $\mathbf{Y}$ and $\mathbf{Z}$, which are the factor matrices, and $K$ is the number of columns. 
+where $\mathbf{p}_i$, $\mathbf{q}_i$ and $\mathbf{w}_i$ are a column of matrices $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$, which are the factor matrices, and $K$ is the number of columns. 
 
 %\begin{figure}[h] 
 %\includegraphics[width=8cm]{tf.jpg} 
