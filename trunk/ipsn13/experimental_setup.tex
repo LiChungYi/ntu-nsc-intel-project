@@ -20,9 +20,11 @@ We found the relative performance of the compared methods to be similar in these
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.20]{berkeley_lab.png}
+\includegraphics[scale=0.15]{berkeley_lab.png}
 \caption{Intel Berkeley Research Lab Floorplan} \label{berkeley_lab}
 \end{figure}
+
+\vspace{-0.5cm}
 
 \paragraph*{Traffic Dataset}
 
@@ -38,7 +40,7 @@ In the Berkeley dataset, observations are removed if temperature \mbox{$>100\deg
 In the Traffic dataset, observations are removed if temperature \mbox{$>60\degc$}, temperature \mbox{$<5\degc$}, humidity \mbox{$>100\%$} or humidity \mbox{$<10\%$}.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{traffic_wsn.png}
+\includegraphics[scale=0.3]{traffic_wsn.png}
 \caption{Traffic Sensor Deployment Configuration (8 sensors of 20 shown)}
 \label{fig:traffic}
 \end{figure}
@@ -69,17 +71,15 @@ This pattern reflects repeatedly choosing a random time and random sensor to be 
 Here we follow the standard evaluation process in machine learning to divide the data into training, validation, and testing sets.
 
 We define two variables $x$ and $y$ during our experiment, and the X-axis of the resulting plot varies with $x$.
-
 \begin{itemize}
 \item $10\%$ of the existing readings are randomly selected (without replacement) to be the validation set
 \item $y\%$ of the existing readings are randomly selected (without replacement) to be the testing set
 \item The remaining readings (x\%) are part of the training set. That is, x+y+10=100 that accounts for all the observed readings.
 \end{itemize}
-\paragraph*{Consecutive Missing Pattern}
 
+\paragraph*{Consecutive Missing Pattern}
 This pattern reflects testing the effect of all data missing after a certain point in time.
 We define two values $x$ and $y$ as follows.
-
 \begin{itemize}
 \item Here, we have the last $y\%$ of time covered as missing, and the prior $10\%$ to that is considered as the validation data.
 \item The sensor node numbers ``covered up'' in the validation and testing for the Berkeley and Traffic datasets are ${4,19,45}$ and ${2,4,6,8,10,14,17,19,20,21}$, respectively.
