@@ -9,20 +9,21 @@ modifications to the MF objective function, and finally provide the complete tra
 
 \subsection{Introducing Matrix Factorization}
 
-Matrix Factorization is designed to amend the limitations of SVD, a widely known dimension reduction technique, 
-in dealing with incomplete or sparse data.
-The goal of SVD is to decompose a fully observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrices~$\mathbf{U}$ and~$\mathbf{V}$ such that
-%\begin{equation*} 
-$\mathbf{R} = \mathbf{U}\mathbf{D}\mathbf{V}^T.$ %\end{equation*}
-The largest $K$ singular values and vectors, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm. Unfortunately, conventional SVD cannot be performed when the matrix~$\mathbf{R}$ is incomplete. 
-Therefore, to exploit latent dimensions through SVD for imputation, prior work (such as EOF) has to fill in missing entries first 
-(usually using zeros or an averaged value) and then perform dimension reduction through retaining the largest $K$ singular values~\cite{beckers2003eof}. 
-Such strategy does create some dilemmas as a high-quality imputation model is needed in the first stage to guarantee the quality of 
-data reproduced in the later stage, but it is such high-quality that we seek for data imputation. In a nutshell, SVD, although 
-proven to be ideal for dimension reduction, can hardly be applied to sparse matrices where a significant fraction of 
-the data are missing.
-To address this drawback, recently researchers have shown \cite{koren2009matrix} that the matrix factorization model is indeed 
-a better approach to learn the latent factors given sparse matrices, because during the factorization procedure only the observed entries are exploited.
+%, a widely known dimension reduction technique, 
+%in dealing with incomplete or sparse data.
+%The goal of SVD is to decompose a fully observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrices~$\mathbf{U}$ and~$\mathbf{V}$ such that
+%%\begin{equation*} 
+%$\mathbf{R} = \mathbf{U}\mathbf{D}\mathbf{V}^T.$ %\end{equation*}
+%The largest $K$ singular values and vectors, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm. Unfortunately, conventional SVD cannot be performed when the matrix~$\mathbf{R}$ is incomplete. 
+%Therefore, to exploit latent dimensions through SVD for imputation, prior work (such as EOF) has to fill in missing entries first 
+%(usually using zeros or an averaged value) and then perform dimension reduction through retaining the largest $K$ singular values~\cite{beckers2003eof}. 
+%Such strategy does create some dilemmas as a high-quality imputation model is needed in the first stage to guarantee the quality of 
+%data reproduced in the later stage, but it is such high-quality that we seek for data imputation. In a nutshell, SVD, although 
+%proven to be ideal for dimension reduction, can hardly be applied to sparse matrices where a significant fraction of 
+%the data are missing.
+%
+As stated in section \ref{sec:rw_matrix}, conventional SVD is not appropriate for the task of missing data imputation.
+Matrix Factorization is designed to amend the limitations of SVD, and recently researchers have shown \cite{koren2009matrix} that the matrix factorization model is indeed a better approach to learn the latent factors given sparse matrices, because during the factorization procedure only the observed entries are exploited.
 Utilizing numerical optimization procedures, for a partially observed matrix~$\mathbf{R}$, MF produces two latent 
 matrices~$\mathbf{P}_{M \times K}$ and $\mathbf{Q}_{K \times N}$ whose multiplication seeks to approximate the observed entries in $\mathbf{R}_{M \times N}$:
 \begin{equation*}\small \mathbf{R} \approx \mathbf{P} \mathbf{Q}.\end{equation*}

@@ -162,28 +162,35 @@ and an autocorrelation-based temporal linear predictor, and one spatial linear p
 %However, the performance of the ImM may degrades if the changes in the continuous data stream are sharp in the high sampling rate dataset. 
 %For example, the wind sensors in the windy climate area may affect the method applied on the target sensor.  
 
-\subsection{Matrix Decomposition Models}
+\subsection{Matrix Decomposition Models} \label{sec:rw_matrix}
 
 The Matrix Decomposition model is the one that is closest to our
 solution, but applies a Singular Value Decomposition (SVD)-based
-approach.  A salient example is the Empirical Orthogonal Functions
+approach. 
+
+SVD is a widely known as a dimension reduction technique.
+It decomposes a fully observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrices~$\mathbf{U}$ and~$\mathbf{V}$ such that
+$\mathbf{R} = \mathbf{U}\mathbf{D}\mathbf{V}^T.$
+The largest $K$ singular values and vectors, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm.
+
+A salient example of SVD-based approaches is the Empirical Orthogonal Functions
 (EOF) model, which has been applied to oceanographic applications to
 solve the problem of missing or unreliable satellite
 data~\cite{beckers2003eof}.  EOF first fills in the missing values
-(e.g., using all zeros or the mean values) and then performs SVD to
-decompose the matrix. The first $k$ spatial-EOF (i.e., the top-$k$
-singular values in SVD) is used to reconstruct the matrix (i.e.,
-perform dimension reduction) for imputation, where $k$ is determined
-through cross validation over the data.  Researchers have pointed out
+(e.g., using all zeros or the mean values) and then performs SVD 
+to decompose the matrix. The first $K$ spatial-EOF (i.e., the top-$K$
+singular values in SVD) is used to reconstruct the matrix and update the estimation of missing values, 
+where $K$ is determined through cross validation over the data.
+
+In the field of Collaborative Filtering, researchers have pointed out
 several drawbacks in the SVD-based methods when applying to impute
-large-scale sensors network data. First, given large data, performing
-SVD is extremely computational demanding as the inverse of a dense
-matrix is required. Second, it requires to fill in all missing values
+missing data. First, given large data, it
+is computational demanding as we need to do the decomposition
+in every iteration. Second, it requires to fill in all missing values
 before the decomposition can be performed, and imperfect initial
-imputation (i.e., researchers argue that filling all zeros is
-questionable) can significantly hurt the final imputation results, in
+imputation can significantly hurt the final imputation results, in
 particular when the missing data rate is
-high~\cite{koren2009matrix,ke2005robust}.
+high~\cite{koren2009matrix}.
 
 %The major differences between those models and ours is that them rely more on the spatial correlation than temporal correlation, while our model does not require specific spatial infromation as it tries to learn sensor correlations from data. 
   
