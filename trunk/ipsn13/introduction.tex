@@ -111,16 +111,14 @@ FARM~\cite{Gruenwald:FARM})
 and weighted functions of nearby sensors (e.g., DEPM~\cite{li2008data},
 K-NN\cite{pan2010k}, and Multi-Im\cite{yuan2000multiple}).
 
-{
-\color{red}
-%For instance, the Data Estimation using Physical Model (DEPM)~\cite{li2008data} method employs the basic laws of Physics and 
-%designs a prediction function as,  
-%%\begin{equation}
-%$I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}$
-%%\label{DEPM}
-%%\end{equation} 
-%where $I_k$ is the intensity of the target sensor value, $j$ represents the neighbor sensors, and P stands for the power radiated from one source to another. 
-%However, such models are only applicable to limited types of signals, and generally require the precise three-dimensional distance among sensors.
+The Data Estimation using Physical Model (DEPM)~\cite{li2008data} method employs the basic laws of Physics and 
+designs a prediction function as,  
+%\begin{equation}
+$I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}$
+%\label{DEPM}
+%\end{equation} 
+where $I_k$ is the intensity of the target sensor value, $j$ represents the neighbor sensors, and P stands for the power radiated from one source to another. 
+However, such models are only applicable to limited types of signals, and generally require the precise three-dimensional distance among sensors.
 
 Researchers also propose predicting missing values based on data mining techniques. Window Association Rule Mining (WARM)~\cite{le2005estimating} and Freshness Association Rule Mining (FARM)~\cite{Gruenwald:FARM} study the estimation of missing data based on the association rules among spatially-correlated neighbors. 
 Such methods enjoy the advantage of being able to handle categorical sensor data, but the performance is limited in continuous sensor data due to the inherent limitations of association rules (basically, the continuous data needs to be quantized into suitable
@@ -137,54 +135,62 @@ contribute to an inferior averaged result.
 %First, in sensor data we do not know how many rounds of information to use in order to get the associated information.
 %In addition, it is difficult to draw a pool of similar complete cases for a certain round of a certain sensor. 
 %Last, it consumes unnecessary time since the sensor data may or may not related to all of the available information.
-}
 
-These methods require reasonably accurate spatial coordinates, and
-more importantly, suffer when ailments arise that affect entire
+Generally speaking, there are two ways to obtain the spatial correlation:
+from the data or from the spatial coordinates.
+We believe the former is a better approach. 
+Not only the latter requires reasonably accurate spatial coordinates.
+More importantly, it suffers when ailments arise that affect entire
 spatial regions (such as large, temporary obstacles to sensing and/or communication).
-Spatial methods can also fail to account for barriers or other
+It also fails to account for barriers or other
 sources of sharp environmental gradients.
+For example, if two sensors are deployed in the kitchen, 
+one next to the stove and the other next to the window.
+While two sensors are nearby, there may be a large temperature difference
+between the two if the stove is in use and the outside temperature is cold.
+In the end, using spatial coordinates can often lead to worse imputation results
+as non-existent or time-varying correlations are imposed between nearby sensors.
 
-For example, in Figure~\ref{house_floorplan}, we find
-sensors $1$ \& $2$ deployed in the kitchen, next to the stove and
-outside window, respectively. While these sensors are nearby, 
-there may be a large temperature difference between the two if
-the stove is in use and the outside temperature is cold.
-Similarly, sensors $2$ \& $5$
-may be quite uncorrelated despite their relative proximity due to the
-wall between them and the presence of kitchen or laundry appliance
-use.  On the other hand, relatively distant sensors $3$ \& $4$
-may be quite correlated as they are within the same room and both
-near an outside wall. The calculation of
-inter-node signal strength or line of sight distance between nodes
-helps to mitigate these issues, though it is not
-a complete remedy.  In the end, using spatial
-coordinates can often lead to worse imputation results.
+
+%For example, in Figure~\ref{house_floorplan}, we find
+%sensors $1$ \& $2$ deployed in the kitchen, next to the stove and
+%outside window, respectively. While these sensors are nearby, 
+%there may be a large temperature difference between the two if
+%the stove is in use and the outside temperature is cold.
+%Similarly, sensors $2$ \& $5$
+%may be quite uncorrelated despite their relative proximity due to the
+%wall between them and the presence of kitchen or laundry appliance
+%use.  On the other hand, relatively distant sensors $3$ \& $4$
+%may be quite correlated as they are within the same room and both
+%near an outside wall. The calculation of
+%inter-node signal strength or line of sight distance between nodes
+%helps to mitigate these issues, though it is not
+%a complete remedy.  In the end, using spatial
+%coordinates can often lead to worse imputation results.
 % as non-existent or time-varying correlations are imposed between nearby sensors.
 
 %Certain methods consider not strictly the distance between sensors,
 %but instead establish a ``neighborhood of influence'' whose size
 %becomes a tuning parameter, which adds to the complexity of such methods.
 
-\begin{figure}[t]
-\centering
-\includegraphics[scale=0.3]{house_floorplan.png}
-\caption{Example home floor plan showing five deployed temperature sensors} \label{house_floorplan}
-\label{fig:example_home_floorplan}
-\vspace{-0.1in}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%\includegraphics[scale=0.3]{house_floorplan.png}
+%\caption{Example home floor plan showing five deployed temperature sensors} \label{house_floorplan}
+%\label{fig:example_home_floorplan}
+%\vspace{-0.1in}
+%\end{figure}
 
 \paragraph{Spatio-Temporal methods}
 {\em spatio-temporal methods} consider both the
 temporal and spatial correlation; salient methods include
 STI~\cite{Jian-Zhong:STI}, DESM~\cite{li2008data}, 
-AKE~\cite{pan2010k}, and Imputation Method~\cite{Lim:robust}.  These
-have the potential advantage of using both types of correlation in
-imputation, but can suffer from the spatial correlation issues
-discussed above.
+AKE~\cite{pan2010k}, and Imputation Method~\cite{Lim:robust}.
+%These
+%have the potential advantage of using both types of correlation in
+%imputation, but can suffer from the spatial correlation issues
+%discussed above.
 
-{
-\color{red}
 The Spatial and Temporal Imputation (STI) algorithm is proposed in~\cite{li2008spatial}. 
 For each missing record, STI first checks if some nodes are within the sensing neighborhood, and utilizes
 the average of the neighbors to impute the missing value. If no sensors are within the neighborhood, the last seen value of the 
@@ -197,15 +203,15 @@ Another spatio-temporal algorithm which relies more on spatial than temporal is 
 Given two sensors data streams, $\{X_{i1},X_{i2},\dots,X_{im}\}$ and \\ $\{X_{j1},X_{j2},\dots,X_{jm}\}$, and assuming
 the value of $X_{i(m+1)}$ is missing,
 the prediction on sensor $i$ by its nearest sensor $j$ is:
-\begin{center}
+%\begin{center}
 $\hat{X}_{i(m+1)} = (1-\alpha)X_{im} + (\alpha)\hat{z}$
-\end{center}
+%\end{center}
 where $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and $j$, and $\hat{z}$ is the estimation of sensor $i$ 
 based on the observation from sensor $j$---it measures the influence of the data sensed by node $i$ on the data of 
 the nearest node $j$:
-\begin{center}
+%\begin{center}
 $\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
-\end{center}
+%\end{center}
 %The above equation assumes that the sensor $X_i$ and $X_j$ have the similar data fluctuation trend. 
 %$\alpha$ is expected to have more impact on the prediction if $X_i$ is more correlated with $X_j$. 
 %\begin{equation}
@@ -221,23 +227,23 @@ estimate the missing values of DNA micro-arrays~\cite{Troyanskaya:DNAKNN}.
 Pan~\cite{pan2010k} proposes the Applying K-nearest neighbor Estimation (AKE) algorithm to exploit the spatial correlation in the 
 missing sensory data problem. 
 AKE adopts a linear regression model to describe the spatial correlation of nodes $i$ and $j$,
-\begin{center}
+%\begin{center}
 $y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} $,
-\end{center}
+%\end{center}
 where $y_{it}$ is the observation of sensor $i$ at time $t$, $y_{jt}$ is the data of sensor $j$ at the same time, 
 and $\mu_{jt}$ is the random error at time t.   
 When the data of sensor $i$ at time $t$ is missing, the estimated value of sensor $i$ by sensor $j$ at the same time is:
-\begin{center}
+%\begin{center}
 $\hat{y}_{it}^{(j)} =\hat{\alpha} +\hat{\beta}\cdot y_{jt}$
 %\label{ake_j}
-\end{center}
+%\end{center}
 The $\hat{\alpha}$ and $\hat{\beta}$ are the estimated values of $\alpha$ and $\beta$, based on the sample data according to the least squares principle.
 %They claim that using a linear combination of the estimation from neighbour sensors can lower the random error caused by only using a single sensor. 
 Therefore, given the $m$ nearest neighbor sensors who have values at time $t$[$y_{1t}, y_{2t},\dots, y_{mt}$], the missing value is predicted by :   
- \begin{center}
+% \begin{center}
 $ \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}$
  %\label{ake_impute}
- \end{center}
+% \end{center}
 % First they build a matrix 
 %\[ \left( \begin{array}{cccc}
 %
@@ -251,11 +257,10 @@ r-square values for the $m$ sensors.
 The above models suffer from an issue as they make some unverified assumptions about the data. For example, some models consider temporal correlation as more important than spatial correlation such that the reading of nearby sensors are used only when nearby time steps are missing (or vice versa), while some assume that sensors of the same distance should have a similar correlation regardless of their 
 orientation or other factors.  Such assumptions might or might not hold for various types of data, while imposing them a priori
 to the model build might lead to inconsistent results.  The models we propose, however, try to rely less on such a priori 
-knowledge, and learn the latent correlation directly from the data.  The Imputation Method (ImM)~\cite{Lim:robust}, tries to learn
-the appropriate weighting of temporal and spatial features by considering two temporal predictors, the last-seen predictor
-and an autocorrelation-based temporal linear predictor, and one spatial linear predictor.
-
-}
+knowledge, and learn the latent correlation directly from the data.  
+%The Imputation Method (ImM)~\cite{Lim:robust}, tries to learn
+%the appropriate weighting of temporal and spatial features by considering two temporal predictors, the last-seen predictor
+%and an autocorrelation-based temporal linear predictor, and one spatial linear predictor.
 
 \paragraph{Singular Value Decomposition (SVD)-based Methods}
 Among the spatio-temporal methods, some are Singular Value Decomposition (SVD)-based methods and they are closest to our
@@ -375,11 +380,12 @@ steps---unlike prior sensor data imputation approaches, our CF
 approaches use this {\em latent} information to impute values, and optimize the evaluation metrics directly. 
 Moreover, our CF approaches are global, taking into account all
 collected observations, and not overly tied to spatial-proximity
-correlations.  For example, they can capture the correlations between
-distant sensors $3$ \& $4$ in Figure~\ref{house_floorplan}, while
-grouping sensors $1$, $2$ \& $5$ only if the observed readings warrant
-it.  The CF framework also provides a unified approach to incorporate
-any number of additional sensor types for an even more accurate imputation.
+correlations.  
+%For example, they can capture the correlations between
+%distant sensors $3$ \& $4$ in Figure~\ref{house_floorplan}, while
+%grouping sensors $1$, $2$ \& $5$ only if the observed readings warrant
+%it.  The CF framework also provides a unified approach to incorporate
+%any number of additional sensor types for an even more accurate imputation.
 
 %The reason we believe our method outperforms the results of other methods are as follows.
 %\begin{itemize}
