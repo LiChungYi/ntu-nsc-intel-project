@@ -199,9 +199,8 @@ missing sensor is used for imputation. The method favors spatial information ove
 %It has the advantage of simple and fast, but suffers when last seen value is far away from the current time stamp, or when most of the nodes in the sensing region has high missing rate.
 %Furthermore, the usage of circular region is problematic as most of the landforms might not be uniformly distributed. Finally, determining the range of the radius is tricky, as a larger radius can cause noise while a smaller one cannot highlight the effectiveness of this model(i.e., the results will be similar to linear interpolation).
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
-Another spatio-temporal algorithm which relies more on spatial than temporal is the Data Estimation using Statistical Model (DESM)~\cite{li2008data} approach.  
-
-In DESM, the prediction on sensor $i$ is produced by the linear combination of previous readings from sensor $i$ and contemporary readings from its k-nearest neighbors. The coefficents used to combine those readings are a function of Pearson correlation among sensors.
+Another spatio-temporal algorithm is the Data Estimation using Statistical Model (DESM)~\cite{li2008data} method.  
+In DESM, the prediction of a missing record is the linear combination of the previous reading of the sensor and the current reading of the neighboring sensor. The weight is given by Pearson correlation.
 
 %Given two sensors data streams, $\{X_{i1},X_{i2},\dots,X_{im}\}$ and \\ $\{X_{j3},X_{j2},\dots,X_{jm}\}$, and assuming
 %the value of $X_{i(m+1)}$ is missing,
