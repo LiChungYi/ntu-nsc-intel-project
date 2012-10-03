@@ -199,6 +199,11 @@ missing sensor is used for imputation. The method favors spatial information ove
 %It has the advantage of simple and fast, but suffers when last seen value is far away from the current time stamp, or when most of the nodes in the sensing region has high missing rate.
 %Furthermore, the usage of circular region is problematic as most of the landforms might not be uniformly distributed. Finally, determining the range of the radius is tricky, as a larger radius can cause noise while a smaller one cannot highlight the effectiveness of this model(i.e., the results will be similar to linear interpolation).
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
+The Imputation Method (ImM)~\cite{Lim:robust} learns to combine two temporal predictors, the last-seen predictor
+and an autocorrelation-based temporal linear predictor, and one spatial linear predictor.
+
+
+%the appropriate weighting of temporal and spatial features by considering two temporal predictors, 
 Another spatio-temporal algorithm is the Data Estimation using Statistical Model (DESM)~\cite{li2008data} method.  
 In DESM, the prediction of a missing record is the linear combination of the previous reading of the sensor and the current reading of the neighboring sensor. The weight is given by Pearson correlation.
 
@@ -262,9 +267,6 @@ while some assume that sensors of the same distance should have a similar correl
 orientation or other factors.  Such assumptions might or might not hold for various types of data, while imposing them a priori
 to the model build might lead to inconsistent results.  The models we propose, however, try to rely less on such a priori 
 knowledge, and learn the latent correlation directly from the data.  
-%The Imputation Method (ImM)~\cite{Lim:robust}, tries to learn
-%the appropriate weighting of temporal and spatial features by considering two temporal predictors, the last-seen predictor
-%and an autocorrelation-based temporal linear predictor, and one spatial linear predictor.
 
 \paragraph{Singular Value Decomposition (SVD)-based Methods}
 Among the spatio-temporal methods, some are Singular Value Decomposition (SVD)-based methods which are conceptually closer to our
