@@ -11,16 +11,16 @@ Sensor readings differ from product ratings, however, in that the former exhibit
 To incorporate this property, we modify the widely successful Matrix Factorization (MF) approach for recommendation systems to model inter-sensor and intra-sensor correlations and learn latent relationships among these dimensions.
 We evaluate the approach using two environmental sensor network datasets, one indoor and one outdoor, and
 two imputation scenarios, corresponding to intermittent readings and failed sensors.
-The results show that our Temporally-Regularized MF (TR-MF) approach provides significantly higher estimation accuracy than 
-both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches 
-%such as the Applying K-nearest neighbor (AKE) model.
-such as AKE.
-The experiments also show that adding spatial coordinate information into TR-MF yields even better results
-in the failed sensors scenario, but {\em not} in the intermittent readings scenario.
+%The results show that our Temporally-Regularized MF (TR-MF) approach provides significantly higher estimation accuracy than 
+%both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches 
+%%such as the Applying K-nearest neighbor (AKE) model.
+%such as AKE.
+%The experiments also show that adding spatial coordinate information into TR-MF yields even better results
+%in the failed sensors scenario, but {\em not} in the intermittent readings scenario.
 
 Next, we consider sensor networks with multiple sensor types at each node.  We present two techniques for extending TR-MF to account for possible correlations among sensor types (e.g., temperature and
-humidity): Multivariate TR-MF and Temporally-Regularized Tensor Factorization.  Our results show that both techniques 
-can significantly improve the accuracy over TR-MF, and each has its strengths, depending on the observed variance in the readings.
+humidity): Multivariate TR-MF and Temporally-Regularized Tensor Factorization. Our results show that both techniques 
+can significantly improve the accuracy.% over TR-MF, and each has its strengths, depending on the observed variance in the readings.
 
 Finally, we consider a popular data analysis task---building regression-based prediction models---and show that,
 compared to prior approaches for imputation, using TR-MF leads to a much higher quality prediction model.
