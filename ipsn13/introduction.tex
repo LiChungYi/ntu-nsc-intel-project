@@ -200,17 +200,20 @@ missing sensor is used for imputation. The method favors spatial information ove
 %Furthermore, the usage of circular region is problematic as most of the landforms might not be uniformly distributed. Finally, determining the range of the radius is tricky, as a larger radius can cause noise while a smaller one cannot highlight the effectiveness of this model(i.e., the results will be similar to linear interpolation).
 %The radius of the region is sometimes too large for sensors whose correlations with the target sensor are low in the sensing range.  
 Another spatio-temporal algorithm which relies more on spatial than temporal is the Data Estimation using Statistical Model (DESM)~\cite{li2008data} approach.  
-Given two sensors data streams, $\{X_{i1},X_{i2},\dots,X_{im}\}$ and \\ $\{X_{j1},X_{j2},\dots,X_{jm}\}$, and assuming
-the value of $X_{i(m+1)}$ is missing,
-the prediction on sensor $i$ by its nearest sensor $j$ is:
+
+In DESM, the prediction on sensor $i$ is produced by the linear combination of previous readings from sensor $i$ and contemporary readings from its k-nearest neighbors. The coefficents used to combine those readings are a function of Pearson correlation among sensors.
+
+%Given two sensors data streams, $\{X_{i1},X_{i2},\dots,X_{im}\}$ and \\ $\{X_{j3},X_{j2},\dots,X_{jm}\}$, and assuming
+%the value of $X_{i(m+1)}$ is missing,
+%the prediction on sensor $i$ by its nearest sensor $j$ is:
 %\begin{center}
-$\hat{X}_{i(m+1)} = (1-\alpha)X_{im} + (\alpha)\hat{z}$
+%$\hat{X}_{i(m+1)} = (1-\alpha)X_{im} + (\alpha)\hat{z}$
 %\end{center}
-where $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and $j$, and $\hat{z}$ is the estimation of sensor $i$ 
-based on the observation from sensor $j$---it measures the influence of the data sensed by node $i$ on the data of 
-the nearest node $j$:
+%where $\alpha$ is the Pearson correlation coefficient between the sensor $i$ and $j$, and $\hat{z}$ is the estimation of sensor $i$ 
+%based on the observation from sensor $j$---it measures the influence of the data sensed by node $i$ on the data of 
+%the nearest node $j$:
 %\begin{center}
-$\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
+%$\hat{z} = X_{im}(1+\frac{X_{j(m+1)}-X_{j(m)}}{X_{j(m)}})$
 %\end{center}
 %The above equation assumes that the sensor $X_i$ and $X_j$ have the similar data fluctuation trend. 
 %$\alpha$ is expected to have more impact on the prediction if $X_i$ is more correlated with $X_j$. 
