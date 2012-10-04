@@ -97,7 +97,9 @@ becomes large.
 \multirow{2}{*}{\bf Spatial}& WARM~\cite{le2005estimating},& DEPM~\cite{li2008data}, K-NN~\cite{pan2010k},\\ 
 &FARM~\cite{Gruenwald:FARM}&Multi-Im~\cite{yuan2000multiple}\\\hline
 {\bf Spatio-}&STI~\cite{Jian-Zhong:STI}&DESM~\cite{li2008data}, AKE~\cite{pan2010k},\\
-{\bf Temporal}&&ImM~\cite{Lim:robust}, EOF~\cite{beckers2003eof} \\\hline \end{tabular}
+{\bf Temporal}&&ImM~\cite{Lim:robust}, EOF~\cite{beckers2003eof},\\
+{\bf } &&BGP~\cite{Osborne2011}\\%{}&&&BGP~\cite{Osborne2011} \
+ \hline \end{tabular}
 }
 \vspace{-0.1in}
 \end{table}
@@ -185,7 +187,7 @@ as non-existent or time-varying correlations are imposed between nearby sensors.
 {\em Spatio-temporal methods} consider both the
 temporal and spatial correlation; salient methods include
 STI~\cite{Jian-Zhong:STI}, DESM~\cite{li2008data}, 
-AKE~\cite{pan2010k}, and Imputation Method~\cite{Lim:robust}.
+AKE~\cite{pan2010k},BGP~\cite{Osborne2011} and Imputation Method~\cite{Lim:robust}.
 %These
 %have the potential advantage of using both types of correlation in
 %imputation, but can suffer from the spatial correlation issues
@@ -260,7 +262,7 @@ $ \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}$
 where $w_j$ is the weight of sensor $j$ used to predict sensor $i$, and is larger for more highly correlated pairs.
 %They adopt the r-square statistics to rank their correlations. The value of $w_j$ is the weighted average of the corresponding 
 %r-square values for the $m$ sensors. 
-
+Recently, a random process method,  called Bayesian Gaussian Process model, had been proposed in 2011~\cite{Osborne2011}. But its performance depends on a convariance function from prior knowledge. Conversely, we focus on more general propose system to impute sensor reading without domain knowledges. By the reason, we do not compare with BGP in our experiment.
 The above models suffer from an issue as they make some unverified assumptions about the data. For example, some models consider temporal correlation as more important than spatial correlation,
 %such that the reading of nearby sensors are used only when nearby time steps are missing (or vice versa),
 while some assume that sensors of the same distance should have a similar correlation regardless of their 
