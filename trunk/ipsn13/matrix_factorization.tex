@@ -114,7 +114,7 @@ Unlike the ratings in recommendation systems that are normally within certain ra
 Here we propose to normalize the training set to zero mean and unit variance before conducting MF learning, and once the missing values are produced by our model, we need to rescale the values to the original mean and variance.
 Although this procedure does not change the quality of outcomes theoretically, in practice we do find some benefits: 
 First, when the global mean becomes zero, the origin of our model naturally becomes a fine initial point for MF training, which is very important for non-convex optimization techniques such as MF.
-Second, normalization forces different data sets to look similar, which simplifies the parameter tuning task. 
+Second, normalization forces different datasets to look similar, which simplifies the parameter tuning task. 
 
 
 %\paragraph*{Parameters Setting}
