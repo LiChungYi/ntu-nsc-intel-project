@@ -73,5 +73,6 @@ $\frac{q_{n_i}^T q_{n_j}}{max(||q_{n_i}||^2, ||q_{n_j}||^2)},$
 Then we identify the top 100 similar pairs and draw a line between each of them on the floor plan.
 We can see that the manually hypothesized spatial correlation plot Figure \ref{fig:expected_similarity} is more similar to the one learned from humidity data (Figure \ref{fig:humidity_similarity}) than to the one learned from light data (Figure \ref{fig:light_similarity}).
 This experiment shows two interesting insights.
-First, the manually-crafted spatial correlations do not necessary reflect the true correlations between sensor signals, because they might have not yet considered other factors such as those described in the example of Figure \ref{fig:example_home_floorplan}.
+First, the manually-crafted spatial correlations do not necessary reflect the true correlations between sensor signals, because they might have not yet considered other factors such as barriers or long-distance correlations. 
+%those described in the example of Figure \ref{fig:example_home_floorplan}.
 Second, if the human knowledge of spatial correlation does to some extent reflect the true correlations between sensors, incorporating them in scenarios with limited information (i.e., the consecutive missing pattens) can be helpful (e.g., the humidity imputation in Table \ref{table:spatial_temporal} improves with spatial information); otherwise it is useless (e.g., no improvement for the light imputation in Table \ref{table:spatial_temporal}).
