@@ -22,7 +22,7 @@ modifications to the MF objective function, and finally provide the complete tra
 %proven to be ideal for dimension reduction, can hardly be applied to sparse matrices where a significant fraction of 
 %the data are missing.
 %
-As stated in section \ref{sec:existing_work}, conventional SVD is not appropriate for the task of missing data imputation.
+As stated in section \ref{sec:rw_spatial_temporal}, conventional SVD is not appropriate for the task of missing data imputation.
 Matrix Factorization is designed to amend the limitations of SVD, and recently researchers have shown \cite{koren2009matrix} that the matrix factorization model is indeed a better approach to learn the latent factors given sparse matrices, because during the factorization procedure only the observed entries are exploited.
 Utilizing numerical optimization procedures, for a partially observed matrix~$\mathbf{R}$, MF produces two latent 
 matrices~$\mathbf{P}_{M \times K}$ and $\mathbf{Q}_{K \times N}$ whose multiplication seeks to approximate the observed entries in $\mathbf{R}_{M \times N}$:
