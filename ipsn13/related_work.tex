@@ -208,7 +208,9 @@ $ \hat{y}_{it} =\sum_{j=1}^m w_j \cdot \hat{y}_{it}^{(j)}$
 where $w_j$ is the weight of sensor $j$ used to predict sensor $i$, and is larger for more highly correlated pairs.
 %They adopt the r-square statistics to rank their correlations. The value of $w_j$ is the weighted average of the corresponding 
 %r-square values for the $m$ sensors. 
-Recently, a random process method,  called Bayesian Gaussian Process model, had been proposed in 2011~\cite{Osborne2011}. But its performance depends on a convariance function from prior knowledge. Conversely, we focus on more general propose system to impute sensor reading without domain knowledges. By the reason, we do not compare with BGP in our experiment.
+
+Recently, a random process method,  called Bayesian Gaussian Process model, had been proposed in 2011~\cite{Osborne2011}. However, its performance depends on a convariance function from prior knowledge. Conversely, we focus on more general propose system to impute sensor reading without domain knowledges. By the reason, we do not compare with BGP in our experiment.
+
 The above models suffer from an issue as they make some unverified assumptions about the data. For example, some models consider temporal correlation as more important than spatial correlation,
 %such that the reading of nearby sensors are used only when nearby time steps are missing (or vice versa),
 while some assume that sensors of the same distance should have a similar correlation regardless of their 
@@ -218,7 +220,7 @@ knowledge, and learn the latent correlation directly from the data.
 
 %\paragraph{Singular Value Decomposition (SVD)-based Methods}
 Among the spatio-temporal methods, some are Singular Value Decomposition (SVD)-based methods which are conceptually closer to our solution. 
-SVD-based methods have a significant limitation as they can only be applied to a complete matrix.
+Conventional SVD has a significant limitation as it can only be applied to a complete matrix.
 Therefore, one needs to somehow first fill in the missing values before conducting such decomposition.
 The initial assignment of those missing values, unfortunately, can significantly affect the performance~\cite{koren2009matrix}.
 Furthermore, SVD is computationally expensive in general.
@@ -235,7 +237,7 @@ solve the problem of missing or unreliable satellite
 data~\cite{beckers2003eof}.  EOF first fills in the missing values
 (e.g., using all zeros or the mean values) and then performs SVD 
 to decompose the matrix. The first $K$ spatial-EOF (i.e., the top-$K$
-singular values in SVD) is used to reconstruct the matrix and update the estimation of missing values, 
+singular vectors in SVD) is used to reconstruct the matrix and update the estimation of missing values, 
 where $K$ is determined through cross validation over the data.
 
 %In the field of Collaborative Filtering, researchers have already pointed out
