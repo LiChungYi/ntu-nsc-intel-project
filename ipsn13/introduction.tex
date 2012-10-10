@@ -122,7 +122,7 @@ design prediction function %as,
 However, such models are only applicable to limited types of signals, and generally require the precise three-dimensional distance among sensors.
 
 Researchers also propose predicting missing values based on data mining techniques. Window Association Rule Mining (WARM)~\cite{le2005estimating} and Freshness Association Rule Mining (FARM)~\cite{Gruenwald:FARM} study the estimation of missing data based on the association rules among spatially-correlated neighbors. 
-Such methods enjoy the advantage of being able to handle categorical sensor data, but the performance is limited in continuous sensor data due to the inherent limitations of association rules.
+Such methods enjoy the advantage of being able to handle categorical sensor data, but the performance is limited in continuous sensor data due to the association rules's requirement to quantize the data.
 %(basically, the continuous data needs to be quantized into suitable
 %categories for association matches).
 %Moreover, the support, confidence of the mined rules need to be predefined by the users which can cause difficulties for building a satisfying model by users without profound knowledge about the environment of deployment. 
