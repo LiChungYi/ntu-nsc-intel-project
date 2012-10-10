@@ -181,7 +181,7 @@ estimate the missing values of DNA micro-arrays~\cite{Troyanskaya:DNAKNN}.
 %While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
 Pan~\cite{pan2010k} proposes the Applying K-nearest neighbor Estimation (AKE) algorithm to exploit the spatial correlation in the 
 missing sensory data problem. 
-AKE adopts linear regression models to describe the spatial correlation among nodes. The prediction of target node is the combination of the regression models from K-nearest nodes. If there are no enougth data to describe spatial information, AKE use temporal regression model instead.
+AKE adopts linear regression models to describe the spatial relationship among each two sensor nodes. The prediction of target node is the weighted combination of the regression models from K-nearest nodes. If there is no enough spatial information to be exploited, AKE will use temporal information to help.
 %\begin{center}
 %$y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} $,
 %\end{center}
