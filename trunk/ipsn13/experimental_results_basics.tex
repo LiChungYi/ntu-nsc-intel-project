@@ -4,6 +4,7 @@ Applying K-nearest neighbor Estimation~(AKE), Data Estimation using Statistical 
 %We implemented AKE, DESM, STI, and for MI we use the EM-imputation from LISREL.  
 Note that sensor location information is only available for 8 out of 20 sensors in the Traffic dataset, but the pairwise distance values are required inputs for the DESM and STI models.
 In these cases, we simply assume the unknown distances are equal.
+Also, we omit the result of light sensors on Berkeley dataset (in which TR-MF performs equally well as in other cases) due to space limit. 
 
 %validation setting
 %Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the results of different models random split on Berkeley dataset. In the plot, the x-axis represents the missing ratio. Conceivably the difficulty of an imputation task arises with th increase of missing ratio, therefore we can see that the slopes for most of the lines in the plot are nonpositive. Also note that to highlight the difference between the better models, we cut the overflowed RMSE values of the inferior models to the maximum values that can be displayed in the plot. That says, the flat lines on top of the plots usually indicate the exact RMSE is even higher than what has been shown.
@@ -29,7 +30,9 @@ EOF results were not generated for other experiments because EOF requires the ex
 
 \input{experimental_figures_basics}
 
-Figures \ref{fig:berkeley_random_hum}, \ref{fig:berkeley_random_light}, \ref{fig:berkeley_random_tem}, \ref{fig:traffic_random_hum} and \ref{fig:traffic_random_tem} show the results of our random missing experiments.
+Figures \ref{fig:berkeley_random_hum},
+%\ref{fig:berkeley_random_light}, 
+\ref{fig:berkeley_random_tem}, \ref{fig:traffic_random_hum} and \ref{fig:traffic_random_tem} show the results of our random missing experiments.
 The outcomes indicate several interesting facts.
 First, TR-MF outperforms the original MF significantly, which demonstrates the effectiveness of the temporal regularization.
 In general, TR-MF shows significant improvement over all the other methods.
@@ -108,7 +111,9 @@ In datasets with lower sampling rates such as the traffic dataset, the spatial-o
 
 %\subsubsection{Consecutive Missing Pattern}
 %Table \ref{table:berkeley_temporal_hum}, \ref{table:berkeley_temporal_light} and \ref{table:berkeley_temporal_tem} show the result for Consecutive Missing Pattern on Berkeley dataset and Table \ref{table:traffic_temporal_hum} and \ref{table:traffic_temporal_tem} on traffic dataset.
-Figures \ref{fig:berkeley_temporal_hum}, \ref{fig:berkeley_temporal_light}, \ref{fig:berkeley_temporal_tem} and \ref{fig:traffic_temporal_hum} and \ref{fig:traffic_temporal_tem} show the results for the consecutive missing pattern.
+Figures \ref{fig:berkeley_temporal_hum}, 
+%\ref{fig:berkeley_temporal_light}, 
+\ref{fig:berkeley_temporal_tem} and \ref{fig:traffic_temporal_hum} and \ref{fig:traffic_temporal_tem} show the results for the consecutive missing pattern.
 Comparing it with the previous figure, we find that, not surprisingly, the consecutive missing task is more challenging,
 as the RMSE is much higher than that of the random missing case.
 Generally speaking, the incorporation of the temporal correlation is not very useful for the consecutive missing cases.
