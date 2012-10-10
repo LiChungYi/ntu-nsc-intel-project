@@ -161,6 +161,8 @@ where $e=\hat{t}_{mnc}-t_{mnc}$. After a round of updating, we then update the m
 %The Temporally-Regularized Tensor Factorization is summarized in Procedure \ref{alg::conjugateGradient}, which is not hard to implement since it accesses only one row of $\mathbf{P}$, $\mathbf{Q}$, $\mathbf{W}$ at a time.
 
 TR-TF applies similar normalization and stopping criterion techniques as in Section~\ref{sec:mf}.
+Its time complexity is also similar to that of TR-MF,
+except TR-TF models can be trained even more efficiently because it usually consists of fewer factors and does not require many iterations to converge. 
 %Empirically, one can achieve reasonable performance by imposing the following constraints on the parameter learning:  
 %\begin{equation*}
 %$\beta_1=\beta_2=\beta_3=\beta_4=\beta_5=\beta_6$ \mbox{ and } $\gamma_1=\gamma_2$.

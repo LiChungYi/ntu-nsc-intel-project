@@ -127,6 +127,15 @@ Second, normalization forces different datasets to look similar, which simplifie
 \paragraph*{Stopping Criterion}
 The validation set is used to determine the parameters and when to cease updating the MF model. More specifically, the training stops when the validation error keeps increasing for a certain amount of iterations (currently setup to $500$). 
 
+\paragraph*{Time Complexity}
+While training TR-MF, the time required for each update is $\Theta(KN + KR)$, where $K$ is the number of factors, $N$ is the number of observed readings and $R$ is the number of temporal and spatial regularization terms.
+In other words, it is independent of the height and width of the data matrix. 
+The total number of iterations varies with data quality, the missing rate and some parameters such as the learning rate and stopping criterion.
+In our experiments, it normally takes several minutes to train a TR-MF model on a computer with Xeon 2.53GHZ processor and 16 to 64G memory, but in some circumstances the training time can grow to 1 to 2 hours.
+To predict a missing value, it takes $2K$ multiplication operations, which can be done in real time. 
+On a normal laptop, it takes less than one second to predict all values for our Berkeley data matrix ($270000$ values).
+Note that we would like to emphasize that the training time is not as important as the prediction time, as normally we need only to train our model once to learn the optimal biases and factors for prediction.
+
 \begin{algorithm}
 	\caption{(Spatio-)Temporally-Regularized MF}
 	\label{alg:STRMF}
