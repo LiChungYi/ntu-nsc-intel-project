@@ -210,8 +210,11 @@ AKE adopts linear regression models to describe the spatial relationship among e
 %They adopt the r-square statistics to rank their correlations. The value of $w_j$ is the weighted average of the corresponding 
 %r-square values for the $m$ sensors. 
 
-Recently, a random process method,  called Bayesian Gaussian Process model, had been proposed~\cite{osborne2012real}. 
-BGP assume the current readings are gassian distribution if given past data. the parameter, mean and covariance, is changable from time to time based on mean and covariance function. However, its performance depends on mean and convariance function from prior knowledge. Conversely, we focus on more general propose system to impute sensor reading without domain knowledges. By the reason, we do not compare with BGP in our experiment.
+Recently, a random process method, called Bayesian Gaussian Process model, had been proposed~\cite{osborne2012real}. 
+BGP assumes the current readings are Gassian distribution given the past data.
+The parameter, mean and covariance, are changable from time to time based on the mean and covariance function.
+Thus, its performance depends on mean and convariance function from prior knowledge.
+Conversely, we focus on more general propose system to impute sensor reading without domain knowledges. By the reason, we do not compare with BGP in our experiment.
 
 
 The above models suffer from an issue as they make some unverified assumptions about the data. For example, some models consider temporal correlation as more important than spatial correlation,
