@@ -40,7 +40,7 @@ becomes large.
 \begin{tabular}{|l|l|l|} \hline
    &{\bf Hot-Deck Imputation}&{\bf Prediction Models}\\ \hline
 {\bf Temporal} & Last-seen~\cite{Granger:lastseen}, Mean& Linear Interpolation\\ \hline
-\multirow{2}{*}{\bf Spatial}& WARM~\cite{le2005estimating},& DEPM~\cite{li2008data}, K-NN~\cite{pan2010k},\\ 
+\multirow{2}{*}{\bf Spatial}& WARM~\cite{le2005estimating},& DEPM~\cite{li2008data},\\ 
 &FARM~\cite{Gruenwald:FARM}&Multi-Im~\cite{yuan2000multiple}\\\hline
 {\bf Spatio-}&STI~\cite{Jian-Zhong:STI}&DESM~\cite{li2008data}, AKE~\cite{pan2010k},\\
 {\bf Temporal}&&EOF~\cite{beckers2003eof},BGP~\cite{Osborne2011}\\%{}&&&BGP~\cite{Osborne2011} \
@@ -79,8 +79,9 @@ The Multi-Im (MI) method~\cite{yuan2000multiple} imputes the missing data by rep
 %instead of filling in a single value. 
 Various methods including multiple linear regression, propensity score method, and Markov chain Monte Carlo method have been used in MI.% The missing data are filled in $M$ times ($M=3-10$~\cite{Little:hotdeck}) 
 %to generate $M$ complete datasets, and the results from $M$ generated datasets are averaged to obtain a single prediction~\cite{yuan2000multiple}. 
-This model suffers from high computation cost because multiple models have to be learned. Moreover, a poor model might unduly 
-contribute to an inferior averaged result. 
+This model suffers from high computation cost because multiple models have to be learned. 
+%Moreover, a poor model might unduly 
+%contribute to an inferior averaged result. 
 %However, this method is criticized on various grounds by WSNs imputation researchers~\cite{jiang2007estimating,Gruenwald:FARM}. 
 %First, in sensor data we do not know how many rounds of information to use in order to get the associated information.
 %In addition, it is difficult to draw a pool of similar complete cases for a certain round of a certain sensor. 
@@ -175,9 +176,9 @@ In DESM, the prediction of a missing record is the linear combination of the pre
 %In DESM, because $\alpha$ is usually high around the target sensor. Therefore, the temporal feature multiplied by $1-\alpha$ holds a very small portion of contribution to the prediction process. It often contradicts the nature that the temporal correlation itself is usually higher than any spatial correlation with other sensors. The performance may becomes bad if the nearest sensor is not the most correlated one, i.e., blocked by a wall.
 % \subsubsection{Applying K-nearest neighbour Estimation}
 
-K-nearest neighbors algorithm (KNN) is an intuitive yet effective spatial-correlation-based imputation method. 
-It directly uses the weighted average of the neighbor signals to impute the missing data, and has been adopted to successfully 
-estimate the missing values of DNA micro-arrays~\cite{Troyanskaya:DNAKNN}.  
+%K-nearest neighbors algorithm (KNN) is an intuitive yet effective spatial-correlation-based imputation method. 
+%It directly uses the weighted average of the neighbor signals to impute the missing data, and has been adopted to successfully 
+%estimate the missing values of DNA micro-arrays~\cite{Troyanskaya:DNAKNN}.  
 %While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
 Pan~\cite{pan2010k} proposes the Applying K-nearest neighbor Estimation (AKE) algorithm to exploit the spatial correlation in the 
 missing sensory data problem. 
