@@ -43,20 +43,21 @@ becomes large.
 \multirow{2}{*}{\bf Spatial}& WARM~\cite{le2005estimating},& DEPM~\cite{li2008data},\\ 
 &FARM~\cite{Gruenwald:FARM}&Multi-Im~\cite{yuan2000multiple}\\\hline
 {\bf Spatio-}&STI~\cite{Jian-Zhong:STI}&DESM~\cite{li2008data}, AKE~\cite{pan2010k},\\
-{\bf Temporal}&&EOF~\cite{beckers2003eof},BGP~\cite{osborne2012real}\\
+{\bf Temporal}&&BGP~\cite{osborne2012real},EOF~\cite{beckers2003eof}\\
  \hline \end{tabular}
 }
 \vspace{-0.1in}
 \end{table}
 
-\subsection{Spatial Methods}
+\subsection{Spatial Methods}\label{subsec:sm}
 {\em Spatial methods} leverage the spatial correlation among readings
 by nearby sensor nodes; salient methods include associations rule
 mining (e.g., WARM~\cite{le2005estimating} and
 FARM~\cite{Gruenwald:FARM}) 
 %\cite{jiang2007estimating} 
-and weighted functions of nearby sensors (e.g., DEPM~\cite{li2008data},
-K-NN\cite{pan2010k}, and Multi-Im\cite{yuan2000multiple}).
+and weighted functions of nearby sensors (e.g., DEPM~\cite{li2008data}
+%K-NN\cite{pan2010k}, 
+and Multi-Im\cite{yuan2000multiple}).
 
 The Data Estimation using Physical Model (DEPM)~\cite{li2008data} method employs the basic laws of Physics to 
 design prediction function %as,  
@@ -133,7 +134,8 @@ as non-existent or time-varying correlations are imposed between nearby sensors.
 {\em Spatio-temporal methods} consider both the
 temporal and spatial correlation; salient methods include
 STI~\cite{Jian-Zhong:STI}, DESM~\cite{li2008data}, 
-AKE~\cite{pan2010k} and BGP~\cite{osborne2012real}. %and Imputation Method~\cite{Lim:robust}.
+AKE~\cite{pan2010k}, BGP~\cite{osborne2012real}, and EOF~\cite{beckers2003eof}.
+%and Imputation Method~\cite{Lim:robust}.
 %These
 %have the potential advantage of using both types of correlation in
 %imputation, but can suffer from the spatial correlation issues
