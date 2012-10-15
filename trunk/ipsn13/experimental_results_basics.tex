@@ -1,18 +1,12 @@
 \subsection{Experimental Results on TR-MF} \label{subsec:exp_basic}%from Chung-Yi
-We compare our TR-MF with conventional MF (i.e., MF without temporal regularization), Linear Interpolation~(LI), 
-Applying K-nearest neighbor Estimation~(AKE), Data Estimation using Statistical Model~(DESM), Spatial temporal imputation~(STI) and Multiple Imputation (MI).
-%We implemented AKE, DESM, STI, and for MI we use the EM-imputation from LISREL.  
-Note that sensor location information is only available for 8 out of 20 sensors in the Traffic dataset, but the pairwise distance values are required inputs for the DESM and STI models.
-In these cases, we simply assume the unknown distances are equal.
-Also, we omit the result of light sensors on Berkeley dataset (in which TR-MF performs equally well as in other cases) due to space limit. 
 
 %validation setting
 %Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the results of different models random split on Berkeley dataset. In the plot, the x-axis represents the missing ratio. Conceivably the difficulty of an imputation task arises with th increase of missing ratio, therefore we can see that the slopes for most of the lines in the plot are nonpositive. Also note that to highlight the difference between the better models, we cut the overflowed RMSE values of the inferior models to the maximum values that can be displayed in the plot. That says, the flat lines on top of the plots usually indicate the exact RMSE is even higher than what has been shown.
 
-Note that we also compared TR-MF with its predecessor, the EOF model.
-Table~\ref{table:trmf_eof} shows a representative experiment (Berkeley dataset, random missing pattern, humidity readings)
-demonstrating that TR-MF outperforms EOF significantly in every aspect.
-EOF results were not generated for other experiments because EOF requires the execution of several rounds of SVD, which is computational expensive and much less efficient compared with other models.
+We first compared TR-MF with its predecessor, the EOF model~\cite{beckers2003eof} and improved EOF model~\cite{kondrashov2006spatio}.
+Table~\ref{table:trmf_eof} shows a representative experiment (Berkeley dataset, random missing pattern, humidity readings).
+Improved EOF is significantly better than EOF, but still worse than our TR-MF.
+EOF results were not generated for other experiments because EOF requires the execution of many rounds of SVD, which is computational expensive and much less efficient compared with other models.
 
 \begin{table}[htbp]
 \setlength{\tabcolsep}{2pt}
@@ -21,12 +15,21 @@ EOF results were not generated for other experiments because EOF requires the ex
 \caption{RMSE of TR-MF and EOF on (Berkeley, Random,Humid).  Columns are labeled with the percentage of data used for training.}
 \label{table:trmf_eof}
 \begin{tabular}{ r | r r r r r r}
-		&10\%	&20\%	&40\%	&60\%	&80\% &85\% \\ 
+		&10\%	&20\%	&40\%	&60\%	&80\% \\ 
 	 \hline
-	 TR-MF & 0.142 &0.114 &0.092&0.082&0.076 & 0.075 \\
-     EOF	 &2.423 &1.385 &1.000 &0.734 &0.656 &0.645\\
+	 TR-MF & 0.142 &0.114 &0.092&0.082&0.076 \\
+     	 EOF &2.423 &1.385 &1.000 &0.734 &0.656 \\
+     Improved EOF & 0.362 & 0.237 & 0.183 & 0.152 & 0.136 \\
 \end{tabular}
 \end{table}
+
+Then, we compare our TR-MF with conventional MF (i.e., MF without temporal regularization), Linear Interpolation~(LI), 
+Applying K-nearest neighbor Estimation~(AKE), Data Estimation using Statistical Model~(DESM), Spatial temporal imputation~(STI) and Multiple Imputation (MI).
+%We implemented AKE, DESM, STI, and for MI we use the EM-imputation from LISREL.  
+Note that sensor location information is only available for 8 out of 20 sensors in the Traffic dataset, but the pairwise distance values are required inputs for the DESM and STI models.
+In these cases, we simply assume the unknown distances are equal.
+Also, we omit the result of light sensors on Berkeley dataset (in which TR-MF performs equally well as in other cases) due to space limit. 
+
 
 \input{experimental_figures_basics}
 

@@ -43,7 +43,7 @@ becomes large.
 {\bf Spatial} & WARM~\cite{le2005estimating}, FARM~\cite{Gruenwald:FARM} & DEPM~\cite{li2008data}, MI~\cite{yuan2000multiple}\\\hline
 {\bf Spatio-} & STI~\cite{Jian-Zhong:STI} & DESM~\cite{li2008data}, ImM~\cite{Lim:robust},\\
 {\bf Temporal} && AKE~\cite{pan2010k}, BGP~\cite{osborne2012real},\\
-               && EOF~\cite{beckers2003eof}\\
+               && EOF~\cite{beckers2003eof, kondrashov2006spatio}\\
  \hline \end{tabular}
 }
 \vspace{-0.1in}
@@ -141,7 +141,7 @@ imposed between nearby sensors.
 {\em Spatio-temporal methods} consider both the
 temporal and spatial correlation; salient methods include
 STI~\cite{Jian-Zhong:STI}, DESM~\cite{li2008data}, ImM~\cite{Lim:robust},
-AKE~\cite{pan2010k}, BGP~\cite{osborne2012real}, and EOF~\cite{beckers2003eof}.
+AKE~\cite{pan2010k}, BGP~\cite{osborne2012real}, and EOF~\cite{beckers2003eof, kondrashov2006spatio}.
 %and Imputation Method~\cite{Lim:robust}.
 %These
 %have the potential advantage of using both types of correlation in
@@ -268,8 +268,16 @@ data~\cite{beckers2003eof}.  EOF first fills in the missing values
 to decompose the matrix. The first $K$ spatial-EOF (i.e., the top-$K$
 singular vectors in SVD) is used to reconstruct the matrix and update the estimation of missing values, 
 where $K$ is determined through cross validation over the data.
-Besides being computationally expensive, EOF is shown in our study to be significantly less accurate 
-than the models we propose.
+
+In \cite{kondrashov2006spatio}, an improved version of EOF model is proposed. 
+The major difference is that it considers the temporal ordering:
+The readings from one sensor node is copied $M$ times and form $M$ lag-shifted time series.
+The modification does boost the performance of EOF,
+but it significantly slows down the performance since the data is enlarged by $M$ times.
+Moreover, our study shows that the improved EOF is still less accurate than our model.
+
+% The other modification:
+% Singular vectors are taken out one at a time => make the determination of $K$ easier.
 
 To the best of our knowledge, ours is the first paper to propose applying
 matrix factorization techniques to sensor data imputation.
