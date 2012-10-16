@@ -94,9 +94,10 @@ Note that node $21$ of the Traffic dataset is the gateway node.
 
 We exploit the commonly used metric of root-mean-square-error (RMSE) to measure the difference between the predicted values and the ground truth, and all parameters in our models and competitors' models are determined by the validation set.
 
-We share our parameter values of our models below.
+We share the parameter values of our models below.
 The number of factors $K$ is $54$ for MF and $30$ for TF for the Berkeley dataset, and $21$ for MF and $10$ for TF in the traffic dataset. 
 The learning rate $\eta$ is set to $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF.
 A smaller~$\eta$ or a larger~$K$ can slow down the training process, but it won't degrade the model.
+Also, a reasonable choice of $K$ should not be larger than the number of sensor nodes since the rank of the matrix is at most $K$.
 The temporal regularization is set to $0.2$ divided by learning-rate $\eta$ in all of our experiments.
 The conventional regularization is $0.001$ in consecutive missing and $0$ for random missing in MF, while in TF, it is $0.005$ for consecutive missing and $0.001$ for random missing.
