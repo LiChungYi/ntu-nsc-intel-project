@@ -109,6 +109,24 @@ we perform temporal regularization by updating all $\mu_m$ and $\mathbf{p}_m$ si
 	\end{cases} $\\
 The updating procedure is summarized in Procedure~\ref{alg:STRMF}. Note that we propose to avoid updating the temporal regularization with the update of each reading, because doing so can bias the model toward the time steps that possess fewer missing readings, which contradicts the goal of data imputation. 
 
+\begin{algorithm}[thb]
+	\caption{(Spatio-)Temporally-Regularized MF}
+	\label{alg:STRMF}
+	\textbf{Parameters:} $\beta$, $\gamma$, ($\gamma_s$,) $\eta$, $K$\\
+	\textbf{Input:} training set, validation set
+	\begin{algorithmic}
+		\State Normalize the training set as $\mathcal{D}$
+		\State Initialize $\mu_m$, $\mu_n$, $\mathbf{p}_m$, $\mathbf{q}_n$ to small random numbers
+		\Repeat
+			\State \textbf{for} each observed reading $r_{mn}$ in $\mathcal{D}$
+				\State \indent Update $\mu_m$, $\mu_n$, $\mathbf{p}_{m}$, $\mathbf{q}_{n}$
+			\State Update $\mu_m$, $\mathbf{p}_m$ by temporal regularization
+			\State (Update $\mu_n$, $\mathbf{q}_n$ by spatial regularization)
+		\Until{stopping criterion is met}
+		\State Output the imputation prediction model
+	\end{algorithmic}
+\end{algorithm}
+
 For STR-MF, we can update all $\mu_n$ and $\mathbf{q_n}$ simultaneously as:\\
 \indent $\begin{cases}
 	\mu_{n_i}' = \mu_{n_i} - \eta \gamma_s \sum_{n_j}{(\mu_{n_i} - \mu_{n_j})}\\
@@ -139,28 +157,13 @@ More specifically, the training stops when the validation error fails to decreas
 amount of iterations ($500$ in our experiments). 
 
 \paragraph*{Time Complexity}
-While training TR-MF, the time required for each update is $\Theta(KN + KR)$, where $K$ is the number of factors, $N$ is the number of observed readings and $R$ is the number of temporal and spatial regularization terms.
-In other words, it is independent of the height and width of the data matrix. 
+While training TR-MF, the time required for each update is $\Theta(KN)$, where $K$ is the number 
+of factors ($\leq 64$ in our experiments) and $N$ is the number of observed readings.
+% and $R$ is the number of temporal and spatial regularization terms.
+In other words, it is independent of the size of the data matrix. 
 The total number of iterations varies with data quality, the missing rate and some parameters such as the learning rate and stopping criterion.
 In our experiments, it normally takes several minutes to train a TR-MF model on a computer with Xeon 2.53GHZ processor and 16 to 64G memory, but in some circumstances the training time can grow to 1 to 2 hours.
 To predict a missing value, it takes $2K$ multiplication operations, which can be done in real time. 
-On a normal laptop, it takes less than one second to predict all values for our Berkeley data matrix ($270000$ values).
-Note that we would like to emphasize that the training time is not as important as the prediction time, as normally we need only to train our model once to learn the optimal biases and factors for prediction.
+On a normal laptop, it takes less than one second to predict all values for our Berkeley data matrix ($270,000$ values).
+Note that the training time is not as important as the prediction time, as normally we need only to train our model once to learn the optimal parameters and factors for prediction.
 
-\begin{algorithm}
-	\caption{(Spatio-)Temporally-Regularized MF}
-	\label{alg:STRMF}
-	\textbf{Parameters:} $\beta$, $\gamma$, $\eta$, $K$\\
-	\textbf{Input:} training set, validation set
-	\begin{algorithmic}
-		\State Normalize the training set as $\mathcal{D}$
-		\State Initialize $\mu_m$, $\mu_n$, $\mathbf{p}_m$, $\mathbf{q}_n$ to small random numbers
-		\Repeat
-			\State \textbf{for} each observed reading $r_{mn}$ in $\mathcal{D}$
-				\State \indent Update $\mu_m$, $\mu_n$, $\mathbf{p}_{m}$, $\mathbf{q}_{n}$
-			\State Update $\mu_m$, $\mathbf{p}_m$ by temporal regularization
-			\State (Update $\mu_n$, $\mathbf{q}_n$ by spatial regularization)
-		\Until{stopping criterion is met}
-		\State Output the model for testing set prediction
-	\end{algorithmic}
-\end{algorithm}
