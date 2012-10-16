@@ -72,15 +72,15 @@ where $\mathbf{p}_i$, $\mathbf{q}_i$ and $\mathbf{w}_i$ are a column of matrices
 \subsubsection{Tensor Factorization for Data Imputation} \label{sec:tfmissing}
 %\subsubsection{Objective function}
 
-Existing Tensor Decomposition models assume no missing entries, which is naturally unsuitable for our problem.
-Although tensor factorization has been studied for a while and enjoys a certain level of success in building context-aware 
-recommender systems~\cite{karatzoglou2010multiverse,rendle2010pairwise}, we have not yet seen any proposal to leverage 
-such techniques for sensor data imputation.
+%Existing Tensor Decomposition models assume no missing entries, which is naturally unsuitable for our problem.
+%Although tensor factorization has been studied for a while and enjoys a certain level of success in building context-aware 
+%recommender systems~\cite{karatzoglou2010multiverse,rendle2010pairwise}, we have not yet seen any proposal to leverage 
+%such techniques for sensor data imputation.
 
 Here we introduce Temporally-Regularized Tensor Factorization (TR-TF) model for missing data estimation. 
 Similar to TR-MF, TR-TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
 
-We borrow the idea of Canonical Decomposition rather than Tucker Decomposition.
+We follow the idea of context-aware recommendation sytems~\cite{karatzoglou2010multiverse}, but we use Canonical Decomposition rather than Tucker Decomposition.
 Consider a three-dimensional tensor (e.g., the temperature reading of a sensor given a certain time-stamp and a certain humidity reading), a tensor model can be described as:
 \begin{equation*}
 %\small
