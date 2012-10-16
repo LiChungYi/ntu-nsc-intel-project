@@ -6,8 +6,10 @@
 
 We first compared TR-MF with its predecessor, the EOF model~\cite{beckers2003eof} and improved EOF model~\cite{kondrashov2006spatio}.
 Table~\ref{table:trmf_eof} shows a representative experiment (Berkeley dataset, random missing pattern, humidity readings).
-Improved EOF is significantly better than EOF, but still worse than our TR-MF.
-EOF results were not generated for other experiments because EOF requires the execution of many rounds of SVD, which is computational expensive and much less efficient compared with other models.
+Improved EOF is significantly more accurate than EOF, but still worse than our TR-MF.
+Given this, and the fact that EOF-based methods require the execution of many rounds of SVD, 
+which is computational expensive and much less efficient than the other models we study, 
+we omit EOF from any further experiments.
 
 \begin{table}[htbp]
 \setlength{\tabcolsep}{2pt}
@@ -26,14 +28,12 @@ EOF results were not generated for other experiments because EOF requires the ex
 
 \input{experimental_figures_basics}
 
-Then, we compare our TR-MF with conventional MF (i.e., MF without temporal regularization), Linear Interpolation~(LI), 
-Applying K-nearest neighbor Estimation~(AKE), Data Estimation using Statistical Model~(DESM), Spatial temporal imputation~(STI) and Multiple Imputation (MI).
+We compared our TR-MF with conventional MF (i.e., MF without temporal regularization), Linear Interpolation~(LI), 
+Applying K-nearest neighbor Estimation~(AKE), Data Estimation using Statistical Model~(DESM), Spatial Temporal Imputation~(STI) and Multiple Imputation (MI).
 %We implemented AKE, DESM, STI, and for MI we use the EM-imputation from LISREL.  
-Note that sensor location information is only available for 8 out of 20 sensors in the Traffic dataset, but the pairwise distance values are required inputs for the DESM and STI models.
+Note that sensor location information is available for only 8 out of 20 sensors in the Traffic dataset, but the pairwise distance values are required inputs for the DESM and STI models.
 In these cases, we simply assume the unknown distances are equal.
-Also, we omit the result of light sensors on Berkeley dataset (in which TR-MF performs equally well as in other cases) due to space limit. 
-
-
+Also, we omit the results for light sensors in the Berkeley dataset (in which TR-MF performs equally well as in other cases) due to space limitations. 
 
 Figures \ref{fig:berkeley_random_hum},
 %\ref{fig:berkeley_random_light}, 
@@ -125,7 +125,7 @@ Generally speaking, the incorporation of the temporal correlation is not very us
 Specifically, LI is no longer competitive and the performance between TR-MF and MF has become closer, especially when the missing rate is high.
 The AKE algorithm also performs competitively in this case.
 The results indicate that when there is less information from which a model can learn, providing it other kinds of information 
-(e.g., the spatial information ) can potentially improve the outcome.
+(e.g., the spatial information) can potentially improve the outcome.
 This conjecture is confirmed in the next experiment which shows that TR-MF can be further improved in consecutive missing cases when spatial information is included.
 
 %\begin{table}[htbp]
