@@ -3,6 +3,7 @@
 %validation setting
 %Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the results of different models random split on Berkeley dataset. In the plot, the x-axis represents the missing ratio. Conceivably the difficulty of an imputation task arises with th increase of missing ratio, therefore we can see that the slopes for most of the lines in the plot are nonpositive. Also note that to highlight the difference between the better models, we cut the overflowed RMSE values of the inferior models to the maximum values that can be displayed in the plot. That says, the flat lines on top of the plots usually indicate the exact RMSE is even higher than what has been shown.
 
+
 We first compared TR-MF with its predecessor, the EOF model~\cite{beckers2003eof} and improved EOF model~\cite{kondrashov2006spatio}.
 Table~\ref{table:trmf_eof} shows a representative experiment (Berkeley dataset, random missing pattern, humidity readings).
 Improved EOF is significantly better than EOF, but still worse than our TR-MF.
@@ -23,6 +24,8 @@ EOF results were not generated for other experiments because EOF requires the ex
 \end{tabular}
 \end{table}
 
+\input{experimental_figures_basics}
+
 Then, we compare our TR-MF with conventional MF (i.e., MF without temporal regularization), Linear Interpolation~(LI), 
 Applying K-nearest neighbor Estimation~(AKE), Data Estimation using Statistical Model~(DESM), Spatial temporal imputation~(STI) and Multiple Imputation (MI).
 %We implemented AKE, DESM, STI, and for MI we use the EM-imputation from LISREL.  
@@ -31,7 +34,6 @@ In these cases, we simply assume the unknown distances are equal.
 Also, we omit the result of light sensors on Berkeley dataset (in which TR-MF performs equally well as in other cases) due to space limit. 
 
 
-\input{experimental_figures_basics}
 
 Figures \ref{fig:berkeley_random_hum},
 %\ref{fig:berkeley_random_light}, 
