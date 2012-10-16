@@ -71,7 +71,7 @@ first quantize the data.
 %\subsubsection{K-Nearest Neighbours Imputation} 
 %  The two major drawbacks of KNN-based model that predicts only from the spatial correlation are: first of all,  they cannot capture temporal correlation, and the second reason is that most of these methods rely on the knowledge of distance between each sensor, which might not be available or accurate in the real world.
 
-The Data Estimation using Physical Model (DEPM)~\cite{li2008data} method employs the basic laws of Physics to 
+The Data Estimation using Physical Model (DEPM)~\cite{li2008data} method employs the basic laws of physics to 
 design its prediction function. %as,  
 %%\begin{equation}
 %$I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}$
@@ -265,15 +265,14 @@ A salient example of SVD-based approaches for imputation is the Empirical Orthog
 solve the problem of missing or unreliable satellite
 data~\cite{beckers2003eof}.  EOF first fills in the missing values
 (e.g., using all zeros or the mean values) and then performs SVD 
-to decompose the matrix. The first $K$ spatial-EOF (i.e., the top-$K$
-singular vectors in SVD) is used to reconstruct the matrix and update the estimation of missing values, 
+to decompose the matrix. The top-$K$ singular vectors in the SVD are used 
+to reconstruct the matrix and update the estimation of missing values, 
 where $K$ is determined through cross validation over the data.
-
-In \cite{kondrashov2006spatio}, an improved version of EOF model is proposed. 
-The major difference is that it considers the temporal ordering:
-The readings from one sensor node is copied $M$ times and form $M$ lag-shifted time series.
-The modification does boost the performance of EOF,
-but it significantly slows down the performance since the data is enlarged by $M$ times.
+An improved version of EOF~\cite{kondrashov2006spatio} also 
+considers the temporal ordering:
+The readings from one sensor node are copied $M$ times and form $M$ lag-shifted time series.
+The modification boosts the accuracy of EOF, but significantly slows down the method
+due to its $M$-fold data size increase.
 Moreover, our study shows that the improved EOF is still less accurate than our model.
 
 % The other modification:
