@@ -40,7 +40,7 @@ Tables~\ref{table:spatial_random} and~\ref{table:spatial_temporal} compare STR-M
 The spatial regularization used for STR-MF was defined based on manually-determined neighborhood nodes established via inspection of the floor plan, as shown in Figure \ref{fig:expected_similarity}.
 Note that STR-MF and sTR-MF stand for TR-MF with strong and relatively weaker spatial regularization, respectively.
 The results show that for the random missing pattern, adding spatial regularization indeed hurts the performance.
-We believe this is the case for the random missing cases because the sensor observations alone are adequate for TR-MF to learn the correlations between sensors, hence enforcing similarity between nearby sensors can actually be deleterious to performance as the degree of correlation between sensors is actually quiet low.
+We believe this perhaps surprising finding holds for the random missing cases because the sensor observations alone are adequate for TR-MF to learn the correlations between sensors, hence enforcing similarity between nearby sensors can actually degrade accuracy because the degree of correlation between sensors is actually quiet low.
 On the other hand, for consecutive missing cases, adding spatial regularization shows significant improvement for humidity and temperature readings.
 Generally, the distinction between TR-MF and STR-MF is that the former is a pure data-driven model while the latter is slightly knowledge-driven.
 The experiments show that when we have sufficient data to learn the correlation between sensors, it is better to ignore the given knowledge because they might not be accurate; however, if the given data is less abundant, incorporating external spatial knowledge can be helpful.
@@ -68,7 +68,7 @@ $\frac{q_{n_i}^T q_{n_j}}{max(||q_{n_i}||^2, ||q_{n_j}||^2)},$
 	\includegraphics[width=0.20\textwidth]{Light_similarity.png}
 }
 \vspace{-0.1in}
-\caption{similarity graph}
+\caption{Expected vs.~Actual Similarities}
 \label{fig:similarity}
 \end{figure}
 
