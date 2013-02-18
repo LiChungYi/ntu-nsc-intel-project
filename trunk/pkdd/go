@@ -1,0 +1,3 @@
+#!/bin/bash
+make
+scp pkdd.pdf r00922051@linux1.csie.org:~/htdocs/a.pdf
