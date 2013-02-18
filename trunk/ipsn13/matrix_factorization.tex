@@ -43,7 +43,7 @@ $\beta$ is the parameter that controls the strength of regularization.
 \subsection{Temporally-Regularized Matrix Factorization (TR-MF)}
 
 Although we map the sensor data imputation task to a CF-based recommendation task, there are indeed some major differences in the properties of the data.
-Normal CF or MF models assume no ordering on the users (i.e., temporal dimension). That is, we can randomly swap the rows in the matrix without affected the factorization outcome. However, such independence does not exist in sensor data as a 
+Normal CF or MF models assume the users (i.e., temporal dimension) are independent of each other. That is, we can randomly swap the rows in the matrix without affected the factorization outcome. However, such independence does not exist in sensor data as a 
 sensor's signal in time $t$ is highly dependent on that of time $t-1$. In other words, an ideal model should consider such ordering dependency, and under such a model reordering the
 rows would significantly affect the outcome of factorization.
 
