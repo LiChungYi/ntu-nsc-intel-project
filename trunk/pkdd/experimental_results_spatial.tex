@@ -1,10 +1,10 @@
 \subsection{Experimental Results on STR-MF} \label{experimental_results_spatial}
 Next we focus on using the Berkeley dataset to verify the STR-MF model as the sensor node location information for the Traffic data is incompletely specified and thus unable to be properly exploited.
-\begin{table} [htbp]
+\begin{table} [h]
 \caption{RMSE of Berkeley, Random Missing} \label{table:spatial_random}
+\small
 \setlength{\tabcolsep}{2pt}
 \centering
-\small
 \begin{tabular} {c | r r r | r r r | r r r}
 & \multicolumn{3}{ c|}{Humidity} & \multicolumn{3}{|c|}{Light} & \multicolumn{3}{|c }{Temperature} \\ \hline
 train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn}& \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn}& \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn} \\ \hline
@@ -16,12 +16,12 @@ train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \be
 85\% & $ \mathbf{ 0.075 } $ & $ 0.326 $ & $ 0.083 $ & $ \mathbf{ 14.4 } $ & $ 82.0 $ & $ 15.8 $ & $ \mathbf{ 0.016 } $ & $ 0.138 $ & $ 0.028 $\\
 \end{tabular}
 \end{table}
-\vspace{-0.2in}
-\begin{table} [htbp]
+%\vspace{-0.2in}
+\begin{table} [h]
 \caption{RMSE of Berkeley, Consecutive Missing } \label{table:spatial_temporal}
+\small
 \setlength{\tabcolsep}{2pt}
 \centering
-\small
 \begin{tabular} {c | r r r | r r r | r r r}
 & \multicolumn{3}{ c|}{Humidity} & \multicolumn{3}{|c|}{Light} & \multicolumn{3}{|c }{Temperature} \\ \hline
 train & \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn}& \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn}& \begin{turn}{65}TR-MF\end{turn} & \begin{turn}{65}STR-MF\end{turn} & \begin{turn}{65}sTR-MF\end{turn} \\ \hline
@@ -56,16 +56,15 @@ $\frac{q_{n_i}^T q_{n_j}}{max(||q_{n_i}||^2, ||q_{n_j}||^2)},$
 \centering
 \subfigure[Expected Similarity]{
 	\label{fig:expected_similarity}
-	\includegraphics[width=0.25\textwidth]{expected.png}
-}\\
+	\includegraphics[width=0.30\textwidth]{expected.png}
+}
 \subfigure[Humidity: top 100 similar pairs]{
 	\label{fig:humidity_similarity}
-	\includegraphics[width=0.20\textwidth]{Hum_similarity.png}
+	\includegraphics[width=0.30\textwidth]{Hum_similarity.png}
 }
-\hspace{0in}
 \subfigure[Light: top 100 similar pairs]{
 	\label{fig:light_similarity}
-	\includegraphics[width=0.20\textwidth]{Light_similarity.png}
+	\includegraphics[width=0.30\textwidth]{Light_similarity.png}
 }
 \vspace{-0.1in}
 \caption{Expected vs.~Actual Similarities}
