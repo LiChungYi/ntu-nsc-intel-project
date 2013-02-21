@@ -21,14 +21,20 @@ Because the completeness of data degrades after 10000 samples, in our experiment
 We found the relative performance of the compared methods to be similar in these three cases; thus, we report only results from 
 5000 samples.  The inherent missing rate (i.e., before we introduce our missing value patterns) for these first 5000 samples is roughly 49\%.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.15]{berkeley_lab.png}
-%\vspace{-0.05in}
-\caption{Intel Berkeley Research Lab Floorplan} \label{berkeley_lab}
+\subfigure[Intel Berkeley Research Lab Floorplan]{
+	\label{berkeley_lab}
+	\includegraphics[scale=0.18]{berkeley_lab.png}
+}
+\hspace{0.5cm}
+\subfigure[Traffic Sensor Deployment Map (8 sensors of 20 shown)]{
+	\label{fig:traffic}
+	\includegraphics[scale=0.45]{traffic_wsn.png}
+}
+\caption{Sensor Configuration}
 \end{figure}
 
-\vspace{-0.1in}
 
 \paragraph*{Traffic Dataset}
 
@@ -38,13 +44,6 @@ The sampling rate is roughly once every 30 minutes.
 Along the temporal dimension, we use the entire range which consists of roughly 43K time stamps.
 The inherent missing rate is roughly 58\%.
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.4]{traffic_wsn.png}
-%\vspace{-0.1in}
-\caption{Traffic Sensor Deployment Configuration (8 sensors of 20 shown)}
-\label{fig:traffic}
-\end{figure}
 
 %This dataset only reveals 8 
 
