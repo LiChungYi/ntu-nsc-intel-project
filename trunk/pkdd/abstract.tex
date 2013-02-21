@@ -9,6 +9,7 @@ missing readings prior to analysis.
 In this paper, we present novel imputation methods that take a ``Recommendation Systems'' view of the problem: 
 the sensors and their readings at each time step are viewed as products and user product ratings, with the goal of estimating the missing ratings.
 Sensor readings differ from product ratings, however, in that the former exhibit high correlation in both time and space.
+For example, readings in adjacent time steps are usually similar.
 To incorporate this property, we modify the widely successful Matrix Factorization (MF) approach for recommendation systems to model inter-sensor and intra-sensor correlations and learn latent relationships among these dimensions.
 We evaluate the approach using two environmental sensor network datasets, one indoor and one outdoor, and
 two imputation scenarios, corresponding to intermittent readings and failed sensors.
@@ -23,7 +24,8 @@ Next, we consider sensor networks with multiple sensor types at each node.  We p
 humidity). Our results show that both techniques 
 can significantly improve the accuracy.% over TR-MF, and each has its strengths, depending on the observed variance in the readings.
 
-Finally, we consider a popular data analysis task---building regression-based prediction models---and show that,
+Finally, we study how the imputed values affect the result of data analysis.
+We consider a popular data analysis task---building regression-based prediction models---and show that,
 compared to prior approaches for imputation, using our model leads to a much higher quality prediction model.
 
 \end{abstract}
