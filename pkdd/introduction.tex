@@ -58,7 +58,9 @@ sensor network deployment objectives.
 
 \subsection{Our Approach: Collaborative Filtering}
 
-\begin{figure}[t]
+\vspace{-0.5cm}
+
+\begin{figure}[h]
 \centering
 
 \includegraphics[scale=0.35,trim=4 4 4 4,clip]{recommend_imputation_timerow_white.png}
@@ -90,7 +92,8 @@ often exhibit high correlation in both time and space.
 To incorporate this property, we first modify MF
 to model temporal correlations and learn latent relationships among
 sensors.  Specifically, we add temporal-proximity terms to
-MF---we call this {\em Temporally-Regularized MF} (TR-MF). 
+MF---we call this {\em Temporally-Regularized MF} (TR-MF)
+---to reflect the fact that readings in neighboring time steps are similar.
 Similarly, we can also add spatial-proximity terms---we 
 call this {\em Spatially-Temporally-Regularized} MF (STR-MF).
 
@@ -126,8 +129,8 @@ Furthermore, our study shows that STR-MF, which adds spatial
 coordinate information into TR-MF, is useful {\em only} in the
 ``consecutive'' pattern---perhaps surprisingly, STR-MF is
 significantly {\em less} accurate than TR-MF in the ``random''
-pattern.  This is because TR-MF effectively leverages the latent
-relationships among sensors, including any spatial correlations, while
+pattern.  This is because TR-MF effectively learns the latent
+relationships among sensors from data, including any spatial correlations, while
 avoiding the pitfalls of spatial-proximity biases (Section~\ref{subsec:sm}).
 
 For the heterogeneous setting, our study shows that both
