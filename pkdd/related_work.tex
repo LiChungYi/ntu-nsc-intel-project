@@ -245,7 +245,7 @@ inaccurate results.  The models we propose, however, try to rely less
 on such a priori knowledge, and learn the latent correlation directly
 from the data.
 
-The Singular Value Decomposition (SVD)-based methods exploit SVD to impute missing values.
+The Singular Value Decomposition (SVD)-based methods exploit the SVD commonly used in linear algebra to impute missing values.
 Conventional SVD has a significant
 limitation as it can only be applied to a complete matrix.  Therefore,
 one needs to somehow first fill in the missing values before
@@ -280,11 +280,13 @@ Moreover, our study shows that the improved EOF is still less accurate than our 
 
 %To the best of our knowledge, ours is the first paper to propose applying
 %matrix factorization techniques to sensor data imputation.
-Matrix Completion method used in \cite{majumdar2011increasing} is closest to our solution. 
-To reduce energy consumption, the authors propose to transmit less data back to the sink node and 
-recover the missing values by Matrix Completion method. 
-The formulation of the Matrix Completion method is similar to basic Matrix Factorization except a different matrix norm measurement.
-However, they do not consider temporal regularization or multivariate extension, both of which are shown to be very effective in our experment, and they have only limited experiments on synthetic datasets.
+Matrix Completion method~\cite{majumdar2011increasing} is the closest approach to our solution. 
+The main focus of the paper is to reduce energy consumption: 
+The authors propose to transmit only subset of sensed data back to the sink node and 
+estimate the remaining values by Matrix Completion method. 
+The formulation of their Matrix Completion method is similar to basic Matrix Factorization except they use different matrix norms.
+However, they have only limited experiments on synthetic datasets and they do not consider temperal regularization or multivariate models, 
+while we show that both of them lead to much more accurate esmitation of missing values.
 
 %In the field of Collaborative Filtering, researchers have already pointed out
 %several drawbacks in the SVD-based methods. % when applying to impute missing data. 
