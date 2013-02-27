@@ -48,16 +48,17 @@ sensor's signal in time $t$ is highly dependent on that of time $t-1$. In other 
 rows would significantly affect the outcome of factorization.
 
 
-\vspace{-0.5cm}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.6\textwidth, trim=4 4 4 4, clip]{TRMF_illustration_white.png}
-	\vspace{-0.1in}
-	\caption{\label{fig:tr-mf} Illustration of TR-MF}
-\end{figure}
-\vspace{-0.5cm}
+%\vspace{-0.5cm}
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.6\textwidth, trim=4 4 4 4, clip]{TRMF_illustration_white.png}
+%	\vspace{-0.1in}
+%	\caption{\label{fig:tr-mf} Illustration of TR-MF}
+%\end{figure}
+%\vspace{-0.5cm}
 
-With this observation, we propose a Temporally-Regularized Matrix Factorization (TR-MF) to better model the characteristic of sensor data. As the name may suggest, TR-MF adds a temporal regularization term to conventional MF (see Figure~\ref{fig:tr-mf}).
+With this observation, we propose a Temporally-Regularized Matrix Factorization (TR-MF) to better model the characteristic of sensor data. As the name may suggest, TR-MF adds a temporal regularization term to conventional MF. 
+%(see Figure~\ref{fig:tr-mf})
 The temporal regularization forces the latent factors of adjacent rows to be similar, which reflects the fact that 
 readings in adjacent time steps should be similar. We also add a similar regularization term for 
 adjacent row biases.
