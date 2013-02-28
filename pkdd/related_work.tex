@@ -42,7 +42,7 @@ becomes large.
 {\bf Temporal} & Last-seen~\cite{Granger:lastseen}, Mean & Linear Interpolation\\ \hline
 {\bf Spatial} & WARM~\cite{le2005estimating}, FARM~\cite{Gruenwald:FARM} & DEPM~\cite{li2008data}, MI~\cite{yuan2000multiple}\\\hline
 {\bf Spatio-} & STI~\cite{Jian-Zhong:STI} & DESM~\cite{li2008data}, ImM~\cite{Lim:robust}, AKE~\cite{pan2010k},\\
-{\bf Temporal} && BGP~\cite{osborne2012real}, EOF~\cite{beckers2003eof, kondrashov2006spatio}, Matrix Completion~\cite{majumdar2011increasing}\\
+{\bf Temporal} && BGP~\cite{osborne2012real}, EOF~\cite{beckers2003eof, kondrashov2006spatio}\\
  \hline \end{tabular}
 }
 \vspace{-0.1in}
@@ -140,8 +140,7 @@ imposed between nearby sensors.
 {\em Spatio-temporal methods} consider both the
 temporal and spatial correlation; salient methods include
 STI~\cite{Jian-Zhong:STI}, DESM~\cite{li2008data}, ImM~\cite{Lim:robust},
-AKE~\cite{pan2010k}, BGP~\cite{osborne2012real}, EOF~\cite{beckers2003eof, kondrashov2006spatio},
-and Matrix Completion~\cite{majumdar2011increasing}.
+AKE~\cite{pan2010k}, BGP~\cite{osborne2012real}, and EOF~\cite{beckers2003eof, kondrashov2006spatio}.
 %and Imputation Method~\cite{Lim:robust}.
 %These
 %have the potential advantage of using both types of correlation in
@@ -245,7 +244,8 @@ inaccurate results.  The models we propose, however, try to rely less
 on such a priori knowledge, and learn the latent correlation directly
 from the data.
 
-The Singular Value Decomposition (SVD)-based methods exploit the SVD commonly used in linear algebra to impute missing values.
+Finally, conceptually closer to our solution are the Singular Value Decomposition (SVD)-based methods.  
+%The Singular Value Decomposition (SVD)-based methods exploit the SVD commonly used in linear algebra to impute missing values.
 Conventional SVD has a significant
 limitation as it can only be applied to a complete matrix.  Therefore,
 one needs to somehow first fill in the missing values before
@@ -278,15 +278,8 @@ Moreover, our study shows that the improved EOF is still less accurate than our 
 % The other modification:
 % Singular vectors are taken out one at a time => make the determination of $K$ easier.
 
-%To the best of our knowledge, ours is the first paper to propose applying
-%matrix factorization techniques to sensor data imputation.
-Matrix Completion method~\cite{majumdar2011increasing} is the closest approach to our solution. 
-The main focus of the paper is to reduce energy consumption: 
-The authors propose to transmit only subset of sensed data back to the sink node and 
-estimate the remaining values by Matrix Completion method. 
-The formulation of their Matrix Completion method is similar to basic Matrix Factorization except they use different matrix norms.
-However, they have only limited experiments on synthetic datasets and they do not consider temperal regularization or multivariate models, 
-while we show that both of them lead to much more accurate esmitation of missing values.
+To the best of our knowledge, ours is the first paper to propose applying
+matrix factorization techniques to sensor data imputation.
 
 %In the field of Collaborative Filtering, researchers have already pointed out
 %several drawbacks in the SVD-based methods. % when applying to impute missing data. 
