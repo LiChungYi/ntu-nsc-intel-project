@@ -126,7 +126,7 @@ The final objective function of our TR-TF is:\\
 \begin{equation*}
 \small
 \begin{aligned}
-&\sum\limits_{m, n, c} \frac{1}{2}(\hat{t}_{mnc}- t_{mnc})^2\\
+\sum\limits_{m, n, c} \frac{1}{2}(\hat{t}_{mnc}- t_{mnc})^2
 + &\frac{\beta}{2}(\sum_m(\mu_m + \|\mathbf{p}_m\|^2) + \sum_n(\mu_n + \|\mathbf{q}_n\|^2) + \sum_c(\mu_c + \|\mathbf{w}_c\|^2))\\
 + &\frac{\gamma}{2}\sum_m((\mu_m-\mu_{m+1})^2 + \|\mathbf{p}_m-\mathbf{p}_{m+1}\|^2)\\
 \end{aligned}
@@ -157,12 +157,9 @@ Focusing on an observed reading data $t_{mnc} $, the update rules for all $k$s a
 \begin{equation*}
 \small
 \begin{aligned}
-  &p_{mk}^\prime=p_{mk}-\eta(e\times q_{nk}\times w_{ck} + \beta \times p_{mk})
-\\&q_{nk}^\prime=q_{nk}-\eta(e\times p_{mk}\times w_{ck} + \beta \times q_{nk})
-\\&w_{ck}^\prime=w_{ck}-\eta(e\times p_{mk}\times q_{nk} + \beta \times w_{ck})
-\\&{\mu_m}^\prime=\mu_m-\eta(e+\beta\mu_m)
-\\&{\mu_n}^\prime=\mu_n-\eta(e+\beta\mu_n)
-\\&{\mu_c}^\prime=\mu_c-\eta(e+\beta\mu_c)
+&{\mu_m}^\prime=\mu_m-\eta(e+\beta\mu_m),   &p_{mk}^\prime=p_{mk}-\eta(e\times q_{nk}\times w_{ck} + \beta \times p_{mk}), \\
+&{\mu_n}^\prime=\mu_n-\eta(e+\beta\mu_n),   &q_{nk}^\prime=q_{nk}-\eta(e\times p_{mk}\times w_{ck} + \beta \times q_{nk}), \\
+&{\mu_c}^\prime=\mu_c-\eta(e+\beta\mu_c),   &w_{ck}^\prime=w_{ck}-\eta(e\times p_{mk}\times q_{nk} + \beta \times w_{ck}). \\
 \end{aligned}
 \end{equation*}
 where $e=\hat{t}_{mnc}-t_{mnc}$. After a round of updating, we then update the model according to temporal regularization:

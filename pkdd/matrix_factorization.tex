@@ -78,10 +78,10 @@ Given the distance (or any kind of `closeness' measure) between sensors, we can 
 possible spatial correlation.
 The objective function ($\gamma_s$ controls the strength of the regularization) then becomes: 
 \begin{equation*}\small \begin{aligned}
-\frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
-&+ \frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}) \\
-&+ \frac{\gamma}{2} \sum_m{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}\\
-&+ \frac{\gamma_s}{2} \sum\limits_{\substack{n_i, n_j \\ \text{neighbors}}}{((\mu_{n_i}-\mu_{n_j})^2 + ||\mathbf{p}_{n_i}-\mathbf{p}_{n_j}||^2)}.
+&\frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
++\frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}) \\
++&\frac{\gamma}{2} \sum_m{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}
++\frac{\gamma_s}{2} \sum\limits_{\substack{n_i, n_j \\ \text{neighbors}}}{((\mu_{n_i}-\mu_{n_j})^2 + ||\mathbf{p}_{n_i}-\mathbf{p}_{n_j}||^2)}.
 \end{aligned}\end{equation*}
 We call this Spatio-Temporal-Regularized Matrix Factorization (STR-MF). 
 Users should exploit spatial regularization with care, however, as our experimental study will show 
@@ -98,19 +98,23 @@ Focused on one observed reading $r_{mn}$ with the following objective function
 \begin{equation*} \small \frac{1}{2}(r_{mn} - \hat{r}_{mn})^2
 + \frac{\beta}{2}(\mu_m^2 + ||\mathbf{p}_m||^2 + \mu_n^2 + ||\mathbf{q}_n||^2).\end{equation*}
 
-It is not hard to derive the TR-MF update equations ($\eta$ controls the learning rate) as \\
+It is not hard to derive the TR-MF update equations ($\eta$ controls the learning rate) as 
+
 \indent	$ \begin{cases} 
 	\mu_m' = \mu_m - \eta ((\hat{r}_{mn}-r_{mn}) + \beta \mu_m) \\
 	\mu_n' = \mu_n - \eta ((\hat{r}_{mn}-r_{mn}) + \beta \mu_n) \\
 	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta ((\hat{r}_{mn}-r_{mn})\mathbf{q}_{n} + \beta \mathbf{p}_{m})\\
 	\mathbf{q}_{n}' = \mathbf{q}_{n} - \eta ((\hat{r}_{mn}-r_{mn})\mathbf{p}_{m} + \beta \mathbf{q}_{n})\\
 	\end{cases} $ \\
+
 For each reading, we update all the $\mu_m$ and $\mathbf{p}_m$. Then after a full scan of all observed readings, 
-we perform temporal regularization by updating all $\mu_m$ and $\mathbf{p}_m$ simultaneously according to the following equations:\\
+we perform temporal regularization by updating all $\mu_m$ and $\mathbf{p}_m$ simultaneously according to the following equations:
+
 \indent $ \begin{cases}
 	\mu_m' = \mu_m - \eta \gamma((\mu_m-\mu_{m-1})+(\mu_m-\mu_{m+1}))\\
 	\mathbf{p}_{m}' = \mathbf{p}_{m} - \eta \gamma((\mathbf{p}_{m}-\mathbf{p}_{m-1})+(\mathbf{p}_{m}-\mathbf{p}_{m+1}))\\
 	\end{cases} $\\
+
 The updating procedure is summarized in Procedure~\ref{alg:STRMF}. Note that we propose to avoid updating the temporal regularization with the update of each reading, because doing so can bias the model toward the time steps that possess fewer missing readings, which contradicts the goal of data imputation. 
 
 \begin{algorithm}[thb]
