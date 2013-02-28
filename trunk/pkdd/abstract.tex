@@ -2,14 +2,14 @@
 
 Datasets gathered from sensor networks often suffer from a significant fraction of missing data, due to issues such as 
 communication interference, sensor interference, power depletion, and hardware failure. 
-Many standard data analysis tools such as classification engines, time-sequence pattern analysis modules, and even statistical 
+Many standard data analysis tools such as classification engines, time-sequence pattern analysis modules, and statistical 
 tools are ill-equipped to deal with missing values---hence, there is a vital need for highly-accurate techniques for imputing
 missing readings prior to analysis.
 
 In this paper, we present novel imputation methods that take a ``Recommendation Systems'' view of the problem: 
 the sensors and their readings at each time step are viewed as products and user product ratings, with the goal of estimating the missing ratings.
 Sensor readings differ from product ratings, however, in that the former exhibit high correlation in both time and space.
-For example, readings in adjacent time steps are usually similar.
+%For example, readings in adjacent time steps are usually similar.
 To incorporate this property, we modify the widely successful Matrix Factorization (MF) approach for recommendation systems to model inter-sensor and intra-sensor correlations and learn latent relationships among these dimensions.
 We evaluate the approach using two environmental sensor network datasets, one indoor and one outdoor, and
 two imputation scenarios, corresponding to intermittent readings and failed sensors.
@@ -22,11 +22,11 @@ two imputation scenarios, corresponding to intermittent readings and failed sens
 
 Next, we consider sensor networks with multiple sensor types at each node.  We present two techniques for extending our model to account for possible correlations among sensor types (e.g., temperature and
 humidity). Our results show that both techniques 
-can significantly improve the accuracy.% over TR-MF, and each has its strengths, depending on the observed variance in the readings.
+can significantly improve the imputation quality.% over TR-MF, and each has its strengths, depending on the observed variance in the readings.
 
 Finally, we study how the imputed values affect the result of data analysis.
 We consider a popular data analysis task---building regression-based prediction models---and show that,
-compared to prior approaches for imputation, using our model leads to a much higher quality prediction model.
+compared to prior approaches for imputation, our model leads to a much higher quality prediction model.
 
 \end{abstract}
 
