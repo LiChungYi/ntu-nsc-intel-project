@@ -23,7 +23,7 @@ that lead to data loss.  Datasets gathered from sensor networks\footnote{We cons
  are
 often missing a significant fraction of the possible readings
 (e.g., the Intel Berkeley Research lab dataset~\cite{berkeley2004lab}
-is missing roughly 50\% of its readings).
+is missing roughly 50\%).
 These missing values are problematic for data analysis tools such as
 classification engines, time-sequence pattern analysis modules, and
 other machine learning tasks, which are often ill-equipped to deal
@@ -37,10 +37,13 @@ preprocessing step, because the core algorithms require that all data be filled
 in.  Typical options are (i) remove the entire ``column'' if there is a
 missing value or (ii) fill in the missing value (called {\em
 imputation}) using either simple defaults like the average of
-neighboring values or utilizing user-written code.  The first option discards
+neighboring values or utilizing user-written code.  
+The first option discards
 otherwise useful data, and in fact, may discard most of the columns in
-datasets with high data loss.  Thus, imputation is a vital tool in the
-preparation of sensor data for subsequent analysis. Because the
+datasets with high data loss.  
+Thus, imputation is a vital tool in the
+preparation of sensor data for subsequent analysis. 
+Because the
 accuracy of the target data analysis depends on the accuracy of the
 imputation, improvements in sensor data imputation better serve
 sensor network deployment objectives.
@@ -70,7 +73,7 @@ sensor network deployment objectives.
 \vspace{-0.1in}
 \end{figure}
 
-Unlike prior work~\cite{Granger:lastseen, le2005estimating, 
+Unlike prior work in sensor data imputation~\cite{Granger:lastseen, le2005estimating, 
 Gruenwald:FARM, li2008data, yuan2000multiple, Jian-Zhong:STI, pan2010k,
 osborne2012real, beckers2003eof, kondrashov2006spatio}, this paper presents a {\em Collaborative Filtering} (CF) 
 approach to sensor data imputation, inspired by the field of Recommendation
@@ -82,9 +85,11 @@ are missing, and the goal is to predict (impute) the missing ratings
 in order to ``recommend'' items to users.  By viewing sensors as
 items, users as time steps, and readings as ratings (as illustrated in
 Figure~\ref{recommend_imputation}), we can apply CF
-techniques to perform sensor data imputation. (Alternatively, sensors
-can be viewed as users and items as time steps---the mapping is
-irrelevant to the CF formulation.)  In particular, we focus on the
+techniques to perform sensor data imputation. 
+%(Alternatively, sensors
+%can be viewed as users and items as time steps---the mapping is
+%irrelevant to the CF formulation.)  
+In particular, we focus on the
 widely successful {\em Matrix Factorization} (MF) technique for CF.
 
 Sensor readings differ from user ratings, however, in that the former
@@ -96,7 +101,6 @@ MF---we call this {\em Temporally-Regularized MF} (TR-MF)
 ---to reflect the fact that readings in neighboring time steps are similar.
 Similarly, we can also add spatial-proximity terms---we 
 call this {\em Spatially-Temporally-Regularized} MF (STR-MF).
-
 Second, we consider sensor networks with multiple sensor types at each node.
 We are readily able to exploit such heterogeneous sensor information in our
 solution, in contrast to most prior imputation methods that use more ad hoc means.
@@ -120,7 +124,6 @@ We study two patterns for missing data: (i) covering
 {\em random} readings (modeling intermittent reading failures) and (ii)
 covering {\em consecutive} readings for some sensor nodes
 (modeling long temporal gaps such as with failed sensors).
-
 Our study shows that TR-MF provides significantly higher estimation accuracy than 
 both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor data imputation approaches 
 (discussed in Section~\ref{sec:rw}).
@@ -132,17 +135,17 @@ significantly {\em less} accurate than TR-MF in the ``random''
 pattern.  This is because TR-MF effectively learns the latent
 relationships among sensors from data, including any spatial correlations, while
 avoiding the pitfalls of spatial-proximity biases (Section~\ref{subsec:sm}).
-
 For the heterogeneous setting, our study shows that both
 Multivariate-TR-MF and TR-TF can significantly improve the accuracy over TR-MF,
 and each has its strengths, depending on the observed variance in the
 readings.  Finally, we consider a popular data analysis task---building regression-based prediction models---and show that,
 compared to prior approaches for imputation, using TR-MF leads to a much higher quality prediction model.
 
-These results validate our novel approach of equating sensor imputation with recommendation systems.  
+%These results validate our novel approach of equating sensor imputation with recommendation systems.  
 %CF approaches such as Matrix Factorization and Tensor Factorization are adept at handling scenarios 
 %with large numbers of missing values.
-Correlations are captured by grouping correlated sensor nodes and correlated time
+Here we proposed a data-driven imputation model that
+correlations are captured by grouping correlated sensor nodes and correlated time
 steps---unlike prior sensor data imputation approaches, our CF
 approaches use this {\em latent} information to impute values, and optimize the evaluation metrics directly. 
 Moreover, our CF approaches are global, taking into account all
@@ -171,13 +174,16 @@ correlations.
 
 In summary, the main contributions of this paper are:
 \begin{itemize}
-\item We propose viewing sensor data imputation as a recommendation systems problem, and apply state-of-the-art collaborative filtering methods of recommendation systems (namely, matrix and tensor factorization) to the sensor network domain.
+\item We propose viewing sensor data imputation as a recommendation problem, and modify state-of-the-art CF methods of recommendation systems as the solution. 
 \item We augment collaborative filtering with temporal regularization and multi-sensor signals, and provide efficient optimization methods to learn the inherent model parameters effectively.
 \item We present an empirical study on two sensor datasets, considering two
 missing data patterns corresponding to intermittent readings and failed
-sensors. The results show that our proposed approaches provide
-significantly higher estimation accuracy than state-of-the-art prior
-approaches, and moreover, such accuracy improvements can result in the
+sensors. The results show 
+superior estimation accuracy,
+%that our proposed approaches provide
+%significantly higher estimation accuracy than state-of-the-art prior
+%approaches, 
+and moreover, such accuracy improvements can result in the
 generation of higher-quality prediction models.
 \end{itemize}
 
