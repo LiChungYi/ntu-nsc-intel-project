@@ -1,5 +1,23 @@
 \section{Related Work}\label{sec:rw}
 
+
+\begin{table}[h]
+\vspace{-0.7cm}
+\caption{Sensor Data Imputation Methods}
+\label{tbl:methods}
+\centering
+{\small
+\begin{tabular}{|l|l|l|} \hline
+   &{\bf Hot-Deck Imputation}&{\bf Prediction Models}\\ \hline
+{\bf Temporal} & Last-seen~\cite{Granger:lastseen}, Mean & Linear Interpolation\\ \hline
+{\bf Spatial} & WARM~\cite{le2005estimating}, FARM~\cite{Gruenwald:FARM} & DEPM~\cite{li2008data}, MI~\cite{yuan2000multiple}\\\hline
+{\bf Spatio-} & STI~\cite{Jian-Zhong:STI} & DESM~\cite{li2008data}, ImM~\cite{Lim:robust}, AKE~\cite{pan2010k},\\
+{\bf Temporal} && BGP~\cite{osborne2012real}, EOF~\cite{beckers2003eof, kondrashov2006spatio}\\
+ \hline \end{tabular}
+}
+\vspace{-0.1in}
+\end{table}
+
 Imputation techniques applied to sensor data can be divided into three categories by the information utilized:
 temporal methods, spatial methods, 
 % (i.e., estimation using the observations from the target sensor at nearby time steps), 
@@ -32,21 +50,6 @@ becomes large.
 
 % (i.e., as can happen when intermittent communications starvation occurs in large WSNs).  
 
-\begin{table}
-\caption{Sensor Data Imputation Methods}
-\label{tbl:methods}
-\centering
-{\small
-\begin{tabular}{|l|l|l|} \hline
-   &{\bf Hot-Deck Imputation}&{\bf Prediction Models}\\ \hline
-{\bf Temporal} & Last-seen~\cite{Granger:lastseen}, Mean & Linear Interpolation\\ \hline
-{\bf Spatial} & WARM~\cite{le2005estimating}, FARM~\cite{Gruenwald:FARM} & DEPM~\cite{li2008data}, MI~\cite{yuan2000multiple}\\\hline
-{\bf Spatio-} & STI~\cite{Jian-Zhong:STI} & DESM~\cite{li2008data}, ImM~\cite{Lim:robust}, AKE~\cite{pan2010k},\\
-{\bf Temporal} && BGP~\cite{osborne2012real}, EOF~\cite{beckers2003eof, kondrashov2006spatio}\\
- \hline \end{tabular}
-}
-\vspace{-0.1in}
-\end{table}
 
 \subsection{Spatial Methods}\label{subsec:sm}
 {\em Spatial methods} leverage the spatial correlation among readings
@@ -57,9 +60,7 @@ FARM~\cite{Gruenwald:FARM})
 and weighted functions of nearby sensors (e.g., DEPM~\cite{li2008data}
 %K-NN\cite{pan2010k}, 
 and MI~\cite{yuan2000multiple}).
-
 %Researchers also propose predicting missing values based on data mining techniques. 
-
 Window Association Rule Mining (WARM)~\cite{le2005estimating} and Freshness Association Rule Mining (FARM)~\cite{Gruenwald:FARM} study the estimation of missing data based on the association rules among spatially-correlated neighbors. 
 Such methods enjoy the advantage of being able to handle categorical sensor data, but the 
 estimation quality is limited in continuous sensor data by the association rules' requirement to 
@@ -69,7 +70,6 @@ first quantize the data.
 %Moreover, the support, confidence of the mined rules need to be predefined by the users which can cause difficulties for building a satisfying model by users without profound knowledge about the environment of deployment. 
 %\subsubsection{K-Nearest Neighbours Imputation} 
 %  The two major drawbacks of KNN-based model that predicts only from the spatial correlation are: first of all,  they cannot capture temporal correlation, and the second reason is that most of these methods rely on the knowledge of distance between each sensor, which might not be available or accurate in the real world.
-
 The Data Estimation using Physical Model (DEPM)~\cite{li2008data} method employs the basic laws of physics to 
 design its prediction function. %as,  
 %%\begin{equation}
@@ -79,7 +79,6 @@ design its prediction function. %as,
 %where $I_k$ is the intensity of the target sensor value, $j$ represents the neighbor sensors, and P stands for the power radiated from one source to another. 
 However, such models are applicable only to limited types of signals and environments, and generally require 
 an accurate three-dimensional distance among sensors.
-
 The Multi-Im (MI) method~\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values.
 %instead of filling in a single value. 
 Methods used in MI for plausible values include multiple linear regression, propensity score method, and 
@@ -196,8 +195,9 @@ The Applying K-nearest neighbor Estimation (AKE) method~\cite{pan2010k}
 adopts linear regression models to describe the spatial relationship among
 each pair of sensor nodes. The prediction of a target node is the
 weighted combination of the regression models from its K-nearest neighbors. If
-there is not enough spatial information to be exploited, AKE will use
-temporal information to help.
+If no enough spatial information, AKE incorporates temporal information.
+%there is not enough spatial information to be exploited, AKE will use
+%temporal information to help.
 
 %\begin{center}
 %$y_{it} = \alpha + \beta\cdot y_{jt} + \mu_{jt} $,
@@ -237,8 +237,10 @@ knowledge.
 The above methods suffer from making unverified assumptions about the
 data. For example, some models favor spatial correlation over temporal
 correlation (or vice versa), while some assume that sensors of the
-same distance should have a similar correlation regardless of their
-orientation or other factors.  Such assumptions may or may not hold
+same distance should have a similar correlation.
+%regardless of their
+%orientation or other factors. 
+Such assumptions may or may not hold
 for various datasets, and hence imposing them a priori can lead to
 inaccurate results.  The models we propose, however, try to rely less
 on such a priori knowledge, and learn the latent correlation directly
@@ -252,14 +254,11 @@ one needs to somehow first fill in the missing values before
 conducting such decomposition.  The initial assignment of those
 missing values, unfortunately, can significantly affect the prediction
 accuracy~\cite{koren2009matrix}.  Furthermore, SVD is computationally
-expensive in general.  In contrast, our approach relies on the
-factorization process on an incomplete matrix.
-
+expensive in general.  
 %SVD is widely used as a dimension reduction technique.
 %It decomposes a fully observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrices~$\mathbf{U}$ and~$\mathbf{V}$ such that
 %$\mathbf{R} = \mathbf{U}\mathbf{D}\mathbf{V}^T.$
 %The largest $K$ singular values and vectors, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm.
-
 A salient example of SVD-based approaches for imputation is the Empirical Orthogonal Functions
 (EOF) model, which has been applied to oceanographic applications to
 solve the problem of missing or unreliable satellite
@@ -278,8 +277,6 @@ Moreover, our study shows that the improved EOF is still less accurate than our 
 % The other modification:
 % Singular vectors are taken out one at a time => make the determination of $K$ easier.
 
-To the best of our knowledge, ours is the first paper to propose applying
-matrix factorization techniques to sensor data imputation.
 
 %In the field of Collaborative Filtering, researchers have already pointed out
 %several drawbacks in the SVD-based methods. % when applying to impute missing data. 
