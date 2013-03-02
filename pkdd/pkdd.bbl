@@ -1,0 +1,142 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem{beckers2003eof}
+Beckers, J., Rixen, M.: Eof calculations and data filling from incomplete
+  oceanographic datasets.
+\newblock Journal of Atmospheric and Oceanic Technology  (2003)
+
+\bibitem{berkeley2004lab}
+Bodik, P., Hong, W., Guestrin, C., Madden, S., Paskin, M., Thibaux, R.: Intel
+  berkeley research lab dataset.
+\newblock \url{http://db.csail.mit.edu/labdata/labdata.html} (2004)
+
+\bibitem{buchanan2005damped}
+Buchanan, A., Fitzgibbon, A.: Damped newton algorithms for matrix factorization
+  with missing data.
+\newblock In: CVPR (2005)
+
+\bibitem{carroll1970analysis}
+Carroll, J., Chang, J.: Analysis of individual differences in multidimensional
+  scaling via an n-way generalization of eckart-young decomposition.
+\newblock Psychometrika  (1970)
+
+\bibitem{chen2011linear}
+Chen, P., Tsai, C., Chen, Y., Chou, K., Li, C., Tsai, C., Wu, K., Chou, Y., Li,
+  C., Lin, W., et~al.: A linear ensemble of individual and blended models for
+  music rating prediction.
+\newblock In: KDDCup Workshop (2011)
+
+\bibitem{chih2008large}
+Chih-Chao, M.: Large-scale collaborative filtering algorithms.
+\newblock Master's thesis, National Taiwan University (2008)
+
+\bibitem{deshpande2005}
+Deshpande, A., Guestrin, C., Hong, W., Madden, S.: Exploiting correlated
+  attributes in acquisitional query processing.
+\newblock In: ICDE (2005)
+
+\bibitem{Garcia:KNNreview}
+Garc{\'\i}a-Laencina, P., Sancho-G{\'o}mez, J., Figueiras-Vidal, A., Verleysen,
+  M.: K nearest neighbours with mutual information for simultaneous
+  classification and missing data imputation.
+\newblock Neurocomputing  (2009)
+
+\bibitem{Granger:lastseen}
+Granger, E., Rubin, M., Grossberg, S., Lavoie, P.: Classification of incomplete
+  data using the fuzzy artmap neural network.
+\newblock IJCNN  (2000)
+
+\bibitem{Gruenwald:FARM}
+Gruenwald, L., Chok, H., Aboukhamis, M.: Using data mining to estimate missing
+  sensor data.
+\newblock In: ICDM Workshops (2007)
+
+\bibitem{Jian-Zhong:STI}
+Jian-Zhong, P., Ji-Zhou, L.: A temporal and spatial correlation based missing
+  values imputation algorithm in wireless sensor networks.
+\newblock Chinese J.~of Computers  (2010)
+
+\bibitem{karatzoglou2010multiverse}
+Karatzoglou, A., Amatriain, X., Baltrunas, L., Oliver, N.: Multiverse
+  recommendation: n-dimensional tensor factorization for context-aware
+  collaborative filtering.
+\newblock In: RecSys (2010)
+
+\bibitem{kondrashov2006spatio}
+Kondrashov, D., Ghil, M., et~al.: Spatio-temporal filling of missing points in
+  geophysical data sets.
+\newblock Nonlinear Processes in Geophysics  (2006)
+
+\bibitem{koren2009matrix}
+Koren, Y., Bell, R., Volinsky, C.: Matrix factorization techniques for
+  recommender systems.
+\newblock Computer  (2009)
+
+\bibitem{le2005estimating}
+Le~Gruenwald, M.: Estimating missing values in related sensor data streams.
+\newblock COMAD  (2005)
+
+\bibitem{li2008data}
+Li, Y., Ai, C., Deshmukh, W., Wu, Y.: Data estimation in sensor networks using
+  physical and statistical methodologies.
+\newblock In: ICDCS (2008)
+
+\bibitem{li2008spatial}
+Li, Y., Parker, L.: A spatial-temporal imputation technique for classification
+  with missing data in a wireless sensor network.
+\newblock In: IROS (2008)
+
+\bibitem{Lim:robust}
+Lim, J., Bleakley, C.: Robust data collection and lifetime improvement in
+  wireless sensor networks through data imputation.
+\newblock In: ICSNC (2010)
+
+\bibitem{liu2011developed}
+Liu, J., Chen, Y., Lin, T., Lai, D., Wen, T., Sun, C., Juang, J., Jiang, J.:
+  Developed urban air quality monitoring system based on wireless sensor
+  networks.
+\newblock In: ICST (2011)
+
+\bibitem{madden2005tinydb}
+Madden, S., Franklin, M., Hellerstein, J., Hong, W.: Tinydb: An acquisitional
+  query processing system for sensor networks.
+\newblock TODS  (2005)
+
+\bibitem{okatani2007wiberg}
+Okatani, T., Deguchi, K.: On the wiberg algorithm for matrix factorization in
+  the presence of missing components.
+\newblock IJCV  (2007)
+
+\bibitem{osborne2012real}
+Osborne, M., Roberts, S., Rogers, A., Jennings, N.: Real-time information
+  processing of environmental sensor network data.
+\newblock ACM Trans.~on Sensor Networks  (2012)
+
+\bibitem{pan2010k}
+Pan, L., Li, J.: K-nearest neighbor based missing data estimation algorithm in
+  wireless sensor networks.
+\newblock Wireless Sensor Network  (2010)
+
+\bibitem{tucker1963implications}
+Tucker, L.: Implications of factor analysis of three-way matrices for
+  measurement of change.
+\newblock Problems in measuring change  (1963)
+
+\bibitem{yuan2000multiple}
+Yuan, Y.: Multiple imputation for missing data: concepts and new development
+  (version 9.0).
+\newblock In: 25th SAS{\textregistered} Users Group International Conference
+  (2000)
+
+\bibitem{zhou2008large}
+Zhou, Y., Wilkinson, D., Schreiber, R., Pan, R.: Large-scale parallel
+  collaborative filtering for the netflix prize.
+\newblock AAIM  (2008)
+
+\end{thebibliography}

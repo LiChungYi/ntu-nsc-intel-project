@@ -1,0 +1,117 @@
+\section{Experimental Results}  \label{sec:exp}
+
+We conducted an experimental study comparing the accuracy of our proposed TR-MF, STR-MF, MTR-MF, and TR-TF methods to
+prior state-of-the-art methods.
+
+\subsection{Experimental Setup}
+We performed our study using two datasets: an indoor dataset, the ``Berkeley'' dataset, and an outdoor dataset, the ``Traffic''
+dataset.  For each dataset, we study two patterns for missing data: ``random missing'' and ``consecutive missing.''  This section
+details these datasets and patterns, as well as the parameter settings for our methods.
+We follow the standard evaluation process in machine learning of dividing the data into training, validation, and testing sets.
+
+\subsubsection{Datasets}
+
+\paragraph*{Berkeley Dataset}
+
+The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature, humidity, light, and voltage for 54 sensors (with one sensor completely missing) in an indoor lab environment
+from February 28th and April 5th, 2004.  Sensor locations are shown in Figure \ref{berkeley_lab}.
+The dataset includes 2.3M sensor observations, with over 210K samples along the temporal dimension.
+Because the completeness of data degrades after 10000 samples, in our experiments only the first 2500, 5000, or 10000 samples were used.
+We found the relative performance of the compared methods to be similar in these three cases; thus, we report only results from 
+5000 samples.  The inherent missing rate (i.e., before we introduce our missing value patterns) for these first 5000 samples is roughly 49\%.
+
+
+\paragraph*{Traffic Dataset}
+
+The Traffic Dataset~\cite{liu2011developed} records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
+This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan (see Figure~\ref{fig:traffic}).
+The sampling rate is roughly once every 30 minutes.
+Along the temporal dimension, we use the entire range which consists of roughly 43K time stamps.
+The inherent missing rate is roughly 58\%.
+
+
+%This dataset only reveals 8 
+
+Note that for both Berkeley and Traffic datasets, simple preprocessing rules were applied to remove apparent outliers.
+In the Berkeley dataset, observations are removed if temperature \mbox{$>100\degC$}, temperature \mbox{$<5\degC$}, or humidity \mbox{$<16\%$}.
+In the Traffic dataset, observations are removed if temperature \mbox{$>60\degC$}, temperature \mbox{$<5\degC$}, humidity \mbox{$>100\%$} or humidity \mbox{$<10\%$}.
+
+
+
+%\vspace{-0.1in}
+\begin{figure}[h]
+\caption{Sensor Configuration}
+%\vspace{0.3cm}
+\hspace{0.4cm}
+\subfigcapmargin = -0.3cm
+\subfigure[\hbox{Intel Berkeley Research Lab Floorplan}]{
+	\label{berkeley_lab}
+	\includegraphics[height=3cm]{berkeley_lab.png}
+}
+\hspace{0.5cm}
+\subfigure[\hbox{Traffic Sensor Deployment Map} \hbox{\hspace{0.5cm}(8 sensors of 20 shown)}]{
+	\label{fig:traffic}
+	\includegraphics[height=3cm]{traffic_wsn.png}
+}
+%\vspace{-0.3cm}
+\end{figure}
+
+%\vspace{-0.5cm}
+
+
+%\subsubsection{Dataset Preparation}
+
+%\paragraph{Berkeley Dataset Outlier Removal and Gridding}
+
+%Gridding : Dataset falls on even 30s intervals for the first 5000 time steps (which is all we consider), so no additional gridding need be performed.
+%Outlier Filtering : We use some simple rules to removed apparent errors. Observation removed if temperature \mbox{$>100\degc$}, temperature \mbox{$<5\degc$}, or humidity \mbox{$<16\%$}.
+
+%\paragraph*{Traffic Dataset Outlier Removal and Gridding}
+
+
+%Gridding : The original dataset recorded most readings at around the $xx:03$ and $xx:33$ minute marks, so a $6$ min window centered at these points captured the data for $30$ minute internal readings. Where more than one reading was recorded for a given node within a given window, the closest to the $3$ or $33$ minute mark was chosen. The full length of the dataset was used, which consists of $\approx 43$K 
+
+%Outlier Filtering : Observation removed if temperature \mbox{$<5\degc$} or \mbox{$>60\degc$} or if humidity \mbox{$<10\%$} or \mbox{$>100\%$}.
+\subsubsection{Missing Data Generation}
+
+%Datasets of various lengths are produced from the single input dataset for our experiments, namely 2500, 5000, and 10000.
+%There is an initially missing portion of the observations which can be considered Missing At Random (MAR).To this, we impose two different types of Missing Completely At Random (MCAR) sampling techniques to build validation and testing datasets.
+
+Although both datasets intrinsically have missing readings, we cannot use those for evaluation because their true values are unknown.
+Instead we devised two strategies to produce artificial missing data.
+\paragraph*{Random Missing Pattern}
+This pattern reflects repeatedly choosing a random time and random sensor to be missing and hence removed from the training set.
+%
+We define two variables $x$ and $y$ during our experiment, and the X-axis of the resulting plot varies with $x$.
+\begin{itemize}
+\item $10\%$ of the existing readings are randomly selected (without replacement) to be the validation set
+\item $y\%$ of the existing readings are randomly selected (without replacement) to be the testing set
+\item The remaining readings (x\%) are part of the training set. That is, x+y+10=100 that accounts for all the observed readings.
+\end{itemize}
+
+\paragraph*{Consecutive Missing Pattern}
+This pattern reflects testing the effect of all data missing after a certain point in time.
+We define two values $x$ and $y$ as follows.
+\begin{itemize}
+\item Here, we have the last $y\%$ of time covered as missing, and the prior $10\%$ to that is considered as the validation data.
+\item The sensor node numbers ``covered up'' in the validation and testing for the Berkeley and Traffic datasets are ${4,19,45}$ and ${2,4,6,8,10,14,17,19,20,21}$, respectively.
+Note that node $21$ of the Traffic dataset is the gateway node.
+We experimented with other combinations of covered up nodes, and the results were similar.
+\end{itemize}
+
+\subsubsection{Parameter Setting}
+
+We exploit the commonly used metric of root-mean-square-error (RMSE)
+to measure the difference between the predicted values and the ground
+truth, and all parameters in our models and competitors' models are
+carefully optimized using the validation set.
+
+Here are the resulting parameter values for our models.
+The number of factors $K$ is $54$ for MF and $30$ for TF for the Berkeley dataset, and $21$ for MF and $10$ for TF for the Traffic dataset. 
+The learning rate $\eta$ is set to $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF.
+A smaller~$\eta$ or a larger~$K$ could slow down the training process, but it would not degrade 
+the model.
+Also, a reasonable choice of $K$ should not be larger than the number of sensor nodes since the rank of the matrix is at most $K$.
+The temporal regularization $\gamma$ is set to $0.2/\eta$ in all of our experiments.
+The conventional regularization $\beta$ is $0.001$ for consecutive missing and $0$ for random missing in MF, 
+while in TF, $\beta$ is $0.005$ for consecutive missing and $0.001$ for random missing.
