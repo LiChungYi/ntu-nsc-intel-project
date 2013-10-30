@@ -81,7 +81,7 @@ The objective function ($\gamma_s$ controls the strength of the regularization) 
 &\frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
 +\frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}) \\
 +&\frac{\gamma}{2} \sum_m{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}
-+\frac{\gamma_s}{2} \sum\limits_{\substack{n_i, n_j \\ \text{neighbors}}}{((\mu_{n_i}-\mu_{n_j})^2 + ||\mathbf{p}_{n_i}-\mathbf{p}_{n_j}||^2)}.
++\frac{\gamma_s}{2} \sum\limits_{\substack{n_i, n_j \\ \text{neighbors}}}{((\mu_{n_i}-\mu_{n_j})^2 + ||\mathbf{q}_{n_i}-\mathbf{q}_{n_j}||^2)}.
 \end{aligned}\end{equation*}
 We call this Spatio-Temporal-Regularized Matrix Factorization (STR-MF). 
 Users should exploit spatial regularization with care, however, as our experimental study will show 
