@@ -27,9 +27,9 @@ is missing roughly 50\%).
 These missing values are problematic for data analysis tools such as
 classification engines, time-sequence pattern analysis modules, and
 other machine learning tasks, which are often ill-equipped to deal
-with missing values.  Support Vector Machine (SVM)
+with missing values.  Support vector machine (SVM)
 %~\cite{vapnik2000nature} 
-and Multiple Regression (MR) analysis,
+and multiple regression (MR) analysis,
 to name but a few examples, require complete datasets with no missing
 values.  Popular statistical packages such as SAS, Stata, and R
 provide a few default options for handling missing data, as a
@@ -75,22 +75,22 @@ sensor network deployment objectives.
 
 Unlike prior work in sensor data imputation~\cite{Granger:lastseen, le2005estimating, 
 Gruenwald:FARM, li2008data, yuan2000multiple, Jian-Zhong:STI, pan2010k,
-osborne2012real, beckers2003eof, kondrashov2006spatio}, this paper presents a {\em Collaborative Filtering} (CF) 
-approach to sensor data imputation, inspired by the field of Recommendation
-Systems.  In typical CF approaches, the elements of interest are users
+osborne2012real, beckers2003eof, kondrashov2006spatio}, this paper presents a {\em collaborative filtering} (CF) 
+approach to sensor data imputation, inspired by the field of recommendation
+systems.  In typical collaborative filtering approaches, the elements of interest are users
 and items (e.g., products), and the values are user ratings of those
 items (as in the left-hand side of
 Figure~\ref{recommend_imputation}).  Typically, most of the ratings
 are missing, and the goal is to predict (impute) the missing ratings
 in order to ``recommend'' items to users.  By viewing sensors as
 items, users as time steps, and readings as ratings (as illustrated in
-Figure~\ref{recommend_imputation}), we can apply CF
+Figure~\ref{recommend_imputation}), we can apply collaborative filtering
 techniques to perform sensor data imputation. 
 %(Alternatively, sensors
 %can be viewed as users and items as time steps---the mapping is
 %irrelevant to the CF formulation.)  
 In particular, we focus on the
-widely successful {\em Matrix Factorization} (MF) technique for CF.
+widely successful {\em matrix factorization} (MF) technique for collaborative filtering.
 
 Sensor readings differ from user ratings, however, in that the former
 often exhibit high correlation in both time and space.
@@ -146,9 +146,9 @@ compared to prior approaches for imputation, using TR-MF leads to a much higher 
 %with large numbers of missing values.
 Here we proposed a data-driven imputation model that
 correlations are captured by grouping correlated sensor nodes and correlated time
-steps---unlike prior sensor data imputation approaches, our CF
+steps---unlike prior sensor data imputation approaches, our collaborative filtering
 approaches use this {\em latent} information to impute values, and optimize the evaluation metrics directly. 
-Moreover, our CF approaches are global, taking into account all
+Moreover, our collaborative filtering approaches are global, taking into account all
 collected observations, and not overly tied to spatial-proximity
 correlations.  
 %For example, they can capture the correlations between
@@ -174,7 +174,7 @@ correlations.
 
 In summary, the main contributions of this paper are:
 \begin{itemize}
-\item We propose viewing sensor data imputation as a recommendation problem, and modify state-of-the-art CF methods of recommendation systems as the solution. 
+\item We propose viewing sensor data imputation as a recommendation problem, and modify state-of-the-art collaborative filtering methods of recommendation systems as the solution. 
 \item We augment collaborative filtering with temporal regularization and multi-sensor signals, and provide efficient optimization methods to learn the inherent model parameters effectively.
 \item We present an empirical study on two sensor datasets, considering two
 missing data patterns corresponding to intermittent readings and failed

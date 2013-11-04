@@ -2,7 +2,7 @@
 
 % need update and to be consistent with related work, need to add the Netflix and our KDD2011 papers to support MF
 
-Matrix Factorization (MF) is arguably the most successful Collaborative Filtering~(CF) technique in the area of Recommendation Systems~\cite{koren2009matrix, chen2011linear}. Compared with other recommendation models such as regression-based prediction models, graph-based random walk models, or simple statistical models, the MF model possesses the advantages of being more accurate and more scalable to data size.
+Matrix Factorization (MF) is arguably the most successful Collaborative Filtering~(CF) technique in the area of recommendation systems~\cite{koren2009matrix, chen2011linear}. Compared with other recommendation models such as regression-based prediction models, graph-based random walk models, or simple statistical models, the MF model possesses the advantages of being more accurate and more scalable to data size.
 A key feature of MF models is its capability to learn {\em latent} factors from {\em relatively sparse} observations, and to leverage these factors to impute the missing elements in the matrix.
 In the following, we will first introduce the fundamentals of the MF methodology, present our novel sensor-data-specific 
 modifications to the MF objective function, and finally provide the complete training procedure of the proposed method.
@@ -39,11 +39,13 @@ After adding the regularization term to constrain the scale of latent factors, t
 \end{aligned}\end{equation*}
 where $\mathbf{p}_m$ are the row factors of $\mathbf{P}$ (for time $m$), and $\mathbf{q}_n$ are the column factors of $\mathbf{Q}$ (for sensor node $n$) respectively.
 $\beta$ is the parameter that controls the strength of regularization.
+Matrix factorization also has a nice interpretation as a probabilistic graphical model~\cite{mnih2007probabilistic}.
+
 
 \subsection{Temporally-Regularized Matrix Factorization (TR-MF)}
 
-Although we map the sensor data imputation task to a CF-based recommendation task, there are indeed some major differences in the properties of the data.
-Normal CF or MF models assume no ordering on the users (i.e., temporal dimension). That is, we can randomly swap the rows in the matrix without affected the factorization outcome. However, such independence does not exist in sensor data as a 
+Although we map the sensor data imputation task to a collaborative-filtering-based recommendation task, there are indeed some major differences in the properties of the data.
+Normal collaborative filtering models assume no ordering on the users (i.e., temporal dimension). That is, we can randomly swap the rows in the matrix without affected the factorization outcome. However, such independence does not exist in sensor data as a 
 sensor's signal in time $t$ is highly dependent on that of time $t-1$. In other words, an ideal model should consider such ordering dependency, and under such a model reordering the
 rows would significantly affect the outcome of factorization.
 
