@@ -144,7 +144,7 @@ For STR-MF, we can update all $\mu_n$ and $\mathbf{q_n}$ simultaneously as:\\
 	\end{cases}$\\
 where $n_i$ and $n_j$ are a pair of neighboring sensor nodes.
 
-\paragraph*{Data Normalization}
+\paragraph*{Data Normalization} ~
 Unlike the ratings in recommendation systems that are normally within a certain range (e.g., 1 to 5 stars), readings from WSNs are real-valued (rounded to a desired level of precision), and the range may vary with the sensors.
 Here we propose to normalize the training set to zero mean and unit variance before conducting MF learning, and once the missing values are produced by our model, we need to rescale the values to the original mean and variance.
 Although this procedure does not change the quality of outcomes theoretically, in practice we do find some benefits: 
@@ -160,13 +160,13 @@ Second, normalization forces different datasets to look similar, which simplifie
 %The parameters in our model are conventional regularization~$\beta$, temporal regularization~$\gamma$, learning rate~$\eta$, number of factors~$K$.
 %A too small~$\eta$ or a too large~$K$ can slow down the training process, but it won't degrade the model.
 
-\paragraph*{Stopping Criterion}
+\paragraph*{Stopping Criterion} ~
 In addition to the training dataset used to learn the TR-MF (or STR-MF) model, we use a validation 
 dataset to determine the model parameters and when to cease updating the model. 
 More specifically, the training stops when the validation error fails to decrease for a certain 
 amount of iterations ($500$ in our experiments). 
 
-\paragraph*{Time Complexity}
+\paragraph*{Time Complexity} ~
 While training TR-MF, the time required for each update is $\Theta(KN)$, where $K$ is the number 
 of factors ($\leq 54$ in our experiments) and $N$ is the number of observed readings.
 % and $R$ is the number of temporal and spatial regularization terms.
