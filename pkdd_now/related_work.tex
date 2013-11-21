@@ -61,7 +61,7 @@ and weighted functions of nearby sensors (e.g., DEPM~\cite{li2008data}
 %K-NN\cite{pan2010k}, 
 and MI~\cite{yuan2000multiple}).
 %Researchers also propose predicting missing values based on data mining techniques. 
-Window Association Rule Mining (WARM)~\cite{le2005estimating} and Freshness Association Rule Mining (FARM)~\cite{Gruenwald:FARM} study the estimation of missing data based on the association rules among spatially-correlated neighbors. 
+Window association rule mining (WARM)~\cite{le2005estimating} and freshness association rule mining (FARM)~\cite{Gruenwald:FARM} study the estimation of missing data based on the association rules among spatially-correlated neighbors. 
 Such methods enjoy the advantage of being able to handle categorical sensor data, but the 
 estimation quality is limited in continuous sensor data by the association rules' requirement to 
 first quantize the data.
@@ -70,7 +70,7 @@ first quantize the data.
 %Moreover, the support, confidence of the mined rules need to be predefined by the users which can cause difficulties for building a satisfying model by users without profound knowledge about the environment of deployment. 
 %\subsubsection{K-Nearest Neighbours Imputation} 
 %  The two major drawbacks of KNN-based model that predicts only from the spatial correlation are: first of all,  they cannot capture temporal correlation, and the second reason is that most of these methods rely on the knowledge of distance between each sensor, which might not be available or accurate in the real world.
-The Data Estimation using Physical Model (DEPM)~\cite{li2008data} method employs the basic laws of physics to 
+The data estimation using physical model (DEPM)~\cite{li2008data} method employs the basic laws of physics to 
 design its prediction function. %as,  
 %%\begin{equation}
 %$I_K =\sum_{j=1}^M\frac{P_j}{4\pi d^2(I_j,s_k)}$
@@ -79,7 +79,7 @@ design its prediction function. %as,
 %where $I_k$ is the intensity of the target sensor value, $j$ represents the neighbor sensors, and P stands for the power radiated from one source to another. 
 However, such models are applicable only to limited types of signals and environments, and generally require 
 an accurate three-dimensional distance among sensors.
-The Multi-Im (MI) method~\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values.
+The multiple imputation (MI) method~\cite{yuan2000multiple} imputes the missing data by replacing each missing value with a set of plausible values.
 %instead of filling in a single value. 
 Methods used in MI for plausible values include multiple linear regression, propensity score method, and 
 Markov chain Monte Carlo method.
@@ -146,17 +146,17 @@ AKE~\cite{pan2010k}, BGP~\cite{osborne2012real}, and EOF~\cite{beckers2003eof, k
 %imputation, but can suffer from the spatial correlation issues
 %discussed above.
 
-The Spatial and Temporal Imputation (STI) method~\cite{li2008spatial}
+The spatial and temporal imputation (STI) method~\cite{li2008spatial}
 favors spatial information over temporal information.  For each
 missing reading, STI first checks if any nodes are within the sensing
 neighborhood (i.e., within a threshold distance), and utilizes the average of these neighbors to impute the
 missing value. If no sensors are within the neighborhood, the last
 seen value of the missing sensor is used for imputation.
-In Data Estimation using Statistical Model (DESM)~\cite{li2008data}, a
+In data estimation using statistical model (DESM)~\cite{li2008data}, a
 missing reading is predicted using the linear combination of the
 previous reading of the sensor and the current reading of the
 neighboring sensor, weighted by the Pearson correlation between the
-two sensors.  The Imputation Method (ImM)~\cite{Lim:robust} learns to combine two temporal predictors 
+two sensors.  The imputation method proposed in \cite{Lim:robust}~(ImM) learns to combine two temporal predictors 
 (the last-seen predictor and an autocorrelation-based temporal linear predictor) and one spatial 
 linear predictor.
 
