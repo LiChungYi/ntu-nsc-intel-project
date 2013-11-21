@@ -11,7 +11,7 @@ We follow the standard evaluation process in machine learning of dividing the da
 
 \subsubsection{Datasets}
 
-\paragraph*{Berkeley Dataset}
+\paragraph*{Berkeley Dataset} ~
 
 The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature, humidity, light, and voltage for 54 sensors (with one sensor completely missing) in an indoor lab environment
 from February 28th and April 5th, 2004.  Sensor locations are shown in Figure \ref{berkeley_lab}.
@@ -21,7 +21,7 @@ We found the relative performance of the compared methods to be similar in these
 5000 samples.  The inherent missing rate (i.e., before we introduce our missing value patterns) for these first 5000 samples is roughly 49\%.
 
 
-\paragraph*{Traffic Dataset}
+\paragraph*{Traffic Dataset} ~
 
 The Traffic Dataset~\cite{liu2011developed} records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
 This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan (see Figure~\ref{fig:traffic}).
@@ -79,7 +79,7 @@ In the Traffic dataset, observations are removed if temperature \mbox{$>60\degC$
 
 Although both datasets intrinsically have missing readings, we cannot use those for evaluation because their true values are unknown.
 Instead we devised two strategies to produce artificial missing data.
-\paragraph*{Random Missing Pattern}
+\paragraph*{Random Missing Pattern} ~
 This pattern reflects repeatedly choosing a random time and random sensor to be missing and hence removed from the training set.
 %
 We define two variables $x$ and $y$ during our experiment, and the X-axis of the resulting plot varies with $x$.
@@ -89,7 +89,7 @@ We define two variables $x$ and $y$ during our experiment, and the X-axis of the
 \item The remaining readings (x\%) are part of the training set. That is, x+y+10=100 that accounts for all the observed readings.
 \end{itemize}
 
-\paragraph*{Consecutive Missing Pattern}
+\paragraph*{Consecutive Missing Pattern} ~
 This pattern reflects testing the effect of all data missing after a certain point in time.
 We define two values $x$ and $y$ as follows.
 \begin{itemize}
