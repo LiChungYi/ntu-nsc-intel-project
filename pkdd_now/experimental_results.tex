@@ -138,7 +138,7 @@ to predict the {\em temperature} values of the gateway.
 In the experiment, we first remove the gateway signal from the matrix, and use TR-MF as well as the other competitive models (including LI and AKE) to fill in all the missing humidity values in the remaining 20 sensors.
 Then for each imputation model, we use the filled-in readings of these 20 sensors as the inputs X and the gateway temperature values as the output Y to train the regression models for prediction.
 We divide the data randomly into 80\% training and 20\% testing, and show the results of both regression models in Table \ref{table:gateway prediction}.
-We use Mean Square Error~(MSE) to measure the error here and show the 95\% confidence interval.
+We use mean square error~(MSE) to measure the error here and show the 95\% confidence interval.
 The results confirm our hypothesis that a better imputation model does lead to the production of a better prediction models, and TR-MF again outperforms the other models in this respect.
 
 %\begin{table} [htbp]

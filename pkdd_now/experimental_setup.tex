@@ -4,7 +4,7 @@ We conducted an experimental study comparing the accuracy of our proposed TR-MF,
 prior state-of-the-art methods.
 
 \subsection{Experimental Setup}
-We performed our study using two datasets: an indoor dataset, the ``Berkeley'' dataset, and an outdoor dataset, the ``Traffic''
+We performed our study using two datasets: an indoor dataset, the ``Berkeley'' dataset, and an outdoor dataset, the ``traffic''
 dataset.  For each dataset, we study two patterns for missing data: ``random missing'' and ``consecutive missing.''  This section
 details these datasets and patterns, as well as the parameter settings for our methods.
 We follow the standard evaluation process in machine learning of dividing the data into training, validation, and testing sets.
@@ -23,7 +23,7 @@ We found the relative performance of the compared methods to be similar in these
 
 \paragraph*{Traffic Dataset} ~
 
-The Traffic Dataset~\cite{liu2011developed} records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
+The traffic dataset~\cite{liu2011developed} records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
 This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan (see Figure~\ref{fig:traffic}).
 The sampling rate is roughly once every 30 minutes.
 Along the temporal dimension, we use the entire range which consists of roughly 43K time stamps.
@@ -32,9 +32,9 @@ The inherent missing rate is roughly 58\%.
 
 %This dataset only reveals 8 
 
-Note that for both Berkeley and Traffic datasets, simple preprocessing rules were applied to remove apparent outliers.
+Note that for both Berkeley and traffic datasets, simple preprocessing rules were applied to remove apparent outliers.
 In the Berkeley dataset, observations are removed if temperature \mbox{$>100\degC$}, temperature \mbox{$<5\degC$}, or humidity \mbox{$<16\%$}.
-In the Traffic dataset, observations are removed if temperature \mbox{$>60\degC$}, temperature \mbox{$<5\degC$}, humidity \mbox{$>100\%$} or humidity \mbox{$<10\%$}.
+In the traffic dataset, observations are removed if temperature \mbox{$>60\degC$}, temperature \mbox{$<5\degC$}, humidity \mbox{$>100\%$} or humidity \mbox{$<10\%$}.
 
 
 
@@ -94,8 +94,8 @@ This pattern reflects testing the effect of all data missing after a certain poi
 We define two values $x$ and $y$ as follows.
 \begin{itemize}
 \item Here, we have the last $y\%$ of time covered as missing, and the prior $10\%$ to that is considered as the validation data.
-\item The sensor node numbers ``covered up'' in the validation and testing for the Berkeley and Traffic datasets are ${4,19,45}$ and ${2,4,6,8,10,14,17,19,20,21}$, respectively.
-Note that node $21$ of the Traffic dataset is the gateway node.
+\item The sensor node numbers ``covered up'' in the validation and testing for the Berkeley and traffic datasets are ${4,19,45}$ and ${2,4,6,8,10,14,17,19,20,21}$, respectively.
+Note that node $21$ of the traffic dataset is the gateway node.
 We experimented with other combinations of covered up nodes, and the results were similar.
 \end{itemize}
 
@@ -107,7 +107,7 @@ truth, and all parameters in our models and competitors' models are
 automatically selected using the validation set.
 
 Here are the resulting parameter values for our models.
-The number of factors $K$ is $54$ for MF and $30$ for TF for the Berkeley dataset, and $21$ for MF and $10$ for TF for the Traffic dataset. 
+The number of factors $K$ is $54$ for MF and $30$ for TF for the Berkeley dataset, and $21$ for MF and $10$ for TF for the traffic dataset. 
 The learning rate $\eta$ is set to $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF.
 A smaller~$\eta$ or a larger~$K$ could slow down the training process, but it would not degrade 
 the model.

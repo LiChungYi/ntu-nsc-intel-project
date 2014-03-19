@@ -191,10 +191,10 @@ linear predictor.
 %estimate the missing values of DNA micro-arrays~\cite{Troyanskaya:DNAKNN}.  
 %While in WSNs, the sensor data of different nodes is more likely to have some functional relations other than just using sensor values.
 
-The Applying K-nearest neighbor Estimation (AKE) method~\cite{pan2010k}
+The applying k-nearest neighbor estimation (AKE) method~\cite{pan2010k}
 adopts linear regression models to describe the spatial relationship among
 each pair of sensor nodes. The prediction of a target node is the
-weighted combination of the regression models from its K-nearest neighbors.
+weighted combination of the regression models from its k-nearest neighbors.
 If no enough spatial information, AKE incorporates temporal information.
 %there is not enough spatial information to be exploited, AKE will use
 %temporal information to help.
@@ -226,7 +226,7 @@ If no enough spatial information, AKE incorporates temporal information.
 %They adopt the r-square statistics to rank their correlations. The value of $w_j$ is the weighted average of the corresponding 
 %r-square values for the $m$ sensors. 
 
-The Bayesian Gaussian Process (BGP) method~\cite{osborne2012real} is a
+The bayesian gaussian process (BGP) method~\cite{osborne2012real} is a
 recently proposed random process method that assumes the current
 readings are Gaussian distributed given the past data.  The parameter,
 mean and covariance are changeable from time to time based on domain
@@ -246,7 +246,7 @@ inaccurate results.  The models we propose, however, try to rely less
 on such a priori knowledge, and learn the latent correlation directly
 from the data.
 
-Finally, conceptually closer to our solution are the Singular Value Decomposition (SVD)-based methods.  
+Finally, conceptually closer to our solution are the singular value decomposition (SVD)-based methods.  
 %The Singular Value Decomposition (SVD)-based methods exploit the SVD commonly used in linear algebra to impute missing values.
 Conventional SVD has a significant
 limitation as it can only be applied to a complete matrix.  Therefore,
@@ -259,12 +259,12 @@ expensive in general.
 %It decomposes a fully observed matrix~$\mathbf{R}$ into one diagonal matrix~$\mathbf{D}$ and two unitary matrices~$\mathbf{U}$ and~$\mathbf{V}$ such that
 %$\mathbf{R} = \mathbf{U}\mathbf{D}\mathbf{V}^T.$
 %The largest $K$ singular values and vectors, $\mathbf{U}_K \mathbf{D}_K \mathbf{V}_K^T$, form the best $K$-rank approximation of $\mathbf{R}$ under the Frobenius Norm.
-A salient example of SVD-based approaches for imputation is the Empirical Orthogonal Functions
+A salient example of SVD-based approaches for imputation is the empirical orthogonal functions
 (EOF) model, which has been applied to oceanographic applications to
 solve the problem of missing or unreliable satellite
 data~\cite{beckers2003eof}.  EOF first fills in the missing values
 (e.g., using all zeros or the mean values) and then performs SVD 
-to decompose the matrix. The top-$K$ singular vectors in the SVD are used 
+to decompose the matrix. The top $K$ singular vectors in the SVD are used 
 to reconstruct the matrix and update the estimation of missing values, 
 where $K$ is determined through cross validation over the data.
 An improved version of EOF~\cite{kondrashov2006spatio} also 

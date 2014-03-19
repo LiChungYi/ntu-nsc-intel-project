@@ -27,10 +27,10 @@ Given this, and the fact that EOF-based methods require the execution of many ro
 which is computational expensive and much less efficient than the other models we study, 
 we omit EOF from any further experiments.
 
-We compared our TR-MF with conventional MF (i.e., MF without temporal regularization), Linear Interpolation~(LI), 
-Applying K-nearest neighbor Estimation~(AKE), Data Estimation using Statistical Model~(DESM), Spatial Temporal Imputation~(STI) and Multiple Imputation (MI).
+We compared our TR-MF with conventional MF (i.e., MF without temporal regularization), linear interpolation~(LI), 
+applying k-nearest neighbor estimation~(AKE), data estimation using statistical model~(DESM), spatial temporal imputation~(STI) and multiple imputation (MI).
 %We implemented AKE, DESM, STI, and for MI we use the EM-imputation from LISREL.  
-Note that sensor location information is available for only 8 out of 20 sensors in the Traffic dataset, but the pairwise distance values are required inputs for the DESM and STI models.
+Note that sensor location information is available for only 8 out of 20 sensors in the traffic dataset, but the pairwise distance values are required inputs for the DESM and STI models.
 In these cases, we simply assume the unknown distances are equal.
 %Also, we omit the results for light sensors in the Berkeley dataset (in which TR-MF performs equally well as in other cases) due to space limitations. 
 
