@@ -2,7 +2,7 @@
 
 % need update and to be consistent with related work, need to add the Netflix and our KDD2011 papers to support MF
 
-Matrix Factorization (MF) is arguably the most successful Collaborative Filtering~(CF) technique in the area of recommendation systems~\cite{koren2009matrix, chen2011linear}. Compared with other recommendation models such as regression-based prediction models, graph-based random walk models, or simple statistical models, the MF model possesses the advantages of being more accurate and more scalable to data size.
+Matrix factorization (MF) is arguably the most successful collaborative filtering~(CF) technique in the area of recommendation systems~\cite{koren2009matrix, chen2011linear}. Compared with other recommendation models such as regression-based prediction models, graph-based random walk models, or simple statistical models, the MF model possesses the advantages of being more accurate and more scalable to data size.
 A key feature of MF models is its capability to learn {\em latent} factors from {\em relatively sparse} observations, and to leverage these factors to impute the missing elements in the matrix.
 In the following, we will first introduce the fundamentals of the MF methodology, present our novel sensor-data-specific 
 modifications to the MF objective function, and finally provide the complete training procedure of the proposed method.
@@ -23,7 +23,7 @@ modifications to the MF objective function, and finally provide the complete tra
 %the data are missing.
 %
 As stated in section \ref{sec:rw_spatial_temporal}, conventional SVD is not appropriate for the task of missing data imputation.
-Matrix Factorization is designed to amend the limitations of SVD, and recently researchers have shown \cite{koren2009matrix} that the matrix factorization model is indeed a better approach to learn the latent factors given sparse matrices, because during the factorization procedure only the observed entries are exploited.
+Matrix factorization is designed to amend the limitations of SVD, and recently researchers have shown \cite{koren2009matrix} that the matrix factorization model is indeed a better approach to learn the latent factors given sparse matrices, because during the factorization procedure only the observed entries are exploited.
 Utilizing numerical optimization procedures, for a partially observed matrix~$\mathbf{R}$, MF produces two latent 
 matrices~$\mathbf{P}_{M \times K}$ and $\mathbf{Q}_{K \times N}$ whose multiplication seeks to approximate the observed entries in $\mathbf{R}_{M \times N}$:
 \begin{equation*}\small \mathbf{R} \approx \mathbf{P} \mathbf{Q}.\end{equation*}
@@ -59,7 +59,7 @@ rows would significantly affect the outcome of factorization.
 %\end{figure}
 %\vspace{-0.5cm}
 
-With this observation, we propose a Temporally-Regularized Matrix Factorization (TR-MF) to better model the characteristic of sensor data. As the name may suggest, TR-MF adds a temporal regularization term to conventional MF. 
+With this observation, we propose a temporally-regularized matrix factorization (TR-MF) to better model the characteristic of sensor data. As the name may suggest, TR-MF adds a temporal regularization term to conventional MF. 
 %(see Figure~\ref{fig:tr-mf})
 The temporal regularization forces the latent factors of adjacent rows to be similar, which reflects the fact that 
 readings in adjacent time steps should be similar. We also add a similar regularization term for 
@@ -85,14 +85,14 @@ The objective function ($\gamma_s$ controls the strength of the regularization) 
 +&\frac{\gamma}{2} \sum_m{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}
 +\frac{\gamma_s}{2} \sum\limits_{\substack{n_i, n_j \\ \text{neighbors}}}{((\mu_{n_i}-\mu_{n_j})^2 + ||\mathbf{q}_{n_i}-\mathbf{q}_{n_j}||^2)}.
 \end{aligned}\end{equation*}
-We call this Spatio-Temporal-Regularized Matrix Factorization (STR-MF). 
+We call this spatio-temporal-regularized matrix factorization (STR-MF). 
 Users should exploit spatial regularization with care, however, as our experimental study will show 
 that biasing for spatial correlation can often produce inferior results. 
 In the following discussion, we will focus mainly on TR-MF.
 
 \subsection{Optimization Procedure}
 \label{optimation_procedure}
-Several methods to learn MF have been proposed, such as Stochastic Gradient Descent (SGD)\cite{koren2009matrix,chih2008large}, Alternating Least Square (ALS)\cite{koren2009matrix,zhou2008large}, Newton's method\cite{buchanan2005damped} and Wiberg Algorithm\cite{okatani2007wiberg}.
+Several methods to learn MF have been proposed, such as stochastic gradient descent (SGD)\cite{koren2009matrix,chih2008large}, alternating least square (ALS)\cite{koren2009matrix,zhou2008large}, Newton's method\cite{buchanan2005damped} and Wiberg Algorithm\cite{okatani2007wiberg}.
 For sensor data, we suggest SGD for its efficiency and simplicity. 
 
 In SGD, we incrementally update our model by considering one reading at a time.

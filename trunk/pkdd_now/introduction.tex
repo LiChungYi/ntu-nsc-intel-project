@@ -97,10 +97,10 @@ often exhibit high correlation in both time and space.
 To incorporate this property, we first modify MF
 to model temporal correlations and learn latent relationships among
 sensors.  Specifically, we add temporal-proximity terms to
-MF---we call this {\em Temporally-Regularized MF} (TR-MF)
+MF---we call this {\em temporally-regularized MF} (TR-MF)
 ---to reflect the fact that readings in neighboring time steps are similar.
 Similarly, we can also add spatial-proximity terms---we 
-call this {\em Spatially-Temporally-Regularized} MF (STR-MF).
+call this {\em spatially-temporally-regularized} MF (STR-MF).
 Second, we consider sensor networks with multiple sensor types at each node.
 We are readily able to exploit such heterogeneous sensor information in our
 solution, in contrast to most prior imputation methods that use more ad hoc means.
@@ -110,8 +110,8 @@ solution, in contrast to most prior imputation methods that use more ad hoc mean
 %sensors in the network) to provide more accurate imputation than 
 %prior approaches.
 We present two techniques for extending 
-TR-MF to account for possible correlations among sensor types: {\em Multivariate-TR-MF} and 
-{\em Temporally-Regularized Tensor Factorization} (TR-TF).
+TR-MF to account for possible correlations among sensor types: {\em multivariate-TR-MF} and 
+{\em temporally-regularized tensor factorization} (TR-TF).
 
 We evaluate our approaches using two environmental sensor network
 datasets, one indoor and one outdoor.
@@ -136,7 +136,7 @@ pattern.  This is because TR-MF effectively learns the latent
 relationships among sensors from data, including any spatial correlations, while
 avoiding the pitfalls of spatial-proximity biases (Section~\ref{subsec:sm}).
 For the heterogeneous setting, our study shows that both
-Multivariate-TR-MF and TR-TF can significantly improve the accuracy over TR-MF,
+multivariate-TR-MF and TR-TF can significantly improve the accuracy over TR-MF,
 and each has its strengths, depending on the observed variance in the
 readings.  Finally, we consider a popular data analysis task---building regression-based prediction models---and show that,
 compared to prior approaches for imputation, using TR-MF leads to a much higher quality prediction model.
