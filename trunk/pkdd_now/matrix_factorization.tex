@@ -39,7 +39,7 @@ After adding the regularization term to constrain the scale of latent factors, t
 \end{aligned}\end{equation*}
 where $\mathbf{p}_m$ are the row factors of $\mathbf{P}$ (for time $m$), and $\mathbf{q}_n$ are the column factors of $\mathbf{Q}$ (for sensor node $n$) respectively.
 $\beta$ is the parameter that controls the strength of regularization.
-Matrix factorization also has a nice interpretation as a probabilistic graphical model~\cite{mnih2007probabilistic}.
+Matrix factorization can also be derived from a probabilistic perspective~\cite{mnih2007probabilistic}.
 
 
 \subsection{Temporally-Regularized Matrix Factorization (TR-MF)}
@@ -148,7 +148,7 @@ where $n_i$ and $n_j$ are a pair of neighboring sensor nodes.
 Unlike the ratings in recommendation systems that are normally within a certain range (e.g., 1 to 5 stars), readings from WSNs are real-valued (rounded to a desired level of precision), and the range may vary with the sensors.
 Here we propose to normalize the training set to zero mean and unit variance before conducting MF learning, and once the missing values are produced by our model, we need to rescale the values to the original mean and variance.
 Although this procedure does not change the quality of outcomes theoretically, in practice we do find some benefits: 
-First, when the global mean becomes zero, the origin of our model naturally becomes a fine initial point for MF training, which is very important for non-convex optimization techniques such as MF.
+First, when the global mean becomes zero, the origin of our model naturally becomes a fine initial point for MF training, which is good for non-convex optimization techniques such as MF.
 Second, normalization forces different datasets to look similar, which simplifies the parameter tuning task. 
 
 

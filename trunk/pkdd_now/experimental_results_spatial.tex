@@ -1,7 +1,8 @@
 \subsection{Experimental Results on STR-MF} \label{experimental_results_spatial}
 Next we focus on using the Berkeley dataset to verify the STR-MF model as the sensor node location information for the traffic data is incompletely specified and thus unable to be properly exploited.
-Here we include another dataset for comparison: London Air Quality dataset (\cite).
-There are 64 sensors that measure the concentration of nitrogen dioxide (ug/m3) in London.
+\redtext{
+Here we include another dataset for comparison: London air quality dataset (\cite).
+There are 64 sensors that measure the concentration of nitrogen dioxide (ug/m3) in London.}
 \begin{table} [h]
 \caption{RMSE of Berkeley, Random Missing and Consecutive Missing} \label{table:spatial}
 \tiny
@@ -9,8 +10,8 @@ There are 64 sensors that measure the concentration of nitrogen dioxide (ug/m3) 
 %\centering
 \begin{tabular} {c | r r r | r r r | r r r | r r r | r r r | r r r }
 & \multicolumn{9}{ c|}{Random Missing} & \multicolumn{9}{ c }{Consecutive Missing}\\ \hline
-& \multicolumn{3}{ c|}{Humidity} & \multicolumn{3}{ c|}{Light} & \multicolumn{3}{ c| }{Temperature} 
-& \multicolumn{3}{ c|}{Humidity} & \multicolumn{3}{ c|}{Light} & \multicolumn{3}{ c }{Temperature} \\ \hline
+& \multicolumn{3}{ c|}{Humidity~(\%)} & \multicolumn{3}{ c|}{Light~(lux)} & \multicolumn{3}{ c| }{Temperature~(\degC)} 
+& \multicolumn{3}{ c|}{Humidity~(\%)} & \multicolumn{3}{ c|}{Light~(lux)} & \multicolumn{3}{ c  }{Temperature~(\degC)} \\ \hline
 train & \begin{turn}{70}TR-MF\end{turn} & \begin{turn}{70}STR-MF\end{turn} & \begin{turn}{70}sTR-MF\end{turn}& \begin{turn}{70}TR-MF\end{turn} & \begin{turn}{70}STR-MF\end{turn} & \begin{turn}{70}sTR-MF\end{turn}& \begin{turn}{70}TR-MF\end{turn} & \begin{turn}{70}STR-MF\end{turn} & \begin{turn}{70}sTR-MF\end{turn} 
 & \begin{turn}{70}TR-MF\end{turn} & \begin{turn}{70}STR-MF\end{turn} & \begin{turn}{70}sTR-MF\end{turn}& \begin{turn}{70}TR-MF\end{turn} & \begin{turn}{70}STR-MF\end{turn} & \begin{turn}{70}sTR-MF\end{turn}& \begin{turn}{70}TR-MF\end{turn} & \begin{turn}{70}STR-MF\end{turn} & \begin{turn}{70}sTR-MF\end{turn} \\ \hline
 10\% & $ \mathbf{ 0.142 } $ & $ 0.484 $ & $ 0.173 $ & $ \mathbf{ 35.5 } $ & $ 97.4 $ & $ 38.3 $ & $ \mathbf{ 0.046 } $ & $ 0.154 $ & $ 0.061 $ 
