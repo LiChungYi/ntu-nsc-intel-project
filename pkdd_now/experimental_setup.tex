@@ -13,7 +13,7 @@ We follow the standard evaluation process in machine learning of dividing the da
 
 \paragraph*{Berkeley Dataset} ~
 
-The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature, humidity, light, and voltage for 54 sensors (with one sensor completely missing) in an indoor lab environment
+The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature~(\mbox{$\degC$}), humidity~(relative humidity, \%), light~(lux), and voltage~(volt) for 54 sensors (with one sensor completely missing) in an indoor lab environment
 from February 28th and April 5th, 2004.  Sensor locations are shown in Figure \ref{berkeley_lab}.
 The dataset includes 2.3M sensor observations, with over 210K samples along the temporal dimension.
 Because the completeness of data degrades after 10000 samples, in our experiments only the first 2500, 5000, or 10000 samples were used.
@@ -23,7 +23,7 @@ We found the relative performance of the compared methods to be similar in these
 
 \paragraph*{Traffic Dataset} ~
 
-The traffic dataset~\cite{liu2011developed} records the temperature, humidity, and voltage conditions of 20 sensor nodes and one gateway node.
+The traffic dataset~\cite{liu2011developed} records the temperature~(\mbox{$\degC$}), humidity~(relative humidity, \%), and voltage~(volt) conditions of 20 sensor nodes and one gateway node.
 This dataset, collected by the Bio-industrial Department at National Taiwan University, was recorded over a 2.5 year time period ending in 2011 in an outdoor location high traffic area in Taipei, Taiwan (see Figure~\ref{fig:traffic}).
 The sampling rate is roughly once every 30 minutes.
 Along the temporal dimension, we use the entire range which consists of roughly 43K time stamps.
@@ -106,7 +106,7 @@ to measure the difference between the predicted values and the ground
 truth, and all parameters in our models and competitors' models are
 automatically selected using the validation set.
 
-Here are the resulting parameter values for our models.
+We share the resulting parameter values of our models.
 The number of factors $K$ is $54$ for MF and $30$ for TF for the Berkeley dataset, and $21$ for MF and $10$ for TF for the traffic dataset. 
 The learning rate $\eta$ is set to $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF.
 A smaller~$\eta$ or a larger~$K$ could slow down the training process, but it would not degrade 
