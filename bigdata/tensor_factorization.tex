@@ -96,7 +96,7 @@ Similar to TR-MF, TR-TF learns the temporal correlation given the sparsity of da
 We follow the idea of context-aware recommendation sytems~\cite{karatzoglou2010multiverse}, but we use canonical decomposition rather than tucker decomposition.
 Consider a 3-dimensional tensor (e.g., the temperature reading of a sensor given a certain time-stamp and a certain humidity reading), a tensor model can be described as:
 \begin{equation*}
-%\small
+%\scriptsize
 \mbox{Factorization} :=  F_1 \times  F_2 \times F_3 \rightarrow F_1 \times K, F_2 \times K, F_3 \times K
 \end{equation*}
 The tensor factorization model decomposes the three dimensional tensors T into three matrices. One of them represents the temporal dimension, and the rest can represent sensor nodes, sensor node coordinates, heterogeneous sensor readings, etc. In the experiments, we implemented a three dimensional tensor model and chose the sensor nodes as well as the multivariate sensor readings as the remaining two dimensions.
@@ -106,7 +106,7 @@ The tensor factorization model decomposes the three dimensional tensors T into t
 %
 Similar to the TR-MF model, we also add bias terms to each dimension into the TR-TF model. The prediction function is:
 \begin{equation*}
-\small
+\scriptsize
 \hat{t}_{mnc}=\mu_m+\mu_n+\mu_c+\sum\limits_{k=1}^{K}{p_{mk} q_{nk} w_{ck}}
 \end{equation*}
 %To learn the latent factors $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$, we use the loss function :
@@ -124,11 +124,11 @@ We extend the model with regularization terms designed to constrain the scale of
 and, solely in the temporal dimension, to force adjacent rows to be similar.
 The final objective function of our TR-TF is:\\
 \begin{equation*}
-\small
+\scriptsize
 \begin{aligned}
-\sum\limits_{m, n, c} \frac{1}{2}(\hat{t}_{mnc}- t_{mnc})^2
-+ &\frac{\beta}{2}(\sum_m(\mu_m + \|\mathbf{p}_m\|^2) + \sum_n(\mu_n + \|\mathbf{q}_n\|^2) + \sum_c(\mu_c + \|\mathbf{w}_c\|^2))\\
-+ &\frac{\gamma}{2}\sum_m((\mu_m-\mu_{m+1})^2 + \|\mathbf{p}_m-\mathbf{p}_{m+1}\|^2)\\
+& \sum\limits_{m, n, c} \frac{1}{2}(\hat{t}_{mnc}- t_{mnc})^2 \\
++ & \frac{\beta}{2}\left(\sum_m(\mu_m + \|\mathbf{p}_m\|^2) + \sum_n(\mu_n + \|\mathbf{q}_n\|^2) + \sum_c(\mu_c + \|\mathbf{w}_c\|^2)\right) \\
++ & \frac{\gamma}{2}\sum_m \left( (\mu_m-\mu_{m+1})^2 + \|\mathbf{p}_m-\mathbf{p}_{m+1}\|^2\right) \\
 \end{aligned}
 \end{equation*}
 
@@ -155,16 +155,16 @@ Minimizing the above objective function can be done using many different strateg
 For efficiency and scalability, we suggest stochastic gradient descent~(SGD) as in TR-MF.
 Focusing on an observed reading data $t_{mnc} $, the update rules for all $k$s are:
 \begin{equation*}
-\small
+\scriptsize
 \begin{aligned}
-&{\mu_m}^\prime=\mu_m-\eta(e+\beta\mu_m),   &p_{mk}^\prime=p_{mk}-\eta(e\times q_{nk}\times w_{ck} + \beta \times p_{mk}), \\
-&{\mu_n}^\prime=\mu_n-\eta(e+\beta\mu_n),   &q_{nk}^\prime=q_{nk}-\eta(e\times p_{mk}\times w_{ck} + \beta \times q_{nk}), \\
-&{\mu_c}^\prime=\mu_c-\eta(e+\beta\mu_c),   &w_{ck}^\prime=w_{ck}-\eta(e\times p_{mk}\times q_{nk} + \beta \times w_{ck}). \\
+&{\mu_m}^\prime=\mu_m-\eta(e+\beta\mu_m), p_{mk}^\prime=p_{mk}-\eta(e\times q_{nk}\times w_{ck} + \beta \times p_{mk}), \\
+&{\mu_n}^\prime=\mu_n-\eta(e+\beta\mu_n), q_{nk}^\prime=q_{nk}-\eta(e\times p_{mk}\times w_{ck} + \beta \times q_{nk}), \\
+&{\mu_c}^\prime=\mu_c-\eta(e+\beta\mu_c), w_{ck}^\prime=w_{ck}-\eta(e\times p_{mk}\times q_{nk} + \beta \times w_{ck}). \\
 \end{aligned}
 \end{equation*}
 where $e=\hat{t}_{mnc}-t_{mnc}$. After a round of updating, we then update the model according to temporal regularization:
 \begin{equation*}
-\small
+\scriptsize
 \begin{aligned}
 &{\mathbf{p}_m}^\prime={\mathbf{p}_m}-\eta\gamma((\mathbf{p}_m-\mathbf{p}_{m+1})+(\mathbf{p}_m-\mathbf{p}_{m-1}))
 \\&{\mu_m}^\prime=\mu_m-\eta\gamma((\mu_m-\mu_{m+1})+(\mu_m-\mu_{m-1}))

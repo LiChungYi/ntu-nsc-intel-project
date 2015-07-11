@@ -2,7 +2,7 @@
 
 
 \begin{table}[h]
-\vspace{-0.7cm}
+%\vspace{-0.7cm}
 \caption{Sensor Data Imputation Methods}
 \label{tbl:methods}
 \centering
@@ -11,8 +11,9 @@
    &{\bf Hot-Deck Imputation}&{\bf Prediction Models}\\ \hline
 {\bf Temporal} & Last-seen~\cite{Granger:lastseen}, Mean & Linear Interpolation\\ \hline
 {\bf Spatial} & WARM~\cite{le2005estimating}, FARM~\cite{Gruenwald:FARM} & DEPM~\cite{li2008data}, MI~\cite{yuan2000multiple}\\\hline
-{\bf Spatio-} & STI~\cite{Jian-Zhong:STI} & DESM~\cite{li2008data}, ImM~\cite{Lim:robust}, AKE~\cite{pan2010k},\\
-{\bf Temporal} && BGP~\cite{osborne2012real}, EOF~\cite{beckers2003eof, kondrashov2006spatio}\\
+{\bf Spatio-} & STI~\cite{Jian-Zhong:STI} & DESM~\cite{li2008data}, ImM~\cite{Lim:robust},\\
+{\bf Temporal} &&AKE~\cite{pan2010k}, BGP~\cite{osborne2012real},\\
+{ } && EOF~\cite{beckers2003eof, kondrashov2006spatio}\\
  \hline \end{tabular}
 }
 \vspace{-0.1in}
