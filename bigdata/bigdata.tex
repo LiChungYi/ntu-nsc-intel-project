@@ -38,12 +38,12 @@
 %
 \RequirePackage{fix-cm}
 %
-\documentclass{svjour3}                     % onecolumn (standard format)
+\documentclass[10pt, conference, compsocconf]{IEEEtran}
 %\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
 %\documentclass[smallextended]{svjour3}       % onecolumn (second format)
 %\documentclass[twocolumn]{svjour3}          % twocolumn
 %
-\smartqed  % flush right qed marks, e.g. at end of proof
+%%\smartqed  % flush right qed marks, e.g. at end of proof
 %
 
 
@@ -108,24 +108,24 @@ Shou-De Lin \\ Phillip B.\ Gibbons \\ Jane Yung-jen Hsu %professors + phil
 }
 
 
-\authorrunning{Chung-Yi Li et al.\ }
+%\authorrunning{Chung-Yi Li et al.\ }
 
 %\authorrunning{Short form of author list} % if too long for running head
 
-\institute{
-Chung-Yi Li, Wei-Lun Su, Todd G.\ McKenzie, Fu-Chun Hsu, Shou-De Lin, Jane Yung-jen Hsu
-\at
-Department of Computer Science and Information Engineering,\\
-National Taiwan University, Taiwan\\
-\email{\{r00922051,r00922050,d97041,r94082,sdlin,yjhsu\}@csie.ntu.edu.tw}
-\and
-Phillip B.\ Gibbons
-\at
-Intel Labs Pittsburgh, USA\\
-\email{phillip.b.gibbons@intel.com}
-}
-
-\date{Received: date / Accepted: date}
+%%%%%%%%%\institute{
+%%%%%%%%%Chung-Yi Li, Wei-Lun Su, Todd G.\ McKenzie, Fu-Chun Hsu, Shou-De Lin, Jane Yung-jen Hsu
+%%%%%%%%%\at
+%%%%%%%%%Department of Computer Science and Information Engineering,\\
+%%%%%%%%%National Taiwan University, Taiwan\\
+%%%%%%%%%\email{\{r00922051,r00922050,d97041,r94082,sdlin,yjhsu\}@csie.ntu.edu.tw}
+%%%%%%%%%\and
+%%%%%%%%%Phillip B.\ Gibbons
+%%%%%%%%%\at
+%%%%%%%%%Intel Labs Pittsburgh, USA\\
+%%%%%%%%%\email{phillip.b.gibbons@intel.com}
+%%%%%%%%%}
+%%%%%%%%%
+%%%%%%%%%\date{Received: date / Accepted: date}
 % The correct dates will be entered by the editor
 
 
@@ -154,11 +154,11 @@ Intel Labs Pittsburgh, USA\\
 
 % BibTeX users please use one of
 %\bibliographystyle{spbasic}      % basic style, author-year citations
-\bibliographystyle{spmpsci}      % mathematics and physical sciences
+%\bibliographystyle{spmpsci}      % mathematics and physical sciences
 %\bibliographystyle{spphys}       % APS-like style for physics
 
-%\bibliographystyle{abbrv}
-\bibliography{pkdd}   % name your BibTeX data base
+\bibliographystyle{abbrv}
+\bibliography{bigdata}   % name your BibTeX data base
 
 % Non-BibTeX users please use
 %\begin{thebibliography}{}
