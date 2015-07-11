@@ -26,14 +26,14 @@ As stated in section \ref{sec:rw_spatial_temporal}, conventional SVD is not appr
 Matrix factorization is designed to amend the limitations of SVD, and recently researchers have shown \cite{koren2009matrix} that the matrix factorization model is indeed a better approach to learn the latent factors given sparse matrices, because during the factorization procedure only the observed entries are exploited.
 Utilizing numerical optimization procedures, for a partially observed matrix~$\mathbf{R}$, MF produces two latent 
 matrices~$\mathbf{P}_{M \times K}$ and $\mathbf{Q}_{K \times N}$ whose multiplication seeks to approximate the observed entries in $\mathbf{R}_{M \times N}$:
-\begin{equation*}\small \mathbf{R} \approx \mathbf{P} \mathbf{Q}.\end{equation*}
+\begin{equation*}\scriptsize \mathbf{R} \approx \mathbf{P} \mathbf{Q}.\end{equation*}
 Given $\mathbf{R}$ being the sensor network readings, each row of $\mathbf{P}$ represents latent factors in the temporal dimension and each column of $\mathbf{Q}$ represents the latent factors in the dimension of correlation among sensors.
 
 We adopt a biased-MF that includes row and column biases $\mu_m$ and $\mu_n$. 
 In a temperature monitoring system, the row bias can be understood as the average temperature at a given time, and the column bias reflects the average temperature at the location plus the systematic bias of the sensor node.
 The predictions of missing values can be obtained through $\hat{r}_{mn} = \mu_m + \mu_n + \mathbf{p}_m \mathbf{q}_n$.
 After adding the regularization term to constrain the scale of latent factors, the objective function of MF becomes to minimize:
-\begin{equation*}\small \begin{aligned}
+\begin{equation*}\scriptsize \begin{aligned}
 \frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
 + \frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}),
 \end{aligned}\end{equation*}
@@ -65,7 +65,7 @@ The temporal regularization forces the latent factors of adjacent rows to be sim
 readings in adjacent time steps should be similar. We also add a similar regularization term for 
 adjacent row biases.
 The modified objective function ($\gamma$ controls the strength of the regularization) looks like: 
-\begin{equation*}\small \begin{aligned}
+\begin{equation*}\scriptsize \begin{aligned}
 \frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
 &+ \frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}) \\
 &+ \frac{\gamma}{2} \sum_m{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}.
@@ -79,11 +79,11 @@ here we would like to show that our TR-MF model can easily be extended to accomm
 Given the distance (or any kind of `closeness' measure) between sensors, we can add spatial regularization terms to bias for 
 possible spatial correlation.
 The objective function ($\gamma_s$ controls the strength of the regularization) then becomes: 
-\begin{equation*}\small \begin{aligned}
+\begin{equation*}\scriptsize \begin{aligned}
 &\frac{1}{2}\sum_{m,n}{(r_{mn} - \hat{r}_{mn})}^2
 +\frac{\beta}{2}(\sum_m{(\mu_m^2 + ||\mathbf{p}_m||^2)} + \sum_n{(\mu_n^2 + ||\mathbf{q}_n||^2)}) \\
-+&\frac{\gamma}{2} \sum_m{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}
-+\frac{\gamma_s}{2} \sum\limits_{\substack{n_i, n_j \\ \text{neighbors}}}{((\mu_{n_i}-\mu_{n_j})^2 + ||\mathbf{q}_{n_i}-\mathbf{q}_{n_j}||^2)}.
++&\frac{\gamma}{2} \sum_m{((\mu_m-\mu_{m+1})^2 + ||\mathbf{p}_m-\mathbf{p}_{m+1}||^2)}\\
++&\frac{\gamma_s}{2} \sum\limits_{\substack{n_i, n_j \\ \text{neighbors}}}{((\mu_{n_i}-\mu_{n_j})^2 + ||\mathbf{q}_{n_i}-\mathbf{q}_{n_j}||^2)}.
 \end{aligned}\end{equation*}
 We call this spatio-temporal-regularized matrix factorization (STR-MF). 
 Users should exploit spatial regularization with care, however, as our experimental study will show 
@@ -97,7 +97,7 @@ For sensor data, we suggest SGD for its efficiency and simplicity.
 
 In SGD, we incrementally update our model by considering one reading at a time.
 Focused on one observed reading $r_{mn}$ with the following objective function
-\begin{equation*} \small \frac{1}{2}(r_{mn} - \hat{r}_{mn})^2
+\begin{equation*} \scriptsize \frac{1}{2}(r_{mn} - \hat{r}_{mn})^2
 + \frac{\beta}{2}(\mu_m^2 + ||\mathbf{p}_m||^2 + \mu_n^2 + ||\mathbf{q}_n||^2).\end{equation*}
 
 It is not hard to derive the TR-MF update equations ($\eta$ controls the learning rate) as 
