@@ -129,10 +129,14 @@ both (i) state-of-the-art recommendation models and (ii) state-of-the-art sensor
 (discussed in Section~\ref{sec:rw}).
 %AKE (which is the most accurate prior spatio-temporal method).
 Furthermore, our study shows that STR-MF, which adds spatial
-coordinate information into TR-MF, is useful {\em only} in the
-``consecutive'' pattern---perhaps surprisingly, STR-MF is
-significantly {\em less} accurate than TR-MF in the ``random''
-pattern.  This is because TR-MF effectively learns the latent
+coordinate information into TR-MF, 
+does not lead to much improvement over TR-MF.
+%is useful {\em only} in the ``consecutive'' pattern---
+%perhaps surprisingly, 
+%STR-MF is
+%significantly {\em less} accurate than TR-MF in the ``random''
+%pattern.  
+This is because TR-MF has effectively learned the latent
 relationships among sensors from data, including any spatial correlations, while
 avoiding the pitfalls of spatial-proximity biases (Section~\ref{subsec:sm}).
 For the heterogeneous setting, our study shows that both

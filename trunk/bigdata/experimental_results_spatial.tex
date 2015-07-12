@@ -1,10 +1,10 @@
 \subsection{Experimental Results on STR-MF} \label{experimental_results_spatial}
 Next we focus on using the Berkeley dataset to verify the STR-MF model as the sensor node location information for the traffic data is incompletely specified and thus unable to be properly exploited.
-\begin{table} [h]
+\begin{table*} [h]
 \caption{RMSE of Berkeley, Random Missing and Consecutive Missing} \label{table:spatial}
 \tiny
 \setlength{\tabcolsep}{1pt}
-%\centering
+\centering
 \begin{tabular} {c | r r r | r r r | r r r | r r r | r r r | r r r }
 & \multicolumn{9}{ c|}{Random Missing} & \multicolumn{9}{ c }{Consecutive Missing}\\ \hline
 & \multicolumn{3}{ c|}{Humidity~(\%)} & \multicolumn{3}{ c|}{Light~(lux)} & \multicolumn{3}{ c| }{Temperature~(\degC)} 
@@ -24,7 +24,8 @@ train & \begin{turn}{70}TR-MF\end{turn} & \begin{turn}{70}STR-MF\end{turn} & \be
 85\% & $ \mathbf{ 0.075 } $ & $ 0.326 $ & $ 0.083 $ & $ \mathbf{ 14.4 } $ & $ 82.0 $ & $ 15.8 $ & $ \mathbf{ 0.016 } $ & $ 0.138 $ & $ 0.028 $ 
 & $ 0.323 $&$ \mathbf{ 0.166 } $&$ 0.256 $&$ \mathbf{ 8.3 } $   & $ 85.4 $  &  $ 12.0 $&$ 0.088 $&$ \mathbf{ 0.065 } $&$ 0.082 $\\
 \end{tabular}
-\end{table}
+\vspace{-0.3cm}
+\end{table*}
 %\vspace{-0.2in}
 
 %Table \ref{table:spatial_random_hum}, \ref{table:spatial_random_light}, \ref{table:spatial_random_tem}, \ref{table:spatial_temporal_hum}, \ref{table:spatial_temporal_light}, \ref{table:spatial_temporal_tem}  show the result of adding spatial regularization.
@@ -41,7 +42,7 @@ The experiments show that when we have sufficient data to learn the correlation 
 
 \begin{figure}[h]
 \centering
-\vspace{-0.4cm}
+\vspace{-0.2cm}
 %\subfigcapmargin = -0.5cm
 \subfigure[ Expected Similarity]{
 	\label{fig:expected_similarity}
