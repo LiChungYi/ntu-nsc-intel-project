@@ -9,8 +9,10 @@ dataset.  For each dataset, we study two patterns for missing data: ``random mis
 details these datasets and patterns, as well as the parameter settings for our methods.
 We follow the standard evaluation process in machine learning of dividing the data into training, validation, and testing sets.
 
+\vspace{0.2cm}
 \subsubsection{Datasets}
 
+\vspace{0.2cm}
 \paragraph*{Berkeley Dataset} ~
 
 The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperature~(\mbox{$\degC$}), humidity~(relative humidity, \%), light~(lux), and voltage~(volt) for 54 sensors (with one sensor completely missing) in an indoor lab environment
@@ -21,6 +23,7 @@ We found the relative performance of the compared methods to be similar in these
 5000 samples.  The inherent missing rate (i.e., before we introduce our missing value patterns) for these first 5000 samples is roughly 49\%.
 
 
+\vspace{0.2cm}
 \paragraph*{Traffic Dataset} ~
 
 The traffic dataset~\cite{liu2011developed} records the temperature~(\mbox{$\degC$}), humidity~(relative humidity, \%), and voltage~(volt) conditions of 20 sensor nodes and one gateway node.
@@ -38,7 +41,7 @@ In the traffic dataset, observations are removed if temperature \mbox{$>60\degC$
 
 
 
-%\vspace{-0.1in}
+\vspace{-0.1in}
 \begin{figure}[h]
 \caption{Sensor Configuration}
 %\vspace{0.3cm}
@@ -46,14 +49,13 @@ In the traffic dataset, observations are removed if temperature \mbox{$>60\degC$
 \subfigcapmargin = -0.2cm
 \subfigure[\hbox{Intel Berkeley Research Lab Floorplan}]{
 	\label{berkeley_lab}
-	\includegraphics[height=2.5cm]{berkeley_lab.eps}
+	\includegraphics[height=2.3cm]{berkeley_lab.eps}
 }
-%\hspace{0.5cm}
 \subfigure[\hbox{Traffic Sensor Deployment Map} \hbox{\hspace{0.5cm}(8 sensors of 20 shown)}]{
 	\label{fig:traffic}
 	\includegraphics[height=2.5cm]{traffic_wsn.eps}
 }
-%\vspace{-0.3cm}
+\vspace{-0.3cm}
 \end{figure}
 
 %\vspace{-0.5cm}
@@ -79,6 +81,8 @@ In the traffic dataset, observations are removed if temperature \mbox{$>60\degC$
 
 Although both datasets intrinsically have missing readings, we cannot use those for evaluation because their true values are unknown.
 Instead we devised two strategies to produce artificial missing data.
+
+\vspace{0.1cm}
 \paragraph*{Random Missing Pattern} ~
 This pattern reflects repeatedly choosing a random time and random sensor to be missing and hence removed from the training set.
 %
@@ -106,6 +110,8 @@ to measure the difference between the predicted values and the ground
 truth, and all parameters in our models and competitors' models are
 automatically selected using the validation set.
 
+\vspace{0.1cm}
+
 We share the resulting parameter values of our models.
 The number of factors $K$ is $54$ for MF and $30$ for TF for the Berkeley dataset, and $21$ for MF and $10$ for TF for the traffic dataset. 
 The learning rate $\eta$ is set to $0.04$ to $0.004$ for MF and $0.001$ to $0.0001$ for TF.
@@ -115,3 +121,4 @@ Also, a reasonable choice of $K$ should not be larger than the number of sensor 
 The temporal regularization $\gamma$ is set to $0.2/\eta$ in all of our experiments.
 The conventional regularization $\beta$ is $0.001$ for consecutive missing and $0$ for random missing in MF, 
 while in TF, $\beta$ is $0.005$ for consecutive missing and $0.001$ for random missing.
+
