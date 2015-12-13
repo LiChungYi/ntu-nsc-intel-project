@@ -1,10 +1,20 @@
 \section{Related Work}\label{sec:rw}
 
+Imputation techniques applied to sensor data can be divided into three categories by the information utilized:
+temporal methods, spatial methods, 
+% (i.e., estimation using the observations from the target sensor at nearby time steps), 
+% (i.e., estimation using neighboring sensor node observations), 
+and spatio-temporal methods. They can be further categorized as hot-deck imputation and prediction models~\cite{Garcia:KNNreview},
+as shown in Table~\ref{tbl:methods}.
+Hot-deck imputation methods directly fill in the missing values using either neighbor values or historical self records
+such as the \textit{last-seen} method, while the prediction models exploit a function 
+%(involving metrics other than just sensor values) 
+to estimate the missing values. 
 
 \begin{table}[h]
 \setlength{\tabcolsep}{2pt}
 \vspace{-0.2cm}
-\caption{Sensor Data Imputation Methods}
+\caption{Sensor data imputation methods}
 \label{tbl:methods}
 \centering
 {\small
@@ -19,17 +29,6 @@
 }
 \vspace{-0.1in}
 \end{table}
-
-Imputation techniques applied to sensor data can be divided into three categories by the information utilized:
-temporal methods, spatial methods, 
-% (i.e., estimation using the observations from the target sensor at nearby time steps), 
-% (i.e., estimation using neighboring sensor node observations), 
-and spatio-temporal methods. They can be further categorized as hot-deck imputation and prediction models~\cite{Garcia:KNNreview},
-as shown in Table~\ref{tbl:methods}.
-Hot-deck imputation methods directly fill in the missing values using either neighbor values or historical records from itself 
-such as the \textit{last-seen} method, while the prediction models exploit a function 
-%(involving metrics other than just sensor values) 
-to estimate the missing values. 
 
 %The feasibility of estimating missing sensor observations based on historical data is grounded by the known temporal correlation in WSN data~\cite{akyildiz2004exploiting}.
 %Moreover, where there is a potential for global communication issues to affect the availability for sensor node observations \emph{en masse} during a given duration of time, utilizing spatial correlations as a basis for estimation may be not be possible.
@@ -49,7 +48,7 @@ suffer, however, when there are long temporal gaps in observations for a given
 sensor; such gaps can be frequent in WSNs due to power depletion in
 energy-harvesting sensors, long-lived communication ailments, etc.  
 As a result, the usefulness of temporal methods drops rapidly as the number of consecutively missing readings
-becomes large.
+increases.
 
 % (i.e., as can happen when intermittent communications starvation occurs in large WSNs).  
 
@@ -98,7 +97,7 @@ This model suffers from high computation cost because multiple models have to be
 
 Generally speaking, there are two ways to obtain the spatial
 correlation: from the spatial coordinates or from the data itself.
-However, (only) the former requires accurate spatial coordinates, and
+However, the former requires accurate spatial coordinates, and
 more importantly, it suffers when ailments arise that affect entire
 spatial regions (such as large, temporary obstacles to sensing and/or
 communication).  It also fails to account for barriers or other
@@ -233,8 +232,7 @@ The bayesian gaussian process (BGP) method~\cite{osborne2012real} is a
 recently proposed random process method that assumes the current
 readings are Gaussian distributed given the past data.  The parameter,
 mean and covariance are changeable from time to time based on domain
-knowledge on the mean and covariance function.  In contrast, we focus
-in this paper on sensor data imputation that does not rely on domain
+knowledge on the mean and covariance function.  In contrast, in this paper we focus on sensor data imputation that does not rely on domain
 knowledge.
 
 The above methods suffer from making unverified assumptions about the

@@ -6,11 +6,10 @@
 %more?
 
 \input{experimental_figures_multivariate}
-
-To evaluate multivariate imputation models, in the experiments we allow temperature and humidity information to mutually enhance the predictions.
+To evaluate multivariate imputation models, we use humidity information to improve temperature predictions and vice versa.
 Here we compare the two proposed multivariate imputation models: MTR-MF and TR-TF with the univariate model TR-MF, which has been demonstrated to outperform other models in the previous section. 
 
-There are two different scenarios we are concerned with in this experiment.
+We consider two different scenarios in this experiment.
 For illustration purposes, assume the goal is to predict the missing entries in the temperature matrix.
 In the first scenario (denoted as MTR-MF-all and TR-TF-all), we do not cover up the humidity data and use this data in its entirety.
 The goal here is to evaluate whether using all the humidity information allows our model to improve the temperature predictions.
@@ -21,10 +20,10 @@ However, to predict an entry in the temperature matrix, the TR-TF model requires
 In the TR-TF-part, such issues can be addressed by first predicting the missing humidity readings based on the humidity TR-MF model, and then apply TR-TF.
 
 The results are shown in Figure~\ref{fig:multi}.
-Except MTR-MF-part, which remains similar performance as TR-MF, we see significant improvement on TR-TF-all, TR-TF-part and MTR-MF-all. 
+Except for MTR-MF-part, which exhibits a similar performance as TR-MF, we see significant improvement on TR-TF-all, TR-TF-part and MTR-MF-all. 
 From this we see the effect of heterogeneous information and we can conclude that:
 although MTR-MF is not helpful when multiple sensors are missing together,
-both of the temperature and humidity information can indeed be used to enhance the prediction of the other.
+both temperature and humidity information can indeed be used to enhance the prediction of the other.
 %
 %With focus on the TR-TF model, we first observe that TR-TF-part and TR-TF-all produce results of similar quality.
 %The results further show that the TR-TF model outperforms all other models significantly for the traffic dataset, but performs less well for the Berkeley dataset.
@@ -140,7 +139,7 @@ In the experiment, we first remove the gateway signal from the matrix, and use T
 Then for each imputation model, we use the filled-in readings of these 20 sensors as the inputs X and the gateway temperature values as the output Y to train the regression models for prediction.
 We divide the data randomly into 80\% training and 20\% testing, and show the results of both regression models in Table \ref{table:gateway prediction}.
 We use mean square error~(MSE) to measure the error here and show the 95\% confidence interval.
-The results confirm our hypothesis that a better imputation model does lead to the production of a better prediction models, and TR-MF again outperforms the other models in this respect.
+The results confirm our hypothesis that a better imputation model does lead to the production of a better prediction model, and TR-MF again outperforms the other models in this respect.
 
 %\begin{table} [htbp]
 %\caption{Building Temperature Models Using Filled Humidity Data } \label{table:gateway prediction}
@@ -163,7 +162,7 @@ The results confirm our hypothesis that a better imputation model does lead to t
 
 \begin{table} [htbp]
 \vspace{-0.2cm}
-\caption{Accuracy of Temperature Models Built Using Filled Humidity Data } \label{table:gateway prediction}
+\caption{Accuracy of temperature models built using filled humidity data } \label{table:gateway prediction}
 \setlength{\tabcolsep}{2pt}
 \centering
 \scriptsize

@@ -45,7 +45,7 @@ Tensor decomposition is a multi-dimensional extension of singular value decompos
 %, while such assumption is not valid for data imputation purposes.
 % as for dimension reduction purposes.
 
-In the following, we will first introduce the tensor decomposition models and then describe how to modify one of them into a tensor factorization model for imputing missing data.
+In the following, we will first introduce the tensor decomposition models and then describe how to modify them into a model for imputing missing data.
 
  
 \subsubsection{Tensor Decomposition}
@@ -97,7 +97,7 @@ where $\mathbf{p}_i$, $\mathbf{q}_i$ and $\mathbf{w}_i$ are a column of matrices
 Here we introduce temporally-regularized tensor factorization (TR-TF) model for missing data estimation. 
 Similar to TR-MF, TR-TF learns the temporal correlation given the sparsity of data with the capability to take additional information such as spatial correlation and heterogeneous sensor readings into consideration.
 
-We follow the idea of context-aware recommendation sytems~\cite{karatzoglou2010multiverse}, but we use canonical decomposition rather than tucker decomposition.
+We follow the idea of context-aware recommendation sytems~\cite{karatzoglou2010multiverse}, but we use canonical decomposition rather than Tucker decomposition.
 Consider a 3-dimensional tensor (e.g., the temperature reading of a sensor given a certain time-stamp and a certain humidity reading), a tensor model can be described as:
 
 \vspace{-0.6cm}
@@ -114,7 +114,8 @@ The tensor factorization model decomposes the three dimensional tensors T into t
 %To avoid over-fitting and to reduce the complexity of prediction, our model borrows the idea of Canonical Decomposition rather than Tucker decomposition. Note that the time complexity for making a prediction is only $O(K)$, where $K$ is the factor size of $\mathbf{P}$, $\mathbf{Q}$ and $\mathbf{W}$. Thus, the complexity is independent of the size of the tensor, which is a favorable property because we can freely add new dimensions into the model without concerns about prediction efficiency.
 %
 Similar to the TR-MF model, we also add bias terms to each dimension into the TR-TF model. The prediction function is:
-\vspace{-0.2cm}
+
+\vspace{-0.4cm}
 {
 \scriptsize
 \begin{equation*}
@@ -136,7 +137,9 @@ Similar to the TR-MF model, we also add bias terms to each dimension into the TR
 %Similar to our TR-MF model, we also add the time regularization terms into our model.
 We extend the model with regularization terms designed to constrain the scale of latent factors
 and, solely in the temporal dimension, to force adjacent rows to be similar.
-The final objective function of our TR-TF is:\\
+The final objective function of our TR-TF is:
+
+\vspace{-0.3cm}
 {
 \scriptsize
 \begin{equation*}
@@ -197,7 +200,7 @@ where $e=\hat{t}_{mnc}-t_{mnc}$. After a round of updating, we then update the m
 
 TR-TF applies similar normalization and stopping criterion techniques as in Section~\ref{sec:mf}.
 Its time complexity is also similar to that of TR-MF,
-except TR-TF models can be trained even more efficiently because it usually consists of fewer factors and does not require many iterations to converge. 
+except TR-TF models can be trained even more efficiently because they usually consist of fewer factors and do not require many iterations to converge. 
 %Empirically, one can achieve reasonable performance by imposing the following constraints on the parameter learning:  
 %\begin{equation*}
 %$\beta_1=\beta_2=\beta_3=\beta_4=\beta_5=\beta_6$ \mbox{ and } $\gamma_1=\gamma_2$.

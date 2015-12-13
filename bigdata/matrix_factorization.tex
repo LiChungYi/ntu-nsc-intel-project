@@ -52,7 +52,7 @@ Matrix factorization can also be derived from a probabilistic perspective~\cite{
 
 Although we map the sensor data imputation task to a collaborative-filtering-based recommendation task, there are indeed some major differences in the properties of the data.
 Normal collaborative filtering models assume no ordering on the users (i.e., temporal dimension). That is, we can randomly swap the rows in the matrix without affected the factorization outcome. However, such independence does not exist in sensor data as a 
-sensor's signal in time $t$ is highly dependent on that of time $t-1$. In other words, an ideal model should consider such ordering dependency, and under such a model reordering the
+sensor's signal in time $t$ is highly dependent on that of time $t-1$. In other words, an ideal model should consider such order dependency, and reordering the
 rows would significantly affect the outcome of factorization.
 
 
@@ -82,7 +82,7 @@ The modified objective function ($\gamma$ controls the strength of the regulariz
 
 Although previously we argued that nearby sensors might not necessarily possess the highest correlation with each other, 
 here we would like to show that our TR-MF model can easily be extended to accommodate spatial correlation if one decides to do so. 
-Given the distance (or any kind of `closeness' measure) between sensors, we can add spatial regularization terms to bias for 
+Given the distance (or any kind of `closeness' measure) between sensors, we can add spatial regularization terms to provide a bias to account for 
 possible spatial correlation.
 The objective function ($\gamma_s$ controls the strength of the regularization) then becomes: 
 \begin{equation*}\scriptsize \begin{aligned}

@@ -4,25 +4,6 @@
 %Table \ref{table:berkeley_random_hum}, \ref{table:berkeley_random_light} and \ref{table:berkeley_random_tem} show the results of different models random split on Berkeley dataset. In the plot, the x-axis represents the missing ratio. Conceivably the difficulty of an imputation task arises with th increase of missing ratio, therefore we can see that the slopes for most of the lines in the plot are nonpositive. Also note that to highlight the difference between the better models, we cut the overflowed RMSE values of the inferior models to the maximum values that can be displayed in the plot. That says, the flat lines on top of the plots usually indicate the exact RMSE is even higher than what has been shown.
 
 
-\begin{table}[h]
-\setlength{\tabcolsep}{2pt}
-\vspace{-0.2cm}
-\centering
-%\caption{RMSE of TR-MF and EOF on (Berkeley, Random, Humid(\%)).\newline  Columns are labeled with the percentage of data used for training.}
-\caption{RMSE of TR-MF and EOF on (Berkeley, Random, Humid(\%)). Columns are labeled with the percentage of data used for training.}
-\label{table:trmf_eof}
-\scriptsize
-\begin{tabular}{ r | r r r r r r}
-		&10\%	&20\%	&40\%	&60\%	&80\% &85\%\\ 
-	 \hline
-	 TR-MF &$\mathbf{0.142}$ &$\mathbf{0.114}$ &$\mathbf{0.092}$ &$\mathbf{0.082}$ &$\mathbf{0.076}$  &$\mathbf{0.075}$\\
-     	 EOF &2.423 &1.385 &1.000 &0.734 &0.656 &0.645\\
-     Improved EOF & 0.362 & 0.237 & 0.183 & 0.152 & 0.136 & 0.134\\
-\end{tabular}
-\vspace{-0.2cm}
-\end{table}
-
-
 We first compared TR-MF with its predecessor, the EOF model~\cite{beckers2003eof} and improved EOF model~\cite{kondrashov2006spatio}.
 Table~\ref{table:trmf_eof} shows a representative experiment (Berkeley dataset, random missing pattern, humidity readings).
 Improved EOF is significantly more accurate than EOF, but still worse than our TR-MF.
@@ -37,6 +18,23 @@ Note that sensor location information is available for only 8 out of 20 sensors 
 In these cases, we simply assume the unknown distances are equal.
 %Also, we omit the results for light sensors in the Berkeley dataset (in which TR-MF performs equally well as in other cases) due to space limitations. 
 
+\begin{table}[h]
+\setlength{\tabcolsep}{2pt}
+\vspace{-0.2cm}
+\centering
+%\caption{RMSE of TR-MF and EOF on (Berkeley, Random, Humid(\%)).\newline  Columns are labeled with the percentage of data used for training.}
+\caption{RMSE of TR-MF and EOF on (Berkeley, random, humid(\%)). Columns are labeled with the percentage of data used for training.}
+\label{table:trmf_eof}
+\scriptsize
+\begin{tabular}{ r | r r r r r r}
+		&10\%	&20\%	&40\%	&60\%	&80\% &85\%\\ 
+	 \hline
+	 TR-MF &$\mathbf{0.142}$ &$\mathbf{0.114}$ &$\mathbf{0.092}$ &$\mathbf{0.082}$ &$\mathbf{0.076}$  &$\mathbf{0.075}$\\
+     	 EOF &2.423 &1.385 &1.000 &0.734 &0.656 &0.645\\
+     Improved EOF & 0.362 & 0.237 & 0.183 & 0.152 & 0.136 & 0.134\\
+\end{tabular}
+\vspace{-0.2cm}
+\end{table}
 
 \input{experimental_figures_basics}
 

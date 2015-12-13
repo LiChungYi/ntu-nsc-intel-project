@@ -19,7 +19,7 @@ The Intel Berkeley Research lab dataset~\cite{berkeley2004lab} records temperatu
 from February 28th and April 5th, 2004.  Sensor locations are shown in Figure \ref{berkeley_lab}.
 The dataset includes 2.3M sensor observations, with over 210K samples along the temporal dimension.
 Because the completeness of data degrades after 10000 samples, in our experiments only the first 2500, 5000, or 10000 samples were used.
-We found the relative performance of the compared methods to be similar in these three cases; thus, we report only results from 
+We found the relative performance of the compared methods to be similar in these three cases; thus, we report only results of
 5000 samples.  The inherent missing rate (i.e., before we introduce our missing value patterns) for these first 5000 samples is roughly 49\%.
 
 
@@ -43,19 +43,17 @@ In the traffic dataset, observations are removed if temperature \mbox{$>60\degC$
 
 \vspace{-0.1in}
 \begin{figure}[h]
-\caption{Sensor Configuration}
-%\vspace{0.3cm}
-%\hspace{0.4cm}
 \subfigcapmargin = -0.2cm
-\subfigure[\hbox{Intel Berkeley Research Lab Floorplan}]{
+\subfigure[\hbox{Intel Berkeley research lab floorplan}]{
 	\label{berkeley_lab}
 	\includegraphics[height=2.3cm]{berkeley_lab.eps}
 }
-\subfigure[\hbox{Traffic Sensor Deployment Map} \hbox{\hspace{0.5cm}(8 sensors of 20 shown)}]{
+\subfigure[\hbox{Traffic sensor deployment map} \hbox{\hspace{0.5cm}(8 sensors of 20 shown)}]{
 	\label{fig:traffic}
 	\includegraphics[height=2.5cm]{traffic_wsn.eps}
 }
 \vspace{-0.3cm}
+\caption{Sensor configuration}
 \end{figure}
 
 %\vspace{-0.5cm}
